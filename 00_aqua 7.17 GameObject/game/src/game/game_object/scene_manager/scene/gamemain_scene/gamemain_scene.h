@@ -2,12 +2,12 @@
 
 #include"../scene.h"
 
-//タイトルシーン
-class CTitleScene : public IScene
+//ゲームメインシーン
+class CGameMainScene : public IScene
 {
 public:
-	CTitleScene(aqua::IGameObject* parent);
-	~CTitleScene() = default;
+	CGameMainScene(aqua::IGameObject* parent);
+	~CGameMainScene() = default;
 
 	void Initialize(void)override;
 	void Update(void)override;
