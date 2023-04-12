@@ -9,7 +9,7 @@ public:
 	IEnemy(aqua::IGameObject* parent, const std::string& object_name);
 	~IEnemy() = default;
 
-	virtual void Initialize(std::string file_name);
+	virtual void Initialize(const std::string& file_name,const aqua::CVector2& position,const aqua::CVector2 velocity,int& life);
 	virtual void Update(void)override;
 	virtual void Draw(void)override;
 	virtual void Finalize(void)override;
@@ -42,5 +42,8 @@ private:
 
 	STATE m_State;					//状態
 	aqua::CSprite m_EnemySprite;	//エネミーのスプライト
+	aqua::CTimer m_DeleteTimer;		//消すまでの時間
+
+	static const float m_delete_time;	//消すまでの時間
 
 };

@@ -1,5 +1,7 @@
 #include "enemy.h"
 
+const float IEnemy::m_delete_time = 1.0f;
+
 //コンストラクタ
 IEnemy::IEnemy(aqua::IGameObject* parent, const std::string& object_name)
 	:aqua::IGameObject(parent,object_name,"Enemy")
@@ -9,10 +11,12 @@ IEnemy::IEnemy(aqua::IGameObject* parent, const std::string& object_name)
 }
 
 //初期化
-void IEnemy::Initialize(std::string file_name)
+void IEnemy::Initialize(const std::string& file_name, const aqua::CVector2& position, const aqua::CVector2 velocity, int& life)
 {
 	m_EnemySprite.Create(file_name);
 	m_EnemySprite.position = m_Position;
+
+	m_DeleteTimer.Setup(m_delete_time);
 }
 
 //更新
@@ -62,9 +66,17 @@ void IEnemy::Damage(void)
 //消える
 void IEnemy::Dead(void)
 {
+	m_DeleteTimer.Update();
+
+	//消す
+	if (m_DeleteTimer.Finished())
+	{
+		DeleteObject();
+	}
 }
 
 //攻撃
 void IEnemy::Attack(void)
 {
+
 }

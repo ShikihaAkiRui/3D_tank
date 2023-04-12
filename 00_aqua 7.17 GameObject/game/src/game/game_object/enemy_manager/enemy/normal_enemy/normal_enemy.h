@@ -2,6 +2,7 @@
 
 #include"../enemy.h"
 
+//•’Ê‚Ì“G
 class CNormalEnemy : public IEnemy
 {
 	CNormalEnemy(aqua::IGameObject* parent);
@@ -9,8 +10,5 @@ class CNormalEnemy : public IEnemy
 
 	void Initialize(void);
 
-private:
-	//UŒ‚
-	void Attack(void)override;
 
 };

@@ -9,9 +9,7 @@ CNormalEnemy::CNormalEnemy(aqua::IGameObject* parent)
 //èâä˙âª
 void CNormalEnemy::Initialize(void)
 {
-}
-
-//
-void CNormalEnemy::Attack(void)
-{
+	m_Position = aqua::CVector2::ZERO;
+	m_Velocity = aqua::CVector2::ZERO;
+	m_Life = 0;
 }
