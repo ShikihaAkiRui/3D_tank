@@ -10,5 +10,6 @@ class CNormalEnemy : public IEnemy
 
 	void Initialize(void);
 
-
+private:
+	static const std::string m_object_name;
 };

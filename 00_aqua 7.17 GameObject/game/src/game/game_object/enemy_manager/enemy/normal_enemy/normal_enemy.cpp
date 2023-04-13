@@ -1,8 +1,10 @@
 #include "normal_enemy.h"
 
+const std::string CNormalEnemy::m_object_name = "NormalEnemy";
+
 //コンストラクタ
 CNormalEnemy::CNormalEnemy(aqua::IGameObject* parent)
-	:IEnemy(parent,"NormalEnemy")
+	:IEnemy(parent,m_object_name)
 {
 }
 

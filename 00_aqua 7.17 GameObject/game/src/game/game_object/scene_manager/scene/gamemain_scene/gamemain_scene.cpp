@@ -1,8 +1,10 @@
 #include "gamemain_scene.h"
 
+const std::string CGameMainScene::m_object_name = "GameMainScene";
+
 //コンストラクタ
 CGameMainScene::CGameMainScene(aqua::IGameObject* parent)
-	:IScene(parent,"GameMain")
+	:IScene(parent,m_object_name)
 {
 }
 

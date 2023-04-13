@@ -41,6 +41,7 @@
     <ClCompile Include="src\graphics\texture\texture_resource\texture_resource.cpp" />
     <ClCompile Include="src\mathematics\mathematics.cpp" />
     <ClCompile Include="src\mathematics\vector\vector2\vector2.cpp" />
+    <ClCompile Include="src\mathematics\vector\vector3\vector3.cpp" />
     <ClCompile Include="src\resources\resource_object\resource_object.cpp" />
     <ClCompile Include="src\sounds\sound\sound.cpp" />
     <ClCompile Include="src\sounds\sound\sound_manager\sound_manager.cpp" />
@@ -95,6 +96,7 @@
     <ClInclude Include="src\mathematics\mathematics.h" />
     <ClInclude Include="src\mathematics\vector\vector.h" />
     <ClInclude Include="src\mathematics\vector\vector2\vector2.h" />
+    <ClInclude Include="src\mathematics\vector\vector3\vector3.h" />
     <ClInclude Include="src\resources\resources.h" />
     <ClInclude Include="src\resources\resource_object\resource_object.h" />
     <ClInclude Include="src\sounds\sounds.h" />

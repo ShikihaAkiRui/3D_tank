@@ -1,5 +1,7 @@
 #include "title_scene.h"
 
+const std::string CTitleScene::m_object_name = "TitleScene";
+
 //コンストラクタ
 CTitleScene::CTitleScene(aqua::IGameObject* parent)
 	:IScene(parent,"TitleScene")
