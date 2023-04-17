@@ -21,3 +21,4 @@
 #include "timer\timer.h"
 #include "json_loader\rapidjson\document.h"
 #include "fmf_loader\fmf_loader.h"
+#include"camera/camera.h"

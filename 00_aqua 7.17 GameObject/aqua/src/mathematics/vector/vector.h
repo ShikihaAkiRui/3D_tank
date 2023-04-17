@@ -12,3 +12,4 @@
 #pragma once
 
 #include "vector2\vector2.h"
+#include"vector3/vector3.h"

@@ -16,6 +16,7 @@ const aqua::CVector3 aqua::CVector3::ONE = aqua::CVector3(1.0f, 1.0f, 1.0f);
 */
 aqua::CVector3::
 CVector3(void)
+	:VECTOR({0.0f,0.0f,0.0f})
 {
 }
 
@@ -24,6 +25,7 @@ CVector3(void)
 */
 aqua::CVector3::
 CVector3(float x, float y, float z)
+	:VECTOR({x,y,z})
 {
 }
 
@@ -32,6 +34,7 @@ CVector3(float x, float y, float z)
 */
 aqua::CVector3::
 CVector3(const VECTOR& v)
+	:VECTOR(v)
 {
 }
 

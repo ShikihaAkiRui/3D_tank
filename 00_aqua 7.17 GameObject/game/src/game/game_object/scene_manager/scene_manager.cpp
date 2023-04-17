@@ -29,6 +29,8 @@ void CSceneManager::Initialize(void)
 
 	//PushフラグをOFF
 	m_PushFlag = false;
+
+	m_Camera.Initialize();
 }
 
 //更新
@@ -42,6 +44,8 @@ void CSceneManager::Update(void)
 	case STATE::SCENE_CHANGE:	SceneChange();	break;
 	default:	break;
 	}
+
+	m_Camera.Update();
 }
 
 //描画

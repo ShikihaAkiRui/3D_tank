@@ -47,6 +47,7 @@
     <ClCompile Include="src\sounds\sound\sound_manager\sound_manager.cpp" />
     <ClCompile Include="src\sounds\sound\sound_resource\sound_resource.cpp" />
     <ClCompile Include="src\sounds\sound_player\sound_player.cpp" />
+    <ClCompile Include="src\utility\camera\camera.cpp" />
     <ClCompile Include="src\utility\csv_loader\csv_loader.cpp" />
     <ClCompile Include="src\utility\easing\easing.cpp" />
     <ClCompile Include="src\utility\fmf_loader\fmf_loader.cpp" />
@@ -104,6 +105,7 @@
     <ClInclude Include="src\sounds\sound\sound_manager\sound_manager.h" />
     <ClInclude Include="src\sounds\sound\sound_resource\sound_resource.h" />
     <ClInclude Include="src\sounds\sound_player\sound_player.h" />
+    <ClInclude Include="src\utility\camera\camera.h" />
     <ClInclude Include="src\utility\csv_loader\csv_loader.h" />
     <ClInclude Include="src\utility\easing\easing.h" />
     <ClInclude Include="src\utility\flag\flag.h" />

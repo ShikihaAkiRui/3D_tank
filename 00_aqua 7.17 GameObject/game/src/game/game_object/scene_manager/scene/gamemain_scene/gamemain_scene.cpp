@@ -33,6 +33,9 @@ void CGameMainScene::Draw(void)
 {
 
 	IGameObject::Draw();
+
+	DrawSphere3D(aqua::CVector3::ZERO, 10.0f, 10, 0xffffffff, 0xffffffff, TRUE);
+
 #ifdef _DEBUG
 	m_Label.Draw();
 #endif 
