@@ -60,6 +60,20 @@ void
 aqua::core::CModelResource::
 Unload(void)
 {
+	MV1DeleteModel(m_ResourceHandle);
+
+	m_ResourceHandle = AQUA_UNUSED_HANDLE;
+
+	m_ResourceName.clear();
+
+	m_ReferenceCount = 0;
+
+	m_ResourceType = RESOURCE_TYPE::DUMMY;
+
+	m_Enabel = true;
+
+	//
+	m_Width = m_Height = 0;
 }
 
 /*
@@ -69,7 +83,32 @@ void
 aqua::core::CModelResource::
 Create(int width, int height, int depth, bool alpha_channel)
 {
+	if (m_Enabel)return;
 
+	m_Width = width;
+	m_Height = height;
+
+	//サイズに合わせてサーフェスを生成
+	
+
+	AQUA_DX_ASSERT(m_ResourceHandle, "テクスチャの作成に失敗しました。");
+
+	//リソース名を保存
+	//時間で名前を付ける
+	time_t now = time(NULL);
+
+	tm local_time;
+
+	localtime_s(&local_time, &now);
+
+	m_ResourceName = "Texture";
+
+	m_ResourceName += std::to_string(local_time.tm_year) + std::to_string(local_time.tm_mon) + std::to_string(local_time.tm_mday);
+
+	m_ResourceName += std::to_string(local_time.tm_hour) + std::to_string(local_time.tm_min) + std::to_string(local_time.tm_sec);
+
+	//生成済み
+	m_Enabel = true;
 }
 
 /*
@@ -79,4 +118,13 @@ void
 aqua::core::CModelResource::
 Delete(void)
 {
+	m_ResourceName.clear();
+
+	m_ReferenceCount = 0;
+
+	m_ResourceType = RESOURCE_TYPE::DUMMY;
+
+	m_Enabel = false;
+
+	m_Width = m_Height = 0;
 }
