@@ -48,7 +48,7 @@ Load( const std::string& file_name )
 
     // グラフィックサイズ取得
     GetGraphSize( m_ResourceHandle, &m_Width, &m_Height );
-
+    
     // ファイルパスを保存
     m_ResourceName = file_name;
 

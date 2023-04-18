@@ -2,6 +2,9 @@
 
 #include<DxLib.h>
 
+/*
+	aqua–¼‘O‹óŠÔ
+*/
 namespace aqua
 {
 
