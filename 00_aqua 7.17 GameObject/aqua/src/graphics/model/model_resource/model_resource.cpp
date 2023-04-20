@@ -45,7 +45,7 @@ Load(const std::string& file_name)
 /*
 	ƒ‚ƒfƒ‹‚ª‚ ‚éê‡‚Ì“Ç‚İ‚İ
 */
-void aqua::core::CModelResource::Duplicate(CModelResource& model)
+void aqua::core::CModelResource::Duplicate(const aqua::core::CModelResource& model)
 {
 	if (m_Enabel) return;
 

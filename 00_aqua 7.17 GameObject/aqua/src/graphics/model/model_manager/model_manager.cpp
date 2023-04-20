@@ -46,10 +46,10 @@ Load(const std::string& file_name)
 	else
 	{
 		//新しいモデルを生成
-		CModelResource* model = AQUA_NEW CModelResource();
+		model = AQUA_NEW CModelResource();
 
 		//モデルを複製
-	//	model->Duplicate();
+		//model->Duplicate();
 
 		//モデルリストに追加
 		m_ModelList.push_back(model);
@@ -66,7 +66,7 @@ Load(const std::string& file_name)
 */
 void 
 aqua::core::CModelManager::
-UnLoad(CModelResource* model)
+UnLoad(aqua::core::CModelResource* model)
 {
 	if (!model)return;
 
@@ -106,24 +106,77 @@ Find(const std::string& file_name)
 {
 	if (m_ModelList.empty())return NULL;
 
+	MODEL_LIST::iterator it = m_ModelList.begin();
+	MODEL_LIST::iterator end = m_ModelList.end();
 
+	//ファイル名が一致したテクスチャクラスを返す
+	while (it != end)
+	{
+		if ((*it)->GetResourceName() == file_name)
+			return (*it);
+
+		++it;
+	}
 
 	return NULL;
 }
 
-void aqua::core::CModelManager::Clear(void)
+/*
+	テクスチャリストのクリア
+*/
+void
+aqua::core::CModelManager::
+Clear(void)
 {
+	if (m_ModelList.empty())return;
+
+	MODEL_LIST::iterator it = m_ModelList.begin();
+	MODEL_LIST::iterator end = m_ModelList.end();
+
+	while (it != end)
+	{
+		if ((*it))
+		{
+			//モデルの解放
+			(*it)->Unload();
+
+			AQUA_SAFE_DELETE((*it));
+		}
+
+		++it;
+	}
+
+	//モデルリスト解放
+	m_ModelList.clear();
 }
 
-aqua::core::CModelManager::CModelManager(void)
+/*
+	コンストラクタ
+*/
+aqua::core::CModelManager::
+CModelManager(void)
 {
+	m_ModelList.clear();
 }
 
-aqua::core::CModelManager::CModelManager(const CModelManager& rhs)
+/*
+	コピーコンストラクタ
+*/
+aqua::core::CModelManager::
+CModelManager(const aqua::core::CModelManager& rhs)
 {
+	(void)rhs;
+
 }
 
-aqua::core::CModelManager& aqua::core::CModelManager::operator=(const CModelManager& rhs)
+/*
+	代入演算子
+*/
+aqua::core::CModelManager& 
+aqua::core::CModelManager::
+operator=(const aqua::core::CModelManager& rhs)
 {
-	// TODO: return ステートメントをここに挿入します
+	(void)rhs;
+
+	return *this;
 }
