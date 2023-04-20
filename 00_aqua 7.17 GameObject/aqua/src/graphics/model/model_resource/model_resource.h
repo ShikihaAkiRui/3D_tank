@@ -42,30 +42,17 @@ namespace aqua
             void   Load(const std::string& file_name);
 
             /*
+                @brief  モデルがある場合の読み込み
+
+                @param[in]  model  モデルリソースクラス
+            */
+            void    Duplicate(CModelResource& model);
+
+            /*
                 @brief  モデルの解放
             */
-            void    Unload(void);
+            void    Unload(void);         
 
-            /*
-                @brief  モデルの横幅取得
-
-                @return モデルの横幅
-            */
-            int    GetWidth(void) {return m_Width; }
-           
-            /*
-                @brief  モデルの縦幅取得
-
-                @return モデルの縦幅
-            */
-            int     GetHeight(void) { return m_Height; }
-
-            /*
-                @brief  モデルの奥行取得
-
-                @return モデルの奥行
-            */
-            int     GetDepth(void) { return m_Depth; }
 
         private:
             /*
@@ -74,29 +61,7 @@ namespace aqua
             friend class CModel;
             friend class CModelManager;
 
-            /*
-                @brief  モデルの生成
 
-                @param[in]  width       横幅
-                @param[in]  height      縦幅
-                @param[in]  depth       奥行
-                @param[in]  alpha_channel   アルファチャンネル
-            */
-            void    Create(int width, int height, int depth, bool alpha_channel);
-
-            /*
-                @brief  モデルの解放
-            */
-            void    Delete(void);
-
-            //!透過色（マゼンタ0xff00ff)
-            static const unsigned int m_transparent_color;
-            //!モデルの幅
-            int m_Width;
-            //!モデルの高さ
-            int m_Height;
-            //!モデルの奥行
-            int m_Depth;
         };
     }
 }
