@@ -6,6 +6,7 @@
 #pragma once
 
 #include"model_resource/model_resource.h"
+#include"../../mathematics/mathematics.h"
 
 /*
 	@brief	aqua名前空間
@@ -20,6 +21,13 @@ namespace aqua
 	class CModel
 	{
 	public:
+		//!位置
+		aqua::CVector3	position;
+		//!拡大率
+		aqua::CVector3	scale;
+		//!回転値
+		aqua::CVector3	rotation;
+
 		/*
 			@brief	コンストラクタ
 		*/
@@ -48,6 +56,11 @@ namespace aqua
 			@brief	テクスチャの解放
 		*/
 		void Unload(void);
+
+		/*
+			@brief	描画
+		*/
+		void Draw(void);
 
 		/*
 			@brief	モデルのリソースハンドル取得

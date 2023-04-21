@@ -22,3 +22,4 @@
 #include "shader\shader.h"
 #include "effect2D\effect2D.h"
 #include "primitive\primitive.h"
+#include "model/model.h"

@@ -7,6 +7,7 @@
 #include<windows.h>
 #include"model.h"
 #include"model_manager/model_manager.h"
+#include"../../debug/debug.h"
 
 /*
 	コンストラクタ
@@ -14,6 +15,9 @@
 aqua::CModel::
 CModel(void)
 	:m_ModelResource(nullptr)
+	,position(aqua::CVector3::ZERO)
+	,scale(aqua::CVector3::ONE)
+	,rotation(aqua::CVector3::ZERO)
 {
 }
 
@@ -67,6 +71,30 @@ Unload(void)
 		core::CModelManager::GetInstance().UnLoad(m_ModelResource);
 
 	m_ModelResource = nullptr;
+}
+
+/*
+	描画
+*/
+void 
+aqua::CModel::
+Draw(void)
+{
+	//モデルが読み込まれていなければ描画しない
+	if (!m_ModelResource->IsEnable()) return;	
+
+	//モデルリソースハンドルを取得
+	int handle = m_ModelResource->GetResourceHandle();
+
+	//位置設定
+	MV1SetPosition(handle,position);
+	//拡大率設定
+	MV1SetScale(handle, scale);
+	//回転値設定
+	MV1SetRotationXYZ(handle,aqua::CVector3(aqua::DegToRad(rotation.x), aqua::DegToRad(rotation.y), aqua::DegToRad(rotation.z)));
+
+	//描画
+	MV1DrawModel(handle);
 }
 
 /*

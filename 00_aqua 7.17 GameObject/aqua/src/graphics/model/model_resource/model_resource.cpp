@@ -45,17 +45,22 @@ Load(const std::string& file_name)
 /*
 	モデルがある場合の読み込み
 */
-void aqua::core::CModelResource::Duplicate(const aqua::core::CModelResource& model)
+void 
+aqua::core::CModelResource::
+Duplicate(const aqua::core::CModelResource* model)
 {
 	if (m_Enabel) return;
 
 	//モデルの複製
-	m_ResourceHandle = MV1DuplicateModel(model.GetResourceHandle());
+	m_ResourceHandle = MV1DuplicateModel(model->GetResourceHandle());
 
-	AQUA_DX_ASSERT(m_ResourceHandle, model.GetResourceName() + "の読み込みに失敗しました。");
+	AQUA_DX_ASSERT(m_ResourceHandle, model->GetResourceName() + "の読み込みに失敗しました。");
 
 	// ファイルパスを保存
-	m_ResourceName = model.GetResourceName();
+	m_ResourceName = model->GetResourceName();
+	
+	//名前の同名を避ける
+	m_ResourceName += std::to_string(model->m_ReferenceCount);
 
 	// 読み込み済み
 	m_Enabel = true;

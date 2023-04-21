@@ -45,11 +45,16 @@ Load(const std::string& file_name)
 	//モデルが見つかった
 	else
 	{
+		//データを退避
+		CModelResource* src_model = model;
+		//参照ポインタを加算
+		src_model->AddReference();
+
 		//新しいモデルを生成
 		model = AQUA_NEW CModelResource();
 
 		//モデルを複製
-		//model->Duplicate();
+		model->Duplicate(src_model);
 
 		//モデルリストに追加
 		m_ModelList.push_back(model);
@@ -74,7 +79,7 @@ UnLoad(aqua::core::CModelResource* model)
 
 	//参照ポインタ減算
 	//参照がなくなったら解放
-	if (model->RemoveReference() > 0) return;
+//	if (model->RemoveReference() > 0) return;
 
 	MODEL_LIST::iterator it = m_ModelList.begin();
 	MODEL_LIST::iterator end = m_ModelList.end();
@@ -122,7 +127,7 @@ Find(const std::string& file_name)
 }
 
 /*
-	テクスチャリストのクリア
+	モデルリストのクリア
 */
 void
 aqua::core::CModelManager::

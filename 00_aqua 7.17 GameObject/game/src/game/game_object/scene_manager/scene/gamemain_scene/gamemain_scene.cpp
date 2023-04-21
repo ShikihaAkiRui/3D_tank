@@ -14,6 +14,7 @@ void CGameMainScene::Initialize(void)
 
 	IGameObject::Initialize();
 
+
 #ifdef _DEBUG
 	m_Label.Create(30);
 	m_Label.text = "gamemain";
@@ -34,6 +35,7 @@ void CGameMainScene::Draw(void)
 
 	IGameObject::Draw();
 
+
 	DrawSphere3D(aqua::CVector3::ZERO, 10.0f, 10, 0xffffffff, 0xffffffff, TRUE);
 
 #ifdef _DEBUG
@@ -46,6 +48,7 @@ void CGameMainScene::Draw(void)
 void CGameMainScene::Finalize(void)
 {
 	IGameObject::Finalize();
+
 
 #ifdef _DEBUG
 	m_Label.Delete();

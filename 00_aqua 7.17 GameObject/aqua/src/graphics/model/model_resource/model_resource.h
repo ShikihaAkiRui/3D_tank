@@ -46,7 +46,7 @@ namespace aqua
 
                 @param[in]  model  モデルリソースクラス
             */
-            void    Duplicate(const CModelResource& model);
+            void    Duplicate(const CModelResource* model);
 
             /*
                 @brief  モデルの解放
