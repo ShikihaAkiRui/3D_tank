@@ -13,7 +13,9 @@ void CGameMainScene::Initialize(void)
 {
 
 	IGameObject::Initialize();
-
+	m_Model.Load("data/model.pmd");
+	m_Model.position = aqua::CVector3(10.0f, 10.0f, 10.0f);
+	m_Model.scale = aqua::CVector3(0.5f,0.5f, 0.5f);
 
 #ifdef _DEBUG
 	m_Label.Create(30);
@@ -25,8 +27,10 @@ void CGameMainScene::Initialize(void)
 //çXêV
 void CGameMainScene::Update(void)
 {
-
 	IGameObject::Update();
+
+	m_Model.rotation.y += 1.0f;
+
 }
 
 //ï`âÊ
@@ -35,8 +39,8 @@ void CGameMainScene::Draw(void)
 
 	IGameObject::Draw();
 
-
-	DrawSphere3D(aqua::CVector3::ZERO, 10.0f, 10, 0xffffffff, 0xffffffff, TRUE);
+	m_Model.Draw();
+	//DrawSphere3D(aqua::CVector3::ZERO, 10.0f, 10, 0xffffffff, 0xffffffff, TRUE);
 
 #ifdef _DEBUG
 	m_Label.Draw();
@@ -48,7 +52,7 @@ void CGameMainScene::Draw(void)
 void CGameMainScene::Finalize(void)
 {
 	IGameObject::Finalize();
-
+	m_Model.Unload();
 
 #ifdef _DEBUG
 	m_Label.Delete();

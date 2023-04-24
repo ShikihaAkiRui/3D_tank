@@ -24,7 +24,7 @@ void CTitleScene::Initialize(void)
 //çXêV
 void CTitleScene::Update(void)
 {
-	if (aqua::keyboard::Trigger(aqua::keyboard::KEY_ID::Z))
+	if (aqua::mouse::Trigger(aqua::mouse::BUTTON_ID::LEFT))
 		ChangeScene(SCENE_ID::GAMEMAIN);
 
 	IGameObject::Update();

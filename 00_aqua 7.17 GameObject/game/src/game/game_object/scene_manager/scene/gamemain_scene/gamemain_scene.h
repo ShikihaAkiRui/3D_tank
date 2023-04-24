@@ -15,6 +15,8 @@ public:
 	void Finalize(void)override;
 
 private:
+	aqua::CModel m_Model;
+
 	static const std::string m_object_name;	//オブジェクトの名前
 	aqua::CLabel m_Label;	//デバック用
 };
