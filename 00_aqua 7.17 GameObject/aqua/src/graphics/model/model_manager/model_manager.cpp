@@ -79,7 +79,7 @@ UnLoad(aqua::core::CModelResource* model)
 
 	//参照ポインタ減算
 	//参照がなくなったら解放
-//	if (model->RemoveReference() > 0) return;
+	//if (model->RemoveReference() > 0) return;
 
 	MODEL_LIST::iterator it = m_ModelList.begin();
 	MODEL_LIST::iterator end = m_ModelList.end();
