@@ -61,7 +61,8 @@ CollCheckSphere(int frame_index, aqua::CVector3 center_pos, float radius)
 {
 	MV1_COLL_RESULT_POLY_DIM result = MV1CollCheck_Sphere(m_Model->GetResourceHandle(), frame_index, center_pos, radius);
 
-	bool hit_flag = result.Dim->HitFlag;
+	//0なら当たってない
+	bool hit_flag = result.HitNum <= 0 ? false : true;
 
 	//当たり判定結果ポリゴン配列の後始末
 	CollResultPolyDimTerminate(result);
@@ -78,7 +79,8 @@ CollCheckCapsule(int frame_index, aqua::CVector3 pos1, aqua::CVector3 pos2, floa
 {
 	MV1_COLL_RESULT_POLY_DIM result = MV1CollCheck_Capsule(m_Model->GetResourceHandle(), frame_index, pos1, pos2, radius);
 
-	bool hit_flag = result.Dim->HitFlag;
+	//0なら当たってない
+	bool hit_flag = result.HitNum <= 0 ? false : true;
 
 	//当たり判定結果ポリゴン配列の後始末
 	CollResultPolyDimTerminate(result);

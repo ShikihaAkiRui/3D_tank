@@ -13,9 +13,8 @@ void CGameMainScene::Initialize(void)
 {
 
 	IGameObject::Initialize();
-	m_Model.Load("data/model.pmd");
-	m_Model.position = aqua::CVector3(10.0f, 10.0f, 10.0f);
-	m_Model.scale = aqua::CVector3(0.5f,0.5f, 0.5f);
+	m_Model.Load("data/box.mv1");
+	m_Model.rotation.y = -20.0f;
 
 #ifdef _DEBUG
 	m_Label.Create(30);
@@ -29,7 +28,6 @@ void CGameMainScene::Update(void)
 {
 	IGameObject::Update();
 
-	m_Model.rotation.y += 1.0f;
 
 }
 
