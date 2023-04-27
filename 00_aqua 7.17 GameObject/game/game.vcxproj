@@ -103,6 +103,7 @@
     <ClCompile Include="src\game\game_object\scene_manager\scene\scene.cpp" />
     <ClCompile Include="src\game\game_object\scene_manager\scene\title_scene\title_scene.cpp" />
     <ClCompile Include="src\game\game_object\scene_manager\scene_manager.cpp" />
+    <ClCompile Include="src\game\game_object\unit\unit.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +113,7 @@
     <ClInclude Include="src\game\game_object\scene_manager\scene\scene_id.h" />
     <ClInclude Include="src\game\game_object\scene_manager\scene\title_scene\title_scene.h" />
     <ClInclude Include="src\game\game_object\scene_manager\scene_manager.h" />
+    <ClInclude Include="src\game\game_object\unit\unit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
