@@ -3,14 +3,14 @@
 #include"aqua.h"
 
 //ユニットクラス
-class IUnit : public ICollision, public aqua::IGameObject
+class IUnit : public ICollision ,public aqua::IGameObject
 {
 public:
 	IUnit(aqua::IGameObject* parent,const std::string& object_name);
 	virtual ~IUnit() = default;
 
 	//初期化
-	virtual void Initialize(void);
+	virtual void Initialize(const std::string& file_name);
 
 	//更新
 	virtual void Update(void);

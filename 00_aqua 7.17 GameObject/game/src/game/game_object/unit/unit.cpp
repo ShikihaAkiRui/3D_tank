@@ -1,16 +1,19 @@
 #include "unit.h"
 
 //コンストラクタ
-IUnit::IUnit(aqua::IGameObject* parent, const std::string& object_name)
-	:IGameObject(parent,object_name,"Unit")
+IUnit::IUnit(aqua::IGameObject* parent,const std::string& object_name)
+	:aqua::IGameObject(parent,object_name,"Unit")
 {
 }
 
 //初期化
-void IUnit::Initialize(void)
+void IUnit::Initialize(const std::string& file_name)
 {
-	SetupCollInfo(m_Model, 0, 8, 8, 8);
+	m_Model = AQUA_NEW aqua::CModel[1];
+
+	m_Model->Load(file_name);
 	
+	SetupCollInfo(m_Model, 0, 8, 8, 8);
 }
 
 //更新
@@ -31,4 +34,7 @@ void IUnit::Finalize(void)
 	TerminateCollInfo(0);
 
 	m_Model->Unload();
+
+	AQUA_SAFE_DELETE_ARRAY(m_Model);
+
 }
