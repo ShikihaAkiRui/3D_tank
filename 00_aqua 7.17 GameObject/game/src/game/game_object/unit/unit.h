@@ -21,6 +21,12 @@ public:
 	//解放
 	virtual void Finalize(void);
 
+	//レイを出して判定
+	bool CollCheckRay(const aqua::CVector3& start_position,const aqua::CVector3& end_position);
+	
 protected:
 	aqua::CModel* m_Model;	//モデル
+	
+	static const int m_frame_index;			//フレーム番号
+	static const aqua::CVector3 m_divnum;	//分割数
 };

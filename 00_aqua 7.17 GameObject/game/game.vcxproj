@@ -99,16 +99,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\game\game.cpp" />
+    <ClCompile Include="src\game\game_object\enemy\enemy.cpp" />
     <ClCompile Include="src\game\game_object\player\player.cpp" />
     <ClCompile Include="src\game\game_object\scene_manager\scene\gamemain_scene\gamemain_scene.cpp" />
     <ClCompile Include="src\game\game_object\scene_manager\scene\scene.cpp" />
     <ClCompile Include="src\game\game_object\scene_manager\scene\title_scene\title_scene.cpp" />
     <ClCompile Include="src\game\game_object\scene_manager\scene_manager.cpp" />
     <ClCompile Include="src\game\game_object\unit\unit.cpp" />
+    <ClCompile Include="src\game\game_object\unit_manager\unit_manager.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\game.h" />
+    <ClInclude Include="src\game\game_object\enemy\enemy.h" />
     <ClInclude Include="src\game\game_object\player\player.h" />
     <ClInclude Include="src\game\game_object\scene_manager\scene\gamemain_scene\gamemain_scene.h" />
     <ClInclude Include="src\game\game_object\scene_manager\scene\scene.h" />
@@ -116,6 +119,8 @@
     <ClInclude Include="src\game\game_object\scene_manager\scene\title_scene\title_scene.h" />
     <ClInclude Include="src\game\game_object\scene_manager\scene_manager.h" />
     <ClInclude Include="src\game\game_object\unit\unit.h" />
+    <ClInclude Include="src\game\game_object\unit_manager\unit_id.h" />
+    <ClInclude Include="src\game\game_object\unit_manager\unit_manager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

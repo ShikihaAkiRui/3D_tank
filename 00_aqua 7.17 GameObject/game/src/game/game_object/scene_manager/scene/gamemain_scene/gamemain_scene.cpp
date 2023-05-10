@@ -1,5 +1,7 @@
 #include "gamemain_scene.h"
 #include"../../../player/player.h"
+#include"../../../enemy/enemy.h"
+#include"../../../unit_manager/unit_manager.h"
 
 const std::string CGameMainScene::m_object_name = "GameMainScene";
 
@@ -12,7 +14,9 @@ CGameMainScene::CGameMainScene(aqua::IGameObject* parent)
 //èâä˙âª
 void CGameMainScene::Initialize(void)
 {
-	aqua::CreateGameObject<CPlayer>(this);
+	CUnitManager* unit = aqua::CreateGameObject<CUnitManager>(this);
+	unit->Create(UNIT_ID::PLAYER);
+	unit->Create(UNIT_ID::ENEMY);
 
 	IGameObject::Initialize();
 	//m_Model.Load("data/box.mv1");
