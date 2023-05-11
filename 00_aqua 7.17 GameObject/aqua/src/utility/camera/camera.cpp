@@ -11,7 +11,7 @@
 */
 namespace aqua
 {
-	const CVector3 CCamera::m_default_position = CVector3(0.0f, 0.0f, -50.0f);
+	const CVector3 CCamera::m_default_position = CVector3(0.0f, 30.0f, -50.0f);
 	const CVector3 CCamera::m_default_up_vector = CVector3(0.0f, 1.0f, 0.0f);
 	const float CCamera::m_default_near = 0.1f;
 	const float CCamera::m_default_far = 10000.0f;

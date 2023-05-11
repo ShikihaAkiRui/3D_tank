@@ -1,6 +1,6 @@
 #pragma once
 
-#include"../unit/unit.h"
+#include"../../unit/unit.h"
 
 //プレイヤークラス
 class CPlayer : public IUnit

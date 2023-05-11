@@ -1,5 +1,5 @@
 #include "player.h"
-#include"../unit_manager/unit_manager.h"
+#include"../unit_manager.h"
 
 const float CPlayer::m_move_speed = 10.0f;
 const float CPlayer::m_ray_langth = 15.0f;
@@ -32,7 +32,7 @@ void CPlayer::Update(void)
 	CUnitManager* unit = (CUnitManager*)aqua::FindGameObject("UnitManager");
 
 	if (unit->HitUnitFlag("Enemy", m_Position, m_Position + m_Velocity * aqua::CVector3(m_ray_langth, m_ray_langth, m_ray_langth)))
-		m_Position = aqua::CVector3(0.0f, 0.0f, 30.0f);
+		m_Position = aqua::CVector3(-20.0f, 0.0f, 30.0f);
 }
 
 //•`‰æ

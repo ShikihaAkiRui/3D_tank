@@ -1,7 +1,6 @@
 #include "gamemain_scene.h"
-#include"../../../player/player.h"
-#include"../../../enemy/enemy.h"
 #include"../../../unit_manager/unit_manager.h"
+#include"../../../bullet_manager/bullet_manager.h"
 
 const std::string CGameMainScene::m_object_name = "GameMainScene";
 
@@ -14,13 +13,13 @@ CGameMainScene::CGameMainScene(aqua::IGameObject* parent)
 //èâä˙âª
 void CGameMainScene::Initialize(void)
 {
-	CUnitManager* unit = aqua::CreateGameObject<CUnitManager>(this);
-	unit->Create(UNIT_ID::PLAYER);
-	unit->Create(UNIT_ID::ENEMY);
+	CUnitManager* unit_manager = aqua::CreateGameObject<CUnitManager>(this);
+	unit_manager->Create(UNIT_ID::PLAYER);
+	unit_manager->Create(UNIT_ID::ENEMY);
+
+	CBulletManager* bullet_manager = aqua::CreateGameObject<CBulletManager>(this);
 
 	IGameObject::Initialize();
-	//m_Model.Load("data/box.mv1");
-	//m_Model.rotation.y = -20.0f;
 
 #ifdef _DEBUG
 	m_Label.Create(30);
@@ -43,9 +42,6 @@ void CGameMainScene::Draw(void)
 
 	IGameObject::Draw();
 
-	//m_Model.Draw();
-	//DrawSphere3D(aqua::CVector3::ZERO, 10.0f, 10, 0xffffffff, 0xffffffff, TRUE);
-
 #ifdef _DEBUG
 	m_Label.Draw();
 #endif 
@@ -56,8 +52,6 @@ void CGameMainScene::Draw(void)
 void CGameMainScene::Finalize(void)
 {
 	IGameObject::Finalize();
-
-//	m_Model.Unload();
 
 #ifdef _DEBUG
 	m_Label.Delete();

@@ -1,6 +1,6 @@
 #pragma once
 
-#include"../unit/unit.h"
+#include"../../unit/unit.h"
 
 //エネミー
 class CEnemy : public IUnit
