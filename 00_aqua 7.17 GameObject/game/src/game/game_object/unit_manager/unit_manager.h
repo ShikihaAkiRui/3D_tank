@@ -14,6 +14,12 @@ public:
 	void Create(UNIT_ID id);
 
 	//ユニットの当たり判定
-	bool HitUnitFlag(const std::string& object_name,aqua::CVector3 start_position,aqua::CVector3 end_position);
+	bool CheckHitUnit(const std::string& object_name,aqua::CVector3 center_position,aqua::CVector3 end_position);
+
+	//エネミーと弾の当たり判定
+	bool EnemyCheckHitBullet(aqua::CVector3 start_position, float radius);
+
+private:
+	static const int m_frame_index;		//フレーム番号
 
 };

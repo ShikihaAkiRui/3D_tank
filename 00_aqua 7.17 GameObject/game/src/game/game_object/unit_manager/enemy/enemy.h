@@ -10,5 +10,8 @@ public:
 	~CEnemy() = default;
 
 	void Initialize(void);
+	void Update(void)override;
 
+	//’e‚Ì“–‚½‚è”»’è
+	bool CheckHitBullet(void);
 };

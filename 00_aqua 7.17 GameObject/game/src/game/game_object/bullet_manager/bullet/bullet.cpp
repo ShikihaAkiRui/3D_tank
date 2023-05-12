@@ -1,7 +1,8 @@
 #include "bullet.h"
+#include"../../unit_manager/unit_manager.h"
 
-const float CBullet::m_move_speed = 30.0f;
-const float CBullet::m_radius = 10.0f;
+const float CBullet::m_move_speed = 100.0f;
+const float CBullet::m_radius = 4.0f;
 
 //コンストラクタ
 CBullet::CBullet(aqua::IGameObject* parent)
@@ -14,7 +15,7 @@ CBullet::CBullet(aqua::IGameObject* parent)
 //初期化
 void CBullet::Initialize(const aqua::CVector3& position, float direction)
 {
-	IUnit::Initialize("data/boxt.mv1");
+	IUnit::Initialize("data/ball.mv1");
 
 	m_Position = position;
 	m_Velocity.x = sin(aqua::DegToRad(direction)) * m_move_speed * aqua::GetDeltaTime();
@@ -31,4 +32,22 @@ void CBullet::Update(void)
 	m_Position += m_Velocity;
 	m_Model->position = m_Position;
 
+	
+	CUnitManager* unit_manager = (CUnitManager*)aqua::FindGameObject("UnitManager");
+	if (!unit_manager)return;
+	if (unit_manager->EnemyCheckHitBullet(m_Position, m_radius))
+		DeleteObject();
+	
+}
+
+//中心位置取得
+aqua::CVector3 CBullet::GetCenterPosition(void)
+{
+	return m_Position;
+}
+
+//半径取得
+float CBullet::GetRadius(void)
+{
+	return m_radius;
 }

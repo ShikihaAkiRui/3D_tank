@@ -20,7 +20,10 @@ public:
 private:
 	aqua::CVector3 m_Position;	//ˆÊ’u
 	aqua::CVector3 m_Velocity;	//‘¬“x
+	float m_Angle;				//Šp“x
+	aqua::CVector3 m_Rotation;	//‰ñ“]
 
 	static const float m_move_speed;	//‘¬“x
 	static const float m_ray_langth;	//ƒŒƒC’·‚³
+	static const float m_rotation_speed;//‰ñ“]‘¬‚³
 };

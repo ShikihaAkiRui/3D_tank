@@ -11,4 +11,5 @@ public:
 
 	//ê∂ê¨
 	void Create(const aqua::CVector3& position,float direction);
+
 };
