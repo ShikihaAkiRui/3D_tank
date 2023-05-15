@@ -41,8 +41,12 @@ void CPlayer::Update(void)
 
 	CBulletManager* bullet_manager = (CBulletManager*)aqua::FindGameObject("BulletManager");
 	if (!bullet_manager)return;
-	if(aqua::mouse::Trigger(aqua::mouse::BUTTON_ID::LEFT))
-		bullet_manager->Create(m_Model->position, 0.0f);
+	if (aqua::mouse::Trigger(aqua::mouse::BUTTON_ID::LEFT))
+	{
+		m_Matrix.RotY(aqua::DegToRad(m_Rotation.y));
+		bullet_manager->Create(m_Model->position);
+		
+	}
 }
 
 //•`‰æ
@@ -79,9 +83,12 @@ void CPlayer::Move(void)
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::DOWN))
 		m_Velocity.z = -1.0f;
 
-	m_Position += m_Velocity * aqua::CVector3(m_move_speed, m_move_speed, m_move_speed) * aqua::GetDeltaTime();
 
 	m_Rotation.y = m_Angle;
+
+	m_Matrix.RotY(aqua::DegToRad(m_Rotation.y));
+	//m_Velocity = aqua::CVector3::Transform(m_Velocity, m_Matrix);
+	m_Position += m_Velocity * aqua::CVector3(m_move_speed, m_move_speed, m_move_speed) * aqua::GetDeltaTime();
 
 	m_Model->rotation = m_Rotation;
 	m_Model->position = m_Position;

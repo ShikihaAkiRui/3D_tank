@@ -51,7 +51,9 @@ Normalize(void)
 /*
 	正規化
 */
-aqua::CVector3 aqua::CVector3::Normalize(const VECTOR& v)
+aqua::CVector3 
+aqua::CVector3::
+Normalize(const VECTOR& v)
 {
 	return VNorm(v);
 }
@@ -94,6 +96,16 @@ aqua::CVector3::
 Cross(const VECTOR& vA, const VECTOR& vB)
 {
 	return VCross(vA,vB);
+}
+
+/*
+	行列を使ったベクトル変換
+*/
+aqua::CVector3
+aqua::CVector3::
+Transform(const VECTOR& vector, const MATRIX& matrix)
+{
+	return VTransform(vector,matrix);
 }
 
 /*

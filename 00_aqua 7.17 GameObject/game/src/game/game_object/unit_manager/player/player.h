@@ -22,6 +22,7 @@ private:
 	aqua::CVector3 m_Velocity;	//速度
 	float m_Angle;				//角度
 	aqua::CVector3 m_Rotation;	//回転
+	aqua::CMatrix m_Matrix;		//行列
 
 	static const float m_move_speed;	//速度
 	static const float m_ray_langth;	//レイ長さ

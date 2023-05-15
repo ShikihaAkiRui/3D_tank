@@ -52,7 +52,7 @@ namespace aqua
 		CVector3	Normalize(void);
 
 		/*
-			@brief	ベクトルの正規化		か
+			@brief	ベクトルの正規化		
 
 			@param[in]	v	ベクトルクラス
 
@@ -95,6 +95,16 @@ namespace aqua
 			@return	外積
 		*/
 		static CVector3 Cross(const VECTOR& vA, const VECTOR& vB);
+
+		/*
+			@brief 行列を使ったベクトル変換
+
+			@param[in] vector	変換処理を行いたいベクトル
+			@param[in] matrix	変換処理に使用するベクトル
+
+			@return 変換後のベクトル
+		*/
+		static CVector3 Transform(const VECTOR& vector, const MATRIX& matrix);
 
 		/*
 			@brief	代入演算子のオーバーロード
@@ -291,7 +301,9 @@ namespace aqua
 		*/
 		void DebugLog(void);
 
+		//!成分がすべて0のベクトル
 		static const CVector3 ZERO;
+		//!成分がすべて1のベクトル
 		static const CVector3 ONE;
 
 	};

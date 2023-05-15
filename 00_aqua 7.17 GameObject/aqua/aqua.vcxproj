@@ -44,6 +44,7 @@
     <ClCompile Include="src\graphics\texture\texture_manager\texture_manager.cpp" />
     <ClCompile Include="src\graphics\texture\texture_resource\texture_resource.cpp" />
     <ClCompile Include="src\mathematics\mathematics.cpp" />
+    <ClCompile Include="src\mathematics\matrix\matrix.cpp" />
     <ClCompile Include="src\mathematics\vector\vector2\vector2.cpp" />
     <ClCompile Include="src\mathematics\vector\vector3\vector3.cpp" />
     <ClCompile Include="src\resources\resource_object\resource_object.cpp" />
@@ -103,6 +104,7 @@
     <ClInclude Include="src\graphics\texture\texture_manager\texture_manager.h" />
     <ClInclude Include="src\graphics\texture\texture_resource\texture_resource.h" />
     <ClInclude Include="src\mathematics\mathematics.h" />
+    <ClInclude Include="src\mathematics\matrix\matrix.h" />
     <ClInclude Include="src\mathematics\vector\vector.h" />
     <ClInclude Include="src\mathematics\vector\vector2\vector2.h" />
     <ClInclude Include="src\mathematics\vector\vector3\vector3.h" />

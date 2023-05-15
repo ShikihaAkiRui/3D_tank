@@ -1,6 +1,7 @@
 #include "bullet.h"
 #include"../../unit_manager/unit_manager.h"
 
+const aqua::CVector3 CBullet::m_direction = aqua::CVector3(0.0f, 0.0f, 1.0f);
 const float CBullet::m_move_speed = 100.0f;
 const float CBullet::m_radius = 4.0f;
 
@@ -13,13 +14,13 @@ CBullet::CBullet(aqua::IGameObject* parent)
 }
 
 //‰Šú‰»
-void CBullet::Initialize(const aqua::CVector3& position, float direction)
+void CBullet::Initialize(const aqua::CVector3& position)
 {
 	IUnit::Initialize("data/ball.mv1");
 
 	m_Position = position;
-	m_Velocity.x = sin(aqua::DegToRad(direction)) * m_move_speed * aqua::GetDeltaTime();
-	m_Velocity.z = cos(aqua::DegToRad(direction)) * m_move_speed * aqua::GetDeltaTime();
+
+	m_Velocity = m_direction * m_move_speed * aqua::GetDeltaTime();
 
 	m_Model->position = m_Position;
 }

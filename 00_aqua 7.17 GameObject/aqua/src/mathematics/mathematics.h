@@ -13,6 +13,7 @@
 
 #include <cmath>
 #include "vector\vector.h"
+#include"matrix\matrix.h"
 
 /*!
  *  @brief      aqua–¼‘O‹óŠÔ
