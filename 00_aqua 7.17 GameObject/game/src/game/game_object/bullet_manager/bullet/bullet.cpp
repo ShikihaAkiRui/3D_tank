@@ -9,18 +9,18 @@ const float CBullet::m_radius = 4.0f;
 CBullet::CBullet(aqua::IGameObject* parent)
 	:IUnit(parent,"Bullet")
 	,m_Position(aqua::CVector3::ZERO)
-	,m_Velocity(aqua::CVector3::ZERO)
+	,m_Velocity(m_direction)
 {
 }
 
 //‰Šú‰»
-void CBullet::Initialize(const aqua::CVector3& position)
+void CBullet::Initialize(const aqua::CVector3& position, const aqua::CMatrix& matrix)
 {
 	IUnit::Initialize("data/ball.mv1");
 
 	m_Position = position;
 
-	m_Velocity = m_direction * m_move_speed * aqua::GetDeltaTime();
+	m_Velocity = m_Velocity.Transform(matrix) * m_move_speed * aqua::GetDeltaTime();
 
 	m_Model->position = m_Position;
 }

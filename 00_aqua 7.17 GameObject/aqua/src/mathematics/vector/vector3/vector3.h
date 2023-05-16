@@ -7,6 +7,7 @@
 */
 namespace aqua
 {
+	class CMatrix;
 
 	/*
 		@class	CVector3
@@ -104,7 +105,7 @@ namespace aqua
 
 			@return 変換後のベクトル
 		*/
-		static CVector3 Transform(const VECTOR& vector, const MATRIX& matrix);
+		CVector3& Transform(const CMatrix& matrix);
 
 		/*
 			@brief	代入演算子のオーバーロード

@@ -10,6 +10,6 @@ public:
 	~CBulletManager() = default;
 
 	//ê∂ê¨
-	void Create(const aqua::CVector3& position);
+	void Create(const aqua::CVector3& position, const aqua::CMatrix& matrix);
 
 };

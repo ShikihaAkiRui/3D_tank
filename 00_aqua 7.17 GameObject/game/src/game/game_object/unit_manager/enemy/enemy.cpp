@@ -41,7 +41,7 @@ bool CEnemy::CheckHitBullet(void)
 	{
 		CBullet* bullet = (CBullet*)(*it);
 
-		hit_flag = CollCheckSphere(-1, bullet->GetCenterPosition(), bullet->GetRadius());
+		hit_flag = CollCheckSphere(m_frame_index, bullet->GetCenterPosition(), bullet->GetRadius());
 
 		//“–‚½‚Á‚½‚çtrue
 		if (hit_flag)

@@ -16,6 +16,8 @@ public:
 	void Draw(void);
 	//ˆÚ“®
 	void Move(void);
+	//’e‚ÅUŒ‚
+	void Shot(void);
 
 private:
 	aqua::CVector3 m_Position;	//ˆÊ’u

@@ -29,7 +29,7 @@ void CUnitManager::Create(UNIT_ID id)
 }
 
 //ユニットの当たり判定
-bool CUnitManager::CheckHitUnit(const std::string& object_name, aqua::CVector3 start_position, aqua::CVector3 end_position)
+bool CUnitManager::CheckHitUnit(const std::string& object_name,const aqua::CVector3& start_position,const aqua::CVector3& end_position)
 {
 	if (m_ChildObjectList.empty())
 		return false;
@@ -60,7 +60,7 @@ bool CUnitManager::CheckHitUnit(const std::string& object_name, aqua::CVector3 s
 }
 
 //エネミーと弾の当たり判定
-bool CUnitManager::EnemyCheckHitBullet(aqua::CVector3 center_position, float radius)
+bool CUnitManager::EnemyCheckHitBullet(const aqua::CVector3& center_position, float radius)
 {
 	if (m_ChildObjectList.empty())
 		return false;

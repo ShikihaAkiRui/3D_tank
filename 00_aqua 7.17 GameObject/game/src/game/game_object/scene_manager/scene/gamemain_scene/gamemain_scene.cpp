@@ -17,7 +17,7 @@ void CGameMainScene::Initialize(void)
 	unit_manager->Create(UNIT_ID::PLAYER);
 	unit_manager->Create(UNIT_ID::ENEMY);
 
-	CBulletManager* bullet_manager = aqua::CreateGameObject<CBulletManager>(this);
+	aqua::CreateGameObject<CBulletManager>(this);
 
 	IGameObject::Initialize();
 

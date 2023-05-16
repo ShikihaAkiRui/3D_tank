@@ -13,7 +13,7 @@ namespace aqua
 
 		@brief	マトリクスクラス	
 	*/
-	class CMatrix : private MATRIX
+	class CMatrix : public MATRIX
 	{
 	public:
 		/*

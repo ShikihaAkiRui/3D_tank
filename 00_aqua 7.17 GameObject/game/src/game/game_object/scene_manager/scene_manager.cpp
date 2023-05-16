@@ -153,7 +153,7 @@ void CSceneManager::SceneIn(void)
 		m_State = STATE::SCENE_UPDATE;
 	}
 
-	m_FadePlane.color.alpha = (unsigned)alpha;
+	m_FadePlane.color.alpha = (unsigned char)alpha;
 }
 
 //シーンを更新

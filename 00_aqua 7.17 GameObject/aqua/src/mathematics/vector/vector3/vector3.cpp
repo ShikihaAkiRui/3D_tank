@@ -7,6 +7,7 @@
 #include "vector3.h"
 #include"../../../debug/debug.h"
 #include<cmath>
+#include "../../matrix/matrix.h"
 
 const aqua::CVector3 aqua::CVector3::ZERO = aqua::CVector3(0.0f, 0.0f, 0.0f);
 const aqua::CVector3 aqua::CVector3::ONE = aqua::CVector3(1.0f, 1.0f, 1.0f);
@@ -101,11 +102,12 @@ Cross(const VECTOR& vA, const VECTOR& vB)
 /*
 	行列を使ったベクトル変換
 */
-aqua::CVector3
+aqua::CVector3&
 aqua::CVector3::
-Transform(const VECTOR& vector, const MATRIX& matrix)
+Transform(const CMatrix& matrix)
 {
-	return VTransform(vector,matrix);
+	*this = VTransform(*this, matrix);
+	return *this;
 }
 
 /*
