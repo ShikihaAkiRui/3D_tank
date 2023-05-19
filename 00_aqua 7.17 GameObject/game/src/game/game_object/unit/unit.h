@@ -23,7 +23,9 @@ public:
 
 	//ƒŒƒC‚ğo‚µ‚Ä”»’è
 	bool CollCheckRay(const aqua::CVector3& start_position,const aqua::CVector3& end_position);
-	
+
+	aqua::CModel* GetModel(void);
+
 protected:
 	aqua::CModel* m_Model;	//ƒ‚ƒfƒ‹
 	

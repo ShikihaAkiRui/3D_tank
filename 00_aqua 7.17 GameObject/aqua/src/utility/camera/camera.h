@@ -17,6 +17,13 @@ namespace aqua
 	class CCamera
 	{
 	public:
+		//!位置
+		CVector3 m_Position;
+		//!注視点（見ている座標）
+		CVector3 m_TargetPosition;
+		//!上方向
+		CVector3 m_UpVector;
+
 		/*
 			@brief	コンストラクタ
 		*/
@@ -35,12 +42,6 @@ namespace aqua
 		void	Update(void);
 
 	private:
-		//!位置
-		CVector3 m_Position;
-		//!注視点（見ている座標）
-		CVector3 m_TargetPosition;
-		//!上方向
-		CVector3 m_UpVector;
 
 		//!位置の初期値
 		static const CVector3 m_default_position;

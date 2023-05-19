@@ -47,3 +47,8 @@ bool IUnit::CollCheckRay(const aqua::CVector3& start_position,const aqua::CVecto
 {
 	return this->CollCheckLine(m_frame_index,start_position,end_position);
 }
+
+aqua::CModel* IUnit::GetModel(void)
+{
+	return m_Model;
+}

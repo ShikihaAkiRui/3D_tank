@@ -32,6 +32,8 @@ void CPlayer::Update(void)
 {
 	IUnit::Update();
 
+
+
 	Move();
 
 	CUnitManager* unit_manager = (CUnitManager*)aqua::FindGameObject("UnitManager");
