@@ -102,6 +102,8 @@
     <ClCompile Include="src\game\game_object\bullet_manager\bullet\bullet.cpp" />
     <ClCompile Include="src\game\game_object\bullet_manager\bullet_manager.cpp" />
     <ClCompile Include="src\game\game_object\control_camera\control_camera.cpp" />
+    <ClCompile Include="src\game\game_object\stage\stage.cpp" />
+    <ClCompile Include="src\game\game_object\unit_manager\character\character.cpp" />
     <ClCompile Include="src\game\game_object\unit_manager\enemy\enemy.cpp" />
     <ClCompile Include="src\game\game_object\unit_manager\player\player.cpp" />
     <ClCompile Include="src\game\game_object\scene_manager\scene\gamemain_scene\gamemain_scene.cpp" />
@@ -117,6 +119,8 @@
     <ClInclude Include="src\game\game_object\bullet_manager\bullet\bullet.h" />
     <ClInclude Include="src\game\game_object\bullet_manager\bullet_manager.h" />
     <ClInclude Include="src\game\game_object\control_camera\control_camera.h" />
+    <ClInclude Include="src\game\game_object\stage\stage.h" />
+    <ClInclude Include="src\game\game_object\unit_manager\character\character.h" />
     <ClInclude Include="src\game\game_object\unit_manager\enemy\enemy.h" />
     <ClInclude Include="src\game\game_object\unit_manager\player\player.h" />
     <ClInclude Include="src\game\game_object\scene_manager\scene\gamemain_scene\gamemain_scene.h" />

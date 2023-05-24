@@ -45,7 +45,7 @@ RefreshCollInfo(int frame_index)
 */
 bool 
 ICollision::
-CollCheckLine(int frame_index, aqua::CVector3 pos_start, aqua::CVector3 pos_end)
+CollCheckLine(int frame_index,const aqua::CVector3& pos_start,const aqua::CVector3& pos_end)
 {
 	MV1_COLL_RESULT_POLY result = MV1CollCheck_Line(m_Model->GetResourceHandle(), frame_index, pos_start, pos_end);
 
@@ -53,11 +53,31 @@ CollCheckLine(int frame_index, aqua::CVector3 pos_start, aqua::CVector3 pos_end)
 }
 
 /*
+	線分とモデルの当たった位置
+*/
+aqua::CVector3 ICollision::GetCollCheckLineHitPosition(int frame_index, const aqua::CVector3& pos_start, const aqua::CVector3& pos_end)
+{
+	MV1_COLL_RESULT_POLY result = MV1CollCheck_Line(m_Model->GetResourceHandle(), frame_index, pos_start, pos_end);
+
+	return result.HitPosition;
+}
+
+/*
+	線分とモデルの当たったポリゴンの法線
+*/
+aqua::CVector3 ICollision::GetCollCheckLineNormal(int frame_index, const aqua::CVector3& pos_start, const aqua::CVector3& pos_end)
+{
+	MV1_COLL_RESULT_POLY result = MV1CollCheck_Line(m_Model->GetResourceHandle(), frame_index, pos_start, pos_end);
+
+	return result.Normal;
+}
+
+/*
 	 玉とモデルの当たり判定
 */
 bool
 ICollision::
-CollCheckSphere(int frame_index, aqua::CVector3 center_pos, float radius)
+CollCheckSphere(int frame_index,const aqua::CVector3& center_pos, float radius)
 {
 	MV1_COLL_RESULT_POLY_DIM result = MV1CollCheck_Sphere(m_Model->GetResourceHandle(), frame_index, center_pos, radius);
 
@@ -75,7 +95,7 @@ CollCheckSphere(int frame_index, aqua::CVector3 center_pos, float radius)
 */
 bool
 ICollision::
-CollCheckCapsule(int frame_index, aqua::CVector3 pos1, aqua::CVector3 pos2, float radius)
+CollCheckCapsule(int frame_index,const aqua::CVector3& pos1,const aqua::CVector3& pos2, float radius)
 {
 	MV1_COLL_RESULT_POLY_DIM result = MV1CollCheck_Capsule(m_Model->GetResourceHandle(), frame_index, pos1, pos2, radius);
 
@@ -93,7 +113,7 @@ CollCheckCapsule(int frame_index, aqua::CVector3 pos1, aqua::CVector3 pos2, floa
 */
 MV1_COLL_RESULT_POLY 
 ICollision::
-CollCheckGetResultPoly(MV1_COLL_RESULT_POLY_DIM result_poly_dim, int poly_no)
+CollCheckGetResultPoly(const MV1_COLL_RESULT_POLY_DIM& result_poly_dim, int poly_no)
 {
 	return MV1CollCheck_GetResultPoly(result_poly_dim,poly_no);
 }
@@ -103,7 +123,7 @@ CollCheckGetResultPoly(MV1_COLL_RESULT_POLY_DIM result_poly_dim, int poly_no)
 */
 void
 ICollision::
-CollResultPolyDimTerminate(MV1_COLL_RESULT_POLY_DIM result_poly_dim)
+CollResultPolyDimTerminate(const MV1_COLL_RESULT_POLY_DIM& result_poly_dim)
 {
 	MV1CollResultPolyDimTerminate(result_poly_dim);
 }

@@ -9,6 +9,7 @@ public:
 	CBullet(aqua::IGameObject* parent);
 	~CBullet() = default;
 
+	void Initialize(void)override {};
 	void Initialize(const aqua::CVector3& position, const aqua::CMatrix& matrix);
 	void Update(void)override;
 

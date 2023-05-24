@@ -4,23 +4,24 @@
 
 //コンストラクタ
 CEnemy::CEnemy(aqua::IGameObject* parent)
-	:IUnit(parent,"Enemy")
+	:ICharacter(parent,"Enemy")
 {
 }
 
 //初期化
 void CEnemy::Initialize(void)
 {
-	IUnit::Initialize("data/boxt.mv1");
+	ICharacter::Initialize("data/boxt.mv1");
 
-	m_Model->position = aqua::CVector3(30.0f, 0.0f, 30.0f);
+	m_Position = aqua::CVector3(-1200.0f, 100.0f, -600.0f);
+	m_Model->position = m_Position;
 
 }
 
 //更新
 void CEnemy::Update(void)
 {
-	IUnit::Update();
+	ICharacter::Update();
 
 	if (CheckHitBullet())
 		DeleteObject();

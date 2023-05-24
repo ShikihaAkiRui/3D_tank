@@ -4,8 +4,8 @@ const int IUnit::m_frame_index = -1;
 const aqua::CVector3 IUnit::m_divnum = aqua::CVector3(4.0f, 4.0f, 4.0f);
 
 //コンストラクタ
-IUnit::IUnit(aqua::IGameObject* parent,const std::string& object_name)
-	:aqua::IGameObject(parent,object_name,"Unit")
+IUnit::IUnit(aqua::IGameObject* parent, const std::string& object_name)
+	:aqua::IGameObject(parent, object_name)
 {
 }
 

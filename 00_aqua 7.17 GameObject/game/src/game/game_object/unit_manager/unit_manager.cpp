@@ -11,9 +11,9 @@ CUnitManager::CUnitManager(aqua::IGameObject* parent)
 }
 
 //¶¬
-void CUnitManager::Create(UNIT_ID id)
+IUnit* CUnitManager::Create(UNIT_ID id)
 {
-	aqua::IGameObject* unit = nullptr;
+	IUnit* unit = nullptr;
 
 	switch (id)
 	{
@@ -22,10 +22,11 @@ void CUnitManager::Create(UNIT_ID id)
 	default:	break;
 	}
 
-	if (!unit)return;
+	if (!unit)return nullptr;
 
 	unit->Initialize();
 
+	return unit;
 }
 
 //ƒ†ƒjƒbƒg‚Ì“–‚½‚è”»’è

@@ -18,4 +18,8 @@ private:
 
 	static const std::string m_object_name;	//オブジェクトの名前
 	aqua::CLabel m_Label;	//デバック用
+
+	aqua::CCamera m_Camera;
+
+	//aqua::CModel m_Field;
 };

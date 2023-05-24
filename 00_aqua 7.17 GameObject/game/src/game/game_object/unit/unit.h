@@ -6,10 +6,11 @@
 class IUnit : public ICollision ,public aqua::IGameObject
 {
 public:
-	IUnit(aqua::IGameObject* parent,const std::string& object_name);
+	IUnit(aqua::IGameObject* parent, const std::string& object_name);
 	virtual ~IUnit() = default;
 
 	//‰Šú‰»
+	virtual void Initialize(void) = 0;
 	virtual void Initialize(const std::string& file_name);
 
 	//XV

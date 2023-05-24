@@ -57,7 +57,6 @@ private:
 	bool m_PushFlag;					//シーンのプッシュが行われた
 	aqua::CBoxPrimitive m_FadePlane;	//フェード用の黒い板
 
-	aqua::CCamera m_Camera;
 };
 
 //シーンマネージャーの取得
