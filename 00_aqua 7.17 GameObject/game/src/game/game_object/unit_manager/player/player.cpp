@@ -11,8 +11,6 @@ const aqua::CVector3 CPlayer::m_graund_ray_langth = aqua::CVector3(0.0f,-15.0f,0
 //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 CPlayer::CPlayer(aqua::IGameObject* parent)
 	:ICharacter(parent,"Player")
-	,m_Velocity(aqua::CVector3::ZERO)
-	,m_Angle(0)
 	,m_Rotation(aqua::CVector3::ZERO)
 	, m_Matrix(aqua::CMatrix::Ident())
 {
@@ -40,8 +38,11 @@ void CPlayer::Update(void)
 
 	ICharacter::Update();
 
+
+	//ˆÚ“®
 	Move();
 
+	//’e‚ÅUŒ‚
 	Shot();
 }
 
@@ -77,6 +78,8 @@ void CPlayer::Move(void)
 	m_Matrix.RotY(aqua::DegToRad(m_Rotation.y));
 	m_Velocity.Transform(m_Matrix);
 
+	ICharacter::Move();
+
 	m_Position += m_Velocity * m_move_speed * aqua::GetDeltaTime();
 
 	m_Model->rotation = m_Rotation;
@@ -86,12 +89,12 @@ void CPlayer::Move(void)
 //’e‚ÅUŒ‚
 void CPlayer::Shot(void)
 {
-	CBulletManager* bullet_manager = (CBulletManager*)aqua::FindGameObject("BulletManager");
-	if (!bullet_manager)return;
-
 	//’e‚ðo‚·
 	if (aqua::mouse::Trigger(aqua::mouse::BUTTON_ID::LEFT))
 	{
+		CBulletManager* bullet_manager = (CBulletManager*)aqua::FindGameObject("BulletManager");
+		if (!bullet_manager)return;
+
 		bullet_manager->Create(m_Position, m_Matrix);
 	}
 

@@ -26,7 +26,7 @@ aqua::CVector3 CStage::GetHitGroundPosition(const aqua::CVector3& ray_start_posi
 {
 	aqua::CVector3 hit_position = aqua::CVector3::ZERO;
 
-	hit_position = GetCollCheckLineHitPosition(m_frame_index, ray_start_position, ray_end_position);
+	//hit_position = GetCollCheckLineHitPosition(m_frame_index, ray_start_position, ray_end_position);
 
 	return hit_position;
 }

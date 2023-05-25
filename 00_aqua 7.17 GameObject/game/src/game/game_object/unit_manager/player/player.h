@@ -13,14 +13,12 @@ public:
 
 	void Update(void);
 
+private:
 	//ˆÚ“®
-	void Move(void);
+	void Move(void)override;
 	//’e‚ÅUŒ‚
 	void Shot(void);
 
-private:
-	aqua::CVector3 m_Velocity;	//‘¬“x
-	float m_Angle;				//Šp“x
 	aqua::CVector3 m_Rotation;	//‰ñ“]
 	aqua::CMatrix m_Matrix;		//s—ñ
 

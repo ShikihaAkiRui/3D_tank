@@ -65,24 +65,16 @@ public:
 	/*
 		@brief 線分とモデルの当たった位置
 
-		@param[in]	frame_index コリジョンの情報を更新するフレームの番号
-		@param[in]	pos_start	当たり判定で使用する線分の始点
-		@param[in]	pos_end		当たり判定で使用する線分の終点
-
 		@return 当たった位置
 	*/
-	aqua::CVector3	GetCollCheckLineHitPosition(int frame_index,const aqua::CVector3& pos_start,const aqua::CVector3& pos_end);
+	aqua::CVector3	GetCollCheckLineHitPosition(void);
 
 	/*
 		@brief	線分とモデルの当たったポリゴンの法線
 
-		@param[in]	frame_index	コリジョン情報を更新するフレームの番号
-		@param[in]	pos_start	当たり判定で使用する線分の始点
-		@param[in]	pos_end		当たり判定で使用する線分の終点
-
 		@return 当たったポリゴンの法線
 	*/
-	aqua::CVector3	GetCollCheckLineNormal(int frame_index, const aqua::CVector3& pos_start, const aqua::CVector3& pos_end);
+	aqua::CVector3	GetCollCheckLineNormal(void);
 
 	/*
 		@brief 玉とモデルの当たり判定
@@ -126,5 +118,6 @@ public:
 
 	//!モデルのポインタ
 	aqua::CModel* m_Model;
-
+	
+	MV1_COLL_RESULT_POLY* m_HitLineResult;
 };
