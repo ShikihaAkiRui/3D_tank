@@ -50,6 +50,7 @@ void ICharacter::CheckGround(void)
 	}
 
 	m_Model->position.y = m_Position.y;
+
 }
 
 //ˆÚ“®

@@ -36,8 +36,8 @@ void CPlayer::Update(void)
 	if (unit_manager->CheckHitUnit("Enemy", m_Position, m_Position + m_Velocity *  m_ray_langth))
 		m_Position = aqua::CVector3(-1250.0f, 50.0f, -600.0f);
 
-	ICharacter::Update();
 
+	ICharacter::Update();
 
 	//ˆÚ“®
 	Move();
@@ -59,6 +59,7 @@ void CPlayer::Move(void)
 
 		if (m_Angle >= 360.0f)
 			m_Angle -= 360.0f;
+
 	}
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::RIGHT))
 	{
@@ -66,6 +67,7 @@ void CPlayer::Move(void)
 
 		if (m_Angle <= 0)
 			m_Angle += 360.0f;
+
 	}
 	//ã‰ºˆÚ“®
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::UP))

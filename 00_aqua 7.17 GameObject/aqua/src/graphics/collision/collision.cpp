@@ -44,12 +44,23 @@ RefreshCollInfo(int frame_index)
 /*
 	線分とモデルの当たり判定
 */
-bool 
+bool
 ICollision::
 CollCheckLine(int frame_index,const aqua::CVector3& pos_start,const aqua::CVector3& pos_end)
 {
 	m_HitLineResult = &MV1CollCheck_Line(m_Model->GetResourceHandle(), frame_index, pos_start, pos_end);
+	MV1_COLL_RESULT_POLY result = MV1CollCheck_Line(m_Model->GetResourceHandle(), frame_index, pos_start, pos_end);
 
+	return m_HitLineResult->HitFlag;
+}
+
+/*
+	線分とモデルの当たったかのフラグ
+*/
+bool 
+ICollision::
+GetCollCheckLineHitFlag(void)
+{
 	return m_HitLineResult->HitFlag;
 }
 

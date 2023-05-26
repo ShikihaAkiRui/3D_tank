@@ -63,6 +63,13 @@ public:
 	bool	CollCheckLine(int frame_index, const aqua::CVector3& pos_start, const aqua::CVector3& pos_end);
 	
 	/*
+		@brief 線分とモデルの当たったかのフラグ
+
+		@return 当たったどうか
+	*/
+	bool	GetCollCheckLineHitFlag(void);
+
+	/*
 		@brief 線分とモデルの当たった位置
 
 		@return 当たった位置
