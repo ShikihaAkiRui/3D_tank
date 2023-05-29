@@ -75,6 +75,7 @@ public:
 		@return 当たった位置
 	*/
 	aqua::CVector3	GetCollCheckLineHitPosition(void);
+	aqua::CVector3	GetCollCheckLineHitPosition(int frame_index, const aqua::CVector3& pos_start, const aqua::CVector3& pos_end);
 
 	/*
 		@brief	線分とモデルの当たったポリゴンの法線
@@ -82,6 +83,7 @@ public:
 		@return 当たったポリゴンの法線
 	*/
 	aqua::CVector3	GetCollCheckLineNormal(void);
+	aqua::CVector3	GetCollCheckLineNormal(int frame_index, const aqua::CVector3& pos_start, const aqua::CVector3& pos_end);
 
 	/*
 		@brief 玉とモデルの当たり判定

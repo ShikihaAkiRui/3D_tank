@@ -17,7 +17,7 @@ protected:
 	aqua::CVector3 m_Position;			//位置	
 	aqua::CVector3 m_GraundRayLength;	//床へのレイ長さ
 	aqua::CVector3 m_Velocity;			//速度
-	float m_Angle;						//角度
+	aqua::CVector3 m_Rotation;			//回転
 
 	//移動
 	virtual void Move(void);

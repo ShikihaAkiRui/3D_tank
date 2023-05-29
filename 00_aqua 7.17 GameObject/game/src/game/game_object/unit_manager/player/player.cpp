@@ -11,7 +11,7 @@ const aqua::CVector3 CPlayer::m_graund_ray_langth = aqua::CVector3(0.0f,-15.0f,0
 //コンストラクタ
 CPlayer::CPlayer(aqua::IGameObject* parent)
 	:ICharacter(parent,"Player")
-	,m_Rotation(aqua::CVector3::ZERO)
+	,m_Angle(0.0f)
 	, m_Matrix(aqua::CMatrix::Ident())
 {
 }
@@ -99,5 +99,4 @@ void CPlayer::Shot(void)
 
 		bullet_manager->Create(m_Position, m_Matrix);
 	}
-
 }

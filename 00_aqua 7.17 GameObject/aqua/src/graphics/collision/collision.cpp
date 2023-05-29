@@ -49,9 +49,12 @@ ICollision::
 CollCheckLine(int frame_index,const aqua::CVector3& pos_start,const aqua::CVector3& pos_end)
 {
 	m_HitLineResult = &MV1CollCheck_Line(m_Model->GetResourceHandle(), frame_index, pos_start, pos_end);
-	MV1_COLL_RESULT_POLY result = MV1CollCheck_Line(m_Model->GetResourceHandle(), frame_index, pos_start, pos_end);
-
+	
 	return m_HitLineResult->HitFlag;
+
+	//MV1_COLL_RESULT_POLY result = MV1CollCheck_Line(m_Model->GetResourceHandle(), frame_index, pos_start, pos_end);
+	//return result.HitFlag;
+
 }
 
 /*
@@ -65,13 +68,33 @@ GetCollCheckLineHitFlag(void)
 }
 
 /*
+	線分とモデルの当たった位置 te
+*/
+aqua::CVector3 ICollision::GetCollCheckLineHitPosition(void)
+{
+	return m_HitLineResult->HitPosition;
+}
+
+/*
 	線分とモデルの当たった位置
 */
 aqua::CVector3
 ICollision::
-GetCollCheckLineHitPosition(void)
+GetCollCheckLineHitPosition(int frame_index, const aqua::CVector3& pos_start, const aqua::CVector3& pos_end)
 {
-	return m_HitLineResult->HitPosition;
+	MV1_COLL_RESULT_POLY result = MV1CollCheck_Line(m_Model->GetResourceHandle(), frame_index, pos_start, pos_end);
+
+	return result.HitPosition;
+
+}
+/*
+	線分とモデルの当たったポリゴンの法線 te
+*/
+aqua::CVector3
+ICollision::
+GetCollCheckLineNormal(void)
+{
+	return m_HitLineResult->Normal;
 }
 
 /*
@@ -79,9 +102,12 @@ GetCollCheckLineHitPosition(void)
 */
 aqua::CVector3
 ICollision::
-GetCollCheckLineNormal(void)
+GetCollCheckLineNormal(int frame_index, const aqua::CVector3& pos_start, const aqua::CVector3& pos_end)
 {
-	return m_HitLineResult->Normal;
+	MV1_COLL_RESULT_POLY result = MV1CollCheck_Line(m_Model->GetResourceHandle(), frame_index, pos_start, pos_end);
+
+	return result.Normal;
+
 }
 
 /*

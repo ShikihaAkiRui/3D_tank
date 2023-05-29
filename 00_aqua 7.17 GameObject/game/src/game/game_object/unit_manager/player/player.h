@@ -19,7 +19,7 @@ private:
 	//’e‚ÅUŒ‚
 	void Shot(void);
 
-	aqua::CVector3 m_Rotation;	//‰ñ“]
+	float m_Angle;				//Šp“x
 	aqua::CMatrix m_Matrix;		//s—ñ
 
 	static const float m_move_speed;	//‘¬“x
