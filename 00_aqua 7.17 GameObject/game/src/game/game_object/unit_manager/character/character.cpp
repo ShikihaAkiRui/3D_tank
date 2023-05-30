@@ -44,8 +44,8 @@ void ICharacter::CheckGround(void)
 	{
 		aqua::CVector3 hit_position;
 
-		//hit_position = stage->GetCollCheckLineHitPosition(m_frame_index, m_Position, m_Position + m_GraundRayLength);
-		hit_position = stage->GetCollCheckLineHitPosition();
+		hit_position = stage->GetCollCheckLineHitPosition(m_frame_index, m_Position, m_Position + m_GraundRayLength);
+		//hit_position = stage->GetCollCheckLineHitPosition();
 
 		m_Position.y = hit_position.y - m_GraundRayLength.y;
 	}
