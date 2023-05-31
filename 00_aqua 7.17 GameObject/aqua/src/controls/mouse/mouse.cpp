@@ -13,6 +13,7 @@
 #include "..\..\debug\debug.h"
 #include "..\..\utility\memory\memory.h"
 
+#include"../../aqua.h"
 /*
  *  初期化
  */
@@ -46,12 +47,16 @@ Update( void )
     // 前のフレームの入力状態を保存
     m_PrevMouseState = m_MouseState;
 
-    m_PrevCursorPos = m_CursorPos;
+    //m_PrevCursorPos = m_CursorPos;
+    m_PrevCursorPos = aqua::CPoint(aqua::GetWindowWidth() / 2, aqua::GetWindowHeight() / 2);
+
 
     // マウスの入力情報取得
     m_MouseState = GetMouseInput( );
 
     m_CursorPos = GetCursorPos( );
+
+    SetMousePoint(aqua::GetWindowWidth() / 2, aqua::GetWindowHeight() / 2);
 }
 
 /*

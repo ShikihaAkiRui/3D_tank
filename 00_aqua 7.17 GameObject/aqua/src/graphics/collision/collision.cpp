@@ -68,7 +68,7 @@ GetCollCheckLineHitFlag(void)
 }
 
 /*
-	線分とモデルの当たった位置 te
+	線分とモデルの当たった位置 t
 */
 aqua::CVector3 ICollision::GetCollCheckLineHitPosition(void)
 {
@@ -88,7 +88,7 @@ GetCollCheckLineHitPosition(int frame_index, const aqua::CVector3& pos_start, co
 
 }
 /*
-	線分とモデルの当たったポリゴンの法線 te
+	線分とモデルの当たったポリゴンの法線 t
 */
 aqua::CVector3
 ICollision::
