@@ -15,8 +15,8 @@ public:
 	//XV
 	void Update(void)override;
 
-	//°‚Ì”»’è
-	aqua::CVector3 GetHitGroundPosition(const aqua::CVector3& ray_start_position, const aqua::CVector3& ray_end_position);
+	//’e‚Æ°‚Ì”»’è
+	bool GetHitBulletGroundFlag(const aqua::CVector3& center_position,float radius);
 
 	//d—Íæ“¾
 	float GetGravity(void);

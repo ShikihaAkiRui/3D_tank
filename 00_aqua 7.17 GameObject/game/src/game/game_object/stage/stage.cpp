@@ -21,14 +21,14 @@ void CStage::Update(void)
 	IUnit::Update();
 }
 
-//°‚Ì“–‚½‚è”»’è
-aqua::CVector3 CStage::GetHitGroundPosition(const aqua::CVector3& ray_start_position, const aqua::CVector3& ray_end_position)
+//’e‚Æ°‚Ì“–‚½‚è”»’è
+bool CStage::GetHitBulletGroundFlag(const aqua::CVector3& center_position, float radius)
 {
-	aqua::CVector3 hit_position = aqua::CVector3::ZERO;
+	bool hit_flag = false;
 
-	//hit_position = GetCollCheckLineHitPosition(m_frame_index, ray_start_position, ray_end_position);
+	hit_flag = CollCheckSphere(m_frame_index, center_position, radius);
 
-	return hit_position;
+	return hit_flag;
 }
 
 //d—Íæ“¾

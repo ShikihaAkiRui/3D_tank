@@ -19,6 +19,12 @@ public:
 	float GetRadius(void);
 
 private:
+	//“G‚Ì“–‚½‚è”»’è
+	void CheckEnemy(void);
+
+	//°‚Ì“–‚½‚è”»’è
+	void CheckGraund(void);
+	
 	aqua::CVector3 m_Position;		//ˆÊ’u
 	aqua::CVector3 m_Velocity;		//‘¬“x
 

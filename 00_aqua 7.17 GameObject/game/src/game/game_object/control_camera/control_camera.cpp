@@ -43,6 +43,12 @@ void CControlCamera::Update(void)
 	m_Angle.x += mouse.x * m_angle_variation.x;
 	m_Angle.y += mouse.y * m_angle_variation.y;
 
+	if (m_Angle.x >= 360.0f)
+		m_Angle.x -= 360.0f;
+	if (m_Angle.x <= 0.0f)
+		m_Angle.x += 360.0f;
+
+	//ã‰º‚Ì•ûŒüãŒÀ
 	if (m_Angle.y >= m_max_x_angle)
 		m_Angle.y = m_max_x_angle;
 	if (m_Angle.y <= m_min_x_angle)

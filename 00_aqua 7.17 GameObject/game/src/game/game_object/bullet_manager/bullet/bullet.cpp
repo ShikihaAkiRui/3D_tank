@@ -1,5 +1,6 @@
 #include "bullet.h"
 #include"../../unit_manager/unit_manager.h"
+#include"../../stage/stage.h"
 
 const aqua::CVector3 CBullet::m_direction = aqua::CVector3(0.0f, 0.0f, 1.0f);
 const float CBullet::m_move_speed = 100.0f;
@@ -32,13 +33,12 @@ void CBullet::Update(void)
 
 	m_Position += m_Velocity;
 	m_Model->position = m_Position;
+	
+	//“G‚Ì”»’è
+	CheckEnemy();
 
-	
-	CUnitManager* unit_manager = (CUnitManager*)aqua::FindGameObject("UnitManager");
-	if (!unit_manager)return;
-	if (unit_manager->EnemyCheckHitBullet(m_Position, m_radius))
-		DeleteObject();
-	
+	//°‚Ì“–‚½‚è”»’è
+	CheckGraund();
 }
 
 //’†SˆÊ’uŽæ“¾
@@ -51,4 +51,29 @@ aqua::CVector3 CBullet::GetCenterPosition(void)
 float CBullet::GetRadius(void)
 {
 	return m_radius;
+}
+
+//“G‚Ì“–‚½‚è”»’è
+void CBullet::CheckEnemy(void)
+{
+	CUnitManager* unit_manager = (CUnitManager*)aqua::FindGameObject("UnitManager");
+	if (!unit_manager)return;
+
+	if (unit_manager->EnemyCheckHitBullet(m_Position, m_radius))
+	{
+		DeleteObject();
+	}
+}
+
+//°‚Ì“–‚½‚è”»’è
+void CBullet::CheckGraund(void)
+{
+	CStage* stage = (CStage*)aqua::FindGameObject("Stage");
+	if (!stage) return;
+
+	if (stage->GetHitBulletGroundFlag(m_Position, m_radius))
+	{
+		DeleteObject();
+	}
+	
 }

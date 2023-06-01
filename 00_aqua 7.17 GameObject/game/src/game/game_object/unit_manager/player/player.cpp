@@ -53,7 +53,7 @@ void CPlayer::Move(void)
 	m_Matrix = aqua::CMatrix::Ident();
 
 	//左右方向変更
-	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::LEFT))
+	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::A))
 	{
 		m_Angle -= m_rotation_speed * aqua::GetDeltaTime();
 
@@ -61,7 +61,7 @@ void CPlayer::Move(void)
 			m_Angle -= 360.0f;
 
 	}
-	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::RIGHT))
+	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::D))
 	{
 		m_Angle += m_rotation_speed * aqua::GetDeltaTime();
 
@@ -70,9 +70,9 @@ void CPlayer::Move(void)
 
 	}
 	//上下移動
-	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::UP))
+	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::W))
 		m_Velocity.z = 1.0f;
-	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::DOWN))
+	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::S))
 		m_Velocity.z = -1.0f;
 
 	//行列で方向変更
