@@ -15,11 +15,16 @@ CBullet::CBullet(aqua::IGameObject* parent)
 }
 
 //èâä˙âª
-void CBullet::Initialize(const aqua::CVector3& position, const aqua::CMatrix& matrix)
+void CBullet::Initialize(const aqua::CVector3& position, const aqua::CVector3& rotation)
 {
 	IUnit::Initialize("data/ball.mv1");
 
 	m_Position = position;
+
+	aqua::CMatrix matrix = aqua::CMatrix::Ident();
+
+	matrix.RotX(aqua::DegToRad(rotation.x));
+	matrix.RotY(aqua::DegToRad(rotation.y));
 
 	m_Velocity = m_Velocity.Transform(matrix) * m_move_speed * aqua::GetDeltaTime();
 

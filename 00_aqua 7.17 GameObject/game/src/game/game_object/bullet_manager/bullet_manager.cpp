@@ -8,12 +8,12 @@ CBulletManager::CBulletManager(aqua::IGameObject* parent)
 }
 
 //ê∂ê¨
-void CBulletManager::Create(const aqua::CVector3& position, const aqua::CMatrix& matrix)
+void CBulletManager::Create(const aqua::CVector3& position, const aqua::CVector3& rotation)
 {
 	CBullet* bullet = aqua::CreateGameObject<CBullet>(this);
 
 	if (!bullet)
 		return;
 
-	bullet->Initialize(position,matrix);
+	bullet->Initialize(position,rotation);
 }

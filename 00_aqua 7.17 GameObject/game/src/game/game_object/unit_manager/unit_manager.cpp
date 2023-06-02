@@ -46,7 +46,7 @@ bool CUnitManager::CheckHitUnit(const std::string& object_name,const aqua::CVect
 		//指定したオブジェクト名だったら
 		if (unit->GetGameObjectName().find(object_name) != std::string::npos)
 		{
-			hit_flag = unit->CollCheckRay(start_position,end_position);
+			hit_flag = unit->CollCheckLine(m_frame_index,start_position,end_position);
 
 			//当たったたらtrue
 			if (hit_flag)

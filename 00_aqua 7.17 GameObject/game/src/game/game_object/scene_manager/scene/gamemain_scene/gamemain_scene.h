@@ -21,5 +21,4 @@ private:
 
 	aqua::CCamera m_Camera;
 
-	//aqua::CModel m_Field;
 };

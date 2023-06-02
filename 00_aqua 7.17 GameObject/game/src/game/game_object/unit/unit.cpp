@@ -42,12 +42,7 @@ void IUnit::Finalize(void)
 	
 }
 
-//ƒŒƒC‚ðo‚µ‚Ä”»’è
-bool IUnit::CollCheckRay(const aqua::CVector3& start_position,const aqua::CVector3& end_position)
-{
-	return this->CollCheckLine(m_frame_index,start_position,end_position);
-}
-
+//ƒ‚ƒfƒ‹Žæ“¾
 aqua::CModel* IUnit::GetModel(void)
 {
 	return m_Model;

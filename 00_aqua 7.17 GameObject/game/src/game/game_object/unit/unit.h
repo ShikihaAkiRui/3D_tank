@@ -22,9 +22,7 @@ public:
 	//‰ğ•ú
 	virtual void Finalize(void);
 
-	//ƒŒƒC‚ğo‚µ‚Ä”»’è
-	bool CollCheckRay(const aqua::CVector3& start_position,const aqua::CVector3& end_position);
-
+	//ƒ‚ƒfƒ‹æ“¾
 	aqua::CModel* GetModel(void);
 
 protected:

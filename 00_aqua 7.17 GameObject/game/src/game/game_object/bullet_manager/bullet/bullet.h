@@ -10,7 +10,7 @@ public:
 	~CBullet() = default;
 
 	void Initialize(void)override {};
-	void Initialize(const aqua::CVector3& position, const aqua::CMatrix& matrix);
+	void Initialize(const aqua::CVector3& position, const aqua::CVector3& rotation);
 	void Update(void)override;
 
 	//’†SˆÊ’uæ“¾

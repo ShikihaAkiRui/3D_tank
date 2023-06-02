@@ -56,6 +56,7 @@ Update( void )
 
     m_CursorPos = GetCursorPos( );
 
+    //マウスの座標を中心に戻す
     SetMousePoint(aqua::GetWindowWidth() / 2, aqua::GetWindowHeight() / 2);
 }
 

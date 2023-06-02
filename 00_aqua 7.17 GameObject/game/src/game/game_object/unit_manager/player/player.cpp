@@ -2,6 +2,7 @@
 #include"../unit_manager.h"
 #include"../../bullet_manager/bullet_manager.h"
 #include"../../bullet_manager/bullet/bullet.h"
+#include"../../control_camera/control_camera.h"
 
 const float CPlayer::m_move_speed = 100.0f;
 const float CPlayer::m_ray_langth = 15.0f;
@@ -23,7 +24,7 @@ void CPlayer::Initialize(void)
 
 	m_Position = aqua::CVector3(-1250.0f, 50.0f,-600.0f);
 	m_Model->position = m_Position;
-	m_Model->scale = aqua::CVector3(.5f, .5f, .5f);
+	m_Model->scale = aqua::CVector3(0.5f, 0.5f, 0.5f);
 
 	m_GraundRayLength = m_graund_ray_langth;
 }
@@ -55,25 +56,47 @@ void CPlayer::Move(void)
 	//左右方向変更
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::A))
 	{
+		
 		m_Angle -= m_rotation_speed * aqua::GetDeltaTime();
 
 		if (m_Angle >= 360.0f)
 			m_Angle -= 360.0f;
+		
+
+		//m_Angle = 270.0f;
+		//m_Velocity.z = 1.0f;
 
 	}
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::D))
 	{
+		
 		m_Angle += m_rotation_speed * aqua::GetDeltaTime();
 
 		if (m_Angle <= 0)
 			m_Angle += 360.0f;
-
+		
+		//m_Angle = 90.0f;
+		//m_Velocity.z = 1.0f;
+		
 	}
 	//上下移動
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::W))
+	{
+		//m_Angle = 0.0f;
 		m_Velocity.z = 1.0f;
+	}
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::S))
+	{
+		//m_Angle = 180.0f;
+
 		m_Velocity.z = -1.0f;
+	}
+
+	/*
+	CControlCamera* camera = (CControlCamera*)aqua::FindGameObject("ControlCamera");
+	if (!camera)return;
+	m_Rotation.y = camera->GetAngle().y;
+	*/
 
 	//行列で方向変更
 	m_Rotation.y = m_Angle;
@@ -97,6 +120,10 @@ void CPlayer::Shot(void)
 		CBulletManager* bullet_manager = (CBulletManager*)aqua::FindGameObject("BulletManager");
 		if (!bullet_manager)return;
 
-		bullet_manager->Create(m_Position, m_Matrix);
+		CControlCamera* camera = (CControlCamera*)aqua::FindGameObject("ControlCamera");
+		if (!camera)return;
+
+		bullet_manager->Create(m_Position, camera->GetAngle());
+
 	}
 }

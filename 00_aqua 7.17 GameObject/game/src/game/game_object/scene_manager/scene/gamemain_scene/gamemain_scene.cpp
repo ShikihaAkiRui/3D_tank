@@ -16,10 +16,9 @@ CGameMainScene::CGameMainScene(aqua::IGameObject* parent)
 void CGameMainScene::Initialize(void)
 {
 	CUnitManager* unit_manager = aqua::CreateGameObject<CUnitManager>(this);
-	aqua::CreateGameObject<CBulletManager>(this);
-
 	CControlCamera* cam_con = aqua::CreateGameObject<CControlCamera>(this);
 	aqua::CreateGameObject<CStage>(this);
+	aqua::CreateGameObject<CBulletManager>(this);
 
 	IGameObject::Initialize();
 
@@ -29,8 +28,6 @@ void CGameMainScene::Initialize(void)
 	m_Camera.Initialize();
 	cam_con->Initialize(&m_Camera, player);
 
-	//m_Field.Load("data\\Terrain.mv1");
-	//m_Field.position.y = -10;
 
 #ifdef _DEBUG
 	m_Label.Create(30);
@@ -48,7 +45,6 @@ void CGameMainScene::Update(void)
 //•`‰æ
 void CGameMainScene::Draw(void)
 {
-	//m_Field.Draw();
 	IGameObject::Draw();
 
 #ifdef _DEBUG
@@ -60,7 +56,6 @@ void CGameMainScene::Draw(void)
 //‰ð•ú
 void CGameMainScene::Finalize(void)
 {
-//	m_Field.Unload();
 	IGameObject::Finalize();
 
 #ifdef _DEBUG
