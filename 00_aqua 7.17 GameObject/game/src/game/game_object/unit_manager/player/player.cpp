@@ -6,7 +6,7 @@
 
 const float CPlayer::m_move_speed = 100.0f;
 const float CPlayer::m_ray_langth = 15.0f;
-const float CPlayer::m_rotation_speed = 90.0f;
+const float CPlayer::m_rotation_speed = 180.0f;
 const aqua::CVector3 CPlayer::m_graund_ray_langth = aqua::CVector3(0.0f,-15.0f,0.0f);
 
 //コンストラクタ
@@ -21,6 +21,8 @@ CPlayer::CPlayer(aqua::IGameObject* parent)
 void CPlayer::Initialize(void)
 {
 	ICharacter::Initialize("data/cube.mv1");
+
+	m_UnitCategory = UNIT_CATEGORY::PLAYER;
 
 	m_Position = aqua::CVector3(-1250.0f, 50.0f,-600.0f);
 	m_Model->position = m_Position;
@@ -45,6 +47,8 @@ void CPlayer::Update(void)
 
 	//弾で攻撃
 	Shot();
+
+
 }
 
 //移動
@@ -53,50 +57,44 @@ void CPlayer::Move(void)
 	m_Velocity = aqua::CVector3::ZERO;
 	m_Matrix = aqua::CMatrix::Ident();
 
+	float direction_rotation = 0.0f;
+	float difference_angle = 0.0f;
+
 	//左右方向変更
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::A))
 	{
-		
-		m_Angle -= m_rotation_speed * aqua::GetDeltaTime();
+		//m_Angle -= m_rotation_speed * aqua::GetDeltaTime();
 
-		if (m_Angle >= 360.0f)
-			m_Angle -= 360.0f;
-		
-
-		//m_Angle = 270.0f;
-		//m_Velocity.z = 1.0f;
-
+		m_Velocity.z = 1.0f;
 	}
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::D))
 	{
-		
-		m_Angle += m_rotation_speed * aqua::GetDeltaTime();
+		//m_Angle += m_rotation_speed * aqua::GetDeltaTime();
 
-		if (m_Angle <= 0)
-			m_Angle += 360.0f;
-		
-		//m_Angle = 90.0f;
-		//m_Velocity.z = 1.0f;
-		
+		m_Velocity.z = 1.0f;
+
+		direction_rotation = 90.0f;
+
 	}
 	//上下移動
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::W))
 	{
-		//m_Angle = 0.0f;
 		m_Velocity.z = 1.0f;
 	}
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::S))
 	{
-		//m_Angle = 180.0f;
-
 		m_Velocity.z = -1.0f;
 	}
 
-	/*
-	CControlCamera* camera = (CControlCamera*)aqua::FindGameObject("ControlCamera");
-	if (!camera)return;
-	m_Rotation.y = camera->GetAngle().y;
-	*/
+	difference_angle = m_Angle - direction_rotation;
+	
+	m_Angle += 0;
+
+
+	if (m_Angle >= 360.0f)
+		m_Angle -= 360.0f;
+	if (m_Angle < 0)
+		m_Angle += 360.0f;
 
 	//行列で方向変更
 	m_Rotation.y = m_Angle;
@@ -123,7 +121,7 @@ void CPlayer::Shot(void)
 		CControlCamera* camera = (CControlCamera*)aqua::FindGameObject("ControlCamera");
 		if (!camera)return;
 
-		bullet_manager->Create(m_Position, camera->GetAngle());
+		bullet_manager->Create(m_UnitCategory,m_Position, camera->GetAngle());
 
 	}
 }

@@ -1,5 +1,7 @@
 #include "character.h"
 #include"../../stage/stage.h"
+#include"../../bullet_manager/bullet_manager.h"
+#include"../../bullet_manager/bullet/bullet.h"
 
 const aqua::CVector3 ICharacter::m_default_position = aqua::CVector3::ZERO;
 const aqua::CVector3 ICharacter::m_default_graund_ray_length = aqua::CVector3(0.0f,-10.0f,0.0f);
@@ -12,6 +14,7 @@ ICharacter::ICharacter(aqua::IGameObject* parent, const std::string& object_name
 	,m_GraundRayLength(m_default_graund_ray_length)
 	,m_Velocity(aqua::CVector3::ZERO)
 	,m_Rotation(aqua::CVector3::ZERO)
+	,m_UnitCategory(UNIT_CATEGORY::DUMMY)
 {
 }
 
@@ -28,6 +31,16 @@ void ICharacter::Update(void)
 
 	//床の判定
 	CheckGround();
+	
+	//弾の判定
+	if (CheckHitBullet())
+		HitAttack();
+}
+
+//ユニットのカテゴリーを取得
+UNIT_CATEGORY ICharacter::GetUnitCategory(void)
+{
+	return m_UnitCategory;
 }
 
 //床の判定
@@ -53,6 +66,38 @@ void ICharacter::CheckGround(void)
 
 }
 
+//弾の判定
+bool ICharacter::CheckHitBullet(void)
+{
+	CBulletManager* bullet_manager = (CBulletManager*)aqua::FindGameObject("BulletManager");
+	if (!bullet_manager || bullet_manager->GetChildList()->empty())
+		return false;
+
+	auto it = bullet_manager->GetChildList()->begin();
+
+	bool hit_flag = false;
+
+	while (it != bullet_manager->GetChildList()->end())
+	{
+		CBullet* bullet = (CBullet*)(*it);
+
+		if (bullet->GetCategory() != m_UnitCategory)
+		{
+			hit_flag = CollCheckSphere(m_frame_index, bullet->GetCenterPosition(), bullet->GetRadius());
+
+			//当たったらtrue
+			if (hit_flag)
+				return hit_flag;
+		}
+
+		++it;
+	}
+
+	//当たってないならfalse
+	return hit_flag;
+
+}
+
 //移動
 void ICharacter::Move(void)
 {
@@ -68,4 +113,10 @@ void ICharacter::Move(void)
 
 		m_Velocity = aqua::CVector3::Cross(right, stage->GetCollCheckLineNormal());
 	}
+}
+
+//攻撃が当たった
+void ICharacter::HitAttack(void)
+{
+	DeleteObject();
 }

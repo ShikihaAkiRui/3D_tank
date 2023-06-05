@@ -1,6 +1,7 @@
 #pragma once
 
 #include"aqua.h"
+#include"../unit_manager/unit_id.h"
 
 //弾のマネージャー
 class CBulletManager : public aqua::IGameObject
@@ -10,6 +11,6 @@ public:
 	~CBulletManager() = default;
 
 	//生成
-	void Create(const aqua::CVector3& position, const aqua::CVector3& rotation);
+	void Create(UNIT_CATEGORY unit_category,const aqua::CVector3& position, const aqua::CVector3& rotation);
 
 };

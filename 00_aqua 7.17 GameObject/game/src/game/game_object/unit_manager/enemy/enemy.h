@@ -12,9 +12,6 @@ public:
 	void Initialize(void) override;
 	void Update(void)override;
 
-	//’e‚Ì“–‚½‚è”»’è
-	bool CheckHitBullet(void);
-
 private:
 	static const aqua::CVector3 m_graund_ray_langth;	//°—p‚ÌƒŒƒC‚Ì’·‚³
 };

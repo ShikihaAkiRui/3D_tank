@@ -1,11 +1,11 @@
 #include "control_camera.h"
 #include"../stage/stage.h"
 
-const aqua::CVector3 CControlCamera::m_camera_length = aqua::CVector3(0.0f, 30.0f, -100.0f);
+const aqua::CVector3 CControlCamera::m_camera_length = aqua::CVector3(0.0f, 40.0f, -100.0f);
 const aqua::CVector2 CControlCamera::m_angle_variation = aqua::CVector2(0.1, 0.1f);
 const float CControlCamera::m_max_x_angle = 60.0f;
 const float CControlCamera::m_min_x_angle = -90.0f;
-const aqua::CVector3 CControlCamera::m_target_position = aqua::CVector3(0.0f, 20.0f, 0.0f);
+const aqua::CVector3 CControlCamera::m_target_position = aqua::CVector3(0.0f, 30.0f, 0.0f);
 
 //コンストラクタ
 CControlCamera::CControlCamera(aqua::IGameObject* parent)
@@ -13,11 +13,6 @@ CControlCamera::CControlCamera(aqua::IGameObject* parent)
 	,m_Camera(nullptr)
 	,m_Unit(nullptr)
 	,m_Angle(aqua::CVector3::ZERO)
-{
-}
-
-//初期化
-void CControlCamera::Initialize(void)
 {
 }
 
@@ -61,7 +56,7 @@ void CControlCamera::Update(void)
 	m_Camera->m_Position = m_Unit->GetModel()->position + aqua::CVector3(m_camera_length).Transform(matrix);
 
 	m_Camera->m_TargetPosition = m_Unit->GetModel()->position + m_target_position;
-
+	
 	m_Camera->Update();
 }
 

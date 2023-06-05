@@ -15,6 +15,8 @@ void CEnemy::Initialize(void)
 {
 	ICharacter::Initialize("data/boxt.mv1");
 
+	m_UnitCategory = UNIT_CATEGORY::ENMEY;
+
 	m_GraundRayLength = m_graund_ray_langth;
 	m_Position = aqua::CVector3(-1200.0f, 100.0f, -600.0f);
 
@@ -25,35 +27,4 @@ void CEnemy::Initialize(void)
 void CEnemy::Update(void)
 {
 	ICharacter::Update();
-
-	if (CheckHitBullet())
-		DeleteObject();
-}
-
-//’e‚Ì“–‚½‚è”»’è
-bool CEnemy::CheckHitBullet(void)
-{
-	CBulletManager* bullet_manager = (CBulletManager*)aqua::FindGameObject("BulletManager");
-	if (!bullet_manager || bullet_manager->GetChildList()->empty())
-		return false;
-
-	auto it = bullet_manager->GetChildList()->begin();
-
-	bool hit_flag = false;
-
-	while(it != bullet_manager->GetChildList()->end())
-	{
-		CBullet* bullet = (CBullet*)(*it);
-
-		hit_flag = CollCheckSphere(m_frame_index, bullet->GetCenterPosition(), bullet->GetRadius());
-
-		//“–‚½‚Á‚½‚çtrue
-		if (hit_flag)
-			return hit_flag;
-
-		++it;
-	}
-
-	//“–‚½‚Á‚Ä‚È‚¢‚È‚çfalse
-	return hit_flag;
 }

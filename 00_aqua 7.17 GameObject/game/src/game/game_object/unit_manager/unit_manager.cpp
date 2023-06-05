@@ -60,8 +60,7 @@ bool CUnitManager::CheckHitUnit(const std::string& object_name,const aqua::CVect
 	return hit_flag;
 }
 
-//エネミーと弾の当たり判定
-bool CUnitManager::EnemyCheckHitBullet(const aqua::CVector3& center_position, float radius)
+bool CUnitManager::CheckHitBullet(UNIT_CATEGORY unit_category,const aqua::CVector3& center_position, float radius)
 {
 	if (m_ChildObjectList.empty())
 		return false;
@@ -72,13 +71,13 @@ bool CUnitManager::EnemyCheckHitBullet(const aqua::CVector3& center_position, fl
 
 	while (it != m_ChildObjectList.end())
 	{
-		IUnit* unit = (IUnit*)(*it);
+		ICharacter* chara = (ICharacter*)(*it);
 
 		//指定したオブジェクト名だったら
-		if (unit->GetGameObjectName().find("Enemy") != std::string::npos)
+		if (chara->GetUnitCategory() != unit_category)
 		{
-			hit_flag = unit->CollCheckSphere(m_frame_index, center_position, radius);
-			
+			hit_flag = chara->CollCheckSphere(m_frame_index, center_position, radius);
+
 			//当たったたらtrue
 			if (hit_flag)
 				return hit_flag;
@@ -89,4 +88,6 @@ bool CUnitManager::EnemyCheckHitBullet(const aqua::CVector3& center_position, fl
 
 	//当たってないならfalse
 	return hit_flag;
+
+	return false;
 }
