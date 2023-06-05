@@ -57,23 +57,25 @@ void CPlayer::Move(void)
 	m_Velocity = aqua::CVector3::ZERO;
 	m_Matrix = aqua::CMatrix::Ident();
 
-	float direction_rotation = 0.0f;
+	aqua::CVector3 direction_rotation = aqua::CVector3::ZERO;
 	float difference_angle = 0.0f;
 
 	//¶‰E•ûŒü•ÏX
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::A))
 	{
-		//m_Angle -= m_rotation_speed * aqua::GetDeltaTime();
+		m_Angle -= m_rotation_speed * aqua::GetDeltaTime();
+
+	//	direction_rotation.x += -1.0f;
 
 		m_Velocity.z = 1.0f;
 	}
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::D))
 	{
-		//m_Angle += m_rotation_speed * aqua::GetDeltaTime();
+		m_Angle += m_rotation_speed * aqua::GetDeltaTime();
+
+	//	direction_rotation.x += 1.0f;
 
 		m_Velocity.z = 1.0f;
-
-		direction_rotation = 90.0f;
 
 	}
 	//ã‰ºˆÚ“®
@@ -86,9 +88,7 @@ void CPlayer::Move(void)
 		m_Velocity.z = -1.0f;
 	}
 
-	difference_angle = m_Angle - direction_rotation;
-	
-	m_Angle += 0;
+
 
 
 	if (m_Angle >= 360.0f)
