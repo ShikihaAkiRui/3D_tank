@@ -2,7 +2,7 @@
 #include"../stage/stage.h"
 
 const aqua::CVector3 CControlCamera::m_camera_length = aqua::CVector3(0.0f, 40.0f, -100.0f);
-const aqua::CVector2 CControlCamera::m_angle_variation = aqua::CVector2(0.1, 0.1f);
+const aqua::CVector2 CControlCamera::m_angle_variation = aqua::CVector2(0.1f, 0.1f);
 const float CControlCamera::m_max_x_angle = 60.0f;
 const float CControlCamera::m_min_x_angle = -90.0f;
 const aqua::CVector3 CControlCamera::m_target_position = aqua::CVector3(0.0f, 30.0f, 0.0f);

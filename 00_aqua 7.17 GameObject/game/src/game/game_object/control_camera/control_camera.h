@@ -27,5 +27,5 @@ private:
 	static const aqua::CVector2 m_angle_variation;		//角度の変化量
 	static const float m_max_x_angle;					//X軸角度最大値
 	static const float m_min_x_angle;					//X軸角度最小値
-	static const aqua::CVector3 m_target_position;				//ターゲットの高さ
+	static const aqua::CVector3 m_target_position;		//ターゲットの高さ
 };
