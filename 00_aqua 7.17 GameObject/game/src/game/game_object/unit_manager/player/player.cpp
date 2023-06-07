@@ -90,27 +90,33 @@ void CPlayer::Move(void)
 		m_Velocity.z = 1.0f;
 	}
 
+	//ƒJƒƒ‰‚ÌŒü‚«‚É‡‚í‚¹‚é
 	aqua::CMatrix direction_mat = aqua::CMatrix::Ident();
 	direction_mat.RotY(aqua::DegToRad(camera->GetAngle().y));
 	direction_vector.Transform(direction_mat);
-
+	
 	//Šp“x‚É’¼‚·
 	direction_angle = aqua::RadToDeg(atan2(direction_vector.x, direction_vector.z));
-
+	
 	if (direction_angle < 0)
 		direction_angle += 360.0f;
-
+	
+	
 	//“®‚¢‚Ä‚¢‚½‚ç•ûŒü“]Š·
 	if (m_Velocity.Length() > 0)
 	{
-		m_Angle = m_Angle + m_rotation_speed * (direction_angle - m_Angle) * aqua::GetDeltaTime();
+		m_Angle = m_Angle + (m_rotation_speed * (direction_angle - m_Angle)) * aqua::GetDeltaTime();
 	}
+	
+//	m_Angle = direction_angle;
 
+	
 	if (m_Angle >= 360.0f)
 		m_Angle -= 360.0f;
 	if (m_Angle < 0)
 		m_Angle += 360.0f;
-
+	
+	
 	//s—ñ‚Å•ûŒü•ÏX
 	m_Rotation.y = m_Angle;
 	m_Matrix.RotY(aqua::DegToRad(m_Rotation.y));
