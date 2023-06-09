@@ -118,7 +118,7 @@ void CPlayer::Move(void)
 	line_dir = cross;
 #else
 	direction_angle = aqua::RadToDeg(atan2(direction_vector.x, direction_vector.z));
-
+	
 
 #endif
 
@@ -129,7 +129,6 @@ void CPlayer::Move(void)
 		m_Angle = m_Angle + ((m_rotation_speed * (direction_angle)) * aqua::GetDeltaTime() * cross.y);
 #else
 		m_Angle = m_Angle + (m_rotation_speed * (direction_angle - m_Angle)) * aqua::GetDeltaTime();
-
 #endif
 	}
 
