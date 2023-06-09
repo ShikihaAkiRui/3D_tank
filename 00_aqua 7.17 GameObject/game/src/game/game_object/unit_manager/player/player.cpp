@@ -50,14 +50,20 @@ void CPlayer::Update(void)
 
 }
 
+void CPlayer::Draw()
+{
+	aqua::CLinePrimitive3D line;
+	line.Setup(m_Position, m_Position + line_dir * 100.0f, 0xff8888ff);
+	line.Draw();
+
+	ICharacter::Draw();
+}
+
 //移動
 void CPlayer::Move(void)
-{
+{	
 	m_Velocity = aqua::CVector3::ZERO;
 	m_Matrix = aqua::CMatrix::Ident();
-
-	CControlCamera* camera = (CControlCamera*)aqua::FindGameObject("ControlCamera");
-	if (!camera)return;
 
 	float direction_angle = 0.0f;
 	aqua::CVector3 direction_vector = aqua::CVector3::ZERO;
@@ -91,32 +97,42 @@ void CPlayer::Move(void)
 	}
 
 	//カメラの向きに合わせる
-	aqua::CMatrix direction_mat = aqua::CMatrix::Ident();
-	direction_mat.RotY(aqua::DegToRad(camera->GetAngle().y));
-	direction_vector.Transform(direction_mat);
-	
-	//角度に直す
-	direction_angle = aqua::RadToDeg(atan2(direction_vector.x, direction_vector.z));
-	
-	if (direction_angle < 0)
-		direction_angle += 360.0f;
-	
-	
-	//動いていたら方向転換
-	if (m_Velocity.Length() > 0)
-	{
-		m_Angle = m_Angle + (m_rotation_speed * (direction_angle - m_Angle)) * aqua::GetDeltaTime();
-	}
-	
-//	m_Angle = direction_angle;
+	CControlCamera* camera = (CControlCamera*)aqua::FindGameObject("ControlCamera");
+	if (!camera)return;
+	aqua::CMatrix camera_matrix = aqua::CMatrix::Ident();
+	camera_matrix.RotY(aqua::DegToRad(camera->GetAngle().y));
+	direction_vector.Transform(camera_matrix);
+	direction_vector.y = 0.0f;
 
-	
-	if (m_Angle >= 360.0f)
-		m_Angle -= 360.0f;
-	if (m_Angle < 0)
-		m_Angle += 360.0f;
-	
-	
+//#define TEST
+#ifdef TEST
+	aqua::CVector3 current_dir;
+	current_dir.x = sin(aqua::DegToRad(m_Rotation.y));
+	current_dir.y = 0.0f;
+	current_dir.z = cos(aqua::DegToRad(m_Rotation.y));
+
+	direction_angle = aqua::RadToDeg(aqua::CVector3::Dot(current_dir, direction_vector.Normalize()));
+
+	aqua::CVector3 cross = aqua::CVector3::Cross(current_dir, direction_vector.Normalize());
+	if (cross.x != 0.0f)cross = aqua::CVector3(0.0f, 1.0f, 0.0f);
+	line_dir = cross;
+#else
+	direction_angle = aqua::RadToDeg(atan2(direction_vector.x, direction_vector.z));
+
+
+#endif
+
+	//動いていたら方向を変える
+	if (direction_vector.Length() > 0)
+	{
+#ifdef TEST
+		m_Angle = m_Angle + ((m_rotation_speed * (direction_angle)) * aqua::GetDeltaTime() * cross.y);
+#else
+		m_Angle = m_Angle + (m_rotation_speed * (direction_angle - m_Angle)) * aqua::GetDeltaTime();
+
+#endif
+	}
+
 	//行列で方向変更
 	m_Rotation.y = m_Angle;
 	m_Matrix.RotY(aqua::DegToRad(m_Rotation.y));

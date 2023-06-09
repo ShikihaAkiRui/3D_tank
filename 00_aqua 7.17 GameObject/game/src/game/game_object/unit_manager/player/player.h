@@ -13,6 +13,8 @@ public:
 
 	void Update(void);
 
+	void Draw()override;
+
 private:
 	//ˆÚ“®
 	void Move(void)override;
@@ -26,4 +28,6 @@ private:
 	static const float m_ray_langth;	//ƒŒƒC’·‚³
 	static const float m_rotation_speed;//‰ñ“]‘¬‚³
 	static const aqua::CVector3 m_graund_ray_langth;	//°—p‚ÌƒŒƒC‚Ì’·‚³
+
+	aqua::CVector3 line_dir;
 };

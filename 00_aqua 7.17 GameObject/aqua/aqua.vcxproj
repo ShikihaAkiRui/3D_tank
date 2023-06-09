@@ -35,6 +35,7 @@
     <ClCompile Include="src\graphics\model\model_resource\model_resource.cpp" />
     <ClCompile Include="src\graphics\primitive\box_primitive\box_primitive.cpp" />
     <ClCompile Include="src\graphics\primitive\circle_primitive\circle_primitive.cpp" />
+    <ClCompile Include="src\graphics\primitive\line_primitive3D\line_primitive3D.cpp" />
     <ClCompile Include="src\graphics\primitive\line_primitive\line_primitive.cpp" />
     <ClCompile Include="src\graphics\primitive\triangle_primitive\triangle_primitive.cpp" />
     <ClCompile Include="src\graphics\shader\shader.cpp" />
@@ -94,6 +95,7 @@
     <ClInclude Include="src\graphics\model\model_resource\model_resource.h" />
     <ClInclude Include="src\graphics\primitive\box_primitive\box_primitive.h" />
     <ClInclude Include="src\graphics\primitive\circle_primitive\circle_primitive.h" />
+    <ClInclude Include="src\graphics\primitive\line_primitive3D\line_primitive3D.h" />
     <ClInclude Include="src\graphics\primitive\line_primitive\line_primitive.h" />
     <ClInclude Include="src\graphics\primitive\primitive.h" />
     <ClInclude Include="src\graphics\primitive\triangle_primitive\triangle_primitive.h" />

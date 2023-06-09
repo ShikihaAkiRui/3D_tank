@@ -37,6 +37,19 @@ void ICharacter::Update(void)
 		HitAttack();
 }
 
+void ICharacter::Draw(void)
+{
+#if 1
+	aqua::CLinePrimitive3D line;
+	aqua::CVector3 dir;
+	dir.x = sin(aqua::DegToRad(m_Rotation.y)) * 100.0f;
+	dir.z = cos(aqua::DegToRad(m_Rotation.y)) * 100.0f;
+	line.Setup(m_Position, m_Position + dir, 0xffff8888);
+	line.Draw();
+#endif
+		IUnit::Draw();
+}
+
 //ユニットのカテゴリーを取得
 UNIT_CATEGORY ICharacter::GetUnitCategory(void)
 {

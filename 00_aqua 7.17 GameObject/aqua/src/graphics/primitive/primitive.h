@@ -14,4 +14,5 @@
 #include "box_primitive/box_primitive.h"
 #include "circle_primitive/circle_primitive.h"
 #include "line_primitive/line_primitive.h"
+#include "line_primitive3D/line_primitive3D.h"
 #include "triangle_primitive/triangle_primitive.h"

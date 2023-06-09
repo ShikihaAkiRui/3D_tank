@@ -14,6 +14,8 @@ public:
 
 	virtual void Update(void)override;
 
+	virtual void Draw(void) override;
+
 	//ユニットのカテゴリーを取得
 	UNIT_CATEGORY GetUnitCategory(void);
 
