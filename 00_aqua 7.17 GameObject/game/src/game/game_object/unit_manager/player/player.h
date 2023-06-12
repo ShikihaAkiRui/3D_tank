@@ -18,8 +18,12 @@ public:
 private:
 	//ˆÚ“®
 	void Move(void)override;
+
 	//’e‚ÅUŒ‚
 	void Shot(void);
+
+	//UŒ‚‚ª“–‚½‚Á‚½
+	void HitAttack(void)override;
 
 	float m_Angle;				//Šp“x
 	aqua::CMatrix m_Matrix;		//s—ñ

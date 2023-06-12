@@ -123,7 +123,7 @@ void ICharacter::Move(void)
 		aqua::CMatrix matrix = aqua::CMatrix::Ident();
 		matrix.RotY(aqua::DegToRad(m_Rotation.y));
 		right.Transform(matrix);
-
+		
 		m_Velocity = aqua::CVector3::Cross(right, stage->GetCollCheckLineNormal());
 	}
 }

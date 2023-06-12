@@ -89,5 +89,4 @@ void CBullet::CheckGraund(void)
 	{
 		DeleteObject();
 	}
-	
 }

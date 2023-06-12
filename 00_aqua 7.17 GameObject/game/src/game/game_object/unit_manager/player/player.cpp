@@ -157,7 +157,14 @@ void CPlayer::Shot(void)
 		CControlCamera* camera = (CControlCamera*)aqua::FindGameObject("ControlCamera");
 		if (!camera)return;
 		
+		
+
 		bullet_manager->Create(m_UnitCategory,m_Position, camera->GetAngle());
 
 	}
+}
+
+//UŒ‚‚ª“–‚½‚Á‚½
+void CPlayer::HitAttack(void)
+{
 }
