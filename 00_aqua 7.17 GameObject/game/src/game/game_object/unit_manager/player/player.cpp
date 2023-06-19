@@ -136,7 +136,7 @@ void CPlayer::Move(void)
 	m_Rotation.y = m_Angle;
 	m_Matrix.RotY(aqua::DegToRad(m_Rotation.y));
 	m_Velocity.Transform(m_Matrix);
-
+	
 	ICharacter::Move();
 
 	m_Position += m_Velocity * m_move_speed * aqua::GetDeltaTime();
@@ -157,8 +157,6 @@ void CPlayer::Shot(void)
 		CControlCamera* camera = (CControlCamera*)aqua::FindGameObject("ControlCamera");
 		if (!camera)return;
 		
-		
-
 		bullet_manager->Create(m_UnitCategory,m_Position, camera->GetAngle());
 
 	}

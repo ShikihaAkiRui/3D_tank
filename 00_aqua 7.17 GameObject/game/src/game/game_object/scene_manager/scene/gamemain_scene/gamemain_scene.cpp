@@ -28,7 +28,6 @@ void CGameMainScene::Initialize(void)
 	m_Camera.Initialize();
 	cam_con->Initialize(&m_Camera, player);
 
-
 #ifdef _DEBUG
 	m_Label.Create(30);
 	m_Label.text = "gamemain";
