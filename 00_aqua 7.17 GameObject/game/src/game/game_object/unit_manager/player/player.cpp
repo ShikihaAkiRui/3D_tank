@@ -104,16 +104,16 @@ void CPlayer::Move(void)
 	direction_vector.Transform(camera_matrix);
 	direction_vector.y = 0.0f;
 
-//#define TEST
+#define TEST
 #ifdef TEST
 	aqua::CVector3 current_dir;
 	current_dir.x = sin(aqua::DegToRad(m_Rotation.y));
 	current_dir.y = 0.0f;
 	current_dir.z = cos(aqua::DegToRad(m_Rotation.y));
 
-	direction_angle = aqua::RadToDeg(aqua::CVector3::Dot(current_dir, direction_vector.Normalize()));
+	direction_angle = aqua::RadToDeg(acos(aqua::CVector3::Dot(current_dir.Normalize(), direction_vector.Normalize())));
 
-	aqua::CVector3 cross = aqua::CVector3::Cross(current_dir, direction_vector.Normalize());
+	aqua::CVector3 cross = aqua::CVector3::Cross(current_dir.Normalize(), direction_vector.Normalize());
 	if (cross.x != 0.0f)cross = aqua::CVector3(0.0f, 1.0f, 0.0f);
 	line_dir = cross;
 #else
@@ -138,6 +138,9 @@ void CPlayer::Move(void)
 	m_Velocity.Transform(m_Matrix);
 	
 	ICharacter::Move();
+
+	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::SPACE))
+		m_Velocity.y += 3;
 
 	m_Position += m_Velocity * m_move_speed * aqua::GetDeltaTime();
 
