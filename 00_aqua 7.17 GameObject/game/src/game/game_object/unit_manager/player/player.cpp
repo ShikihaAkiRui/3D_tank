@@ -3,11 +3,15 @@
 #include"../../bullet_manager/bullet_manager.h"
 #include"../../bullet_manager/bullet/bullet.h"
 #include"../../control_camera/control_camera.h"
+#include"../../scene_manager/scene/gamemain_scene/gamemain_scene.h"
 
+const int CPlayer::m_life = 3;
 const float CPlayer::m_move_speed = 100.0f;
 const float CPlayer::m_ray_langth = 15.0f;
 const float CPlayer::m_rotation_speed = 10.0f;
 const aqua::CVector3 CPlayer::m_graund_ray_langth = aqua::CVector3(0.0f,-15.0f,0.0f);
+const float CPlayer::m_jump_power = 5.0f;
+const float CPlayer::m_deceleration = 0.9f;
 
 //コンストラクタ
 CPlayer::CPlayer(aqua::IGameObject* parent)
@@ -23,6 +27,7 @@ void CPlayer::Initialize(void)
 	ICharacter::Initialize("data/cube.mv1");
 
 	m_UnitCategory = UNIT_CATEGORY::PLAYER;
+	m_Life = m_life;
 
 	m_Position = aqua::CVector3(-1250.0f, 50.0f,-600.0f);
 	m_Model->position = m_Position;
@@ -62,13 +67,16 @@ void CPlayer::Draw()
 //移動
 void CPlayer::Move(void)
 {	
-	m_Velocity = aqua::CVector3::ZERO;
+	//m_Velocity = aqua::CVector3::ZERO;
+	m_Velocity.x = 0.0f;
+	m_Velocity.z = 0.0f;
+
 	m_Matrix = aqua::CMatrix::Ident();
 
 	float direction_angle = 0.0f;
 	aqua::CVector3 direction_vector = aqua::CVector3::ZERO;
 
-	//左右方向変更
+	//左右移動
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::A))
 	{
 		direction_vector.x = -1.0f;
@@ -126,7 +134,7 @@ void CPlayer::Move(void)
 	if (direction_vector.Length() > 0)
 	{
 #ifdef TEST
-		m_Angle = m_Angle + ((m_rotation_speed * (direction_angle)) * aqua::GetDeltaTime() * cross.y);
+		m_Angle = m_Angle + ((m_rotation_speed * direction_angle) * aqua::GetDeltaTime() * cross.y);
 #else
 		m_Angle = m_Angle + (m_rotation_speed * (direction_angle - m_Angle)) * aqua::GetDeltaTime();
 #endif
@@ -139,10 +147,15 @@ void CPlayer::Move(void)
 	
 	ICharacter::Move();
 
-	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::SPACE))
-		m_Velocity.y += 3;
+	//地面についているとき飛ぶ
+	if (aqua::keyboard::Trigger(aqua::keyboard::KEY_ID::SPACE) && m_GraundFlag)
+	{
+		m_Velocity.y += m_jump_power;
+		m_GraundFlag = false;
+	}
 
 	m_Position += m_Velocity * m_move_speed * aqua::GetDeltaTime();
+	m_Velocity *= m_deceleration;
 
 	m_Model->rotation = m_Rotation;
 	m_Model->position = m_Position;
@@ -165,7 +178,7 @@ void CPlayer::Shot(void)
 	}
 }
 
-//攻撃が当たった
-void CPlayer::HitAttack(void)
+//倒された
+void CPlayer::Dead(void)
 {
 }

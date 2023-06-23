@@ -19,7 +19,7 @@ public:
 
 private:
 	aqua::CCamera* m_Camera;	//カメラのポインタ
-	IUnit* m_Unit;				//注視店のユニットのポインタ
+	IUnit* m_Unit;				//注視点のユニットのポインタ
 	aqua::CVector3 m_Angle;		//カメラ角度
 
 

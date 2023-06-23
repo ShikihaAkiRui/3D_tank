@@ -25,12 +25,17 @@ protected:
 	aqua::CVector3 m_Velocity;			//速度
 	aqua::CVector3 m_Rotation;			//回転
 	UNIT_CATEGORY m_UnitCategory;		//ユニットのカテゴリー
+	int m_Life;							//体力
+	bool m_GraundFlag;					//床についているか
 
 	//移動
 	virtual void Move(void);
 
 	//攻撃が当たった
 	virtual void HitAttack(void);
+
+	//倒された
+	virtual void Dead(void);
 
 private:
 	//床の判定
@@ -39,7 +44,11 @@ private:
 	//弾の判定
 	bool CheckHitBullet(void);
 
+	//アイテムの判定
+	bool CheckHitItem(void);
+
 	static const aqua::CVector3 m_default_position;				//デフォルトの位置
 	static const aqua::CVector3 m_default_graund_ray_length;	//デフォルトの床へのレイの長さ
 	static const aqua::CVector3 m_model_right_vector;			//右向きのベクトル
+	static const int m_default_damage;							//デフォルトのダメージ量
 };

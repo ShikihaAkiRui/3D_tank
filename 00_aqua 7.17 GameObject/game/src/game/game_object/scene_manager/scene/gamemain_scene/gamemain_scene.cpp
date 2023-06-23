@@ -3,6 +3,7 @@
 #include"../../../bullet_manager/bullet_manager.h"
 #include"../../../control_camera/control_camera.h"
 #include"../../../stage/stage.h"
+#include"../../../item_manager/item_manager.h"
 
 const std::string CGameMainScene::m_object_name = "GameMainScene";
 
@@ -19,6 +20,7 @@ void CGameMainScene::Initialize(void)
 	CControlCamera* cam_con = aqua::CreateGameObject<CControlCamera>(this);
 	aqua::CreateGameObject<CStage>(this);
 	aqua::CreateGameObject<CBulletManager>(this);
+	aqua::CreateGameObject<CItemManager>(this);
 
 	IGameObject::Initialize();
 

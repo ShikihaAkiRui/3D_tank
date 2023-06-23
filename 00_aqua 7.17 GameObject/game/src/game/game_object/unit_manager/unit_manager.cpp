@@ -60,6 +60,7 @@ bool CUnitManager::CheckHitUnit(const std::string& object_name,const aqua::CVect
 	return hit_flag;
 }
 
+//’e‚Ì“–‚½‚è”»’è
 bool CUnitManager::CheckHitBullet(UNIT_CATEGORY unit_category,const aqua::CVector3& center_position, float radius)
 {
 	if (m_ChildObjectList.empty())
@@ -90,4 +91,33 @@ bool CUnitManager::CheckHitBullet(UNIT_CATEGORY unit_category,const aqua::CVecto
 	return hit_flag;
 
 	return false;
+}
+
+bool CUnitManager::CheckHitItem(const aqua::CVector3& center_position, float radius)
+{
+	if (m_ChildObjectList.empty())
+		return false;
+
+	auto it = m_ChildObjectList.begin();
+
+	bool hit_flag = false;
+
+	while (it != m_ChildObjectList.end())
+	{
+		ICharacter* chara = (ICharacter*)(*it);
+
+		hit_flag = chara->CollCheckSphere(m_frame_index, center_position, radius);
+
+		//“–‚½‚Á‚½‚½‚çtrue
+		if (hit_flag)
+			return hit_flag;
+
+		it++;
+	}
+
+	//“–‚½‚Á‚Ä‚È‚¢‚È‚çfalse
+	return hit_flag;
+
+	return false;
+
 }

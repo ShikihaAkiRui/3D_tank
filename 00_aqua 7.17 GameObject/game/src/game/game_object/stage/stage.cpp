@@ -15,12 +15,6 @@ void CStage::Initialize(void)
 	m_Model->position = aqua::CVector3(0.0f, -13.0f, 0.0f);
 }
 
-//XV
-void CStage::Update(void)
-{
-	IUnit::Update();
-}
-
 //’e‚Æ°‚Ì“–‚½‚è”»’è
 bool CStage::GetHitBulletGroundFlag(const aqua::CVector3& center_position, float radius)
 {

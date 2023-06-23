@@ -2,10 +2,13 @@
 #include"../../stage/stage.h"
 #include"../../bullet_manager/bullet_manager.h"
 #include"../../bullet_manager/bullet/bullet.h"
+#include"../../item_manager/item_manager.h"
+#include"../../item_manager/item/item.h"
 
 const aqua::CVector3 ICharacter::m_default_position = aqua::CVector3::ZERO;
 const aqua::CVector3 ICharacter::m_default_graund_ray_length = aqua::CVector3(0.0f,-10.0f,0.0f);
 const aqua::CVector3 ICharacter::m_model_right_vector = aqua::CVector3(1.0f,0.0f,0.0f);
+const int ICharacter::m_default_damage = 1;
 
 //コンストラクタ
 ICharacter::ICharacter(aqua::IGameObject* parent, const std::string& object_name)
@@ -15,6 +18,8 @@ ICharacter::ICharacter(aqua::IGameObject* parent, const std::string& object_name
 	,m_Velocity(aqua::CVector3::ZERO)
 	,m_Rotation(aqua::CVector3::ZERO)
 	,m_UnitCategory(UNIT_CATEGORY::DUMMY)
+	,m_Life(0)
+	,m_GraundFlag(false)
 {
 }
 
@@ -73,6 +78,8 @@ void ICharacter::CheckGround(void)
 		hit_position = stage->GetCollCheckLineHitPosition();
 
 		m_Position.y = hit_position.y - m_GraundRayLength.y;
+
+		m_GraundFlag = true;
 	}
 
 	m_Model->position.y = m_Position.y;
@@ -111,6 +118,34 @@ bool ICharacter::CheckHitBullet(void)
 
 }
 
+//アイテムの判定
+bool ICharacter::CheckHitItem(void)
+{
+	CItemManager* item_manager = (CItemManager*)aqua::FindGameObject("ItemManager");
+	if (item_manager || item_manager->GetChildList()->empty())
+		return false;
+
+	auto it = item_manager->GetChildList()->begin();
+
+	bool hit_flag = false;
+
+	while (it != item_manager->GetChildList()->end())
+	{
+		CItem* item = (CItem*)(*it);
+
+		hit_flag = CollCheckSphere(m_frame_index, item->GetCenterPosition(), item->GetRadius());
+
+		//当たったらtrue
+		if (hit_flag)
+			return hit_flag;
+
+		++it;
+	}
+
+	//当たらなかったらfalse
+	return false;
+}
+
 //移動
 void ICharacter::Move(void)
 {
@@ -130,6 +165,18 @@ void ICharacter::Move(void)
 
 //攻撃が当たった
 void ICharacter::HitAttack(void)
+{
+	m_Life -= m_default_damage;
+
+	//体力が0以下になった
+	if (m_Life <= 0)
+	{
+		Dead();
+	}
+}
+
+//倒された
+void ICharacter::Dead(void)
 {
 	DeleteObject();
 }

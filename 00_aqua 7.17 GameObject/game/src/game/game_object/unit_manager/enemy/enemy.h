@@ -17,6 +17,9 @@ private:
 	//ˆÚ“®
 	void Move(void)override;
 
+	//“|‚³‚ê‚Ä‚½
+	void Dead(void)override;
+
 	//’e‚ğŒ‚‚Â
 	void Shot(void);
 
@@ -25,6 +28,7 @@ private:
 	aqua::CTimer m_ShotTimer;				//Œ‚‚ÂŠÔŠu‚ÌŠÔ
 
 	static const aqua::CVector3 m_graund_ray_langth;	//°—p‚ÌƒŒƒC‚Ì’·‚³
+	static const int m_life;							//‘Ì—Í
 	static const float m_move_speed;					//ˆÚ“®‘¬“x
 	static const float m_stop_distance;					//~‚Ü‚é‹——£
 	static const float m_back_distance;					//‰º‚ª‚é‹——£

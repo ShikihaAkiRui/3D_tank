@@ -1,11 +1,13 @@
 #include "enemy.h"
 #include"../../bullet_manager/bullet_manager.h"
 #include"../player/player.h"
+#include"../../item_manager/item_manager.h"
 
 const aqua::CVector3 CEnemy::m_graund_ray_langth = aqua::CVector3(0.0f, -10.0f, 0.0f);
-const float CEnemy::m_move_speed = 300.0f;
+const int CEnemy::m_life = 1;
+const float CEnemy::m_move_speed = 30.0f;
 const float CEnemy::m_stop_distance = 250.0f;
-const float CEnemy::m_back_distance = 23.0f;
+const float CEnemy::m_back_distance = 230.0f;
 const float CEnemy::m_shot_time = 2.0f;
 
 //コンストラクタ
@@ -22,6 +24,7 @@ void CEnemy::Initialize(void)
 	ICharacter::Initialize("data/boxt.mv1");
 
 	m_UnitCategory = UNIT_CATEGORY::ENMEY;
+	m_Life = m_life;
 
 	m_GraundRayLength = m_graund_ray_langth;
 	m_Position = aqua::CVector3(-1200.0f, 100.0f, -600.0f);
@@ -69,15 +72,17 @@ void CEnemy::Move(void)
 	float x_angle = 0.0f;
 	x_angle = acos(aqua::CVector3::Dot(floor.Normalize(), distance.Normalize()));
 
+	//現在向いている方向
 	aqua::CVector3 current_dir;
 	current_dir.x = 0.0f;
 	current_dir.y = sin(aqua::DegToRad(m_Rotation.x));
 	current_dir.z = cos(aqua::DegToRad(m_Rotation.x));
 
-	aqua::CVector3 cross = aqua::CVector3::Cross(current_dir.Normalize(),distance.Normalize());
-	//if (cross.y != 0.0f) cross = aqua::CVector3(1.0f, 0.0f, 0.0f);
+	m_Rotation.x = aqua::RadToDeg(-x_angle);
 
-	m_Rotation.x = aqua::RadToDeg(x_angle) * cross.x;
+	//回転方向を設定
+	//aqua::CVector3 cross = aqua::CVector3::Cross(current_dir.Normalize(),distance.Normalize());
+	//m_Rotation.x = aqua::RadToDeg(-x_angle) * cross.x;
 
 	//移動方向を変える
 	aqua::CMatrix matrix = aqua::CMatrix::Ident();
@@ -107,6 +112,17 @@ void CEnemy::Move(void)
 
 	m_Model->rotation = m_Rotation;
 	m_Model->position = m_Position;
+}
+
+//倒された
+void CEnemy::Dead(void)
+{
+	CItemManager* item_manager = (CItemManager*)aqua::FindGameObject("ItemManager");
+	if (!item_manager)return;
+
+	item_manager->Create(m_Position);
+
+	ICharacter::Dead();
 }
 
 //弾を撃つ

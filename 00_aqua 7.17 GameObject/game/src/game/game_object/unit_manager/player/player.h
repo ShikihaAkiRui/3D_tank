@@ -22,16 +22,19 @@ private:
 	//’e‚ÅUŒ‚
 	void Shot(void);
 
-	//UŒ‚‚ª“–‚½‚Á‚½
-	void HitAttack(void)override;
+	//“|‚³‚ê‚½‚ª“–‚½‚Á‚½
+	void Dead(void)override;
 
 	float m_Angle;				//Šp“x
 	aqua::CMatrix m_Matrix;		//s—ñ
 
+	static const int m_life;			//‘Ì—Í
 	static const float m_move_speed;	//‘¬“x
 	static const float m_ray_langth;	//ƒŒƒC’·‚³
 	static const float m_rotation_speed;//‰ñ“]‘¬‚³
 	static const aqua::CVector3 m_graund_ray_langth;	//°—p‚ÌƒŒƒC‚Ì’·‚³
+	static const float m_jump_power;	//”ò‚Ô‚Æ‚«‚Ì—Í
+	static const float m_deceleration;	//Œ¸‘¬—¦
 
 	aqua::CVector3 line_dir;
 };

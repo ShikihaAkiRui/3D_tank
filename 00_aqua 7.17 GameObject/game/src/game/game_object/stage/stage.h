@@ -12,9 +12,6 @@ public:
 	//‰Šú‰»
 	void Initialize(void)override;
 
-	//XV
-	void Update(void)override;
-
 	//’e‚Æ°‚Ì”»’è
 	bool GetHitBulletGroundFlag(const aqua::CVector3& center_position,float radius);
 
