@@ -10,7 +10,8 @@ public:
 	CEnemy(aqua::IGameObject* parent);
 	~CEnemy() = default;
 
-	void Initialize(void) override;
+	void Initialize(void)override {};
+	void Initialize(const aqua::CVector3& position);
 	void Update(void)override;
 
 private:

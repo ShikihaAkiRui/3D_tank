@@ -22,8 +22,14 @@ private:
 	//’e‚ÅUŒ‚
 	void Shot(void);
 
-	//“|‚³‚ê‚½‚ª“–‚½‚Á‚½
+	//UŒ‚‚ª“–‚½‚Á‚½
+	void HitAttack(void)override;
+
+	//“|‚³‚ê‚½
 	void Dead(void)override;
+
+	//ƒAƒCƒeƒ€‚É“–‚½‚Á‚½
+	void HitItem(void)override;
 
 	float m_Angle;				//Šp“x
 	aqua::CMatrix m_Matrix;		//s—ñ

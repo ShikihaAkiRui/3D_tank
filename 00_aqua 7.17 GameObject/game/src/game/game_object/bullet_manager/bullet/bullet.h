@@ -14,6 +14,9 @@ public:
 	void Initialize(UNIT_CATEGORY unit_category, const aqua::CVector3& position, const aqua::CVector3& rotation);
 	void Update(void)override;
 
+	//キャラクターに当たった
+	void HitCharacter(void);
+
 	//中心位置取得
 	aqua::CVector3 GetCenterPosition(void);
 	//半径取得
@@ -22,8 +25,6 @@ public:
 	UNIT_CATEGORY GetCategory(void);
 
 private:
-	//敵の当たり判定
-	void CheckCharacter(void);
 
 	//床の当たり判定
 	void CheckGraund(void);

@@ -19,20 +19,22 @@ CEnemy::CEnemy(aqua::IGameObject* parent)
 }
 
 //初期化
-void CEnemy::Initialize(void)
+void CEnemy::Initialize(const aqua::CVector3& position)
 {
 	ICharacter::Initialize("data/boxt.mv1");
 
+	m_Position = position;
+
+	CheckGround();
+
 	m_UnitCategory = UNIT_CATEGORY::ENMEY;
 	m_Life = m_life;
-
 	m_GraundRayLength = m_graund_ray_langth;
-	m_Position = aqua::CVector3(-1200.0f, 100.0f, -600.0f);
-
-	m_Player = (CPlayer*)aqua::FindGameObject("Player");
-	if (!m_Player)return;
 
 	//向き設定
+	m_Player = (CPlayer*)aqua::FindGameObject("Player");
+	if (!m_Player)return;
+	//向く方向の角度を求める
 	aqua::CVector3 distance = m_Player->GetModel()->position - m_Position;
 	aqua::CVector2 move_direction = aqua::CVector2::ZERO;
 	m_Rotation.y = aqua::RadToDeg(atan2(distance.x, distance.z));
@@ -41,19 +43,20 @@ void CEnemy::Initialize(void)
 	m_Model->position = m_Position;
 
 	m_ShotTimer.Setup(m_shot_time);
+
 }
 
 //更新
 void CEnemy::Update(void)
 {
-	ICharacter::Update();
-
 	//移動
 	Move();
 
 	//フラグがtrueのとき攻撃
 	if (m_ShotFlag)
 		Shot();
+
+	ICharacter::Update();
 }
 
 //移動
@@ -72,9 +75,8 @@ void CEnemy::Move(void)
 
 //#define TEST
 #ifdef TEST
-	m_Rotation.x = aqua::RadToDeg(-x_angle);
 
-#else
+	
 	//現在向いている方向
 	aqua::CVector3 current_dir;
 	current_dir.x = 0.0f;
@@ -87,8 +89,20 @@ void CEnemy::Move(void)
 	aqua::CVector3 cross = aqua::CVector3::Cross(current_dir.Normalize(),dis.Normalize());
 	if (cross.y != 0.0f)cross = aqua::CVector3(1.0f, 0.0f, 0.0f);
 
-	m_Rotation.x = aqua::RadToDeg(x_angle) * cross.x;
+	if (cross.x > 0)
+		m_Rotation.x = aqua::RadToDeg(x_angle);
+	else
+		m_Rotation.x = aqua::RadToDeg(-x_angle);
+	
 
+#else
+
+	//m_Rotation.x = aqua::RadToDeg(-x_angle);
+
+	//プレイヤーがしたなら回転方向を変える
+	x_angle *= distance.y < 0 ? 1.0f : -1.0f;
+	
+	m_Rotation.x = aqua::RadToDeg(x_angle);
 
 #endif
 

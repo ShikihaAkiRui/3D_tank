@@ -37,10 +37,14 @@ protected:
 	//倒された
 	virtual void Dead(void);
 
-private:
+	//アイテムが当たった
+	virtual void HitItem(void);
+
 	//床の判定
 	void CheckGround(void);
 
+	static const int m_default_damage;							//デフォルトのダメージ量
+private:
 	//弾の判定
 	bool CheckHitBullet(void);
 
@@ -50,5 +54,4 @@ private:
 	static const aqua::CVector3 m_default_position;				//デフォルトの位置
 	static const aqua::CVector3 m_default_graund_ray_length;	//デフォルトの床へのレイの長さ
 	static const aqua::CVector3 m_model_right_vector;			//右向きのベクトル
-	static const int m_default_damage;							//デフォルトのダメージ量
 };

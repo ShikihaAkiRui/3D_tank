@@ -18,7 +18,7 @@ IUnit* CUnitManager::Create(UNIT_ID id)
 	switch (id)
 	{
 	case UNIT_ID::PLAYER:	unit = aqua::CreateGameObject<CPlayer>(this); break;
-	case UNIT_ID::ENEMY:	unit = aqua::CreateGameObject<CEnemy>(this); break;
+	//case UNIT_ID::ENEMY:	unit = aqua::CreateGameObject<CEnemy>(this); break;
 	default:	break;
 	}
 
@@ -27,6 +27,23 @@ IUnit* CUnitManager::Create(UNIT_ID id)
 	unit->Initialize();
 
 	return unit;
+}
+
+//敵生成
+void CUnitManager::CreateEnemy(UNIT_ID id, const aqua::CVector3& position)
+{
+	CEnemy* enemy = nullptr;
+
+	switch (id)
+	{
+	case UNIT_ID::ENEMY:	enemy = aqua::CreateGameObject<CEnemy>(this);	break;
+	default:	break;
+	}
+
+	if (!enemy)return;
+
+	enemy->Initialize(position);
+
 }
 
 //ユニットの当たり判定
@@ -58,66 +75,4 @@ bool CUnitManager::CheckHitUnit(const std::string& object_name,const aqua::CVect
 
 	//当たってないならfalse
 	return hit_flag;
-}
-
-//弾の当たり判定
-bool CUnitManager::CheckHitBullet(UNIT_CATEGORY unit_category,const aqua::CVector3& center_position, float radius)
-{
-	if (m_ChildObjectList.empty())
-		return false;
-
-	auto it = m_ChildObjectList.begin();
-
-	bool hit_flag = false;
-
-	while (it != m_ChildObjectList.end())
-	{
-		ICharacter* chara = (ICharacter*)(*it);
-
-		//指定したオブジェクト名だったら
-		if (chara->GetUnitCategory() != unit_category)
-		{
-			hit_flag = chara->CollCheckSphere(m_frame_index, center_position, radius);
-
-			//当たったたらtrue
-			if (hit_flag)
-				return hit_flag;
-		}
-
-		it++;
-	}
-
-	//当たってないならfalse
-	return hit_flag;
-
-	return false;
-}
-
-bool CUnitManager::CheckHitItem(const aqua::CVector3& center_position, float radius)
-{
-	if (m_ChildObjectList.empty())
-		return false;
-
-	auto it = m_ChildObjectList.begin();
-
-	bool hit_flag = false;
-
-	while (it != m_ChildObjectList.end())
-	{
-		ICharacter* chara = (ICharacter*)(*it);
-
-		hit_flag = chara->CollCheckSphere(m_frame_index, center_position, radius);
-
-		//当たったたらtrue
-		if (hit_flag)
-			return hit_flag;
-
-		it++;
-	}
-
-	//当たってないならfalse
-	return hit_flag;
-
-	return false;
-
 }

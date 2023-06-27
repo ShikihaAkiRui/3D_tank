@@ -18,7 +18,11 @@ public:
 	//重力取得
 	float GetGravity(void);
 
+	//床の高さを取得
+	float GetGraundHeight(const aqua::CVector3& min_height_position, const aqua::CVector3& max_height_position);
+
 private:
-	static const float m_gravity;	//重力
+	static const float m_gravity;			//重力
+	static const float m_not_hit_height;	//当たらなかったときに返す値
 
 };

@@ -40,6 +40,10 @@ void ICharacter::Update(void)
 	//弾の判定
 	if (CheckHitBullet())
 		HitAttack();
+
+	//アイテムの判定
+	if (CheckHitItem())
+		HitItem();
 }
 
 void ICharacter::Draw(void)
@@ -107,7 +111,10 @@ bool ICharacter::CheckHitBullet(void)
 
 			//当たったらtrue
 			if (hit_flag)
+			{
+				bullet->HitCharacter();
 				return hit_flag;
+			}
 		}
 
 		++it;
@@ -122,7 +129,7 @@ bool ICharacter::CheckHitBullet(void)
 bool ICharacter::CheckHitItem(void)
 {
 	CItemManager* item_manager = (CItemManager*)aqua::FindGameObject("ItemManager");
-	if (item_manager || item_manager->GetChildList()->empty())
+	if (!item_manager || item_manager->GetChildList()->empty())
 		return false;
 
 	auto it = item_manager->GetChildList()->begin();
@@ -137,7 +144,10 @@ bool ICharacter::CheckHitItem(void)
 
 		//当たったらtrue
 		if (hit_flag)
+		{
+			item->HitCharacter();
 			return hit_flag;
+		}
 
 		++it;
 	}
@@ -179,4 +189,9 @@ void ICharacter::HitAttack(void)
 void ICharacter::Dead(void)
 {
 	DeleteObject();
+}
+
+//アイテムが当たった
+void ICharacter::HitItem(void)
+{
 }

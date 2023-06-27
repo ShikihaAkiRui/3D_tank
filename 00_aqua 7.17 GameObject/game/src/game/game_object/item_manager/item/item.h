@@ -14,6 +14,9 @@ public:
 
 	void Update(void)override;
 
+	//キャラクターに当たった
+	void HitCharacter(void);
+
 	//中心位置取得
 	aqua::CVector3 GetCenterPosition(void);
 

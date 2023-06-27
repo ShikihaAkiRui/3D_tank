@@ -41,11 +41,14 @@ void CBullet::Update(void)
 	m_Position += m_Velocity;
 	m_Model->position = m_Position;
 	
-	//敵の判定
-	CheckCharacter();
-
 	//床の当たり判定
 	CheckGraund();
+}
+
+//キャラクターに当たった
+void CBullet::HitCharacter(void)
+{
+	DeleteObject();
 }
 
 //中心位置取得
@@ -66,18 +69,6 @@ UNIT_CATEGORY CBullet::GetCategory(void)
 	return m_UnitCategory;
 }
 
-//キャラクターとの当たり判定
-void CBullet::CheckCharacter(void)
-{
-	CUnitManager* unit_manager = (CUnitManager*)aqua::FindGameObject("UnitManager");
-	if (!unit_manager)return;
-
-	if (unit_manager->CheckHitBullet(m_UnitCategory,m_Position, m_radius))
-	{
-		DeleteObject();
-	}
-
-}
 
 //床の当たり判定
 void CBullet::CheckGraund(void)

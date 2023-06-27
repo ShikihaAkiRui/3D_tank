@@ -16,9 +16,19 @@ public:
 
 private:
 
+	//ゲームの状態
+	enum class GAME_STATE
+	{
+		START,
+		MAIN,
+		END
+	};
+
+	GAME_STATE m_GameState;					//ゲームの状態
+
 	static const std::string m_object_name;	//オブジェクトの名前
+
+	aqua::CCamera m_Camera;					//カメラ
+
 	aqua::CLabel m_Label;	//デバック用
-
-	aqua::CCamera m_Camera;
-
 };

@@ -4,6 +4,8 @@
 #include"../../bullet_manager/bullet/bullet.h"
 #include"../../control_camera/control_camera.h"
 #include"../../scene_manager/scene/gamemain_scene/gamemain_scene.h"
+#include"../../ui_component/score/score.h"
+#include"../../ui_component/life/life.h"
 
 const int CPlayer::m_life = 3;
 const float CPlayer::m_move_speed = 100.0f;
@@ -34,6 +36,7 @@ void CPlayer::Initialize(void)
 	m_Model->scale = aqua::CVector3(0.5f, 0.5f, 0.5f);
 
 	m_GraundRayLength = m_graund_ray_langth;
+
 }
 
 //XV
@@ -44,14 +47,13 @@ void CPlayer::Update(void)
 	if (unit_manager->CheckHitUnit("Enemy", m_Position, m_Position + m_Velocity *  m_ray_langth))
 		m_Position = aqua::CVector3(-1250.0f, 50.0f, -600.0f);
 
-	ICharacter::Update();
-
 	//ˆÚ“®
 	Move();
 
 	//’e‚ÅUŒ‚
 	Shot();
 
+	ICharacter::Update();
 
 }
 
@@ -178,7 +180,28 @@ void CPlayer::Shot(void)
 	}
 }
 
+//UŒ‚‚ª“–‚½‚Á‚½
+void CPlayer::HitAttack(void)
+{
+	ICharacter::HitAttack();
+
+	//‘Ì—Í‚Ì•\Ž¦‚ðŒ¸‚ç‚·
+	CLife* life = (CLife*)aqua::FindGameObject("Life");
+	if (!life)return;
+
+	life->Reduce(m_default_damage);
+}
+
 //“|‚³‚ê‚½
 void CPlayer::Dead(void)
 {
+}
+
+//ƒAƒCƒeƒ€‚É“–‚½‚Á‚½
+void CPlayer::HitItem(void)
+{
+	CScore* score = (CScore*)aqua::FindGameObject("Score");
+	if (!score)return;
+
+	score->Add(1);
 }

@@ -30,12 +30,12 @@ void CItem::Update(void)
 	//重力
 	Gravity();
 
-	CUnitManager* unit_manager = (CUnitManager*)aqua::FindGameObject("UnitManager");
-	if (!unit_manager)return;
+}
 
-	//キャラクターに当たったら
-	if(unit_manager->CheckHitItem(m_Position,m_radius))
-		DeleteObject();
+//キャラクターに当たった
+void CItem::HitCharacter(void)
+{
+	DeleteObject();
 }
 
 //中心位置取得

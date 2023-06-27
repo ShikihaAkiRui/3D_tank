@@ -4,12 +4,16 @@
 #include"../../../control_camera/control_camera.h"
 #include"../../../stage/stage.h"
 #include"../../../item_manager/item_manager.h"
+#include"../../../ui_component/score/score.h"
+#include"../../../ui_component/life/life.h"
+#include"../../../enemy_appear/enemy_appear.h"
 
 const std::string CGameMainScene::m_object_name = "GameMainScene";
 
 //コンストラクタ
 CGameMainScene::CGameMainScene(aqua::IGameObject* parent)
 	:IScene(parent,m_object_name)
+	,m_GameState(GAME_STATE::START)
 {
 }
 
@@ -21,14 +25,23 @@ void CGameMainScene::Initialize(void)
 	aqua::CreateGameObject<CStage>(this);
 	aqua::CreateGameObject<CBulletManager>(this);
 	aqua::CreateGameObject<CItemManager>(this);
+	aqua::CreateGameObject<CEnemyAppear>(this);
+
+	//CScore* score = aqua::CreateGameObject<CScore>(this);
+	//CLife* life = aqua::CreateGameObject<CLife>(this);
 
 	IGameObject::Initialize();
 
 	IUnit* player = unit_manager->Create(UNIT_ID::PLAYER);
-	unit_manager->Create(UNIT_ID::ENEMY);
+	//unit_manager->Create(UNIT_ID::ENEMY);
 
 	m_Camera.Initialize();
 	cam_con->Initialize(&m_Camera, player);
+
+	//life->Initialize(aqua::CVector2(500.0f, 0.0f),3);
+	//score->Initialize(aqua::CVector2(100.0f, 0.0f));
+
+	m_GameState = GAME_STATE::START;
 
 #ifdef _DEBUG
 	m_Label.Create(30);
@@ -41,6 +54,31 @@ void CGameMainScene::Initialize(void)
 void CGameMainScene::Update(void)
 {
 	IGameObject::Update();
+
+	CLife* life = nullptr;
+
+	//ゲームの状態
+	switch (m_GameState)
+	{
+	case CGameMainScene::GAME_STATE::START:
+		m_GameState = GAME_STATE::MAIN;
+
+		break;
+	case CGameMainScene::GAME_STATE::MAIN:
+
+		
+		
+		life = (CLife*)aqua::FindGameObject("Life");
+		if (!life)return;
+		if (life->GetLife() <= 0)
+			m_GameState = GAME_STATE::END;
+		break;
+	case CGameMainScene::GAME_STATE::END:
+
+		ChangeScene(SCENE_ID::TITLE);
+		break;
+	default:	break;
+	}
 }
 
 //描画
@@ -49,7 +87,7 @@ void CGameMainScene::Draw(void)
 	IGameObject::Draw();
 
 #ifdef _DEBUG
-	m_Label.Draw();
+	//m_Label.Draw();
 #endif 
 
 }
