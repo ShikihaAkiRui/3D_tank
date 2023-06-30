@@ -7,6 +7,7 @@
 #include"../../../ui_component/score/score.h"
 #include"../../../ui_component/life/life.h"
 #include"../../../enemy_appear/enemy_appear.h"
+#include"../../../ui_component/aim/aim.h"
 
 const std::string CGameMainScene::m_object_name = "GameMainScene";
 
@@ -25,10 +26,11 @@ void CGameMainScene::Initialize(void)
 	aqua::CreateGameObject<CStage>(this);
 	aqua::CreateGameObject<CBulletManager>(this);
 	aqua::CreateGameObject<CItemManager>(this);
-	aqua::CreateGameObject<CEnemyAppear>(this);
+	//aqua::CreateGameObject<CEnemyAppear>(this);
 
-	//CScore* score = aqua::CreateGameObject<CScore>(this);
-	//CLife* life = aqua::CreateGameObject<CLife>(this);
+	CScore* score = aqua::CreateGameObject<CScore>(this);
+	CLife* life = aqua::CreateGameObject<CLife>(this);
+	aqua::CreateGameObject<CAim>(this);
 
 	IGameObject::Initialize();
 
@@ -38,8 +40,8 @@ void CGameMainScene::Initialize(void)
 	m_Camera.Initialize();
 	cam_con->Initialize(&m_Camera, player);
 
-	//life->Initialize(aqua::CVector2(500.0f, 0.0f),3);
-	//score->Initialize(aqua::CVector2(100.0f, 0.0f));
+	life->Initialize(aqua::CVector2(500.0f, 0.0f),3);
+	score->Initialize(aqua::CVector2(100.0f, 0.0f));
 
 	m_GameState = GAME_STATE::START;
 

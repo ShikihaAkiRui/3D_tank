@@ -73,38 +73,10 @@ void CEnemy::Move(void)
 	float x_angle = 0.0f;
 	x_angle = acos(aqua::CVector3::Dot(floor.Normalize(), distance.Normalize()));
 
-//#define TEST
-#ifdef TEST
-
-	
-	//現在向いている方向
-	aqua::CVector3 current_dir;
-	current_dir.x = 0.0f;
-	current_dir.y = sin(aqua::DegToRad(m_Rotation.x));
-	current_dir.z = cos(aqua::DegToRad(m_Rotation.x));
-
-	//回転方向を設定
-	aqua::CVector3 dis = distance;
-	dis.x = 0.0f;
-	aqua::CVector3 cross = aqua::CVector3::Cross(current_dir.Normalize(),dis.Normalize());
-	if (cross.y != 0.0f)cross = aqua::CVector3(1.0f, 0.0f, 0.0f);
-
-	if (cross.x > 0)
-		m_Rotation.x = aqua::RadToDeg(x_angle);
-	else
-		m_Rotation.x = aqua::RadToDeg(-x_angle);
-	
-
-#else
-
-	//m_Rotation.x = aqua::RadToDeg(-x_angle);
-
-	//プレイヤーがしたなら回転方向を変える
+	//プレイヤーが下なら回転方向を変える
 	x_angle *= distance.y < 0 ? 1.0f : -1.0f;
 	
 	m_Rotation.x = aqua::RadToDeg(x_angle);
-
-#endif
 
 	//移動方向を変える
 	aqua::CMatrix matrix = aqua::CMatrix::Ident();

@@ -58,10 +58,37 @@ void CControlCamera::Update(void)
 	m_Camera->m_TargetPosition = m_Unit->GetModel()->position + m_target_position;
 	
 	m_Camera->Update();
+
 }
 
+//ƒJƒƒ‰‚ÌˆÊ’u‚ðŽæ“¾
+aqua::CVector3 CControlCamera::GetPosition(void)
+{
+	return m_Camera->m_Position;
+}
+
+/*
 //Œü‚¢‚Ä‚¢‚éŠp“x‚ðŽæ“¾
 aqua::CVector3 CControlCamera::GetAngle(void)
 {
 	return m_Angle;
+}
+*/
+
+//Œü‚¢‚Ä‚¢‚éŠp“x‚ðŽæ“¾
+aqua::CVector3 CControlCamera::GetAngle(void)
+{
+	aqua::CVector3 angle = aqua::CVector3::ZERO;
+	aqua::CVector3 distance = m_Camera->m_TargetPosition - m_Camera->m_Position;
+	angle.y = aqua::RadToDeg(atan2(distance.x, distance.z));
+
+	aqua::CVector3 floor = distance;
+	floor.y = 0.0f;
+	float x_angle = 0.0f;
+	x_angle = acos(aqua::CVector3::Dot(floor.Normalize(), distance.Normalize()));
+	
+	x_angle *= distance.y < 0 ? 1.0f : -1.0f;
+	angle.x = aqua::RadToDeg(x_angle);
+
+	return angle;
 }

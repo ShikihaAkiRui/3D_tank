@@ -14,10 +14,13 @@ public:
 
 	void Update(void)override;
 
+	//カメラの位置取得
+	aqua::CVector3 GetPosition(void);
 	//向いている角度を取得
 	aqua::CVector3 GetAngle(void);
 
 private:
+
 	aqua::CCamera* m_Camera;	//カメラのポインタ
 	IUnit* m_Unit;				//注視点のユニットのポインタ
 	aqua::CVector3 m_Angle;		//カメラ角度

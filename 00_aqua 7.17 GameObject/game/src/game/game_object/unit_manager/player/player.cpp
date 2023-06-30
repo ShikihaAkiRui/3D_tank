@@ -6,6 +6,7 @@
 #include"../../scene_manager/scene/gamemain_scene/gamemain_scene.h"
 #include"../../ui_component/score/score.h"
 #include"../../ui_component/life/life.h"
+#include"../../ui_component/aim/aim.h"
 
 const int CPlayer::m_life = 3;
 const float CPlayer::m_move_speed = 100.0f;
@@ -172,10 +173,13 @@ void CPlayer::Shot(void)
 		CBulletManager* bullet_manager = (CBulletManager*)aqua::FindGameObject("BulletManager");
 		if (!bullet_manager)return;
 
-		CControlCamera* camera = (CControlCamera*)aqua::FindGameObject("ControlCamera");
-		if (!camera)return;
+		//CControlCamera* camera = (CControlCamera*)aqua::FindGameObject("ControlCamera");
+		//if (!camera)return;
+		//bullet_manager->Create(m_UnitCategory,m_Position, camera->GetAngle());
 		
-		bullet_manager->Create(m_UnitCategory,m_Position, camera->GetAngle());
+		CAim* aim = (CAim*)aqua::FindGameObject("Aim");
+		if (!aim)return;
+		bullet_manager->Create(m_UnitCategory,m_Position, aim->GetAimAngle());
 
 	}
 }
