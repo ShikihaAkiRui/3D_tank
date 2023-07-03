@@ -21,10 +21,12 @@ private:
 	//カメラからのレイの計算
 	void SetAimRay(void);
 
-	//通常時の弾の角度
-	void GetNormalBulletAngle(void);
-	//レイに当たった時の弾の角度
-	void GetRayHitBulletAngle(void);
+	//レイが当たった位置を取得
+	aqua::CVector3 CheckHitRay(void);
+
+	//弾を飛ばす角度
+	void GetBulletAngle(const aqua::CVector3& position);
+
 
 	aqua::CSprite m_Sprite;		//照準
 	aqua::CVector2 m_Position;	//位置
@@ -32,6 +34,9 @@ private:
 	aqua::CVector3 m_StartRayPosition;	//レイの出始め位置
 	aqua::CVector3 m_EndRayPosition;	//レイの終わる位置
 
-	static const float m_ray_length;	//レイの長さ
+	static const aqua::CVector2 m_aim_position;		//位置
+	static const float m_ray_length;				//レイの長さ
+	static const std::string m_hit_object_name;		//当たり判定を見るオブジェクトの名前
+	static const int m_frame_index;					//フレームの番号
 
 };

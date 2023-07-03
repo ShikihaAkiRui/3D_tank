@@ -60,9 +60,9 @@ void CPlayer::Update(void)
 
 void CPlayer::Draw()
 {
-	aqua::CLinePrimitive3D line;
-	line.Setup(m_Position, m_Position + line_dir * 100.0f, 0xff8888ff);
-	line.Draw();
+	//aqua::CLinePrimitive3D line;
+	//line.Setup(m_Position, m_Position + line_dir * 100.0f, 0xff8888ff);
+	//line.Draw();
 
 	ICharacter::Draw();
 }

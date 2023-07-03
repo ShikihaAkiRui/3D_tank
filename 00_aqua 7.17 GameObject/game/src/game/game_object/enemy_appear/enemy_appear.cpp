@@ -45,7 +45,7 @@ void CEnemyAppear::Update(void)
 		{
 			m_AppearTimer.Reset();
 
-			CUnitManager* unit_manager = aqua::CreateGameObject<CUnitManager>(this);
+			CUnitManager* unit_manager = (CUnitManager*)aqua::FindGameObject("UnitManager");
 			if (!unit_manager)return;
 
 			unit_manager->CreateEnemy(UNIT_ID::ENEMY, appear_position);

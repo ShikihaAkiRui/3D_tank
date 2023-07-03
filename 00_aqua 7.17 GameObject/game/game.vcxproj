@@ -108,6 +108,7 @@
     <ClCompile Include="src\game\game_object\stage\stage.cpp" />
     <ClCompile Include="src\game\game_object\ui_component\aim\aim.cpp" />
     <ClCompile Include="src\game\game_object\ui_component\life\life.cpp" />
+    <ClCompile Include="src\game\game_object\ui_component\radar\radar.cpp" />
     <ClCompile Include="src\game\game_object\ui_component\score\score.cpp" />
     <ClCompile Include="src\game\game_object\ui_component\ui_component.cpp" />
     <ClCompile Include="src\game\game_object\unit_manager\character\character.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="src\game\game_object\stage\stage.h" />
     <ClInclude Include="src\game\game_object\ui_component\aim\aim.h" />
     <ClInclude Include="src\game\game_object\ui_component\life\life.h" />
+    <ClInclude Include="src\game\game_object\ui_component\radar\radar.h" />
     <ClInclude Include="src\game\game_object\ui_component\score\score.h" />
     <ClInclude Include="src\game\game_object\ui_component\ui_component.h" />
     <ClInclude Include="src\game\game_object\unit_manager\character\character.h" />
