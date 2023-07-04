@@ -4,7 +4,7 @@
 #include"../../unit_manager/player/player.h"
 
 const aqua::CVector2 CAim::m_aim_position = aqua::CVector2(aqua::GetWindowWidth() / 2.0f, aqua::GetWindowHeight() / 2.0f);
-const float CAim::m_ray_length = 500.0f;
+const float CAim::m_ray_length = 800.0f;
 const std::string CAim::m_hit_object_name = "Enemy";
 const int CAim::m_frame_index = -1;
 

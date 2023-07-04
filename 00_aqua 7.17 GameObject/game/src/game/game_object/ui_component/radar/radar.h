@@ -15,5 +15,10 @@ public:
 	void Finalize(void)override;
 
 private:
+	aqua::CSprite m_AreaSprite;		//画像
+	aqua::CSprite m_PlayerSprite;	//プレイヤーの画像
+	aqua::CSprite* m_EnemySprites;	//敵の画像
+	int m_MaxEnemyCount;			//エネミーの最大数
+
 
 };

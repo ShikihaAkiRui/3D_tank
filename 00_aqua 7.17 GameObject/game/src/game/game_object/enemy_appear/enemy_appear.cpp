@@ -5,10 +5,13 @@
 const float CEnemyAppear::m_max_ray_height = 500.0f;
 const float CEnemyAppear::m_min_ray_height = -500.0f;
 const float CEnemyAppear::m_appear_time = 10.0f;
+const float CEnemyAppear::m_appear_height = 10.0f;
+const int CEnemyAppear::m_max_enemy = 20;
 
 //コンストラクタ
 CEnemyAppear::CEnemyAppear(aqua::IGameObject* parent)
 	:aqua::IGameObject(parent,"EnemyAppear")
+	,m_CountEnemy(0)
 {
 }
 
@@ -38,12 +41,14 @@ void CEnemyAppear::Update(void)
 		
 		appear_position.y = stage->GetGraundHeight(aqua::CVector3(appear_position.x, m_min_ray_height, appear_position.z),
 													aqua::CVector3(appear_position.x, m_max_ray_height, appear_position.z));
-		appear_position.y += 10.0f;
+		appear_position.y += m_appear_height;
 
-		//出現範囲ないなら
-		if (appear_position.y >= m_min_ray_height)
+		//出現範囲ないかつ最大数に達していない
+		if (appear_position.y >= m_min_ray_height && m_CountEnemy < m_max_enemy)
 		{
 			m_AppearTimer.Reset();
+
+			SetCountEnemy(1);
 
 			CUnitManager* unit_manager = (CUnitManager*)aqua::FindGameObject("UnitManager");
 			if (!unit_manager)return;
@@ -52,7 +57,23 @@ void CEnemyAppear::Update(void)
 		}
 
 	}
-
 	
 	aqua::IGameObject::Update();
+}
+
+//エネミーの数を設定
+void CEnemyAppear::SetCountEnemy(int count)
+{
+	m_CountEnemy += count;
+
+	if (m_CountEnemy >= m_max_enemy)
+		m_CountEnemy = m_max_enemy;
+	if (m_CountEnemy <= 0)
+		m_CountEnemy = 0;
+}
+
+//エネミーの最大数取得
+int CEnemyAppear::GetMaxCountEnemy(void)
+{
+	return m_max_enemy;
 }

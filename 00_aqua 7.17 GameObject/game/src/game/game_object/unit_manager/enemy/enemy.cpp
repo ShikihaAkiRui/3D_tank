@@ -2,6 +2,7 @@
 #include"../../bullet_manager/bullet_manager.h"
 #include"../player/player.h"
 #include"../../item_manager/item_manager.h"
+#include"../../enemy_appear/enemy_appear.h"
 
 const aqua::CVector3 CEnemy::m_graund_ray_langth = aqua::CVector3(0.0f, -10.0f, 0.0f);
 const int CEnemy::m_life = 1;
@@ -112,9 +113,18 @@ void CEnemy::Move(void)
 void CEnemy::Dead(void)
 {
 	CItemManager* item_manager = (CItemManager*)aqua::FindGameObject("ItemManager");
-	if (!item_manager)return;
+	if (item_manager)
+	{
+		//アイテムをドロップする
+		item_manager->Create(m_Position);
+	}
 
-	item_manager->Create(m_Position);
+	CEnemyAppear* appear = (CEnemyAppear*)aqua::FindGameObject("EnemyAppear");
+	if (appear)
+	{
+		//出ているエネミーの数を減らす
+		appear->SetCountEnemy(-1);
+	}
 
 	ICharacter::Dead();
 }

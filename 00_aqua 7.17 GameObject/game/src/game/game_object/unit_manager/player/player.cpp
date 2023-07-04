@@ -12,15 +12,18 @@ const int CPlayer::m_life = 3;
 const float CPlayer::m_move_speed = 100.0f;
 const float CPlayer::m_ray_langth = 15.0f;
 const float CPlayer::m_rotation_speed = 10.0f;
+const float CPlayer::m_shot_rotation_speed = 40.0f;
 const aqua::CVector3 CPlayer::m_graund_ray_langth = aqua::CVector3(0.0f,-15.0f,0.0f);
 const float CPlayer::m_jump_power = 5.0f;
 const float CPlayer::m_deceleration = 0.9f;
+const float CPlayer::m_shot_rotation_time = 0.4;
 
 //コンストラクタ
 CPlayer::CPlayer(aqua::IGameObject* parent)
 	:ICharacter(parent,"Player")
 	,m_Angle(0.0f)
 	, m_Matrix(aqua::CMatrix::Ident())
+	,m_ShotRotationFlag(false)
 {
 }
 
@@ -38,6 +41,7 @@ void CPlayer::Initialize(void)
 
 	m_GraundRayLength = m_graund_ray_langth;
 
+	m_ShotRotationTimer.Setup(m_shot_rotation_time);
 }
 
 //更新
@@ -70,12 +74,10 @@ void CPlayer::Draw()
 //移動
 void CPlayer::Move(void)
 {	
-	//m_Velocity = aqua::CVector3::ZERO;
 	m_Velocity.x = 0.0f;
 	m_Velocity.z = 0.0f;
 
 	m_Matrix = aqua::CMatrix::Ident();
-
 	float direction_angle = 0.0f;
 	aqua::CVector3 direction_vector = aqua::CVector3::ZERO;
 
@@ -85,6 +87,7 @@ void CPlayer::Move(void)
 		direction_vector.x = -1.0f;
 
 		m_Velocity.z = 1.0f;
+
 	}
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::D))
 	{
@@ -93,18 +96,30 @@ void CPlayer::Move(void)
 		m_Velocity.z = 1.0f;
 
 	}
-	//上下移動
+	//前後移動
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::W))
 	{
 		direction_vector.z = 1.0f;
 	
 		m_Velocity.z = 1.0f;
+
 	}
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::S))
 	{
 		direction_vector.z = -1.0f;
 	
 		m_Velocity.z = 1.0f;
+
+	}
+
+	//弾を撃った時 カメラの方向にする
+	if (m_ShotRotationFlag)
+	{
+		direction_vector.z = 1.0f;
+		direction_vector.x = 0.0f;
+
+		m_Velocity.z = 0.0f;
+		m_ShotRotationTimer.Update();
 	}
 
 	//カメラの向きに合わせる
@@ -117,30 +132,44 @@ void CPlayer::Move(void)
 
 #define TEST
 #ifdef TEST
+	//現在向いている方向のベクトル
 	aqua::CVector3 current_dir;
 	current_dir.x = sin(aqua::DegToRad(m_Rotation.y));
 	current_dir.y = 0.0f;
 	current_dir.z = cos(aqua::DegToRad(m_Rotation.y));
 
+	//向くベクトルまでの角度
 	direction_angle = aqua::RadToDeg(acos(aqua::CVector3::Dot(current_dir.Normalize(), direction_vector.Normalize())));
 
+	//どちら側に回るかを計算
 	aqua::CVector3 cross = aqua::CVector3::Cross(current_dir.Normalize(), direction_vector.Normalize());
 	if (cross.x != 0.0f)cross = aqua::CVector3(0.0f, 1.0f, 0.0f);
 	line_dir = cross;
 #else
 	direction_angle = aqua::RadToDeg(atan2(direction_vector.x, direction_vector.z));
 	
-
 #endif
 
 	//動いていたら方向を変える
 	if (direction_vector.Length() > 0)
 	{
 #ifdef TEST
-		m_Angle = m_Angle + ((m_rotation_speed * direction_angle) * aqua::GetDeltaTime() * cross.y);
+
+		if (m_ShotRotationFlag)
+			m_Angle = m_Angle + ((m_shot_rotation_speed * direction_angle) * aqua::GetDeltaTime() * cross.y);
+		else
+			m_Angle = m_Angle + ((m_rotation_speed * direction_angle) * aqua::GetDeltaTime() * cross.y);
+
 #else
 		m_Angle = m_Angle + (m_rotation_speed * (direction_angle - m_Angle)) * aqua::GetDeltaTime();
 #endif
+	}
+
+	//撃った方向に向く処理を戻す
+	if (m_ShotRotationFlag && m_ShotRotationTimer.Finished())
+	{
+		m_ShotRotationTimer.Reset();
+		m_ShotRotationFlag = false;
 	}
 
 	//行列で方向変更
@@ -158,6 +187,8 @@ void CPlayer::Move(void)
 	}
 
 	m_Position += m_Velocity * m_move_speed * aqua::GetDeltaTime();
+
+	//ジャンプ力を減らす
 	m_Velocity *= m_deceleration;
 
 	m_Model->rotation = m_Rotation;
@@ -172,15 +203,14 @@ void CPlayer::Shot(void)
 	{
 		CBulletManager* bullet_manager = (CBulletManager*)aqua::FindGameObject("BulletManager");
 		if (!bullet_manager)return;
-
-		//CControlCamera* camera = (CControlCamera*)aqua::FindGameObject("ControlCamera");
-		//if (!camera)return;
-		//bullet_manager->Create(m_UnitCategory,m_Position, camera->GetAngle());
 		
 		CAim* aim = (CAim*)aqua::FindGameObject("Aim");
 		if (!aim)return;
+		
+		//弾生成
 		bullet_manager->Create(m_UnitCategory,m_Position, aim->GetAimAngle());
 
+		m_ShotRotationFlag = true;
 	}
 }
 

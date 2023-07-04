@@ -33,14 +33,18 @@ private:
 
 	float m_Angle;				//Šp“x
 	aqua::CMatrix m_Matrix;		//s—ñ
+	bool m_ShotRotationFlag;	//’e‚ğŒ‚‚Â•ûŒü‚Ö‚Ì•ûŒü“]Š·ƒtƒ‰ƒO
+	aqua::CTimer m_ShotRotationTimer; //Œ‚‚Á‚½‚Ì‰ñ“]ŠÔ
 
-	static const int m_life;			//‘Ì—Í
-	static const float m_move_speed;	//‘¬“x
-	static const float m_ray_langth;	//ƒŒƒC’·‚³
-	static const float m_rotation_speed;//‰ñ“]‘¬‚³
+	static const int m_life;					//‘Ì—Í
+	static const float m_move_speed;			//‘¬“x
+	static const float m_ray_langth;			//ƒŒƒC’·‚³
+	static const float m_rotation_speed;		//‰ñ“]‘¬‚³
+	static const float m_shot_rotation_speed;	//’e‚ğŒ‚‚Á‚½‚Ì‰ñ“]‘¬‚³
 	static const aqua::CVector3 m_graund_ray_langth;	//°—p‚ÌƒŒƒC‚Ì’·‚³
-	static const float m_jump_power;	//”ò‚Ô‚Æ‚«‚Ì—Í
-	static const float m_deceleration;	//Œ¸‘¬—¦
+	static const float m_jump_power;			//”ò‚Ô‚Æ‚«‚Ì—Í
+	static const float m_deceleration;			//Œ¸‘¬—¦
+	static const float m_shot_rotation_time;	//Œ‚‚Á‚½‚Ì‰ñ“]ŠÔ
 
 	aqua::CVector3 line_dir;
 };
