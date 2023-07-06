@@ -26,5 +26,4 @@ private:
 
 	static const int m_min_life;	//体力最小値
 	static const int m_life_width;	//ライフひとつの幅
-	static const int m_life_height;	//ライフひとつの高さ
 };

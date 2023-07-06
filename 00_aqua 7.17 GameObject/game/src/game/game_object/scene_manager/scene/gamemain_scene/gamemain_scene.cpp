@@ -8,6 +8,7 @@
 #include"../../../ui_component/life/life.h"
 #include"../../../enemy_appear/enemy_appear.h"
 #include"../../../ui_component/aim/aim.h"
+#include"../../../ui_component/radar/radar.h"
 
 const std::string CGameMainScene::m_object_name = "GameMainScene";
 
@@ -30,6 +31,7 @@ void CGameMainScene::Initialize(void)
 
 	CScore* score = aqua::CreateGameObject<CScore>(this);
 	CLife* life = aqua::CreateGameObject<CLife>(this);
+	CRadar* radar = aqua::CreateGameObject<CRadar>(this);
 	aqua::CreateGameObject<CAim>(this);
 
 	IGameObject::Initialize();
@@ -42,6 +44,7 @@ void CGameMainScene::Initialize(void)
 
 	life->Initialize(aqua::CVector2(500.0f, 0.0f),3);
 	score->Initialize(aqua::CVector2(100.0f, 0.0f));
+	radar->Initialize(aqua::CVector2(1000.0f, 0.0f));
 
 	m_GameState = GAME_STATE::START;
 

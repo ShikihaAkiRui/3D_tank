@@ -1,8 +1,7 @@
 #include "life.h"
 
 const int CLife::m_min_life = 0;
-const int CLife::m_life_width = 64;
-const int CLife::m_life_height = 64;
+const int CLife::m_life_width = 48;
 
 //コンストラクタ
 CLife::CLife(aqua::IGameObject* parent)
@@ -23,7 +22,7 @@ void CLife::Initialize(const aqua::CVector2& position, int life)
 
 	for (int i = 0; i < m_Life; ++i)
 	{
-		m_Sprites[i].Create("data/abe.png");
+		m_Sprites[i].Create("data/ball.png");
 		m_Sprites[i].position = m_Position;
 	}
 }

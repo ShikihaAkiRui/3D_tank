@@ -119,6 +119,7 @@ void CPlayer::Move(void)
 		direction_vector.x = 0.0f;
 
 		m_Velocity.z = 0.0f;
+
 		m_ShotRotationTimer.Update();
 	}
 
