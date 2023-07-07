@@ -34,4 +34,6 @@ private:
 	static const float m_stop_distance;					//Ž~‚Ü‚é‹——£
 	static const float m_back_distance;					//‰º‚ª‚é‹——£
 	static const float m_shot_time;						//Œ‚‚ÂŠ´Šo‚ÌŽžŠÔ
+
+	aqua::CTimer m_Test;
 };

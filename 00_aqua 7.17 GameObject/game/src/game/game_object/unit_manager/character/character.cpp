@@ -93,6 +93,7 @@ void ICharacter::CheckGround(void)
 //’e‚Ì”»’è
 bool ICharacter::CheckHitBullet(void)
 {
+	
 	CBulletManager* bullet_manager = (CBulletManager*)aqua::FindGameObject("BulletManager");
 	if (!bullet_manager || bullet_manager->GetChildList()->empty())
 		return false;
@@ -122,7 +123,6 @@ bool ICharacter::CheckHitBullet(void)
 
 	//“–‚½‚Á‚Ä‚È‚¢‚È‚çfalse
 	return hit_flag;
-
 }
 
 //ƒAƒCƒeƒ€‚Ì”»’è
@@ -143,7 +143,7 @@ bool ICharacter::CheckHitItem(void)
 		hit_flag = CollCheckSphere(m_frame_index, item->GetCenterPosition(), item->GetRadius());
 
 		//“–‚½‚Á‚½‚çtrue
-		if (hit_flag)
+		if (hit_flag && IGameObject::GetGameObjectName() =="Player")
 		{
 			item->HitCharacter();
 			return hit_flag;

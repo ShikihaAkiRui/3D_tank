@@ -43,12 +43,13 @@ void CBullet::Update(void)
 	
 	//床の当たり判定
 	CheckGraund();
+
 }
 
 //キャラクターに当たった
 void CBullet::HitCharacter(void)
 {
-	DeleteObject();
+	//DeleteObject();
 }
 
 //中心位置取得
@@ -73,11 +74,13 @@ UNIT_CATEGORY CBullet::GetCategory(void)
 //床の当たり判定
 void CBullet::CheckGraund(void)
 {
+	
 	CStage* stage = (CStage*)aqua::FindGameObject("Stage");
 	if (!stage) return;
 
 	if (stage->GetHitBulletGroundFlag(m_Position, m_radius))
 	{
-		DeleteObject();
+		//DeleteObject();
 	}
+	
 }

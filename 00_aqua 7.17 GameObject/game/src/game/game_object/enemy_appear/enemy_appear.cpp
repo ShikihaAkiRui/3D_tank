@@ -33,8 +33,8 @@ void CEnemyAppear::Update(void)
 		aqua::CVector3 appear_position = aqua::CVector3::ZERO;
 		
 		//ïΩñ è„ÇÃç¿ïWÇåàÇﬂÇÈ
-		appear_position.x = (float)aqua::Rand(100, -1500);
-		appear_position.z = (float)aqua::Rand(100, -800);
+		appear_position.x = (float)aqua::Rand(100, -2500);
+		appear_position.z = (float)aqua::Rand(100, -1500);
 		
 		CStage* stage = (CStage*)aqua::FindGameObject("Stage");
 		if (!stage)return;

@@ -29,6 +29,7 @@ private:
 	int m_AppearEnemyCount;			//出ている敵の数
 	aqua::CVector2 m_CenterPosition;//中心位置
 	aqua::CVector2* m_EnemyVectors;	//敵のベクトルの配列
+	float m_ShowRadius;				//出す半径
 
 	static const std::string m_find_name;	//見つける名前
 	static const float m_scale_vector;		//ベクトルを縮小

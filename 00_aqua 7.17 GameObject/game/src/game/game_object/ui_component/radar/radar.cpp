@@ -13,6 +13,7 @@ CRadar::CRadar(aqua::IGameObject* parent)
 	,m_MaxEnemyCount(0)
 	,m_AppearEnemyCount(0)
 	,m_CenterPosition(aqua::CVector2::ZERO)
+	,m_ShowRadius(0.0f)
 {
 }
 
@@ -124,15 +125,33 @@ void CRadar::SetEnemyPosition(void)
 	CControlCamera* camera = (CControlCamera*)aqua::FindGameObject("ControlCamera");
 	if (!camera)return;
 
+	aqua::CVector2 vector = aqua::CVector2::ZERO;
+	float camera_angle = aqua::DegToRad(-camera->GetAngle().y);
+
+	//表示エリアの半径を求める
+	m_ShowRadius = m_AreaSprite.GetTextureWidth() / 2.0f - m_EnemySprites[0].GetTextureWidth()/2.0f;
+
+	//出現している数だけ表示
 	for (int i = 0; i < m_AppearEnemyCount; ++i)
 	{
+		//表示エリアを超えてたら 端に表示
+		if (m_EnemyVectors[i].Length() * m_scale_vector > m_ShowRadius)
+		{
+			float angle = atan2(m_EnemyVectors[i].x, m_EnemyVectors[i].y);
+
+			m_EnemyVectors[i].x = m_ShowRadius * sin(angle);
+			m_EnemyVectors[i].y = m_ShowRadius * cos(angle);
+
+			m_EnemyVectors[i] = m_EnemyVectors[i] / m_scale_vector;
+
+		}
+
 		//カメラの方向に合わせる
-		//m_EnemyVectors[i].x *= cos(aqua::DegToRad(camera->GetAngle().y));
-		//m_EnemyVectors[i].y *= sin(aqua::DegToRad(camera->GetAngle().y));
+		vector.x = m_EnemyVectors[i].x * cos(camera_angle) - m_EnemyVectors[i].y * sin(camera_angle);
+		vector.y = m_EnemyVectors[i].x * sin(camera_angle) + m_EnemyVectors[i].y * cos(camera_angle);
 
 		//位置設定
-		m_EnemySprites[i].position = m_CenterPosition + (m_EnemyVectors[i] * m_scale_vector) 
+		m_EnemySprites[i].position = m_CenterPosition + (vector * m_scale_vector) 
 									- aqua::CVector2(m_EnemySprites[i].GetTextureWidth()/2.0f,m_EnemySprites[i].GetTextureHeight()/2.0f); 
-
 	}
 }

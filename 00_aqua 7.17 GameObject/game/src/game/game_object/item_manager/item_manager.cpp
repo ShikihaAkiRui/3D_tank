@@ -10,7 +10,8 @@ CItemManager::CItemManager(aqua::IGameObject* parent)
 //ê∂ê¨
 void CItemManager::Create(aqua::CVector3& position)
 {
-	CItem* item = aqua::CreateGameObject<CItem>(this);
+	CItem* item = nullptr;
+	//CItem* item = aqua::CreateGameObject<CItem>(this);
 
 	if (!item)	return;
 

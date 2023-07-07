@@ -12,11 +12,10 @@ const int CPlayer::m_life = 3;
 const float CPlayer::m_move_speed = 100.0f;
 const float CPlayer::m_ray_langth = 15.0f;
 const float CPlayer::m_rotation_speed = 10.0f;
-const float CPlayer::m_shot_rotation_speed = 40.0f;
+const float CPlayer::m_shot_rotation_speed = 45.0f;
 const aqua::CVector3 CPlayer::m_graund_ray_langth = aqua::CVector3(0.0f,-15.0f,0.0f);
 const float CPlayer::m_jump_power = 5.0f;
 const float CPlayer::m_deceleration = 0.9f;
-const float CPlayer::m_shot_rotation_time = 0.4;
 
 //コンストラクタ
 CPlayer::CPlayer(aqua::IGameObject* parent)
@@ -41,7 +40,6 @@ void CPlayer::Initialize(void)
 
 	m_GraundRayLength = m_graund_ray_langth;
 
-	m_ShotRotationTimer.Setup(m_shot_rotation_time);
 }
 
 //更新
@@ -60,15 +58,6 @@ void CPlayer::Update(void)
 
 	ICharacter::Update();
 
-}
-
-void CPlayer::Draw()
-{
-	//aqua::CLinePrimitive3D line;
-	//line.Setup(m_Position, m_Position + line_dir * 100.0f, 0xff8888ff);
-	//line.Draw();
-
-	ICharacter::Draw();
 }
 
 //移動
@@ -119,8 +108,6 @@ void CPlayer::Move(void)
 		direction_vector.x = 0.0f;
 
 		m_Velocity.z = 0.0f;
-
-		m_ShotRotationTimer.Update();
 	}
 
 	//カメラの向きに合わせる
@@ -156,6 +143,7 @@ void CPlayer::Move(void)
 	{
 #ifdef TEST
 
+		//撃った時は回転を変える
 		if (m_ShotRotationFlag)
 			m_Angle = m_Angle + ((m_shot_rotation_speed * direction_angle) * aqua::GetDeltaTime() * cross.y);
 		else
@@ -164,13 +152,6 @@ void CPlayer::Move(void)
 #else
 		m_Angle = m_Angle + (m_rotation_speed * (direction_angle - m_Angle)) * aqua::GetDeltaTime();
 #endif
-	}
-
-	//撃った方向に向く処理を戻す
-	if (m_ShotRotationFlag && m_ShotRotationTimer.Finished())
-	{
-		m_ShotRotationTimer.Reset();
-		m_ShotRotationFlag = false;
 	}
 
 	//行列で方向変更
@@ -212,6 +193,12 @@ void CPlayer::Shot(void)
 		bullet_manager->Create(m_UnitCategory,m_Position, aim->GetAimAngle());
 
 		m_ShotRotationFlag = true;
+	}
+
+	//放したら方向処理をなくす
+	if (aqua::mouse::Released(aqua::mouse::BUTTON_ID::LEFT))
+	{
+		m_ShotRotationFlag = false;
 	}
 }
 
