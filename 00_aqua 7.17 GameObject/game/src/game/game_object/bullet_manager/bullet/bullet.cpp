@@ -49,7 +49,7 @@ void CBullet::Update(void)
 //キャラクターに当たった
 void CBullet::HitCharacter(void)
 {
-	//DeleteObject();
+	DeleteObject();
 }
 
 //中心位置取得
@@ -80,7 +80,7 @@ void CBullet::CheckGraund(void)
 
 	if (stage->GetHitBulletGroundFlag(m_Position, m_radius))
 	{
-		//DeleteObject();
+		DeleteObject();
 	}
 	
 }

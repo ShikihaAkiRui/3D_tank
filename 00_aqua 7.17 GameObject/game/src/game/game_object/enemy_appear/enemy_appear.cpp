@@ -4,9 +4,10 @@
 
 const float CEnemyAppear::m_max_ray_height = 500.0f;
 const float CEnemyAppear::m_min_ray_height = -500.0f;
-const float CEnemyAppear::m_appear_time = 10.0f;
+//const float CEnemyAppear::m_appear_time = 10.0f;
+const float CEnemyAppear::m_appear_time = 2.0f;
 const float CEnemyAppear::m_appear_height = 10.0f;
-const int CEnemyAppear::m_max_enemy = 20;
+const int CEnemyAppear::m_max_enemy = 10;
 
 //コンストラクタ
 CEnemyAppear::CEnemyAppear(aqua::IGameObject* parent)

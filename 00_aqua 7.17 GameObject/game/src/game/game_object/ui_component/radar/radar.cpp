@@ -37,6 +37,7 @@ void CRadar::Initialize(const aqua::CVector2& position)
 	m_PlayerSprite.color = aqua::CColor::BLUE;
 	m_PlayerSprite.position = m_CenterPosition - aqua::CVector2(m_PlayerSprite.GetTextureWidth()/2.0f,m_PlayerSprite.GetTextureHeight()/2.0f);
 
+	//test
 	m_EnemySprites = AQUA_NEW aqua::CSprite[m_MaxEnemyCount];
 	m_EnemyVectors = AQUA_NEW aqua::CVector2[m_MaxEnemyCount];
 
@@ -111,11 +112,13 @@ void CRadar::GetEnemyData(void)
 			m_EnemyVectors[m_AppearEnemyCount].y = -(unit->GetModel()->position.z - player->GetModel()->position.z);
 
 			//oŒ»‚µ‚Ä‚¢‚é”‚ğ‘‚â‚·
-			m_AppearEnemyCount++;
+			//if(m_AppearEnemyCount < m_MaxEnemyCount)
+				m_AppearEnemyCount++;
 		}
 
 		it++;
 	}
+	m_AppearEnemyCount--;
 
 }
 
