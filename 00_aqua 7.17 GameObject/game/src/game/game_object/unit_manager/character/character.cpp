@@ -32,7 +32,6 @@ void ICharacter::Initialize(const std::string& file_name)
 //更新
 void ICharacter::Update(void)
 {
-	IUnit::Update();
 
 	//床の判定
 	CheckGround();
@@ -44,6 +43,7 @@ void ICharacter::Update(void)
 	//アイテムの判定
 	if (CheckHitItem())
 		HitItem();
+	IUnit::Update();
 }
 
 void ICharacter::Draw(void)
@@ -56,7 +56,7 @@ void ICharacter::Draw(void)
 	line.Setup(m_Position, m_Position + dir, 0xffff8888);
 	line.Draw();
 #endif
-		IUnit::Draw();
+	IUnit::Draw();
 }
 
 //ユニットのカテゴリーを取得

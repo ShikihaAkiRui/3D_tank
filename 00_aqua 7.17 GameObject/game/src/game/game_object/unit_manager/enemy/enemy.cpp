@@ -52,6 +52,8 @@ void CEnemy::Initialize(const aqua::CVector3& position)
 //XV
 void CEnemy::Update(void)
 {
+	ICharacter::Update();
+
 	//ˆÚ“®
 	Move();
 
@@ -73,7 +75,6 @@ void CEnemy::Update(void)
 	}
 	*/
 
-	ICharacter::Update();
 }
 
 //ˆÚ“®
@@ -152,11 +153,12 @@ void CEnemy::Shot(void)
 
 	if (m_ShotTimer.Finished())
 	{
+		m_ShotTimer.Reset();
+		
 		CBulletManager* bullet_manager = (CBulletManager*)aqua::FindGameObject("BulletManager");
 		if (!bullet_manager)return;
 
 		bullet_manager->Create(m_UnitCategory, m_Position, m_Rotation);
 
-		m_ShotTimer.Reset();
 	}
 }

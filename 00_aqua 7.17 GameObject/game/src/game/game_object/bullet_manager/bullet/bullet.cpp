@@ -36,14 +36,13 @@ void CBullet::Initialize(UNIT_CATEGORY unit_category,const aqua::CVector3& posit
 //更新
 void CBullet::Update(void)
 {
-	IUnit::Update();
-
 	m_Position += m_Velocity;
 	m_Model->position = m_Position;
 	
 	//床の当たり判定
 	CheckGraund();
 
+	IUnit::Update();
 }
 
 //キャラクターに当たった
@@ -73,8 +72,7 @@ UNIT_CATEGORY CBullet::GetCategory(void)
 
 //床の当たり判定
 void CBullet::CheckGraund(void)
-{
-	
+{	
 	CStage* stage = (CStage*)aqua::FindGameObject("Stage");
 	if (!stage) return;
 

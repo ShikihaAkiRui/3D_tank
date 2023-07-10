@@ -7,7 +7,7 @@ const float CEnemyAppear::m_min_ray_height = -500.0f;
 //const float CEnemyAppear::m_appear_time = 10.0f;
 const float CEnemyAppear::m_appear_time = 2.0f;
 const float CEnemyAppear::m_appear_height = 10.0f;
-const int CEnemyAppear::m_max_enemy = 10;
+const int CEnemyAppear::m_max_enemy = 4;
 
 //コンストラクタ
 CEnemyAppear::CEnemyAppear(aqua::IGameObject* parent)
@@ -26,6 +26,7 @@ void CEnemyAppear::Initialize(void)
 //更新
 void CEnemyAppear::Update(void)
 {
+
 	m_AppearTimer.Update();
 
 	//出す時間になったら出す

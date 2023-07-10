@@ -60,6 +60,8 @@ void CRadar::Update(void)
 
 	//表示位置設定
 	SetEnemyPosition();
+
+
 }
 
 //描画
@@ -112,13 +114,15 @@ void CRadar::GetEnemyData(void)
 			m_EnemyVectors[m_AppearEnemyCount].y = -(unit->GetModel()->position.z - player->GetModel()->position.z);
 
 			//出現している数を増やす
-			//if(m_AppearEnemyCount < m_MaxEnemyCount)
-				m_AppearEnemyCount++;
+			m_AppearEnemyCount++;
+
+			//出現最大数を満たした場合
+			if (m_AppearEnemyCount >= m_MaxEnemyCount)
+				break;
 		}
 
 		it++;
 	}
-	m_AppearEnemyCount--;
 
 }
 
