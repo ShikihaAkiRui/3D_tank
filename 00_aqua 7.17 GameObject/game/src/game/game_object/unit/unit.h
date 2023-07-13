@@ -28,6 +28,5 @@ public:
 protected:
 	aqua::CModel* m_Model;	//ƒ‚ƒfƒ‹
 	
-	static const int m_frame_index;			//ƒtƒŒ[ƒ€”Ô†
 	static const aqua::CVector3 m_divnum;	//•ªŠ„”
 };

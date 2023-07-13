@@ -7,7 +7,7 @@ const float CEnemyAppear::m_min_ray_height = -500.0f;
 //const float CEnemyAppear::m_appear_time = 10.0f;
 const float CEnemyAppear::m_appear_time = 2.0f;
 const float CEnemyAppear::m_appear_height = 10.0f;
-const int CEnemyAppear::m_max_enemy = 4;
+const int CEnemyAppear::m_max_enemy = 5;
 
 //コンストラクタ
 CEnemyAppear::CEnemyAppear(aqua::IGameObject* parent)
@@ -19,19 +19,19 @@ CEnemyAppear::CEnemyAppear(aqua::IGameObject* parent)
 //初期化
 void CEnemyAppear::Initialize(void)
 {
-
 	m_AppearTimer.Setup(m_appear_time);
 }
 
 //更新
 void CEnemyAppear::Update(void)
 {
-
 	m_AppearTimer.Update();
 
 	//出す時間になったら出す
 	if (m_AppearTimer.Finished())
 	{
+		m_AppearTimer.Reset();
+
 		aqua::CVector3 appear_position = aqua::CVector3::ZERO;
 		
 		//平面上の座標を決める
@@ -48,8 +48,6 @@ void CEnemyAppear::Update(void)
 		//出現範囲ないかつ最大数に達していない
 		if (appear_position.y >= m_min_ray_height && m_CountEnemy < m_max_enemy)
 		{
-			m_AppearTimer.Reset();
-
 			SetCountEnemy(1);
 
 			CUnitManager* unit_manager = (CUnitManager*)aqua::FindGameObject("UnitManager");

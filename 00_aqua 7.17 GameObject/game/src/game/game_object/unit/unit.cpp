@@ -1,6 +1,5 @@
 #include "unit.h"
 
-const int IUnit::m_frame_index = -1;
 const aqua::CVector3 IUnit::m_divnum = aqua::CVector3(4.0f, 4.0f, 4.0f);
 
 //コンストラクタ
@@ -16,13 +15,13 @@ void IUnit::Initialize(const std::string& file_name)
 
 	m_Model->Load(file_name);
 
-	SetupCollInfo(m_Model, m_frame_index, (int)m_divnum.x, (int)m_divnum.y, (int)m_divnum.z);
+	SetupCollInfo(m_Model,(int)m_divnum.x, (int)m_divnum.y, (int)m_divnum.z);
 }
 
 //更新
 void IUnit::Update(void)
 {
-	RefreshCollInfo(m_frame_index);
+	RefreshCollInfo();
 }
 
 //描画
@@ -34,7 +33,7 @@ void IUnit::Draw(void)
 //解放
 void IUnit::Finalize(void)
 {
-	TerminateCollInfo(m_frame_index);
+	TerminateCollInfo();
 	
 	m_Model->Unload();
 

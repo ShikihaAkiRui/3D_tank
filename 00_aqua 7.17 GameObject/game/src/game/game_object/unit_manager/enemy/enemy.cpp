@@ -61,20 +61,6 @@ void CEnemy::Update(void)
 	if (m_ShotFlag)
 		Shot();
 
-	/*
-	m_Test.Update();
-	if (m_Test.Finished())
-	{
-		m_Test.Reset();
-		CItemManager* item_manager = (CItemManager*)aqua::FindGameObject("ItemManager");
-		if (item_manager)
-		{
-			//アイテムをドロップする
-			item_manager->Create(m_Position);
-		}
-	}
-	*/
-
 }
 
 //移動

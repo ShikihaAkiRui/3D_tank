@@ -422,7 +422,9 @@ GameProcess( void )
 #endif
 
     // EffekseerXV
+    Effekseer_Sync3DSetting();
     UpdateEffekseer2D();
+    UpdateEffekseer3D();
 
 #ifdef AQUA_DEBUG
     // ƒQ[ƒ€•`‰æ

@@ -28,7 +28,7 @@ private:
 	void GetBulletAngle(const aqua::CVector3& position);
 
 
-	aqua::CSprite m_Sprite;		//照準
+	//aqua::CSprite m_Sprite;		//照準
 	aqua::CVector2 m_Position;	//位置
 	aqua::CVector3 m_DirectionAngle;	//弾を出す向き
 	aqua::CVector3 m_StartRayPosition;	//レイの出始め位置

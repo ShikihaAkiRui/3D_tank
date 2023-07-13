@@ -5,6 +5,8 @@
 const aqua::CVector3 CBullet::m_direction = aqua::CVector3(0.0f, 0.0f, 1.0f);
 const float CBullet::m_move_speed = 100.0f;
 const float CBullet::m_radius = 4.0f;
+const aqua::CVector3 CBullet::m_min_range = aqua::CVector3(-2000.0f, -500.0f, -2000.0f);
+const aqua::CVector3 CBullet::m_max_range = aqua::CVector3(1000.0f, 500.0f, 1000.0f);
 
 //コンストラクタ
 CBullet::CBullet(aqua::IGameObject* parent)
@@ -41,6 +43,9 @@ void CBullet::Update(void)
 	
 	//床の当たり判定
 	CheckGraund();
+
+	//範囲の判定
+	CheckRange();
 
 	IUnit::Update();
 }
@@ -81,4 +86,18 @@ void CBullet::CheckGraund(void)
 		DeleteObject();
 	}
 	
+}
+
+//範囲の判定
+void CBullet::CheckRange(void)
+{
+	//範囲から出たら消す
+	if (m_min_range.x > m_Position.x || m_max_range.x < m_Position.x)
+		DeleteObject();
+	
+	if (m_min_range.y > m_Position.y || m_max_range.y < m_Position.y)
+		DeleteObject();
+
+	if (m_min_range.z > m_Position.z || m_max_range.z < m_Position.z)
+		DeleteObject();
 }

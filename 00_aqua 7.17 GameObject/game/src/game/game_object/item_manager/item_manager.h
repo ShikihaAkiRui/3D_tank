@@ -12,4 +12,6 @@ public:
 	//生成
 	void Create(aqua::CVector3& position);
 
+	//アイテムとキャラクターの判定
+	bool CheckHitCharacter(ICollision* collision);
 };

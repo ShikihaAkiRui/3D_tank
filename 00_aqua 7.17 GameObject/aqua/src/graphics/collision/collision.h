@@ -30,37 +30,31 @@ public:
 		@brief	コリジョン情報を構築
 
 		@param[in]	model	モデル情報
-		@param[in]	frame_index	コリジョンの情報を構築するフレームの番号
 		@param[in]	x_divnum	コリジョン情報のx軸方向の空間分割数
 		@param[in]	y_divnum	コリジョン情報のy軸方向の空間分割数
 		@param[in]	z_divnum	コリジョン情報のz軸方向の空間分割数
 	*/
-	void	SetupCollInfo(aqua::CModel* model,int frame_index,int x_divnum,int y_divnum,int z_divnum);
+	void	SetupCollInfo(aqua::CModel* model,int x_divnum,int y_divnum,int z_divnum);
 
 	/*
 		@brief	コリジョン情報の後始末
-
-		@param[in]	frame_index	コリジョンの情報を後始末を行うフレーム番号
 	*/
-	void	TerminateCollInfo(int frame_index);
+	void	TerminateCollInfo(void);
 
 	/*
 		@brief	コリジョン情報の更新
-
-		@param[in]	frame_index	コリジョンの情報を更新するフレームの番号
 	*/
-	void	RefreshCollInfo(int frame_index);
+	void	RefreshCollInfo(void);
 
 	/*
 		@brief	線分とモデルの当たり判定
 
-		@param[in]	frame_index	コリジョンの情報を更新するフレームの番号
 		@param[in]	pos_start	当たり判定で使用する線分の始点
 		@param[in]	pos_end		当たり判定で使用する線分の終点
 
 		@return 当たったどうか
 	*/
-	bool	CollCheckLine(int frame_index, const aqua::CVector3& pos_start, const aqua::CVector3& pos_end);
+	bool	CollCheckLine(const aqua::CVector3& pos_start, const aqua::CVector3& pos_end);
 	
 	/*
 		@brief 線分とモデルの当たったかのフラグ
@@ -92,7 +86,7 @@ public:
 		
 		@return	当たったどうか
 	*/
-	bool	CollCheckSphere( int frame_index,const aqua::CVector3& center_pos, float radius);
+	bool	CollCheckSphere(const aqua::CVector3& center_pos, float radius);
 
 	/*
 		@brief	カプセルとモデルの当たり判定
@@ -104,7 +98,7 @@ public:
 
 		@return 当たったどうか
 	*/
-	bool	CollCheckCapsule(int frame_index,const aqua::CVector3& pos1,const aqua::CVector3& pos2, float radius);
+	bool	CollCheckCapsule(const aqua::CVector3& pos1,const aqua::CVector3& pos2, float radius);
 
 	/*
 		@brief	当たり判定結果ポリゴン配列から指定番のポリゴン情報を取得
@@ -128,4 +122,7 @@ public:
 	
 	//線分が当たったのデータ
 	MV1_COLL_RESULT_POLY m_HitLineResult;
+
+	//フレーム番号
+	static const int m_frame_index;
 };

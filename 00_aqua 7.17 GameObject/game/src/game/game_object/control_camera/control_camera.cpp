@@ -67,14 +67,6 @@ aqua::CVector3 CControlCamera::GetPosition(void)
 	return m_Camera->m_Position;
 }
 
-/*
-//Œü‚¢‚Ä‚¢‚éŠp“x‚ðŽæ“¾
-aqua::CVector3 CControlCamera::GetAngle(void)
-{
-	return m_Angle;
-}
-*/
-
 //Œü‚¢‚Ä‚¢‚éŠp“x‚ðŽæ“¾
 aqua::CVector3 CControlCamera::GetAngle(void)
 {

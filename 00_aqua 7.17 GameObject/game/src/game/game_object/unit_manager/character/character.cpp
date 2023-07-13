@@ -32,7 +32,6 @@ void ICharacter::Initialize(const std::string& file_name)
 //更新
 void ICharacter::Update(void)
 {
-
 	//床の判定
 	CheckGround();
 	
@@ -43,6 +42,7 @@ void ICharacter::Update(void)
 	//アイテムの判定
 	if (CheckHitItem())
 		HitItem();
+
 	IUnit::Update();
 }
 
@@ -75,7 +75,7 @@ void ICharacter::CheckGround(void)
 	m_Position.y += stage->GetGravity() * aqua::GetDeltaTime();
 
 	//床と当たってたら
-	if (stage->CollCheckLine(m_frame_index,m_Position, m_Position + m_GraundRayLength))
+	if (stage->CollCheckLine(m_Position, m_Position + m_GraundRayLength))
 	{
 		aqua::CVector3 hit_position;
 
@@ -93,67 +93,18 @@ void ICharacter::CheckGround(void)
 //弾の判定
 bool ICharacter::CheckHitBullet(void)
 {
-	
 	CBulletManager* bullet_manager = (CBulletManager*)aqua::FindGameObject("BulletManager");
-	if (!bullet_manager || bullet_manager->GetChildList()->empty())
-		return false;
 
-	auto it = bullet_manager->GetChildList()->begin();
-
-	bool hit_flag = false;
-
-	while (it != bullet_manager->GetChildList()->end())
-	{
-		CBullet* bullet = (CBullet*)(*it);
-
-		if (bullet->GetCategory() != m_UnitCategory)
-		{
-			hit_flag = CollCheckSphere(m_frame_index, bullet->GetCenterPosition(), bullet->GetRadius());
-
-			//当たったらtrue
-			if (hit_flag)
-			{
-				bullet->HitCharacter();
-				return hit_flag;
-			}
-		}
-
-		++it;
-	}
-
-	//当たってないならfalse
-	return hit_flag;
+	return bullet_manager->CheckHitCharacter(this, m_UnitCategory);
 }
 
 //アイテムの判定
 bool ICharacter::CheckHitItem(void)
 {
 	CItemManager* item_manager = (CItemManager*)aqua::FindGameObject("ItemManager");
-	if (!item_manager || item_manager->GetChildList()->empty())
-		return false;
+	if (!item_manager)return false;
 
-	auto it = item_manager->GetChildList()->begin();
-
-	bool hit_flag = false;
-
-	while (it != item_manager->GetChildList()->end())
-	{
-		CItem* item = (CItem*)(*it);
-
-		hit_flag = CollCheckSphere(m_frame_index, item->GetCenterPosition(), item->GetRadius());
-
-		//当たったらtrue
-		if (hit_flag && IGameObject::GetGameObjectName() =="Player")
-		{
-			item->HitCharacter();
-			return hit_flag;
-		}
-
-		++it;
-	}
-
-	//当たらなかったらfalse
-	return false;
+	return item_manager->CheckHitCharacter(this);
 }
 
 //移動
@@ -162,7 +113,7 @@ void ICharacter::Move(void)
 	CStage* stage = (CStage*)aqua::FindGameObject("Stage");
 	if (!stage)return;
 
-	if (stage->CollCheckLine(m_frame_index, m_Position, m_Position + m_GraundRayLength))
+	if (stage->CollCheckLine(m_Position, m_Position + m_GraundRayLength))
 	{
 		aqua::CVector3 right = m_model_right_vector;
 		aqua::CMatrix matrix = aqua::CMatrix::Ident();

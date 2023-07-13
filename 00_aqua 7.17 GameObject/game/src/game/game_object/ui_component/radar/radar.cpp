@@ -37,7 +37,6 @@ void CRadar::Initialize(const aqua::CVector2& position)
 	m_PlayerSprite.color = aqua::CColor::BLUE;
 	m_PlayerSprite.position = m_CenterPosition - aqua::CVector2(m_PlayerSprite.GetTextureWidth()/2.0f,m_PlayerSprite.GetTextureHeight()/2.0f);
 
-	//test
 	m_EnemySprites = AQUA_NEW aqua::CSprite[m_MaxEnemyCount];
 	m_EnemyVectors = AQUA_NEW aqua::CVector2[m_MaxEnemyCount];
 
@@ -60,7 +59,6 @@ void CRadar::Update(void)
 
 	//表示位置設定
 	SetEnemyPosition();
-
 
 }
 
@@ -91,38 +89,41 @@ void CRadar::Finalize(void)
 //エネミーのデータを得る
 void CRadar::GetEnemyData(void)
 {
-	CPlayer* player = (CPlayer*)aqua::FindGameObject("Player");
 	CUnitManager* unit_manager = (CUnitManager*)aqua::FindGameObject("UnitManager");
-	if (!player || !unit_manager)return;
+	m_AppearEnemyCount = unit_manager->GetEnemyData(m_EnemyVectors, m_MaxEnemyCount);
 
-	m_AppearEnemyCount = 0;
+	//CPlayer* player = (CPlayer*)aqua::FindGameObject("Player");
+	//CUnitManager* unit_manager = (CUnitManager*)aqua::FindGameObject("UnitManager");
+	//if (!player || !unit_manager)return;
 
-	if (unit_manager->GetChildList()->empty())
-		return;
+	//m_AppearEnemyCount = 0;
 
-	auto it = unit_manager->GetChildList()->begin();
+	//if (unit_manager->GetChildList()->empty())
+	//	return;
 
-	while (it != unit_manager->GetChildList()->end())
-	{
-		IUnit* unit = (IUnit*)(*it);
+	//auto it = unit_manager->GetChildList()->begin();
 
-		//指定したオブジェクト名だったら
-		if (unit->GetGameObjectName().find(m_find_name) != std::string::npos)
-		{
-			//プレイヤーからのベクトル取得
-			m_EnemyVectors[m_AppearEnemyCount].x = unit->GetModel()->position.x - player->GetModel()->position.x;
-			m_EnemyVectors[m_AppearEnemyCount].y = -(unit->GetModel()->position.z - player->GetModel()->position.z);
+	//while (it != unit_manager->GetChildList()->end())
+	//{
+	//	IUnit* unit = (IUnit*)(*it);
 
-			//出現している数を増やす
-			m_AppearEnemyCount++;
+	//	//指定したオブジェクト名だったら
+	//	if (unit->GetGameObjectName().find(m_find_name) != std::string::npos)
+	//	{
+	//		//プレイヤーからのベクトル取得
+	//		m_EnemyVectors[m_AppearEnemyCount].x = unit->GetModel()->position.x - player->GetModel()->position.x;
+	//		m_EnemyVectors[m_AppearEnemyCount].y = -(unit->GetModel()->position.z - player->GetModel()->position.z);
 
-			//出現最大数を満たした場合
-			if (m_AppearEnemyCount >= m_MaxEnemyCount)
-				break;
-		}
+	//		//出現している数を増やす
+	//		m_AppearEnemyCount++;
 
-		it++;
-	}
+	//		//出現最大数を満たした場合
+	//		if (m_AppearEnemyCount >= m_MaxEnemyCount)
+	//			break;
+	//	}
+
+	//	it++;
+	//}
 
 }
 

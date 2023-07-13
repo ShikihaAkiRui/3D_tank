@@ -21,7 +21,7 @@ bool CStage::GetHitBulletGroundFlag(const aqua::CVector3& center_position, float
 {
 	bool hit_flag = false;
 
-	hit_flag = CollCheckSphere(m_frame_index, center_position, radius);
+	hit_flag = CollCheckSphere(center_position, radius);
 
 	return hit_flag;
 }
@@ -36,7 +36,7 @@ float CStage::GetGravity(void)
 float CStage::GetGraundHeight(const aqua::CVector3& min_height_position, const aqua::CVector3& max_height_position)
 {
 	//“–‚½‚Á‚Ä‚È‚©‚Á‚½ü‚Ì‰º‚Ì’l‚æ‚è‰º‚Ì’l‚ğ•Ô‚·
-	if(!CollCheckLine(m_frame_index, min_height_position, max_height_position))
+	if(!CollCheckLine(min_height_position, max_height_position))
 		return min_height_position.y + m_not_hit_height;
 	
 	//“–‚½‚Á‚½À•W‚ğæ“¾

@@ -46,4 +46,5 @@ void IScene::ResetScene(void)
 	CSceneManager* sm = (CSceneManager*)GetParent();
 
 	//ƒV[ƒ“‚ğíœ
+	sm->Reset();
 }

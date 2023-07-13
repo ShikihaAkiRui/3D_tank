@@ -79,71 +79,11 @@ void CAim::SetAimRay(void)
 //レイが当たった位置を取得
 aqua::CVector3 CAim::CheckHitRay(void)
 {
-	CPlayer* player = (CPlayer*)aqua::FindGameObject("Player");
-	if (!player)
-		return m_EndRayPosition;
-
 	CUnitManager* unit_manager = (CUnitManager*)aqua::FindGameObject("UnitManager");
-	if (!unit_manager || unit_manager->GetChildList()->empty())
-		return m_EndRayPosition;
+	if (!unit_manager)return m_EndRayPosition;
 
-	aqua::CVector3 hit_position = aqua::CVector3::ZERO;
-	bool hit_flag = false;
-	float more_near = 0.0f;
+	return unit_manager->CheckHitAim(m_StartRayPosition, m_EndRayPosition);
 
-	auto it = unit_manager->GetChildList()->begin();
-
-	while (it != unit_manager->GetChildList()->end())
-	{
-		IUnit* unit = (IUnit*)(*it);
-		
-		//敵だったら判定する
-		if (unit->GetGameObjectName().find(m_hit_object_name) != std::string::npos)
-		{
-			//当たったら位置取得
-			if (unit->CollCheckLine(m_frame_index, m_StartRayPosition, m_EndRayPosition))
-			{
-				//初めて当たった
-				if (!hit_flag)
-				{
-					hit_position = unit->GetCollCheckLineHitPosition();
-
-					aqua::CVector3 vector = unit->GetCollCheckLineHitPosition() - player->GetModel()->position;
-					more_near = vector.Length();
-
-				}
-				else
-				{
-					//キャラクターに近い位置を取得
-					aqua::CVector3 vector = unit->GetCollCheckLineHitPosition() - player->GetModel()->position;
-					float length = vector.Length();
-
-					//位置が近いほうに変更
-					if (more_near > length)
-					{
-						hit_position = unit->GetCollCheckLineHitPosition();
-					}
-
-				}
-
-				hit_flag = true;
-			}
-
-		}
-
-		++it;
-	}
-
-	//当たっていたら当たった位置を返す
-	if (hit_flag)
-	{
-		return hit_position;
-	}
-	//当たらなかったらレイの終わりの位置を返す
-	else
-	{
-		return m_EndRayPosition;
-	}
 }
 
 //弾を撃つ角度

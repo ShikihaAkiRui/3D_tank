@@ -1,5 +1,7 @@
 #include "collision.h"
 
+const int ICollision::m_frame_index = -1;
+
 /*
 	コンストラクタ
 */
@@ -14,11 +16,11 @@ ICollision(void)
 */
 void
 ICollision::
-SetupCollInfo(aqua::CModel* model, int frame_index, int x_divnum, int y_divnum, int z_divnum)
+SetupCollInfo(aqua::CModel* model, int x_divnum, int y_divnum, int z_divnum)
 {
 	m_Model = model;
 
-	MV1SetupCollInfo(m_Model->GetResourceHandle(), frame_index, x_divnum, y_divnum, z_divnum);
+	MV1SetupCollInfo(m_Model->GetResourceHandle(), m_frame_index, x_divnum, y_divnum, z_divnum);
 }
 
 /*
@@ -26,9 +28,9 @@ SetupCollInfo(aqua::CModel* model, int frame_index, int x_divnum, int y_divnum, 
 */
 void 
 ICollision::
-TerminateCollInfo(int frame_index)
+TerminateCollInfo(void)
 {
-	MV1TerminateCollInfo(m_Model->GetResourceHandle(), frame_index);
+	MV1TerminateCollInfo(m_Model->GetResourceHandle(), m_frame_index);
 }
 
 /*
@@ -36,9 +38,9 @@ TerminateCollInfo(int frame_index)
 */
 void
 ICollision::
-RefreshCollInfo(int frame_index)
+RefreshCollInfo(void)
 {
-	MV1RefreshCollInfo(m_Model->GetResourceHandle(), frame_index);
+	MV1RefreshCollInfo(m_Model->GetResourceHandle(), m_frame_index);
 }
 
 /*
@@ -46,9 +48,9 @@ RefreshCollInfo(int frame_index)
 */
 bool
 ICollision::
-CollCheckLine(int frame_index,const aqua::CVector3& pos_start,const aqua::CVector3& pos_end)
+CollCheckLine(const aqua::CVector3& pos_start,const aqua::CVector3& pos_end)
 {
-	m_HitLineResult = MV1CollCheck_Line(m_Model->GetResourceHandle(), frame_index, pos_start, pos_end);
+	m_HitLineResult = MV1CollCheck_Line(m_Model->GetResourceHandle(), m_frame_index, pos_start, pos_end);
 	
 	return m_HitLineResult.HitFlag;
 
@@ -87,9 +89,9 @@ GetCollCheckLineNormal(void)
 */
 bool
 ICollision::
-CollCheckSphere(int frame_index,const aqua::CVector3& center_pos, float radius)
+CollCheckSphere(const aqua::CVector3& center_pos, float radius)
 {
-	MV1_COLL_RESULT_POLY_DIM result = MV1CollCheck_Sphere(m_Model->GetResourceHandle(), frame_index, center_pos, radius);
+	MV1_COLL_RESULT_POLY_DIM result = MV1CollCheck_Sphere(m_Model->GetResourceHandle(), m_frame_index, center_pos, radius);
 
 	//0なら当たってない
 	bool hit_flag = result.HitNum <= 0 ? false : true;
@@ -105,9 +107,9 @@ CollCheckSphere(int frame_index,const aqua::CVector3& center_pos, float radius)
 */
 bool
 ICollision::
-CollCheckCapsule(int frame_index,const aqua::CVector3& pos1,const aqua::CVector3& pos2, float radius)
+CollCheckCapsule(const aqua::CVector3& pos1,const aqua::CVector3& pos2, float radius)
 {
-	MV1_COLL_RESULT_POLY_DIM result = MV1CollCheck_Capsule(m_Model->GetResourceHandle(), frame_index, pos1, pos2, radius);
+	MV1_COLL_RESULT_POLY_DIM result = MV1CollCheck_Capsule(m_Model->GetResourceHandle(),m_frame_index, pos1, pos2, radius);
 
 	//0なら当たってない
 	bool hit_flag = result.HitNum <= 0 ? false : true;

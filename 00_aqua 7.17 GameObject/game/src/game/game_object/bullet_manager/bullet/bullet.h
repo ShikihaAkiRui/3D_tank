@@ -28,6 +28,9 @@ private:
 
 	//床の当たり判定
 	void CheckGraund(void);
+
+	//表示範囲の判定
+	void CheckRange(void);
 	
 	aqua::CVector3 m_Position;		//位置
 	aqua::CVector3 m_Velocity;		//速度
@@ -36,4 +39,7 @@ private:
 	static const aqua::CVector3 m_direction;	//動く方向
 	static const float m_move_speed;			//移動速度
 	static const float m_radius;				//半径
+	static const aqua::CVector3 m_min_range;	//最小範囲
+	static const aqua::CVector3 m_max_range;	//最大範囲
+
 };

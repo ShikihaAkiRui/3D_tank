@@ -26,7 +26,7 @@ void CGameMainScene::Initialize(void)
 	CControlCamera* cam_con = aqua::CreateGameObject<CControlCamera>(this);
 	aqua::CreateGameObject<CStage>(this);
 	aqua::CreateGameObject<CBulletManager>(this);
-	aqua::CreateGameObject<CItemManager>(this);
+	//aqua::CreateGameObject<CItemManager>(this);
 	aqua::CreateGameObject<CEnemyAppear>(this);
 
 	CScore* score = aqua::CreateGameObject<CScore>(this);
@@ -37,7 +37,6 @@ void CGameMainScene::Initialize(void)
 	IGameObject::Initialize();
 
 	IUnit* player = unit_manager->Create(UNIT_ID::PLAYER);
-	unit_manager->Create(UNIT_ID::ENEMY);
 
 	m_Camera.Initialize();
 	cam_con->Initialize(&m_Camera, player);
@@ -73,10 +72,12 @@ void CGameMainScene::Update(void)
 
 		
 		
+		/*
 		life = (CLife*)aqua::FindGameObject("Life");
 		if (!life)return;
-		//if (life->GetLife() <= 0)
-			//m_GameState = GAME_STATE::END;
+		if (life->GetLife() <= 0)
+			m_GameState = GAME_STATE::END;
+		*/
 		break;
 	case CGameMainScene::GAME_STATE::END:
 
