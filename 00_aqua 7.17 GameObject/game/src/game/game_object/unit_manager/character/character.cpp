@@ -32,6 +32,7 @@ void ICharacter::Initialize(const std::string& file_name)
 //更新
 void ICharacter::Update(void)
 {
+
 	//床の判定
 	CheckGround();
 	
@@ -44,19 +45,6 @@ void ICharacter::Update(void)
 		HitItem();
 
 	IUnit::Update();
-}
-
-void ICharacter::Draw(void)
-{
-#if 1
-	aqua::CLinePrimitive3D line;
-	aqua::CVector3 dir;
-	dir.x = sin(aqua::DegToRad(m_Rotation.y)) * 100.0f;
-	dir.z = cos(aqua::DegToRad(m_Rotation.y)) * 100.0f;
-	line.Setup(m_Position, m_Position + dir, 0xffff8888);
-	line.Draw();
-#endif
-	IUnit::Draw();
 }
 
 //ユニットのカテゴリーを取得
@@ -94,6 +82,7 @@ void ICharacter::CheckGround(void)
 bool ICharacter::CheckHitBullet(void)
 {
 	CBulletManager* bullet_manager = (CBulletManager*)aqua::FindGameObject("BulletManager");
+	if (!bullet_manager)return false;
 
 	return bullet_manager->CheckHitCharacter(this, m_UnitCategory);
 }
@@ -104,7 +93,7 @@ bool ICharacter::CheckHitItem(void)
 	CItemManager* item_manager = (CItemManager*)aqua::FindGameObject("ItemManager");
 	if (!item_manager)return false;
 
-	return item_manager->CheckHitCharacter(this);
+	return item_manager->CheckHitCharacter(this,m_UnitCategory);
 }
 
 //移動

@@ -1,7 +1,7 @@
 #include "unit_manager.h"
 #include"../unit/unit.h"
 #include"player/player.h"
-#include"enemy/enemy.h"
+#include"enemy/enemy_normal/enemy_normal.h"
 
 const std::string CUnitManager::m_enemy_name = "Enemy";
 
@@ -31,11 +31,11 @@ IUnit* CUnitManager::Create(UNIT_ID id)
 //ìGê∂ê¨
 void CUnitManager::CreateEnemy(UNIT_ID id, const aqua::CVector3& position)
 {
-	CEnemy* enemy = nullptr;
+	IEnemy* enemy = nullptr;
 
 	switch (id)
 	{
-	case UNIT_ID::ENEMY:	enemy = aqua::CreateGameObject<CEnemy>(this);	break;
+	case UNIT_ID::ENEMY_NORMAL:	enemy = aqua::CreateGameObject<CEnemyNormal>(this);	break;
 	default:	break;
 	}
 

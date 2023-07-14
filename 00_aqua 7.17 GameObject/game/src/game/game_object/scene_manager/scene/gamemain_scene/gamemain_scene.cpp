@@ -72,12 +72,12 @@ void CGameMainScene::Update(void)
 
 		
 		
-		/*
+		
 		life = (CLife*)aqua::FindGameObject("Life");
 		if (!life)return;
 		if (life->GetLife() <= 0)
 			m_GameState = GAME_STATE::END;
-		*/
+		
 		break;
 	case CGameMainScene::GAME_STATE::END:
 

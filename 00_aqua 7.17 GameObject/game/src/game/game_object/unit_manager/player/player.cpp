@@ -3,7 +3,6 @@
 #include"../../bullet_manager/bullet_manager.h"
 #include"../../bullet_manager/bullet/bullet.h"
 #include"../../control_camera/control_camera.h"
-#include"../../scene_manager/scene/gamemain_scene/gamemain_scene.h"
 #include"../../ui_component/score/score.h"
 #include"../../ui_component/life/life.h"
 #include"../../ui_component/aim/aim.h"
@@ -132,7 +131,6 @@ void CPlayer::Move(void)
 	//Ç«ÇøÇÁë§Ç…âÒÇÈÇ©ÇåvéZ
 	aqua::CVector3 cross = aqua::CVector3::Cross(current_dir.Normalize(), direction_vector.Normalize());
 	if (cross.x != 0.0f)cross = aqua::CVector3(0.0f, 1.0f, 0.0f);
-	line_dir = cross;
 #else
 	direction_angle = aqua::RadToDeg(atan2(direction_vector.x, direction_vector.z));
 	
@@ -180,6 +178,7 @@ void CPlayer::Move(void)
 //íeÇ≈çUåÇ
 void CPlayer::Shot(void)
 {
+
 	//íeÇèoÇ∑
 	if (aqua::mouse::Trigger(aqua::mouse::BUTTON_ID::LEFT))
 	{

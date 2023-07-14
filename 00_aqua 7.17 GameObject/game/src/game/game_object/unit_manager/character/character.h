@@ -14,8 +14,6 @@ public:
 
 	virtual void Update(void)override;
 
-	virtual void Draw(void) override;
-
 	//ユニットのカテゴリーを取得
 	UNIT_CATEGORY GetUnitCategory(void);
 
@@ -54,4 +52,5 @@ private:
 	static const aqua::CVector3 m_default_position;				//デフォルトの位置
 	static const aqua::CVector3 m_default_graund_ray_length;	//デフォルトの床へのレイの長さ
 	static const aqua::CVector3 m_model_right_vector;			//右向きのベクトル
+
 };

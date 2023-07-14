@@ -2,7 +2,7 @@
 
 #include"../unit/unit.h"
 #include"unit_id.h"
-#include<map>
+//#include<map>
 
 //ユニットマネージャー
 class CUnitManager : public aqua::IGameObject
@@ -28,4 +28,5 @@ public:
 
 private:
 	static const std::string m_enemy_name;	//当たる対象の名前
+
 };

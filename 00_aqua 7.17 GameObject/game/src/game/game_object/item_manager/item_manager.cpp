@@ -10,8 +10,7 @@ CItemManager::CItemManager(aqua::IGameObject* parent)
 //生成
 void CItemManager::Create(aqua::CVector3& position)
 {
-	CItem* item = nullptr;
-	//CItem* item = aqua::CreateGameObject<CItem>(this);
+	CItem* item = aqua::CreateGameObject<CItem>(this);
 
 	if (!item)	return;
 
@@ -19,7 +18,7 @@ void CItemManager::Create(aqua::CVector3& position)
 }
 
 //アイテムとキャラクターの判定
-bool CItemManager::CheckHitCharacter(ICollision* collision)
+bool CItemManager::CheckHitCharacter(ICollision* collision,UNIT_CATEGORY unit_category)
 {
 	auto it = GetChildList()->begin();
 
@@ -32,7 +31,7 @@ bool CItemManager::CheckHitCharacter(ICollision* collision)
 		hit_flag = collision->CollCheckSphere(item->GetCenterPosition(), item->GetRadius());
 
 		//当たったらtrue
-		if (hit_flag && IGameObject::GetGameObjectName() == "Player")
+		if (hit_flag && unit_category == UNIT_CATEGORY::PLAYER)
 		{
 			item->HitCharacter();
 			return hit_flag;
@@ -42,6 +41,6 @@ bool CItemManager::CheckHitCharacter(ICollision* collision)
 	}
 
 	//当たらなかったらfalse
-	return hit_flag;
+	return false;
 
 }

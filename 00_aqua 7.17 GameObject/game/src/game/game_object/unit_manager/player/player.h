@@ -42,5 +42,4 @@ private:
 	static const float m_jump_power;			//”ò‚Ô‚Æ‚«‚Ì—Í
 	static const float m_deceleration;			//Œ¸‘¬—¦
 
-	aqua::CVector3 line_dir;
 };

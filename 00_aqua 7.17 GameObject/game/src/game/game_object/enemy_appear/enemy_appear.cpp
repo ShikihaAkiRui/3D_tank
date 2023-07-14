@@ -25,6 +25,8 @@ void CEnemyAppear::Initialize(void)
 //更新
 void CEnemyAppear::Update(void)
 {
+	aqua::IGameObject::Update();
+	
 	m_AppearTimer.Update();
 
 	//出す時間になったら出す
@@ -53,12 +55,11 @@ void CEnemyAppear::Update(void)
 			CUnitManager* unit_manager = (CUnitManager*)aqua::FindGameObject("UnitManager");
 			if (!unit_manager)return;
 
-			unit_manager->CreateEnemy(UNIT_ID::ENEMY, appear_position);
+			unit_manager->CreateEnemy(UNIT_ID::ENEMY_NORMAL, appear_position);
 		}
 
 	}
 	
-	aqua::IGameObject::Update();
 }
 
 //エネミーの数を設定

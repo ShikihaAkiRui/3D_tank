@@ -92,39 +92,6 @@ void CRadar::GetEnemyData(void)
 	CUnitManager* unit_manager = (CUnitManager*)aqua::FindGameObject("UnitManager");
 	m_AppearEnemyCount = unit_manager->GetEnemyData(m_EnemyVectors, m_MaxEnemyCount);
 
-	//CPlayer* player = (CPlayer*)aqua::FindGameObject("Player");
-	//CUnitManager* unit_manager = (CUnitManager*)aqua::FindGameObject("UnitManager");
-	//if (!player || !unit_manager)return;
-
-	//m_AppearEnemyCount = 0;
-
-	//if (unit_manager->GetChildList()->empty())
-	//	return;
-
-	//auto it = unit_manager->GetChildList()->begin();
-
-	//while (it != unit_manager->GetChildList()->end())
-	//{
-	//	IUnit* unit = (IUnit*)(*it);
-
-	//	//指定したオブジェクト名だったら
-	//	if (unit->GetGameObjectName().find(m_find_name) != std::string::npos)
-	//	{
-	//		//プレイヤーからのベクトル取得
-	//		m_EnemyVectors[m_AppearEnemyCount].x = unit->GetModel()->position.x - player->GetModel()->position.x;
-	//		m_EnemyVectors[m_AppearEnemyCount].y = -(unit->GetModel()->position.z - player->GetModel()->position.z);
-
-	//		//出現している数を増やす
-	//		m_AppearEnemyCount++;
-
-	//		//出現最大数を満たした場合
-	//		if (m_AppearEnemyCount >= m_MaxEnemyCount)
-	//			break;
-	//	}
-
-	//	it++;
-	//}
-
 }
 
 //表示位置設定
