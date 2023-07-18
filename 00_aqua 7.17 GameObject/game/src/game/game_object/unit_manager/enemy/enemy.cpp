@@ -23,11 +23,6 @@ void IEnemy::Initialize(const std::string& file_name,const aqua::CVector3& posit
 	m_Model->position = m_Position;
 }
 
-void IEnemy::Update(void)
-{
-	ICharacter::Update();
-}
-
 //“|‚³‚ê‚½
 void IEnemy::Dead(void)
 {

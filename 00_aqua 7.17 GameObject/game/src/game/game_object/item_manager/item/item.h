@@ -1,18 +1,18 @@
 #pragma once
 
-#include"../../unit/unit.h"
+#include"aqua.h"
 
 //アイテム
-class CItem : public IUnit
+class CItem : public aqua::IGameObject
 {
 public:
 	CItem(aqua::IGameObject* parent);
 	~CItem() = default;
 
-	void Initialize(void)override {};
 	void Initialize(const aqua::CVector3& position);
-
 	void Update(void)override;
+	void Draw(void)override;
+	void Finalize(void)override;
 
 	//キャラクターに当たった
 	void HitCharacter(void);
@@ -27,6 +27,7 @@ private:
 	//重力
 	void Gravity(void);
 
+	aqua::CModel m_Model;		//モデル
 	aqua::CVector3 m_Position;	//位置
 	
 	static const aqua::CVector3 m_graund_ray;	//床の判定のレイの大きさ

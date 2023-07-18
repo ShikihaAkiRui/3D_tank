@@ -178,18 +178,17 @@ void CPlayer::Move(void)
 //’e‚ÅUŒ‚
 void CPlayer::Shot(void)
 {
-
 	//’e‚ðo‚·
 	if (aqua::mouse::Trigger(aqua::mouse::BUTTON_ID::LEFT))
 	{
-		CBulletManager* bullet_manager = (CBulletManager*)aqua::FindGameObject("BulletManager");
-		if (!bullet_manager)return;
 		
 		CAim* aim = (CAim*)aqua::FindGameObject("Aim");
 		if (!aim)return;
+	
+		CBulletManager& bullet_manager = CBulletManager::GetInstance();
 		
 		//’e¶¬
-		bullet_manager->Create(m_UnitCategory,m_Position, aim->GetAimAngle());
+		bullet_manager.Create(m_UnitCategory, m_Position, aim->GetAimAngle());
 
 		m_ShotRotationFlag = true;
 	}

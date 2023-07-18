@@ -25,9 +25,11 @@ void CGameMainScene::Initialize(void)
 	CUnitManager* unit_manager = aqua::CreateGameObject<CUnitManager>(this);
 	CControlCamera* cam_con = aqua::CreateGameObject<CControlCamera>(this);
 	aqua::CreateGameObject<CStage>(this);
-	aqua::CreateGameObject<CBulletManager>(this);
+	//aqua::CreateGameObject<CBulletManager>(this);
 	//aqua::CreateGameObject<CItemManager>(this);
 	aqua::CreateGameObject<CEnemyAppear>(this);
+
+	CBulletManager::GetInstance().Initialize();
 
 	CScore* score = aqua::CreateGameObject<CScore>(this);
 	CLife* life = aqua::CreateGameObject<CLife>(this);
@@ -59,6 +61,8 @@ void CGameMainScene::Update(void)
 {
 	IGameObject::Update();
 
+	CBulletManager::GetInstance().Update();
+
 	CLife* life = nullptr;
 
 	//ƒQ[ƒ€‚Ìó‘Ô
@@ -72,12 +76,12 @@ void CGameMainScene::Update(void)
 
 		
 		
-		
+		/*
 		life = (CLife*)aqua::FindGameObject("Life");
 		if (!life)return;
 		if (life->GetLife() <= 0)
 			m_GameState = GAME_STATE::END;
-		
+		*/
 		break;
 	case CGameMainScene::GAME_STATE::END:
 
@@ -90,6 +94,8 @@ void CGameMainScene::Update(void)
 //•`‰æ
 void CGameMainScene::Draw(void)
 {
+	CBulletManager::GetInstance().Draw();
+
 	IGameObject::Draw();
 
 #ifdef _DEBUG
@@ -101,6 +107,8 @@ void CGameMainScene::Draw(void)
 //‰ð•ú
 void CGameMainScene::Finalize(void)
 {
+	CBulletManager::GetInstance().Finalize();
+
 	IGameObject::Finalize();
 
 #ifdef _DEBUG

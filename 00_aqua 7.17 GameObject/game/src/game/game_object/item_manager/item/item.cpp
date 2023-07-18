@@ -7,7 +7,7 @@ const float CItem::m_radius = 4.0f;
 
 //コンストラクタ
 CItem::CItem(aqua::IGameObject* parent)
-	:IUnit(parent,"Item")
+	:aqua::IGameObject(parent,"Item")
 	,m_Position(aqua::CVector3::ZERO)
 {
 }
@@ -15,21 +15,30 @@ CItem::CItem(aqua::IGameObject* parent)
 //初期化
 void CItem::Initialize(const aqua::CVector3& position)
 {
-	IUnit::Initialize("data/ball.mv1");
+	m_Model.Load("data/ball.mv1");
 
 	m_Position = position;
 
-	m_Model->position = m_Position;
+	m_Model.position = m_Position;
 }
 
 //更新
 void CItem::Update(void)
 {
-	IUnit::Update();
-
 	//重力
 	Gravity();
+}
 
+//描画
+void CItem::Draw(void)
+{
+	m_Model.Draw();
+}
+
+//解放
+void CItem::Finalize(void)
+{
+	m_Model.Unload();
 }
 
 //キャラクターに当たった
@@ -67,5 +76,5 @@ void CItem::Gravity(void)
 		m_Position.y = hit_position.y - m_graund_ray.y;
 	}
 
-	m_Model->position = m_Position;
+	m_Model.position = m_Position;
 }

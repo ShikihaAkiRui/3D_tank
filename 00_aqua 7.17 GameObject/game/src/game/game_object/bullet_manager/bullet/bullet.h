@@ -1,18 +1,19 @@
 #pragma once
 
-#include"../../unit/unit.h"
+#include"aqua.h"
 #include"../../unit_manager/unit_id.h"
 
 //弾クラス
-class CBullet : public IUnit
+class CBullet : public aqua::IGameObject
 {
 public:
 	CBullet(aqua::IGameObject* parent);
 	~CBullet() = default;
 
-	void Initialize(void)override {};
 	void Initialize(UNIT_CATEGORY unit_category, const aqua::CVector3& position, const aqua::CVector3& rotation);
 	void Update(void)override;
+	void Draw(void)override;
+	void Finalize(void)override;
 
 	//キャラクターに当たった
 	void HitCharacter(void);
@@ -32,6 +33,7 @@ private:
 	//表示範囲の判定
 	void CheckRange(void);
 	
+	aqua::CModel m_Model;			//モデル
 	aqua::CVector3 m_Position;		//位置
 	aqua::CVector3 m_Velocity;		//速度
 	UNIT_CATEGORY  m_UnitCategory;	//出したユニットのカテゴリー

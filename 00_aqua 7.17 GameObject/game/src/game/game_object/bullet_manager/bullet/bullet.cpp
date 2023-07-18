@@ -10,7 +10,7 @@ const aqua::CVector3 CBullet::m_max_range = aqua::CVector3(1000.0f, 500.0f, 1000
 
 //コンストラクタ
 CBullet::CBullet(aqua::IGameObject* parent)
-	:IUnit(parent,"Bullet")
+	:aqua::IGameObject(parent,"Bullet")
 	,m_Position(aqua::CVector3::ZERO)
 	,m_Velocity(m_direction)
 	,m_UnitCategory(UNIT_CATEGORY::DUMMY)
@@ -20,7 +20,7 @@ CBullet::CBullet(aqua::IGameObject* parent)
 //初期化
 void CBullet::Initialize(UNIT_CATEGORY unit_category,const aqua::CVector3& position, const aqua::CVector3& rotation)
 {
-	IUnit::Initialize("data/ball.mv1");
+	m_Model.Load("data/ball.mv1");
 
 	m_UnitCategory = unit_category;
 	m_Position = position;
@@ -32,14 +32,14 @@ void CBullet::Initialize(UNIT_CATEGORY unit_category,const aqua::CVector3& posit
 
 	m_Velocity = m_Velocity.Transform(matrix) * m_move_speed * aqua::GetDeltaTime();
 
-	m_Model->position = m_Position;
+	m_Model.position = m_Position;
 }
 
 //更新
 void CBullet::Update(void)
 {
 	m_Position += m_Velocity;
-	m_Model->position = m_Position;
+	m_Model.position = m_Position;
 	
 	//床の当たり判定
 	CheckGraund();
@@ -47,7 +47,17 @@ void CBullet::Update(void)
 	//範囲の判定
 	CheckRange();
 
-	IUnit::Update();
+}
+//描画
+void CBullet::Draw(void)
+{
+	m_Model.Draw();
+}
+
+//解放
+void CBullet::Finalize(void)
+{
+	m_Model.Unload();
 }
 
 //キャラクターに当たった

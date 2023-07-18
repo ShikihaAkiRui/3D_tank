@@ -13,8 +13,6 @@ public:
 	virtual void Initialize(const aqua::CVector3& position) {};
 	virtual void Initialize(const std::string& file_name,const aqua::CVector3& position ,float graund_ray_langeth,int life);
 
-	virtual void Update(void)override;
-
 protected:
 
 	//“|‚³‚ê‚½

@@ -32,7 +32,6 @@ void ICharacter::Initialize(const std::string& file_name)
 //更新
 void ICharacter::Update(void)
 {
-
 	//床の判定
 	CheckGround();
 	
@@ -81,10 +80,12 @@ void ICharacter::CheckGround(void)
 //弾の判定
 bool ICharacter::CheckHitBullet(void)
 {
-	CBulletManager* bullet_manager = (CBulletManager*)aqua::FindGameObject("BulletManager");
-	if (!bullet_manager)return false;
+	//CBulletManager* bullet_manager = (CBulletManager*)aqua::FindGameObject("BulletManager");
+	//if (!bullet_manager)return false;
 
-	return bullet_manager->CheckHitCharacter(this, m_UnitCategory);
+	CBulletManager& bullet_manager = CBulletManager::GetInstance();
+
+	return bullet_manager.CheckHitCharacter(this, m_UnitCategory);
 }
 
 //アイテムの判定

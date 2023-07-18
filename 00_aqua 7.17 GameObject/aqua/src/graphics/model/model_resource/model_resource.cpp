@@ -60,7 +60,7 @@ Duplicate(const aqua::core::CModelResource* model)
 	m_ResourceName = model->GetResourceName();
 	
 	//–¼‘O‚Ì“¯–¼‚ğ”ğ‚¯‚é
-	m_ResourceName += std::to_string(model->m_ReferenceCount);
+	m_ResourceName += std::to_string(m_ResourceHandle);
 
 	// “Ç‚İ‚İÏ‚İ
 	m_Enabel = true;
