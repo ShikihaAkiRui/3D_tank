@@ -80,8 +80,6 @@ void ICharacter::CheckGround(void)
 //’e‚Ì”»’è
 bool ICharacter::CheckHitBullet(void)
 {
-	//CBulletManager* bullet_manager = (CBulletManager*)aqua::FindGameObject("BulletManager");
-	//if (!bullet_manager)return false;
 
 	CBulletManager& bullet_manager = CBulletManager::GetInstance();
 

@@ -81,6 +81,7 @@ aqua::CVector3 CAim::CheckHitRay(void)
 {
 	CUnitManager* unit_manager = (CUnitManager*)aqua::FindGameObject("UnitManager");
 	if (!unit_manager)return m_EndRayPosition;
+	//CUnitManager& unit_manager = CUnitManager::GetInstance();
 
 	return unit_manager->CheckHitAim(m_StartRayPosition, m_EndRayPosition);
 

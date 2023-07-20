@@ -90,6 +90,8 @@ void CRadar::Finalize(void)
 void CRadar::GetEnemyData(void)
 {
 	CUnitManager* unit_manager = (CUnitManager*)aqua::FindGameObject("UnitManager");
+	//CUnitManager& unit_manager = CUnitManager::GetInstance();
+
 	m_AppearEnemyCount = unit_manager->GetEnemyData(m_EnemyVectors, m_MaxEnemyCount);
 
 }
