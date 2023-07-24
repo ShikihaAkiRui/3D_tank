@@ -1,5 +1,6 @@
 #include "enemy_normal.h"
 #include"../../../bullet_manager/bullet_manager.h"
+#include"../../unit_manager.h"
 
 const float CEnemyNormal::m_graund_ray_langth = -15.0f;
 const int CEnemyNormal::m_life = 1;
@@ -21,8 +22,9 @@ void CEnemyNormal::Initialize(const aqua::CVector3& position)
 	IEnemy::Initialize("data/boxt.mv1", position, m_graund_ray_langth,m_life);
 
 	//Œü‚«Ý’è
-	m_Player = (CPlayer*)aqua::FindGameObject("Player");
+	m_Player = CUnitManager::GetInstance().GetPlayer();
 	if (!m_Player)return;
+
 	//Œü‚­•ûŒü‚ÌŠp“x‚ð‹‚ß‚é
 	aqua::CVector3 distance = m_Player->GetModel()->position - m_Position;
 	aqua::CVector2 move_direction = aqua::CVector2::ZERO;
@@ -107,11 +109,9 @@ void CEnemyNormal::Shot(void)
 	{
 		m_ShotTimer.Reset();
 
-		CBulletManager* bullet_manager = (CBulletManager*)aqua::FindGameObject("BulletManager");
-		if (!bullet_manager)return;
+		CBulletManager& bullet_manager = CBulletManager::GetInstance();
 
-		bullet_manager->Create(m_UnitCategory, m_Position, m_Rotation);
-
+		bullet_manager.Create(m_UnitCategory, m_Position, m_Rotation);
 	}
 
 }

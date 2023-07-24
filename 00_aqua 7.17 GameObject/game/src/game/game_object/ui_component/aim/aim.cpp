@@ -79,18 +79,15 @@ void CAim::SetAimRay(void)
 //ƒŒƒC‚ª“–‚½‚Á‚½ˆÊ’u‚ðŽæ“¾
 aqua::CVector3 CAim::CheckHitRay(void)
 {
-	CUnitManager* unit_manager = (CUnitManager*)aqua::FindGameObject("UnitManager");
-	if (!unit_manager)return m_EndRayPosition;
-	//CUnitManager& unit_manager = CUnitManager::GetInstance();
+	CUnitManager& unit_manager = CUnitManager::GetInstance();
 
-	return unit_manager->CheckHitAim(m_StartRayPosition, m_EndRayPosition);
-
+	return unit_manager.CheckHitAim(m_StartRayPosition, m_EndRayPosition);
 }
 
 //’e‚ðŒ‚‚ÂŠp“x
 void CAim::GetBulletAngle(const aqua::CVector3& position)
 {
-	CPlayer* player = (CPlayer*)aqua::FindGameObject("Player");
+	CPlayer* player = CUnitManager::GetInstance().GetPlayer();
 	if (!player)return;
 
 	aqua::CVector3 distance = position - player->GetModel()->position;

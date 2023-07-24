@@ -44,9 +44,9 @@ void CPlayer::Initialize(void)
 //XV
 void CPlayer::Update(void)
 {
-	CUnitManager* unit_manager = (CUnitManager*)aqua::FindGameObject("UnitManager");
+	CUnitManager& unit_manager = CUnitManager::GetInstance();
 
-	if (unit_manager->CheckHitUnit("Enemy", m_Position, m_Position + m_Velocity *  m_ray_langth))
+	if (unit_manager.CheckHitUnit("Enemy", m_Position, m_Position + m_Velocity *  m_ray_langth))
 		m_Position = aqua::CVector3(-1250.0f, 50.0f, -600.0f);
 
 	//ˆÚ“®

@@ -22,8 +22,8 @@ CGameMainScene::CGameMainScene(aqua::IGameObject* parent)
 //èâä˙âª
 void CGameMainScene::Initialize(void)
 {
-	CUnitManager* unit_manager = aqua::CreateGameObject<CUnitManager>(this);
-	//CUnitManager& unit_manager = CUnitManager::GetInstance();
+	CUnitManager& unit_manager = CUnitManager::GetInstance();
+	unit_manager.GetInstance().Initialzie();
 	CControlCamera* cam_con = aqua::CreateGameObject<CControlCamera>(this);
 	aqua::CreateGameObject<CStage>(this);
 	//aqua::CreateGameObject<CItemManager>(this);
@@ -38,8 +38,7 @@ void CGameMainScene::Initialize(void)
 
 	IGameObject::Initialize();
 
-	IUnit* player = unit_manager->Create(UNIT_ID::PLAYER);
-	//IUnit* player = unit_manager.Create(UNIT_ID::PLAYER);
+	IUnit* player = unit_manager.Create(UNIT_ID::PLAYER);
 
 	m_Camera.Initialize();
 	cam_con->Initialize(&m_Camera, player);
@@ -62,7 +61,7 @@ void CGameMainScene::Update(void)
 {
 	IGameObject::Update();
 
-	//CUnitManager::GetInstance().Update();
+	CUnitManager::GetInstance().Update();
 
 	CBulletManager::GetInstance().Update();
 
@@ -97,7 +96,7 @@ void CGameMainScene::Update(void)
 //ï`âÊ
 void CGameMainScene::Draw(void)
 {
-	//CUnitManager::GetInstance().Draw();
+	CUnitManager::GetInstance().Draw();
 
 	CBulletManager::GetInstance().Draw();
 
@@ -112,7 +111,7 @@ void CGameMainScene::Draw(void)
 //âï˙
 void CGameMainScene::Finalize(void)
 {
-//	CUnitManager::GetInstance().Finalize();
+	CUnitManager::GetInstance().Finalize();
 
 	CBulletManager::GetInstance().Finalize();
 
