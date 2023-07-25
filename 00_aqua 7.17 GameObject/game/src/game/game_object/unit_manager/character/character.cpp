@@ -89,10 +89,9 @@ bool ICharacter::CheckHitBullet(void)
 //ƒAƒCƒeƒ€‚Ì”»’è
 bool ICharacter::CheckHitItem(void)
 {
-	CItemManager* item_manager = (CItemManager*)aqua::FindGameObject("ItemManager");
-	if (!item_manager)return false;
+	CItemManager& item_manager = CItemManager::GetInstance();
 
-	return item_manager->CheckHitCharacter(this,m_UnitCategory);
+	return item_manager.CheckHitCharacter(this,m_UnitCategory);
 }
 
 //ˆÚ“®

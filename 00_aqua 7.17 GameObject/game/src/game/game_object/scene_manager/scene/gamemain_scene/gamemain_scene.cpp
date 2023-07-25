@@ -26,7 +26,7 @@ void CGameMainScene::Initialize(void)
 	unit_manager.GetInstance().Initialzie();
 	CControlCamera* cam_con = aqua::CreateGameObject<CControlCamera>(this);
 	aqua::CreateGameObject<CStage>(this);
-	//aqua::CreateGameObject<CItemManager>(this);
+	CItemManager::GetInstance().Initialize();
 	aqua::CreateGameObject<CEnemyAppear>(this);
 
 	CBulletManager::GetInstance().Initialize();
@@ -62,7 +62,7 @@ void CGameMainScene::Update(void)
 	IGameObject::Update();
 
 	CUnitManager::GetInstance().Update();
-
+	CItemManager::GetInstance().Update();
 	CBulletManager::GetInstance().Update();
 
 	CLife* life = nullptr;
@@ -97,7 +97,7 @@ void CGameMainScene::Update(void)
 void CGameMainScene::Draw(void)
 {
 	CUnitManager::GetInstance().Draw();
-
+	CItemManager::GetInstance().Draw();
 	CBulletManager::GetInstance().Draw();
 
 	IGameObject::Draw();
@@ -112,7 +112,7 @@ void CGameMainScene::Draw(void)
 void CGameMainScene::Finalize(void)
 {
 	CUnitManager::GetInstance().Finalize();
-
+	CItemManager::GetInstance().Finalize();
 	CBulletManager::GetInstance().Finalize();
 
 	IGameObject::Finalize();

@@ -26,12 +26,9 @@ void IEnemy::Initialize(const std::string& file_name,const aqua::CVector3& posit
 //倒された
 void IEnemy::Dead(void)
 {
-	CItemManager* item_manager = (CItemManager*)aqua::FindGameObject("ItemManager");
-	if (item_manager)
-	{
-		//アイテムをドロップする
-		item_manager->Create(m_Position);
-	}
+	CItemManager& item_manager = CItemManager::GetInstance();
+	//アイテムをドロップする
+	item_manager.Create(m_Position);
 
 	CEnemyAppear* appear = (CEnemyAppear*)aqua::FindGameObject("EnemyAppear");
 	if (appear)
