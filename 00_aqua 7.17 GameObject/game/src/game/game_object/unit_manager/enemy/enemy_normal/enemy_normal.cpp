@@ -22,8 +22,10 @@ void CEnemyNormal::Initialize(const aqua::CVector3& position)
 	IEnemy::Initialize("data/boxt.mv1", position, m_graund_ray_langth,m_life);
 
 	//Œü‚«Ý’è
-	m_Player = CUnitManager::GetInstance().GetPlayer();
-	if (!m_Player)return;
+	//m_Player = CUnitManager::GetInstance().GetPlayer();
+	m_Player = (CPlayer*)aqua::FindGameObject("Player");
+	if (!m_Player)
+		return;
 
 	//Œü‚­•ûŒü‚ÌŠp“x‚ð‹‚ß‚é
 	aqua::CVector3 distance = m_Player->GetModel()->position - m_Position;
