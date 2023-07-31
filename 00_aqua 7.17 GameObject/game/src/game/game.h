@@ -45,10 +45,16 @@ public:
      */
     void        Initialize( void ) override;
 
+    //更新
+    void        Update(void)override;
+
     /*!
      *  @brief      描画
      */
     void        Draw( void ) override;
+
+    //解放
+    void        Finalize(void)override;
 
 private:
     //! 画面クリアカラー

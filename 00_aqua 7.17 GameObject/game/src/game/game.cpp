@@ -31,10 +31,22 @@ CGame::
 Initialize(void)
 {
     // 最初に作るオブジェクト群
-    aqua::CreateGameObject<CSceneManager>(this);
+    //aqua::CreateGameObject<CSceneManager>(this);
+
+    CSceneManager::GetInstance().Initialize();
 
     IGameObject::Initialize();
 
+}
+
+//更新
+void 
+CGame::
+Update(void)
+{
+    CSceneManager::GetInstance().Update();
+
+    IGameObject::Update();
 }
 
 /*
@@ -48,6 +60,17 @@ Draw(void)
     aqua::Clear(m_clear_color);
 
     // 描画したいオブジェクト群
+    CSceneManager::GetInstance().Draw();
 
     IGameObject::Draw();
+}
+
+//解放
+void 
+CGame::
+Finalize(void)
+{
+    CSceneManager::GetInstance().Finalize();
+
+    IGameObject::Finalize();
 }

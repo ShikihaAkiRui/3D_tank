@@ -4,6 +4,258 @@
 
 const float CSceneManager::m_fade_speed = 255.0f;
 
+//インスタンスを取得
+CSceneManager& CSceneManager::GetInstance(void)
+{
+	static CSceneManager instance;
+
+	return instance;
+}
+
+//初期化
+void CSceneManager::Initialize(void)
+{
+	m_GameObject.Initialize();
+	
+	// フェード用パネル設定
+	m_FadePlane.Setup(aqua::CVector2::ZERO, (float)aqua::GetWindowWidth(), (float)aqua::GetWindowHeight(), aqua::CColor::BLACK);
+
+	// スプラッシュシーンを始めに生成
+	Create(SCENE_ID::TITLE);
+
+	// シーンイン状態を設定
+	m_State = STATE::SCENE_IN;
+
+	// プッシュフラグOFF
+	m_PushFlag = false;
+
+}
+
+//更新
+void CSceneManager::Update(void)
+{
+	switch (m_State)
+	{
+	case STATE::SCENE_IN:       SceneIn();         break;
+	case STATE::SCENE_UPDATE:   SceneUpdate();     break;
+	case STATE::SCENE_OUT:      SceneOut();        break;
+	case STATE::SCENE_CHANGE:   SceneChange();     break;
+	}
+	
+	m_GameObject.Update();
+
+}
+
+//描画
+void CSceneManager::Draw(void)
+{
+	m_GameObject.Draw();
+
+	if (m_State != STATE::SCENE_UPDATE)
+		m_FadePlane.Draw();
+}
+
+//解放
+void CSceneManager::Finalize(void)
+{
+	m_GameObject.Finalize();
+}
+
+//シーンを変更
+void CSceneManager::Change(SCENE_ID id)
+{
+	// 次のシーンID
+	m_NextSceneID = id;
+}
+
+//シーンをスタック
+void CSceneManager::Push(SCENE_ID id)
+{
+	// 同フレーム中にすでにプッシュされている
+	if (m_PushFlag || m_PushSceneID != SCENE_ID::DUMMY) return;
+
+	// プッシュフラグをON
+	m_PushFlag = true;
+
+	// スタックするシーンIDを保存
+	m_PushSceneID = id;
+}
+
+//スタックしたシーンを取り出す
+void CSceneManager::Pop(void)
+{
+	// 子のシーンが1つの場合はポップできない
+	if (m_GameObject.GetChildList()->size() <= 1)
+		return;
+
+	// 末尾のシーンのイテレータ取得
+	aqua::GAME_OBJECT_LIST::reverse_iterator it = m_GameObject.GetChildList()->rbegin();
+
+	// シーンクラスにキャスト
+	IScene* scene = (IScene*)(*it);
+
+	// 末尾のシーンを削除対象に設定
+	scene->DeleteObject();
+
+	// ひとつ前のシーンを取得
+	scene = (IScene*)(*(++it));
+
+	// ひとつ前のシーンをアクティブ状態に変更
+	scene->SetGameObjectState(aqua::GAME_OBJECT_STATE::ACTIVE);
+
+}
+
+//シーンをリセット
+void CSceneManager::Reset(void)
+{
+	m_NextSceneID = m_CurrentSceneID;
+
+	m_CurrentSceneID = SCENE_ID::DUMMY;
+}
+
+//現在のシーンID
+SCENE_ID CSceneManager::GetSceneID(void) const
+{
+	return m_CurrentSceneID;
+}
+
+//コンストラクタ
+CSceneManager::CSceneManager(void)
+: m_CurrentSceneID(SCENE_ID::DUMMY)
+, m_NextSceneID(SCENE_ID::DUMMY)
+, m_PushSceneID(SCENE_ID::DUMMY)
+, m_State(STATE::SCENE_IN)
+, m_PushFlag(false)
+{
+}
+
+//コピーコンストラクタ
+CSceneManager::CSceneManager(const CSceneManager& rhs)
+{
+	(void)rhs;
+}
+
+//代入演算子
+CSceneManager& CSceneManager::operator=(const CSceneManager& rhs)
+{
+	(void)rhs;
+
+	return *this;
+}
+
+//シーンを生成
+void CSceneManager::Create(SCENE_ID id)
+{
+	IScene* scene = nullptr;
+
+	switch (id)
+	{
+	case SCENE_ID::TITLE:   scene = aqua::CreateGameObject<CTitleScene>(&m_GameObject); break;
+	case SCENE_ID::GAMEMAIN:	scene = aqua::CreateGameObject<CGameMainScene>(&m_GameObject);  break;
+	}
+
+	AQUA_ASSERT(scene, "シーンが生成できませんでした。");
+
+	// シーンを初期化
+	scene->Initialize();
+
+}
+
+//現在のシーンを削除
+void CSceneManager::Delete(void)
+{
+	m_GameObject.Finalize();
+}
+
+//シーンの開始演出
+void CSceneManager::SceneIn(void)
+{
+	float alpha = (float)m_FadePlane.color.alpha;
+
+	alpha -= m_fade_speed * aqua::GetDeltaTime();
+
+	if (alpha < 0.0f)
+	{
+		alpha = 0.0f;
+
+		m_State = STATE::SCENE_UPDATE;
+	}
+
+	m_FadePlane.color.alpha = (unsigned char)alpha;
+
+}
+
+//シーンの更新
+void CSceneManager::SceneUpdate(void)
+{
+	// プッシュ処理が行われていた場合
+	if (m_PushFlag)
+	{
+		// 末尾のシーンのイテレータ取得
+		aqua::GAME_OBJECT_LIST::reverse_iterator it = m_GameObject.GetChildList()->rbegin();
+
+		// シーンクラスにキャスト
+		IScene* scene = (IScene*)(*it);
+
+		// 現在のシーンを非アクティブ状態に変更
+		scene->SetGameObjectState(aqua::GAME_OBJECT_STATE::WAIT);
+
+		// 新しいシーンを生成してスタックする
+		Create(m_PushSceneID);
+
+		// 未使用時はダミーIDを入れておく
+		m_PushSceneID = SCENE_ID::DUMMY;
+
+		// シーンのプッシュが終了した
+		m_PushFlag = false;
+	}
+
+	//m_GameObject.Update();
+	
+	// シーンの変更を検知
+	if (m_CurrentSceneID != m_NextSceneID)
+		m_State = STATE::SCENE_OUT;
+
+}
+
+//シーンの終了演出
+void CSceneManager::SceneOut(void)
+{
+	float alpha = (float)m_FadePlane.color.alpha;
+
+	alpha += m_fade_speed * aqua::GetDeltaTime();
+
+	if (alpha > (float)aqua::CColor::MAX_COLOR)
+	{
+		alpha = (float)aqua::CColor::MAX_COLOR;
+
+		m_State = STATE::SCENE_CHANGE;
+	}
+
+	m_FadePlane.color.alpha = (unsigned char)alpha;
+}
+
+//シーンを変更
+void CSceneManager::SceneChange(void)
+{
+	// 現在のシーンを削除
+	Delete();
+
+	// 次のシーンを生成
+	Create(m_NextSceneID);
+
+	// シーンIDを保存
+	m_CurrentSceneID = m_NextSceneID;
+
+	// 状態を移行
+	m_State = STATE::SCENE_IN;
+
+}
+
+
+/*
+const float CSceneManager::m_fade_speed = 255.0f;
+
 //コンストラクタ
 CSceneManager::CSceneManager(aqua::IGameObject* parent)
 	:aqua::IGameObject(parent,"SceneManager")
@@ -224,3 +476,4 @@ CSceneManager* GetSceneManager(void)
 {
 	return (CSceneManager*)aqua::FindGameObject("SceneManager");
 }
+*/

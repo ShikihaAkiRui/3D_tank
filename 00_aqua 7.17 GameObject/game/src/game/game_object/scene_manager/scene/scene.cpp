@@ -13,10 +13,14 @@ IScene::IScene(aqua::IGameObject* parent, const std::string& object_name)
 void IScene::ChangeScene(SCENE_ID id)
 {
 	//親のシーンマネージャーを呼び出す
-	CSceneManager* sm = (CSceneManager*)GetParent();
+	//CSceneManager* sm = (CSceneManager*)GetParent();
 
 	//シーンを変更
-	sm->Change(id);
+	//sm->Change(id);
+
+	CSceneManager& sm = CSceneManager::GetInstance();
+
+	sm.Change(id);
 }
 
 //シーンをスタック
