@@ -54,7 +54,7 @@ void CEnemyAppear::Update(void)
 
 			CUnitManager& unit_manager = CUnitManager::GetInstance();
 
-			unit_manager.CreateEnemy(UNIT_ID::ENEMY_NORMAL, appear_position);
+			unit_manager.CreateEnemy(UNIT_ID::ENEMY_PARABOLA, appear_position);
 		}
 
 	}

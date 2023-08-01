@@ -1,25 +1,24 @@
-#include "enemy_normal.h"
+#include "enemy_parabola.h"
 #include"../../../bullet_manager/bullet_manager.h"
 #include"../../unit_manager.h"
 
-const float CEnemyNormal::m_graund_ray_langth = -15.0f;
-const int CEnemyNormal::m_life = 1;
-const float CEnemyNormal::m_move_speed = 30.0f;
-const float CEnemyNormal::m_stop_distance = 250.0f;
-const float CEnemyNormal::m_back_distance = 230.0f;
-const float CEnemyNormal::m_shot_time = 3.0f;
+const float CEnemyParabola::m_graund_ray_langth = -15.0f;
+const int CEnemyParabola::m_life = 1;
+const float CEnemyParabola::m_move_speed = 10.0f;
+const float CEnemyParabola::m_stop_distance = 300.0f;
+const float CEnemyParabola::m_shot_time = 3.0f;
 
 //コンストラクタ
-CEnemyNormal::CEnemyNormal(aqua::IGameObject* parent)
-	:IEnemy(parent,"EnemyNormal")
-	,m_ShotFlag(false)
+CEnemyParabola::CEnemyParabola(aqua::IGameObject* parent)
+	:IEnemy(parent, "EnemyNormal")
+	, m_ShotFlag(false)
 {
 }
 
 //初期化
-void CEnemyNormal::Initialize(const aqua::CVector3& position)
+void CEnemyParabola::Initialize(const aqua::CVector3& position)
 {
-	IEnemy::Initialize("data/boxt.mv1", position, m_graund_ray_langth,m_life);
+	IEnemy::Initialize("data/boxt.mv1", position, m_graund_ray_langth, m_life);
 
 	//向き設定
 	m_Player = CUnitManager::GetInstance().GetPlayer();
@@ -37,7 +36,7 @@ void CEnemyNormal::Initialize(const aqua::CVector3& position)
 }
 
 //更新
-void CEnemyNormal::Update(void)
+void CEnemyParabola::Update(void)
 {
 	IEnemy::Update();
 
@@ -51,7 +50,7 @@ void CEnemyNormal::Update(void)
 }
 
 //移動
-void CEnemyNormal::Move(void)
+void CEnemyParabola::Move(void)
 {
 	m_Velocity = aqua::CVector3(0.0f, 0.0f, 1.0f);
 
@@ -84,14 +83,9 @@ void CEnemyNormal::Move(void)
 
 	}
 	//下がる位置内のとき
-	else if (distance.Length() < m_back_distance)
-	{
-		m_Position -= m_Velocity * m_move_speed * aqua::GetDeltaTime();
-		m_ShotFlag = true;
-	}
-	//近づかず、下がらないとき
 	else
 	{
+		m_Position -= m_Velocity * m_move_speed * aqua::GetDeltaTime();
 		m_ShotFlag = true;
 	}
 
@@ -101,7 +95,7 @@ void CEnemyNormal::Move(void)
 }
 
 //弾を撃つ
-void CEnemyNormal::Shot(void)
+void CEnemyParabola::Shot(void)
 {
 	m_ShotTimer.Update();
 
@@ -109,9 +103,9 @@ void CEnemyNormal::Shot(void)
 	{
 		m_ShotTimer.Reset();
 
-		CBulletManager& bullet_manager = CBulletManager::GetInstance();
+		//CBulletManager& bullet_manager = CBulletManager::GetInstance();
 
-		bullet_manager.Create(m_UnitCategory, m_Position, m_Rotation);
+		//bullet_manager.Create(m_UnitCategory, m_Position, m_Rotation);
 	}
 
 }

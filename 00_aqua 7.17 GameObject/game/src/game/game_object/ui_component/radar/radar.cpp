@@ -23,7 +23,7 @@ void CRadar::Initialize(const aqua::CVector2& position)
 	IUIComponent::Initialize(position);
 
 	CEnemyAppear* enemy_appear = (CEnemyAppear*)aqua::FindGameObject("EnemyAppear");
-	if (!enemy_appear)return;
+	//if (!enemy_appear)return;
 
 	//•\Ž¦‚·‚é“G‚ÌÅ‘å”
 	m_MaxEnemyCount = enemy_appear->GetMaxCountEnemy();

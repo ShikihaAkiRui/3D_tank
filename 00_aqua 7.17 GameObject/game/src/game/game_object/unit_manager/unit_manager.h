@@ -5,6 +5,7 @@
 #include"unit_id.h"
 #include"player/player.h"
 
+
 //ユニットマネージャー
 class CUnitManager
 {

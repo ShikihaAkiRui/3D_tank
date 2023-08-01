@@ -31,9 +31,9 @@ CGame::
 Initialize(void)
 {
     // 最初に作るオブジェクト群
-    //aqua::CreateGameObject<CSceneManager>(this);
+    aqua::CreateGameObject<CSceneManager>(this);
 
-    CSceneManager::GetInstance().Initialize();
+   // CSceneManager::GetInstance().Initialize();
 
     IGameObject::Initialize();
 
@@ -44,7 +44,7 @@ void
 CGame::
 Update(void)
 {
-    CSceneManager::GetInstance().Update();
+  //  CSceneManager::GetInstance().Update();
 
     IGameObject::Update();
 }
@@ -60,7 +60,7 @@ Draw(void)
     aqua::Clear(m_clear_color);
 
     // 描画したいオブジェクト群
-    CSceneManager::GetInstance().Draw();
+   // CSceneManager::GetInstance().Draw();
 
     IGameObject::Draw();
 }
@@ -70,7 +70,7 @@ void
 CGame::
 Finalize(void)
 {
-    CSceneManager::GetInstance().Finalize();
+  //  CSceneManager::GetInstance().Finalize();
 
     IGameObject::Finalize();
 }
