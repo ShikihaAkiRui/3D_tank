@@ -188,7 +188,7 @@ void CPlayer::Shot(void)
 		CBulletManager& bullet_manager = CBulletManager::GetInstance();
 		
 		//’e¶¬
-		bullet_manager.Create(m_UnitCategory, m_Position, aim->GetAimAngle());
+		bullet_manager.Create(BULLET_ID::NORMAL,m_UnitCategory, m_Position, aim->GetAimAngle());
 
 		m_ShotRotationFlag = true;
 	}

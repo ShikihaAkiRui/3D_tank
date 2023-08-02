@@ -1,5 +1,6 @@
 #include "bullet_manager.h"
 #include"bullet/bullet.h"
+#include"bullet/bullet_normal/bullet_normal.h"
 
 //インスタンスの取得
 CBulletManager& CBulletManager::GetInstance(void)
@@ -34,14 +35,17 @@ void CBulletManager::Finalize(void)
 }
 
 //生成
-void CBulletManager::Create(UNIT_CATEGORY unit_category, const aqua::CVector3& position, const aqua::CVector3& rotation)
+void CBulletManager::Create(BULLET_ID id,UNIT_CATEGORY unit_category, const aqua::CVector3& position, const aqua::CVector3& rotation)
 {
-	CBullet* bullet = nullptr;
+	CBulletNormal* bullet = nullptr;
 
-	bullet = aqua::CreateGameObject<CBullet>(&m_GameObject);
+	switch (id)
+	{
+	case BULLET_ID::NORMAL:	bullet = aqua::CreateGameObject<CBulletNormal>(&m_GameObject);	break;
+	default:	break;
+	}
 
-	if (!bullet)
-		return;
+	if (!bullet)return;
 
 	bullet->Initialize(unit_category, position, rotation);
 
@@ -56,7 +60,7 @@ bool CBulletManager::CheckHitCharacter(ICollision* collision, UNIT_CATEGORY unit
 
 	while (it != m_GameObject.GetChildList()->end())
 	{
-		CBullet* bullet = (CBullet*)(*it);
+		IBullet* bullet = (IBullet*)(*it);
 
 		if (bullet->GetCategory() != unit_category)
 		{

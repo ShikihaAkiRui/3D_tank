@@ -2,6 +2,7 @@
 
 #include"aqua.h"
 #include"../unit_manager/unit_id.h"
+#include"bullet/bullet_id.h"
 
 //弾のマネージャー
 class CBulletManager
@@ -16,7 +17,7 @@ public:
 	void Finalize(void);
 
 	//生成
-	void Create(UNIT_CATEGORY unit_category, const aqua::CVector3& position, const aqua::CVector3& rotation);
+	void Create(BULLET_ID id,UNIT_CATEGORY unit_category, const aqua::CVector3& position, const aqua::CVector3& rotation);
 
 	//弾とキャラクターの当たり判定
 	bool CheckHitCharacter(ICollision* collision, UNIT_CATEGORY unit_category);

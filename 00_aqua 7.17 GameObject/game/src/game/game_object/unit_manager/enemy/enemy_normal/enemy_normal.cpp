@@ -111,7 +111,7 @@ void CEnemyNormal::Shot(void)
 
 		CBulletManager& bullet_manager = CBulletManager::GetInstance();
 
-		bullet_manager.Create(m_UnitCategory, m_Position, m_Rotation);
+		bullet_manager.Create(BULLET_ID::NORMAL,m_UnitCategory, m_Position, m_Rotation);
 	}
 
 }
