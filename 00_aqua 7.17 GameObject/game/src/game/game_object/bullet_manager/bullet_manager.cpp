@@ -1,6 +1,7 @@
 #include "bullet_manager.h"
 #include"bullet/bullet.h"
 #include"bullet/bullet_normal/bullet_normal.h"
+#include"bullet/bullet_parabola/bullet_parabola.h"
 
 //インスタンスの取得
 CBulletManager& CBulletManager::GetInstance(void)
@@ -38,10 +39,14 @@ void CBulletManager::Finalize(void)
 void CBulletManager::Create(BULLET_ID id,UNIT_CATEGORY unit_category, const aqua::CVector3& position, const aqua::CVector3& rotation)
 {
 	CBulletNormal* bullet = nullptr;
+	CBulletParabola* parabola = nullptr;
 
 	switch (id)
 	{
-	case BULLET_ID::NORMAL:	bullet = aqua::CreateGameObject<CBulletNormal>(&m_GameObject);	break;
+	case BULLET_ID::NORMAL:	
+		bullet = aqua::CreateGameObject<CBulletNormal>(&m_GameObject);	break;
+	case BULLET_ID::PARABOLA:	
+		break;
 	default:	break;
 	}
 

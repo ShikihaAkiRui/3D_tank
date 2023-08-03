@@ -9,7 +9,6 @@ public:
 	IBullet(aqua::IGameObject* parent,const std::string& object_name);
 	~IBullet() = default;
 
-	void Initialize(void)override {};
 	virtual void Initialize(const std::string& file_name);
 	virtual void Update(void)override;
 	virtual void Draw(void)override;
