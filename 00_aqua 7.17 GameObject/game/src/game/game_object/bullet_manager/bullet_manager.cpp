@@ -46,13 +46,16 @@ void CBulletManager::Create(BULLET_ID id,UNIT_CATEGORY unit_category, const aqua
 	case BULLET_ID::NORMAL:	
 		bullet = aqua::CreateGameObject<CBulletNormal>(&m_GameObject);	break;
 	case BULLET_ID::PARABOLA:	
+		parabola = aqua::CreateGameObject<CBulletParabola>(&m_GameObject);	break;
 		break;
 	default:	break;
 	}
 
-	if (!bullet)return;
+	if (bullet)
+		bullet->Initialize(unit_category, position, rotation);
+	else if (parabola)
+		parabola->Initialize(unit_category, position, rotation);
 
-	bullet->Initialize(unit_category, position, rotation);
 
 }
 

@@ -103,9 +103,9 @@ void CEnemyParabola::Shot(void)
 	{
 		m_ShotTimer.Reset();
 
-		//CBulletManager& bullet_manager = CBulletManager::GetInstance();
+		CBulletManager& bullet_manager = CBulletManager::GetInstance();
 
-		//bullet_manager.Create(m_UnitCategory, m_Position, m_Rotation);
+		bullet_manager.Create(BULLET_ID::PARABOLA,m_UnitCategory, m_Position,m_Player->GetModel()->position );
 	}
 
 }

@@ -1,12 +1,16 @@
 #include "bullet_parabola.h"
+#include"../../../stage/stage.h"
 
-const float CBulletParabola::m_move_angle = 60.0f;
-const float CBulletParabola::m_move_speed = 100.0f;
+const float CBulletParabola::m_move_angle = 45.0f;
+const float CBulletParabola::m_move_speed = 10.0f;
+const float CBulletParabola::m_accelerate = 0.98f;
 
 //コンストラクタ
 CBulletParabola::CBulletParabola(aqua::IGameObject* parent)
 	:IBullet(parent,"BulletParabola")
 	,m_ImpactPosition(aqua::CVector3::ZERO)
+	,m_Accelerate(aqua::CVector3::ZERO)
+	,m_Lenght(0.0f)
 {
 }
 
@@ -19,32 +23,29 @@ void CBulletParabola::Initialize(UNIT_CATEGORY unit_category, const aqua::CVecto
 
 	IBullet::Initialize("data/ball.mv1");
 
-
 	m_Model.position = m_Position;
+	aqua::CVector2 vector = aqua::CVector2(m_Position.x, m_Position.z) - aqua::CVector2(m_ImpactPosition.x, m_ImpactPosition.z);
+
+	m_Lenght = vector.Length();
+
+
+	//角度
+
+
 }
 
 //更新
 void CBulletParabola::Update(void)
 {
-	//移動方向設定
-	SetVelocity();
+	CStage* stage = (CStage*)aqua::FindGameObject("Stage");
+
+	m_Accelerate.y += stage->GetGravity();
+
+	m_Velocity += m_Accelerate;
 
 	IBullet::Update();
-}
 
-//移動方向設定
-void CBulletParabola::SetVelocity(void)
-{
-	aqua::CVector3 vector = m_Position - m_ImpactPosition;
-	float length = vector.Length();
+	m_Velocity *= m_accelerate;
 
-	float t1 = tan(aqua::DegToRad(m_move_angle));
-	float t2 = (m_ImpactPosition.y - t1 * length) / (length * length);
-
-	//移動
-	m_Velocity.x += m_move_speed;
-
-	float y = t2 * m_Velocity.x * m_Velocity.x + t1 * m_Velocity.x;
-
-	m_Velocity = aqua::CVector3(m_Velocity.x, y, 0);
+	m_Accelerate = aqua::CVector3::ZERO;
 }

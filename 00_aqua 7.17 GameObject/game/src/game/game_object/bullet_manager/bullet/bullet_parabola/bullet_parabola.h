@@ -13,11 +13,13 @@ public:
 	void Update(void)override;
 
 private:
-	//移動方向設定
-	void SetVelocity(void);
 
 	aqua::CVector3 m_ImpactPosition;	//着弾位置
+	aqua::CVector3 m_Accelerate;		//加速度
+	float m_Lenght;						//飛ばす距離
 
 	static const float m_move_angle;	//角度
-	static const float m_move_speed;	//移動速度
+	static const float m_move_speed;	//初速
+	static const float m_accelerate;	//加速度
+
 };
