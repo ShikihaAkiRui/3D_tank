@@ -6,12 +6,13 @@ const float CEnemyParabola::m_graund_ray_langth = -15.0f;
 const int CEnemyParabola::m_life = 1;
 const float CEnemyParabola::m_move_speed = 10.0f;
 const float CEnemyParabola::m_stop_distance = 300.0f;
+const float CEnemyParabola::m_shot_lenght = 350.0f;
 const float CEnemyParabola::m_shot_time = 3.0f;
 
 //コンストラクタ
 CEnemyParabola::CEnemyParabola(aqua::IGameObject* parent)
 	:IEnemy(parent, "EnemyNormal")
-	, m_ShotFlag(false)
+	,m_Distance(aqua::CVector3::ZERO)
 {
 }
 
@@ -43,9 +44,8 @@ void CEnemyParabola::Update(void)
 	//移動
 	Move();
 
-	//フラグがtrueのとき攻撃
-	if (m_ShotFlag)
-		Shot();
+	//弾を撃つ
+	Shot();
 
 }
 
@@ -55,16 +55,16 @@ void CEnemyParabola::Move(void)
 	m_Velocity = aqua::CVector3(0.0f, 0.0f, 1.0f);
 
 	//向きを変える
-	aqua::CVector3 distance = m_Player->GetModel()->position - m_Position;
-	m_Rotation.y = aqua::RadToDeg(atan2(distance.x, distance.z));
+	m_Distance = m_Player->GetModel()->position - m_Position;
+	m_Rotation.y = aqua::RadToDeg(atan2(m_Distance.x, m_Distance.z));
 
-	aqua::CVector3 floor = distance;
+	aqua::CVector3 floor = m_Distance;
 	floor.y = 0.0f;
 	float x_angle = 0.0f;
-	x_angle = acos(aqua::CVector3::Dot(floor.Normalize(), distance.Normalize()));
+	x_angle = acos(aqua::CVector3::Dot(floor.Normalize(), m_Distance.Normalize()));
 
 	//プレイヤーが下なら回転方向を変える
-	x_angle *= distance.y < 0 ? 1.0f : -1.0f;
+	x_angle *= m_Distance.y < 0 ? 1.0f : -1.0f;
 
 	m_Rotation.x = aqua::RadToDeg(x_angle);
 
@@ -76,17 +76,15 @@ void CEnemyParabola::Move(void)
 	IEnemy::Move();
 
 	//止まる距離より遠いとき
-	if (distance.Length() > m_stop_distance)
+	if (m_Distance.Length() > m_stop_distance)
 	{
 		m_Position += m_Velocity * m_move_speed * aqua::GetDeltaTime();
-		m_ShotFlag = false;
 
 	}
 	//下がる位置内のとき
 	else
 	{
-		m_Position -= m_Velocity * m_move_speed * aqua::GetDeltaTime();
-		m_ShotFlag = true;
+		//m_Position -= m_Velocity * m_move_speed * aqua::GetDeltaTime();
 	}
 
 	m_Model->rotation = m_Rotation;
@@ -97,15 +95,23 @@ void CEnemyParabola::Move(void)
 //弾を撃つ
 void CEnemyParabola::Shot(void)
 {
-	m_ShotTimer.Update();
-
-	if (m_ShotTimer.Finished())
+	//撃つ範囲内なら撃つ
+	//if (m_Distance.Length() < m_shot_lenght)
 	{
-		m_ShotTimer.Reset();
+		m_ShotTimer.Update();
 
-		CBulletManager& bullet_manager = CBulletManager::GetInstance();
+		if (m_ShotTimer.Finished())
+		{
+			m_ShotTimer.Reset();
 
-		bullet_manager.Create(BULLET_ID::PARABOLA,m_UnitCategory, m_Position,m_Player->GetModel()->position );
+			CBulletManager& bullet_manager = CBulletManager::GetInstance();
+
+			bullet_manager.Create(BULLET_ID::PARABOLA,m_UnitCategory, m_Position,m_Player->GetModel()->position );
+		}
+	}
+//	else
+	{
+//		m_ShotTimer.Reset();
 	}
 
 }

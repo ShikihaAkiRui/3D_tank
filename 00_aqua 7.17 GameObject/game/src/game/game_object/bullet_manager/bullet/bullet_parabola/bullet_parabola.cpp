@@ -1,16 +1,14 @@
 #include "bullet_parabola.h"
 #include"../../../stage/stage.h"
 
-const float CBulletParabola::m_move_angle = 45.0f;
-const float CBulletParabola::m_move_speed = 10.0f;
-const float CBulletParabola::m_accelerate = 0.98f;
+const float CBulletParabola::m_move_speed = 30.0f;
+const float CBulletParabola::m_fall_speed = 4.0f;
+const float CBulletParabola::m_max_lenght_angle = 45.0f;
 
 //コンストラクタ
 CBulletParabola::CBulletParabola(aqua::IGameObject* parent)
 	:IBullet(parent,"BulletParabola")
 	,m_ImpactPosition(aqua::CVector3::ZERO)
-	,m_Accelerate(aqua::CVector3::ZERO)
-	,m_Lenght(0.0f)
 {
 }
 
@@ -19,33 +17,34 @@ void CBulletParabola::Initialize(UNIT_CATEGORY unit_category, const aqua::CVecto
 {
 	m_UnitCategory = unit_category;
 	m_Position = position;
-	m_ImpactPosition = m_ImpactPosition;
+	m_ImpactPosition = impact_position;
 
 	IBullet::Initialize("data/ball.mv1");
 
 	m_Model.position = m_Position;
 	aqua::CVector2 vector = aqua::CVector2(m_Position.x, m_Position.z) - aqua::CVector2(m_ImpactPosition.x, m_ImpactPosition.z);
 
-	m_Lenght = vector.Length();
+	float target_length = vector.Length();
 
+	//位置が射程内か確認
+	float bullet_length = (m_move_speed * m_move_speed * sin(2 * aqua::DegToRad(m_max_lenght_angle))) / m_fall_speed;
 
-	//角度
+	//ターゲットが範囲外なら消す
+	if (target_length > bullet_length)
+		DeleteObject();
 
+	//角度を求める
+	float angle = asinf((target_length * m_fall_speed) / (m_move_speed * m_move_speed)) / 2;
 
+	m_Velocity.y = cos(angle) * m_move_speed * aqua::GetDeltaTime();
+	m_Velocity.z = sin(angle) * m_move_speed * aqua::GetDeltaTime();
+	
 }
 
 //更新
 void CBulletParabola::Update(void)
 {
-	CStage* stage = (CStage*)aqua::FindGameObject("Stage");
-
-	m_Accelerate.y += stage->GetGravity();
-
-	m_Velocity += m_Accelerate;
+	m_Velocity.y -= m_fall_speed * aqua::GetDeltaTime();
 
 	IBullet::Update();
-
-	m_Velocity *= m_accelerate;
-
-	m_Accelerate = aqua::CVector3::ZERO;
 }
