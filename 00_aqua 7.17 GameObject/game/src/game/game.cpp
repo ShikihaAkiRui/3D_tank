@@ -11,6 +11,7 @@
 
 #include "game.h"
 #include"game_object/scene_manager/scene_manager.h"
+#include"game_object/game_sound_manager/game_sound_manager.h"
 
 const unsigned int CGame::m_clear_color = 0xff7f7f7f;
 
@@ -31,9 +32,9 @@ CGame::
 Initialize(void)
 {
     // 最初に作るオブジェクト群
-    aqua::CreateGameObject<CSceneManager>(this);
+    CGameSoundManager::GetInstance().Initialize();
 
-   // CSceneManager::GetInstance().Initialize();
+    aqua::CreateGameObject<CSceneManager>(this);
 
     IGameObject::Initialize();
 
@@ -44,7 +45,6 @@ void
 CGame::
 Update(void)
 {
-  //  CSceneManager::GetInstance().Update();
 
     IGameObject::Update();
 }
@@ -60,7 +60,6 @@ Draw(void)
     aqua::Clear(m_clear_color);
 
     // 描画したいオブジェクト群
-   // CSceneManager::GetInstance().Draw();
 
     IGameObject::Draw();
 }
@@ -70,7 +69,7 @@ void
 CGame::
 Finalize(void)
 {
-  //  CSceneManager::GetInstance().Finalize();
+    CGameSoundManager::GetInstance().Finalize();
 
     IGameObject::Finalize();
 }

@@ -29,7 +29,6 @@ private:
 	static const int m_life;						//‘Ì—Í
 	static const float m_move_speed;				//ˆÚ“®‘¬“x
 	static const float m_stop_distance;				//Ž~‚Ü‚é‹——£
-	static const float m_shot_lenght;				//Œ‚‚Â‹——£
 	static const float m_shot_time;					//Œ‚‚ÂŠ´Šo‚ÌŽžŠÔ
 
 };

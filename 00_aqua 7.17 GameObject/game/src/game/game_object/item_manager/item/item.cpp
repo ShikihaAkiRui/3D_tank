@@ -9,13 +9,14 @@ const float CItem::m_radius = 4.0f;
 CItem::CItem(aqua::IGameObject* parent)
 	:aqua::IGameObject(parent,"Item")
 	,m_Position(aqua::CVector3::ZERO)
+	,m_GraundFlag(false)
 {
 }
 
 //‰Šú‰»
 void CItem::Initialize(const aqua::CVector3& position)
 {
-	m_Model.Load("data/ball.mv1");
+	m_Model.Load("data/model/ball.mv1");
 
 	m_Position = position;
 
@@ -26,7 +27,8 @@ void CItem::Initialize(const aqua::CVector3& position)
 void CItem::Update(void)
 {
 	//d—Í
-	Gravity();
+	if(!m_GraundFlag)
+		Gravity();
 }
 
 //•`‰æ
@@ -74,6 +76,8 @@ void CItem::Gravity(void)
 		hit_position = stage->GetCollCheckLineHitPosition();
 
 		m_Position.y = hit_position.y - m_graund_ray.y;
+
+		m_GraundFlag = true;
 	}
 
 	m_Model.position = m_Position;

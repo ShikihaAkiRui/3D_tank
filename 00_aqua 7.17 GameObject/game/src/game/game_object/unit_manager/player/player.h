@@ -20,6 +20,9 @@ private:
 	//弾で攻撃
 	void Shot(void);
 
+	//敵と衝突した
+	void HitEnemyBody(void);
+
 	//攻撃が当たった
 	void HitAttack(void)override;
 
@@ -32,6 +35,8 @@ private:
 	float m_Angle;				//角度
 	aqua::CMatrix m_Matrix;		//行列
 	bool m_ShotRotationFlag;	//弾を撃つ方向への方向転換フラグ
+	bool m_DamageFlag;			//ダメージのフラグ
+	aqua::CTimer m_IntervalTimer;//無敵時間のタイマー
 
 	static const int m_life;					//体力
 	static const float m_move_speed;			//速度
@@ -41,5 +46,6 @@ private:
 	static const aqua::CVector3 m_graund_ray_langth;	//床用のレイの長さ
 	static const float m_jump_power;			//飛ぶときの力
 	static const float m_deceleration;			//減速率
+	static const float m_damage_interval_time;	//無敵時間
 
 };

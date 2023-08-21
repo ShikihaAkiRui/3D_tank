@@ -1,6 +1,6 @@
 #include "stage.h"
 
-const float CStage::m_gravity = -100.0f;
+const float CStage::m_gravity = -50.0f;
 const float CStage::m_not_hit_height = -100.0f;
 
 //コンストラクタ
@@ -12,7 +12,7 @@ CStage::CStage(aqua::IGameObject* parent)
 //初期化
 void CStage::Initialize(void)
 {
-	IUnit::Initialize("data/Terrain.mv1");
+	IUnit::Initialize("data/model/Terrain.mv1");
 	m_Model->position = aqua::CVector3(0.0f, -13.0f, 0.0f);
 }
 

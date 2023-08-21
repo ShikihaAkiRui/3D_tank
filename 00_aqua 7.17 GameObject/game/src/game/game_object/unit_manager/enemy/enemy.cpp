@@ -1,6 +1,7 @@
 #include "enemy.h"
 #include"../../item_manager/item_manager.h"
 #include"../../enemy_appear/enemy_appear.h"
+#include"../../effect_manager/effect_manager.h"
 
 //コンストラクタ
 IEnemy::IEnemy(aqua::IGameObject* parent,const std::string& object_name)
@@ -32,10 +33,11 @@ void IEnemy::Dead(void)
 
 	CEnemyAppear* appear = (CEnemyAppear*)aqua::FindGameObject("EnemyAppear");
 	if (appear)
-	{
 		//出ているエネミーの数を減らす
 		appear->SetCountEnemy(-1);
-	}
+
+	CEffectManager& effect_manager = CEffectManager::GetInstance();
+	effect_manager.Create(EFFECT_ID::EXPLOSION, m_Position);
 
 	ICharacter::Dead();
 }

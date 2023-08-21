@@ -1,9 +1,10 @@
 #include"bullet.h"
 #include"../../stage/stage.h"
+#include"../../effect_manager/effect_manager.h"
 
 const aqua::CVector3 IBullet::m_default_direction = aqua::CVector3(0.0f,0.0f,1.0f);
-const aqua::CVector3 IBullet::m_min_range = aqua::CVector3(-2000.0f,-500.0f,-2000.0f);
-const aqua::CVector3 IBullet::m_max_range = aqua::CVector3(2000.0f,500.0f,2000.0f);
+const aqua::CVector3 IBullet::m_min_range = aqua::CVector3(-2000.0f,-1000.0f,-2000.0f);
+const aqua::CVector3 IBullet::m_max_range = aqua::CVector3(2000.0f,1000.0f,2000.0f);
 
 
 //コンストラクタ
@@ -80,6 +81,9 @@ void IBullet::CheckGraund(void)
 
 	if (stage->GetHitBulletGroundFlag(m_Position, m_Radius))
 	{
+		CEffectManager& effect = CEffectManager::GetInstance();
+		effect.Create(EFFECT_ID::GRAUND_HIT_BULLET, m_Position);
+
 		DeleteObject();
 	}
 

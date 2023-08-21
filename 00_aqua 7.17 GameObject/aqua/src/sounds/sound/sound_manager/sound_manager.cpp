@@ -1,4 +1,3 @@
-
 /*!
  *  @file       sound_manager.cpp
  *  @brief      サウンド管理クラス

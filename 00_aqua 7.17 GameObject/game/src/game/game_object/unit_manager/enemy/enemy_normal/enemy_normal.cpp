@@ -19,7 +19,7 @@ CEnemyNormal::CEnemyNormal(aqua::IGameObject* parent)
 //‰Šú‰»
 void CEnemyNormal::Initialize(const aqua::CVector3& position)
 {
-	IEnemy::Initialize("data/boxt.mv1", position, m_graund_ray_langth,m_life);
+	IEnemy::Initialize("data/model/boxt.mv1", position, m_graund_ray_langth,m_life);
 
 	//Œü‚«İ’è
 	m_Player = CUnitManager::GetInstance().GetPlayer();

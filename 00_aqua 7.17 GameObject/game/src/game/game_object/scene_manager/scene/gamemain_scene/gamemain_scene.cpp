@@ -4,13 +4,14 @@
 #include"../../../control_camera/control_camera.h"
 #include"../../../stage/stage.h"
 #include"../../../item_manager/item_manager.h"
-#include"../../../ui_component/score/score.h"
-#include"../../../ui_component/life/life.h"
 #include"../../../enemy_appear/enemy_appear.h"
-#include"../../../ui_component/aim/aim.h"
-#include"../../../ui_component/radar/radar.h"
+#include"../../../ui_manager/ui_manager.h"
+#include"../../../effect_manager/effect_manager.h"
 
 const std::string CGameMainScene::m_object_name = "GameMainScene";
+const aqua::CVector2 CGameMainScene::m_radar_position = aqua::CVector2(1000.0f, 10.0f);
+const aqua::CVector2 CGameMainScene::m_life_position = aqua::CVector2(680.0f,0.0f);
+const aqua::CVector2 CGameMainScene::m_score_position = aqua::CVector2(100.0f, 0.0f);
 
 //コンストラクタ
 CGameMainScene::CGameMainScene(aqua::IGameObject* parent)
@@ -26,26 +27,25 @@ void CGameMainScene::Initialize(void)
 	unit_manager.GetInstance().Initialzie();
 	CControlCamera* cam_con = aqua::CreateGameObject<CControlCamera>(this);
 	aqua::CreateGameObject<CStage>(this);
-	CItemManager::GetInstance().Initialize();
 	aqua::CreateGameObject<CEnemyAppear>(this);
-
+	CItemManager::GetInstance().Initialize();
 	CBulletManager::GetInstance().Initialize();
-
-	CScore* score = aqua::CreateGameObject<CScore>(this);
-	CLife* life = aqua::CreateGameObject<CLife>(this);
-	CRadar* radar = aqua::CreateGameObject<CRadar>(this);
-	aqua::CreateGameObject<CAim>(this);
+	CUIManager& ui_manager = CUIManager::GetInstance();
 
 	IGameObject::Initialize();
+
+	CEffectManager::GetInstance().Initialize();
+	ui_manager.Initialize();
 
 	IUnit* player = unit_manager.Create(UNIT_ID::PLAYER);
 
 	m_Camera.Initialize();
 	cam_con->Initialize(&m_Camera, player);
 
-	life->Initialize(aqua::CVector2(500.0f, 0.0f),3);
-	score->Initialize(aqua::CVector2(100.0f, 0.0f));
-	radar->Initialize(aqua::CVector2(1100.0f, 0.0f));
+	ui_manager.Create(UI_ID::AIM);
+	ui_manager.Create(UI_ID::LIFE,m_life_position);
+	ui_manager.Create(UI_ID::SCORE,m_score_position);
+	ui_manager.Create(UI_ID::RADAR,m_radar_position);
 
 	m_GameState = GAME_STATE::START;
 
@@ -64,8 +64,9 @@ void CGameMainScene::Update(void)
 	CUnitManager::GetInstance().Update();
 	CItemManager::GetInstance().Update();
 	CBulletManager::GetInstance().Update();
-
-	CLife* life = nullptr;
+	CEffectManager::GetInstance().Update();
+	CUIManager::GetInstance().Update();
+	CLife life = CUIManager::GetInstance().GetLife();
 
 	//ゲームの状態
 	switch (m_GameState)
@@ -76,14 +77,10 @@ void CGameMainScene::Update(void)
 		break;
 	case CGameMainScene::GAME_STATE::MAIN:
 
-		
-		
-		/*
-		life = (CLife*)aqua::FindGameObject("Life");
-		if (!life)return;
-		if (life->GetLife() <= 0)
+		//体力がなくなったら
+		if (life.GetLife() <= 0)
 			m_GameState = GAME_STATE::END;
-		*/
+		
 		break;
 	case CGameMainScene::GAME_STATE::END:
 
@@ -101,6 +98,8 @@ void CGameMainScene::Draw(void)
 	CBulletManager::GetInstance().Draw();
 
 	IGameObject::Draw();
+	CEffectManager::GetInstance().Draw();
+	CUIManager::GetInstance().Draw();
 
 #ifdef _DEBUG
 	//m_Label.Draw();
@@ -116,6 +115,8 @@ void CGameMainScene::Finalize(void)
 	CBulletManager::GetInstance().Finalize();
 
 	IGameObject::Finalize();
+	CEffectManager::GetInstance().Finalize();
+	CUIManager::GetInstance().Finalize();
 
 #ifdef _DEBUG
 	m_Label.Delete();

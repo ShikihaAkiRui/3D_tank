@@ -29,6 +29,7 @@ private:
 
 	aqua::CModel m_Model;		//モデル
 	aqua::CVector3 m_Position;	//位置
+	bool m_GraundFlag;			//地面についているか
 	
 	static const aqua::CVector3 m_graund_ray;	//床の判定のレイの大きさ
 	static const float m_radius;				//半径

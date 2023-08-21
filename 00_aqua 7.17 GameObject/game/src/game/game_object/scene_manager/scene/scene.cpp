@@ -18,8 +18,6 @@ void IScene::ChangeScene(SCENE_ID id)
 	//シーンを変更
 	sm->Change(id);
 
-	//CSceneManager& sm = CSceneManager::GetInstance();
-	//sm.Change(id);
 }
 
 //シーンをスタック
@@ -30,9 +28,6 @@ void IScene::PushScene(SCENE_ID id)
 
 	//シーンをスタック
 	sm->Push(id);
-
-	//CSceneManager& sm = CSceneManager::GetInstance();
-	//sm.Push(id);
 
 }
 
@@ -45,9 +40,6 @@ void IScene::PopScene(void)
 	//スタックされたシーンを取り出す
 	sm->Pop();
 
-	//CSceneManager& sm = CSceneManager::GetInstance();
-	//sm.Pop();
-
 }
 
 //シーンをリセット
@@ -58,8 +50,4 @@ void IScene::ResetScene(void)
 
 	//シーンを削除
 	sm->Reset();
-
-	//CSceneManager& sm = CSceneManager::GetInstance();
-	//sm.Reset();
-
 }

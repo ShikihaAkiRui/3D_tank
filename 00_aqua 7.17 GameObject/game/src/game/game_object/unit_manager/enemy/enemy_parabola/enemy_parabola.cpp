@@ -6,7 +6,6 @@ const float CEnemyParabola::m_graund_ray_langth = -15.0f;
 const int CEnemyParabola::m_life = 1;
 const float CEnemyParabola::m_move_speed = 10.0f;
 const float CEnemyParabola::m_stop_distance = 300.0f;
-const float CEnemyParabola::m_shot_lenght = 350.0f;
 const float CEnemyParabola::m_shot_time = 3.0f;
 
 //コンストラクタ
@@ -19,7 +18,7 @@ CEnemyParabola::CEnemyParabola(aqua::IGameObject* parent)
 //初期化
 void CEnemyParabola::Initialize(const aqua::CVector3& position)
 {
-	IEnemy::Initialize("data/boxt.mv1", position, m_graund_ray_langth, m_life);
+	IEnemy::Initialize("data/model/boxt.mv1", position, m_graund_ray_langth, m_life);
 
 	//向き設定
 	m_Player = CUnitManager::GetInstance().GetPlayer();
@@ -84,7 +83,7 @@ void CEnemyParabola::Move(void)
 	//下がる位置内のとき
 	else
 	{
-		//m_Position -= m_Velocity * m_move_speed * aqua::GetDeltaTime();
+		m_Position -= m_Velocity * m_move_speed * aqua::GetDeltaTime();
 	}
 
 	m_Model->rotation = m_Rotation;
@@ -95,23 +94,14 @@ void CEnemyParabola::Move(void)
 //弾を撃つ
 void CEnemyParabola::Shot(void)
 {
-	//撃つ範囲内なら撃つ
-	//if (m_Distance.Length() < m_shot_lenght)
+	m_ShotTimer.Update();
+
+	if (m_ShotTimer.Finished())
 	{
-		m_ShotTimer.Update();
+		m_ShotTimer.Reset();
 
-		if (m_ShotTimer.Finished())
-		{
-			m_ShotTimer.Reset();
+		CBulletManager& bullet_manager = CBulletManager::GetInstance();
+		bullet_manager.Create(BULLET_ID::PARABOLA,m_UnitCategory, m_Position,m_Player->GetModel()->position );
 
-			CBulletManager& bullet_manager = CBulletManager::GetInstance();
-
-			bullet_manager.Create(BULLET_ID::PARABOLA,m_UnitCategory, m_Position,m_Player->GetModel()->position );
-		}
 	}
-//	else
-	{
-//		m_ShotTimer.Reset();
-	}
-
 }

@@ -27,4 +27,6 @@ private:
 	static const float m_appear_time;		//出現間隔
 	static const float m_appear_height;		//出す高さ
 	static const int m_max_enemy;			//エネミーの最大数
+	static const aqua::CVector2 m_min_appear_area;	//最小出現範囲
+	static const aqua::CVector2 m_max_appear_area;	//最大出現範囲
 };

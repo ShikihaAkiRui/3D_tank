@@ -19,5 +19,6 @@ private:
 	static const float m_move_speed;	//‰‘¬
 	static const float m_fall_speed;	//—‚¿‚é‘¬“x
 	static const float m_max_lenght_angle;	//Å‘åË’ö‚É‚È‚éŠp“x
+	static const float m_radius;			//”¼Œa
 
 };
