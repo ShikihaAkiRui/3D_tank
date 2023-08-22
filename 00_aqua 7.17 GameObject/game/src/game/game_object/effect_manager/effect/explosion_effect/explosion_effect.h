@@ -15,7 +15,6 @@ public:
 	void Finalize(void)override;
 
 private:
-	aqua::CEffect3D m_Effect;	//エフェクト
 
 	static const aqua::CVector3 m_scale;	//拡大率
 };

@@ -17,9 +17,13 @@ public:
 	//スコアを加算
 	void Add(int score);
 
+	//数値を変更するかを設定
+	void SetCountFlag(bool flag);
+
 private:
 	aqua::CSprite* m_Sprites;	//画像
 	int m_Score;				//スコア
+	bool m_CountFlag;			//数値を増加させるかのフラグ
 
 	static const int m_max_score;		//最大スコア
 	static const int m_min_score;		//最小スコア
