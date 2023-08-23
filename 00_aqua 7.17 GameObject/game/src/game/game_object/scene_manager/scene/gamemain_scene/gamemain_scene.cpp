@@ -68,6 +68,8 @@ void CGameMainScene::Update(void)
 	CUIManager& ui_manager = CUIManager::GetInstance();
 	ui_manager.Update();
 	CLife life = CUIManager::GetInstance().GetLife();
+	CScore score = CUIManager::GetInstance().GetScore();
+
 
 	//ƒQ[ƒ€‚Ìó‘Ô
 	switch (m_GameState)
@@ -80,7 +82,10 @@ void CGameMainScene::Update(void)
 
 		//‘Ì—Í‚ª‚È‚­‚È‚Á‚½‚ç
 		if (life.GetLife() <= 0)
+		{
 			m_GameState = GAME_STATE::END;
+			score.SetCountFlag(false);
+		}
 		
 		break;
 	case CGameMainScene::GAME_STATE::END:

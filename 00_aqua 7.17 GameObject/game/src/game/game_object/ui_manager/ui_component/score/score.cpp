@@ -11,6 +11,7 @@ const aqua::CVector2 CScore::m_scale = aqua::CVector2(3.0f, 3.0f);
 CScore::CScore(aqua::IGameObject* parent)
 	:IUIComponent(parent, "Score")
 	,m_Score(0)
+	,m_CountFlag(true)
 {
 }
 
@@ -76,12 +77,21 @@ void CScore::Finalize(void)
 //スコアを加算
 void CScore::Add(int score)
 {
-	m_Score += score;
+	if (m_CountFlag)
+	{
+		m_Score += score;
 
-	//最大値を超えたら最大値に直す
-	if (m_Score > m_max_score)
-		m_Score = m_max_score;
-	//最小値を超えたら最小値に直す
-	if (m_Score < m_min_score)
-		m_Score = m_min_score;
+		//最大値を超えたら最大値に直す
+		if (m_Score > m_max_score)
+			m_Score = m_max_score;
+		//最小値を超えたら最小値に直す
+		if (m_Score < m_min_score)
+			m_Score = m_min_score;
+	}
+}
+
+//数値を変更するかを設定
+void CScore::SetCountFlag(bool flag)
+{
+	m_CountFlag = flag;
 }

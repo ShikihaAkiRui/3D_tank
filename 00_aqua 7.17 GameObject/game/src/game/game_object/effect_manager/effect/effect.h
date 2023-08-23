@@ -13,6 +13,7 @@ public:
 
 protected:
 	aqua::CVector3 m_Position;	//位置
+	aqua::CEffect3D m_Effect;	//エフェクト
 
 private:
 	void Initialize(void)override;
