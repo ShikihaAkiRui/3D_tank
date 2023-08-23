@@ -2,7 +2,7 @@
 
 const int CScore::m_max_score = 99;
 const int CScore::m_min_score = 0;
-const int CScore::m_max_dight = 2;
+const int CScore::m_max_digit = 2;
 const int CScore::m_digit_width = 32;
 const int CScore::m_digit_height = 32;
 const aqua::CVector2 CScore::m_scale = aqua::CVector2(3.0f, 3.0f);
@@ -19,9 +19,9 @@ void CScore::Initialize(const aqua::CVector2& position)
 {
 	IUIComponent::Initialize(position);
 
-	m_Sprites = AQUA_NEW aqua::CSprite[m_max_dight];
+	m_Sprites = AQUA_NEW aqua::CSprite[m_max_digit];
 
-	for (int i = 0; i < m_max_dight; ++i)
+	for (int i = 0; i < m_max_digit; ++i)
 	{
 		m_Sprites[i].Create("data/texture/number_l.png");
 		m_Sprites[i].position = m_Position;
@@ -55,19 +55,19 @@ void CScore::Draw(void)
 		m_Sprites[digit_count].Draw();
 
 		//•\Ž¦ˆÊ’u‚ð‚¸‚ç‚·
-		if (digit_count < m_max_dight)
+		if (digit_count < m_max_digit)
 			m_Sprites[digit_count + 1].position.x = m_Sprites[digit_count].position.x - m_digit_width * m_scale.x;
 		
 		//Œ…‚ð‘‚â‚·
 		digit_count++;
-	} while (score > 0 && digit_count < m_max_dight);
+	} while (score > 0 && digit_count < m_max_digit);
 
 }
 
 //‰ð•ú
 void CScore::Finalize(void)
 {
-	for (int i = 0; i < m_max_dight; ++i)
+	for (int i = 0; i < m_max_digit; ++i)
 		m_Sprites[i].Delete();
 
 	AQUA_SAFE_DELETE_ARRAY(m_Sprites);

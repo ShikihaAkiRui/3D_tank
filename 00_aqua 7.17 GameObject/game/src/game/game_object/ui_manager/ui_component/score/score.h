@@ -23,7 +23,7 @@ private:
 
 	static const int m_max_score;		//最大スコア
 	static const int m_min_score;		//最小スコア
-	static const int m_max_dight;		//最大桁数
+	static const int m_max_digit;		//最大桁数
 	static const int m_digit_width;		//一桁の幅
 	static const int m_digit_height;	//一桁の高さ
 	static const aqua::CVector2 m_scale;//拡大率

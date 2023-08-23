@@ -6,5 +6,6 @@ enum class UI_ID
 	AIM,
 	LIFE,
 	RADAR,
-	SCORE
+	SCORE,
+	SHOW_SCORE
 };

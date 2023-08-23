@@ -21,6 +21,7 @@ public:
 	//ê∂ê¨
 	void Create(UI_ID id);
 	void Create(UI_ID id, const aqua::CVector2& position);
+	void Create(UI_ID id, const aqua::CVector2& position, int score, float scale, aqua::CColor color);
 
 	//è∆èÄUIéÊìæ
 	CAim* GetAim(void);

@@ -65,15 +65,16 @@ void CGameMainScene::Update(void)
 	CItemManager::GetInstance().Update();
 	CBulletManager::GetInstance().Update();
 	CEffectManager::GetInstance().Update();
-	CUIManager::GetInstance().Update();
+	CUIManager& ui_manager = CUIManager::GetInstance();
+	ui_manager.Update();
 	CLife life = CUIManager::GetInstance().GetLife();
 
 	//ÉQÅ[ÉÄÇÃèÛë‘
 	switch (m_GameState)
 	{
 	case CGameMainScene::GAME_STATE::START:
-		m_GameState = GAME_STATE::MAIN;
 
+		m_GameState = GAME_STATE::MAIN;
 		break;
 	case CGameMainScene::GAME_STATE::MAIN:
 
@@ -83,6 +84,8 @@ void CGameMainScene::Update(void)
 		
 		break;
 	case CGameMainScene::GAME_STATE::END:
+
+		ui_manager.Create(UI_ID::SHOW_SCORE, aqua::CVector2(500.0f, 100.0f), 0, 5.0f, 0xffffff00);
 
 		ChangeScene(SCENE_ID::TITLE);
 		break;

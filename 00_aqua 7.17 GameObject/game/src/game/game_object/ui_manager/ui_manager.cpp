@@ -1,5 +1,6 @@
 #include "ui_manager.h"
 #include"ui_component/radar/radar.h"
+#include"ui_component/show_score/show_score.h"
 
 const std::string CUIManager::m_aim_name = "Aim";
 const std::string CUIManager::m_life_name = "Life";
@@ -67,6 +68,18 @@ void CUIManager::Create(UI_ID id, const aqua::CVector2& position)
 
 	if (ui)
 		ui->Initialize(position);
+}
+
+//ê∂ê¨
+void CUIManager::Create(UI_ID id, const aqua::CVector2& position, int score, float scale, aqua::CColor color)
+{
+	CShowScore* show_score = nullptr;
+
+	if (UI_ID::SHOW_SCORE == id)
+		show_score = aqua::CreateGameObject<CShowScore>(&m_GameObject);
+
+	if (show_score)
+		show_score->Initialize(position, score, scale, color);
 }
 
 //è∆èÄUIéÊìæ
