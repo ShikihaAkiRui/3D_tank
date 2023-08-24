@@ -32,7 +32,6 @@ void ICharacter::Initialize(const std::string& file_name)
 //XV
 void ICharacter::Update(void)
 {
-
 	//°‚Ì”»’è
 	CheckGround();
 	

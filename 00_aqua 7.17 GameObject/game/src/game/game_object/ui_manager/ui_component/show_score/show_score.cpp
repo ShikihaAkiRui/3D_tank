@@ -29,6 +29,10 @@ void CShowScore::Initialize(const aqua::CVector2 position, int score, float scal
 		++m_MaxDigit;
 	}
 
+	//0‚¾‚Á‚½‚Æ‚«1Œ…‚É‚·‚é
+	if (score == 0)
+		m_MaxDigit = 1;
+
 	m_Sprites = AQUA_NEW aqua::CSprite[m_MaxDigit];
 
 	for (int i = 0; i < m_MaxDigit; ++i)
@@ -55,7 +59,6 @@ void CShowScore::Initialize(const aqua::CVector2 position, int score, float scal
 		m_Sprites[digit_count].rect.top = 0;
 		m_Sprites[digit_count].rect.bottom = m_Sprites[digit_count].rect.top + m_digit_height;
 
-
 		//•\Ž¦ˆÊ’u‚ð‚¸‚ç‚·
 		if (digit_count < m_MaxDigit)
 			m_Sprites[digit_count + 1].position.x = m_Sprites[digit_count].position.x - m_digit_width * m_Scale.x;
@@ -69,6 +72,7 @@ void CShowScore::Initialize(const aqua::CVector2 position, int score, float scal
 //•`‰æ
 void CShowScore::Draw(void)
 {
+
 	for (int i = 0; i < m_MaxDigit; ++i)
 	{
 		m_Sprites[i].Draw();

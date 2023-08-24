@@ -41,6 +41,7 @@ void CGameMainScene::Initialize(void)
 	ui_manager.Initialize();
 
 	IUnit* player = unit_manager.Create(UNIT_ID::PLAYER);
+	unit_manager.SetGameState(aqua::GAME_OBJECT_STATE::WAIT);
 
 	m_Camera.Initialize();
 	cam_con->Initialize(&m_Camera, player);
@@ -64,14 +65,15 @@ void CGameMainScene::Update(void)
 {
 	IGameObject::Update();
 
-	CUnitManager::GetInstance().Update();
+	CUnitManager& unit_manager = CUnitManager::GetInstance();
+	unit_manager.Update();
 	CItemManager::GetInstance().Update();
 	CBulletManager::GetInstance().Update();
 	CEffectManager::GetInstance().Update();
 	CUIManager& ui_manager = CUIManager::GetInstance();
 	ui_manager.Update();
-	CLife life = CUIManager::GetInstance().GetLife();
-	CScore score = CUIManager::GetInstance().GetScore();
+	CLife* life = CUIManager::GetInstance().GetLife();
+	CScore* score = CUIManager::GetInstance().GetScore();
 
 
 	//ÉQÅ[ÉÄÇÃèÛë‘
@@ -79,22 +81,26 @@ void CGameMainScene::Update(void)
 	{
 	case CGameMainScene::GAME_STATE::START:
 
+
+		unit_manager.SetGameState(aqua::GAME_OBJECT_STATE::ACTIVE);
 		m_GameState = GAME_STATE::MAIN;
+
 		break;
 	case CGameMainScene::GAME_STATE::MAIN:
 
 		//ëÃóÕÇ™Ç»Ç≠Ç»Ç¡ÇΩÇÁ
-		if (life.GetLife() <= 0)
+		if (life->GetLife() <= 0)
 		{
 			m_GameState = GAME_STATE::END;
-			score.SetCountFlag(false);
+			score->SetCountFlag(false);
+			ui_manager.Create(UI_ID::SHOW_SCORE,m_show_score_position,score->GetScore(), m_show_score_scale, m_show_score_color);
+			//unit_manager.SetGameState(aqua::GAME_OBJECT_STATE::WAIT);
 		}
 		
 		break;
 	case CGameMainScene::GAME_STATE::END:
 
-		ui_manager.Create(UI_ID::SHOW_SCORE,m_show_score_position,score.GetScore(), m_show_score_scale, m_show_score_color);
-
+		//unit_manager.SetGameState(aqua::GAME_OBJECT_STATE::ACTIVE);
 		ChangeScene(SCENE_ID::TITLE);
 		break;
 	default:	break;

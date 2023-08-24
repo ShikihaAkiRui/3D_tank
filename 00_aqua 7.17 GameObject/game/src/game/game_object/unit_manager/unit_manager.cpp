@@ -1,5 +1,6 @@
 #include "unit_manager.h"
 #include"../unit/unit.h"
+#include"character/character.h"
 #include"enemy/enemy_normal/enemy_normal.h"
 #include"enemy/enemy_parabola/enemy_parabola.h"
 #include"enemy/enemy_flight/enemy_flight.h"
@@ -202,6 +203,27 @@ int CUnitManager::GetEnemyData(aqua::CVector2* vectors, int max_enemy)
 
 	//エネミー数を返す
 	return appear_enemy_count;
+
+}
+
+//全ユニットの状態変更
+void CUnitManager::SetGameState(aqua::GAME_OBJECT_STATE state)
+{
+	if (m_GameObject.GetChildList()->empty())
+		return;
+
+	auto it = m_GameObject.GetChildList()->begin();
+
+	bool hit_flag = false;
+
+	while (it != m_GameObject.GetChildList()->end())
+	{
+		ICharacter* character = (ICharacter*)(*it);
+		
+		character->SetGameObjectState(state);
+
+		it++;
+	}
 
 }
 

@@ -10,6 +10,7 @@ const float CLife::m_max_alpha = 255.0f;
 CLife::CLife(aqua::IGameObject* parent)
 	:IUIComponent(parent,"Life")
 	,m_Life(m_default_life)
+	,m_ShowLife(m_default_life)
 	,m_DisappearFlag(false)
 {
 }
@@ -100,5 +101,5 @@ void CLife::Reduce(int life)
 //Œ»İ‚Ì‘Ì—Í‚ğæ“¾
 int CLife::GetLife(void)
 {
-	return m_Life;
+	return m_ShowLife;
 }

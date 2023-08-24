@@ -32,6 +32,9 @@ public:
 	//プレイヤーと敵の距離取得
 	int GetEnemyData(aqua::CVector2* vectors, int max_enemy);
 
+	//全ユニットの状態変更
+	void SetGameState(aqua::GAME_OBJECT_STATE state);
+
 	//プレイヤーを取得
 	CPlayer* GetPlayer(void);
 
