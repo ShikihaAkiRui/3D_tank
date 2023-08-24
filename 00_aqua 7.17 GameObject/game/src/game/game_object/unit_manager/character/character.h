@@ -26,6 +26,7 @@ protected:
 	int m_Life;							//体力
 	bool m_GraundFlag;					//床についているか
 
+
 	//移動
 	virtual void Move(void);
 
@@ -41,7 +42,8 @@ protected:
 	//床の判定
 	void CheckGround(void);
 
-	static const int m_default_damage;							//デフォルトのダメージ量
+	static const int m_default_damage;	//デフォルトのダメージ量
+
 private:
 	//弾の判定
 	bool CheckHitBullet(void);

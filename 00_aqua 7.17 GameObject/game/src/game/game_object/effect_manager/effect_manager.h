@@ -25,4 +25,5 @@ private:
 	CEffectManager& operator=(const CEffectManager& rhs);
 
 	aqua::IGameObject m_GameObject;	//リスト
+	aqua::CEffect3D* m_LoadEffect;	//読み込むエフェクト
 };

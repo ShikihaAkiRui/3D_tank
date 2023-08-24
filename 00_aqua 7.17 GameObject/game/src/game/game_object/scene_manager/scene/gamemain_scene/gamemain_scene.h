@@ -31,6 +31,9 @@ private:
 	static const aqua::CVector2 m_radar_position;	//レーダー位置
 	static const aqua::CVector2 m_life_position;	//体力位置
 	static const aqua::CVector2 m_score_position;	//スコア位置
+	static const aqua::CVector2 m_show_score_position;	//表示スコアの位置
+	static const float m_show_score_scale;				//表示スコアの拡大率
+	static const aqua::CColor m_show_score_color;		//表示スコアの色
 
 
 	aqua::CLabel m_Label;	//デバック用

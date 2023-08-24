@@ -38,8 +38,8 @@ private:
 	aqua::CVector3 m_EndRayPosition;	//レイの終わる位置
 
 	static const aqua::CVector2 m_aim_position;		//位置
-	static const float m_aim_default_color;			//デフォルトの色
-	static const float m_aim_target_color;			//狙っているの色
+	static const aqua::CColor m_aim_default_color;	//デフォルトの色
+	static const aqua::CColor m_aim_target_color;	//狙っているの色
 	static const float m_ray_length;				//レイの長さ
 	static const std::string m_hit_object_name;		//当たり判定を見るオブジェクトの名前
 	static const int m_frame_index;					//フレームの番号

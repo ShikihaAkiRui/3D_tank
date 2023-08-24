@@ -12,6 +12,9 @@ const std::string CGameMainScene::m_object_name = "GameMainScene";
 const aqua::CVector2 CGameMainScene::m_radar_position = aqua::CVector2(1000.0f, 10.0f);
 const aqua::CVector2 CGameMainScene::m_life_position = aqua::CVector2(680.0f,0.0f);
 const aqua::CVector2 CGameMainScene::m_score_position = aqua::CVector2(100.0f, 0.0f);
+const aqua::CVector2 CGameMainScene::m_show_score_position = aqua::CVector2(800.0f, 300.0f);
+const float CGameMainScene::m_show_score_scale = 5.0f;
+const aqua::CColor CGameMainScene::m_show_score_color = 0xffffff00;
 
 //コンストラクタ
 CGameMainScene::CGameMainScene(aqua::IGameObject* parent)
@@ -90,7 +93,7 @@ void CGameMainScene::Update(void)
 		break;
 	case CGameMainScene::GAME_STATE::END:
 
-		ui_manager.Create(UI_ID::SHOW_SCORE, aqua::CVector2(500.0f, 100.0f), 0, 5.0f, 0xffffff00);
+		ui_manager.Create(UI_ID::SHOW_SCORE,m_show_score_position,score.GetScore(), m_show_score_scale, m_show_score_color);
 
 		ChangeScene(SCENE_ID::TITLE);
 		break;

@@ -32,6 +32,7 @@ void ICharacter::Initialize(const std::string& file_name)
 //XV
 void ICharacter::Update(void)
 {
+
 	//°‚Ì”»’è
 	CheckGround();
 	
@@ -80,7 +81,6 @@ void ICharacter::CheckGround(void)
 //’e‚Ì”»’è
 bool ICharacter::CheckHitBullet(void)
 {
-
 	CBulletManager& bullet_manager = CBulletManager::GetInstance();
 
 	return bullet_manager.CheckHitCharacter(this, m_UnitCategory);

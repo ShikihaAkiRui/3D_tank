@@ -15,6 +15,7 @@ const aqua::CVector3 CPlayer::m_graund_ray_langth = aqua::CVector3(0.0f,-15.0f,0
 const float CPlayer::m_jump_power = 5.0f;
 const float CPlayer::m_deceleration = 0.9f;
 const float CPlayer::m_damage_interval_time = 3.0f;
+const float CPlayer::m_shot_bullet_time = 1.0f;
 
 //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 CPlayer::CPlayer(aqua::IGameObject* parent)
@@ -23,6 +24,7 @@ CPlayer::CPlayer(aqua::IGameObject* parent)
 	, m_Matrix(aqua::CMatrix::Ident())
 	,m_ShotRotationFlag(false)
 	,m_DamageFlag(false)
+	,m_FirstShotFlag(true)
 {
 }
 
@@ -40,17 +42,12 @@ void CPlayer::Initialize(void)
 
 	m_GraundRayLength = m_graund_ray_langth;
 
-	m_IntervalTimer.Setup(m_damage_interval_time);
+	m_DamageIntervalTimer.Setup(m_damage_interval_time);
 }
 
 //XV
 void CPlayer::Update(void)
 {
-	CUnitManager& unit_manager = CUnitManager::GetInstance();
-
-	if (unit_manager.CheckHitUnit("Enemy", m_Position, m_Position + m_Velocity *  m_ray_langth))
-		m_Position = aqua::CVector3(-1250.0f, 50.0f, -600.0f);
-
 	//ˆÚ“®
 	Move();
 
@@ -60,8 +57,8 @@ void CPlayer::Update(void)
 	//–³“GŠÔ
 	if(m_DamageFlag)
 	{
-		m_IntervalTimer.Update();
-		if(m_IntervalTimer.Finished())
+		m_DamageIntervalTimer.Update();
+		if(m_DamageIntervalTimer.Finished())
 			m_DamageFlag = false;
 	}
 
@@ -188,20 +185,37 @@ void CPlayer::Move(void)
 //’e‚ÅUŒ‚
 void CPlayer::Shot(void)
 {
+	m_ShotBulletTimer.Update();
+
 	//’e‚ğo‚·
 	if (aqua::mouse::Trigger(aqua::mouse::BUTTON_ID::LEFT))
 	{
-		
-		CAim* aim = CUIManager::GetInstance().GetAim();
-		if (!aim)return;
-	
-		CBulletManager& bullet_manager = CBulletManager::GetInstance();
-		
-		//’e¶¬
-		bullet_manager.Create(BULLET_ID::NORMAL,m_UnitCategory, m_Position, aim->GetAimAngle());
+		//Å‰‚ÌUŒ‚‚©AËŒ‚ŠÔŠu‚Ì•b”‚ğ’´‚¦‚½
+		if (m_FirstShotFlag || m_ShotBulletTimer.Finished())
+		{
+			//Å‰‚ÌUŒ‚‚¾‚Á‚½‚çƒ^ƒCƒ}[İ’è
+			if (m_FirstShotFlag)
+			{
+				m_FirstShotFlag = false;
+				m_ShotBulletTimer.Setup(m_shot_bullet_time);
+			}
+			else
+			{
+				m_ShotBulletTimer.Reset();
+			}
 
-		m_ShotRotationFlag = true;
+			CAim* aim = CUIManager::GetInstance().GetAim();
+			if (!aim)return;
+
+			CBulletManager& bullet_manager = CBulletManager::GetInstance();
+
+			//’e¶¬
+			bullet_manager.Create(BULLET_ID::NORMAL, m_UnitCategory, m_Position, aim->GetAimAngle());
+
+			m_ShotRotationFlag = true;
+		}
 	}
+
 
 	//•ú‚µ‚½‚ç•ûŒüˆ—‚ğ‚È‚­‚·
 	if (aqua::mouse::Released(aqua::mouse::BUTTON_ID::LEFT))
@@ -218,7 +232,7 @@ void CPlayer::HitEnemyBody(void)
 	if (unit_manager.CheckHitUnit("Enemy", m_Position, m_Position + m_Velocity * m_ray_langth) && !m_DamageFlag)
 	{
 		m_DamageFlag = true;
-		m_IntervalTimer.Reset();
+		m_DamageIntervalTimer.Reset();
 
 		ICharacter::HitAttack();
 
@@ -242,7 +256,7 @@ void CPlayer::HitAttack(void)
 	if (!m_DamageFlag)
 	{
 		m_DamageFlag = true;
-		m_IntervalTimer.Reset();
+		m_DamageIntervalTimer.Reset();
 
 		ICharacter::HitAttack();
 

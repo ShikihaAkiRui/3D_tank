@@ -17,6 +17,9 @@ public:
 	//スコアを加算
 	void Add(int score);
 
+	//スコア取得
+	int GetScore(void);
+
 	//数値を変更するかを設定
 	void SetCountFlag(bool flag);
 

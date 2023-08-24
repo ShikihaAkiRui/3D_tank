@@ -36,7 +36,9 @@ private:
 	aqua::CMatrix m_Matrix;		//行列
 	bool m_ShotRotationFlag;	//弾を撃つ方向への方向転換フラグ
 	bool m_DamageFlag;			//ダメージのフラグ
-	aqua::CTimer m_IntervalTimer;//無敵時間のタイマー
+	aqua::CTimer m_DamageIntervalTimer;//無敵時間のタイマー
+	aqua::CTimer m_ShotBulletTimer;	   //射撃間隔
+	bool m_FirstShotFlag;		//最初の攻撃をしたかのフラグ
 
 	static const int m_life;					//体力
 	static const float m_move_speed;			//速度
@@ -47,5 +49,5 @@ private:
 	static const float m_jump_power;			//飛ぶときの力
 	static const float m_deceleration;			//減速率
 	static const float m_damage_interval_time;	//無敵時間
-
+	static const float m_shot_bullet_time;		//射撃間隔
 };

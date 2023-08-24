@@ -90,6 +90,12 @@ void CScore::Add(int score)
 	}
 }
 
+//スコア取得
+int CScore::GetScore(void)
+{
+	return m_Score;
+}
+
 //数値を変更するかを設定
 void CScore::SetCountFlag(bool flag)
 {
