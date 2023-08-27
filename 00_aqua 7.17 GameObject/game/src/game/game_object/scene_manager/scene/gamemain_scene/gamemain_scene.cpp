@@ -50,6 +50,7 @@ void CGameMainScene::Initialize(void)
 	ui_manager.Create(UI_ID::LIFE,m_life_position);
 	ui_manager.Create(UI_ID::SCORE,m_score_position);
 	ui_manager.Create(UI_ID::RADAR,m_radar_position);
+	ui_manager.Create(UI_ID::START_MESSAGE);
 
 	m_GameState = GAME_STATE::START;
 
@@ -81,27 +82,27 @@ void CGameMainScene::Update(void)
 	{
 	case CGameMainScene::GAME_STATE::START:
 
-
-		unit_manager.SetGameState(aqua::GAME_OBJECT_STATE::ACTIVE);
-		m_GameState = GAME_STATE::MAIN;
+		if (ui_manager.GetStartMessage() == nullptr)
+		{
+			unit_manager.SetGameState(aqua::GAME_OBJECT_STATE::ACTIVE);
+			m_GameState = GAME_STATE::MAIN;
+		}
 
 		break;
 	case CGameMainScene::GAME_STATE::MAIN:
+		//PushScene(SCENE_ID::RESULT);
 
 		//‘Ì—Í‚ª‚È‚­‚È‚Á‚½‚ç
 		if (life->GetLife() <= 0)
 		{
 			m_GameState = GAME_STATE::END;
 			score->SetCountFlag(false);
-			ui_manager.Create(UI_ID::SHOW_SCORE,m_show_score_position,score->GetScore(), m_show_score_scale, m_show_score_color);
-			//unit_manager.SetGameState(aqua::GAME_OBJECT_STATE::WAIT);
 		}
 		
 		break;
 	case CGameMainScene::GAME_STATE::END:
+		PushScene(SCENE_ID::RESULT);
 
-		//unit_manager.SetGameState(aqua::GAME_OBJECT_STATE::ACTIVE);
-		ChangeScene(SCENE_ID::TITLE);
 		break;
 	default:	break;
 	}

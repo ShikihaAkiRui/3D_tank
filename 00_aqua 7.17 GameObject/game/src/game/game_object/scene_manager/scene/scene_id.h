@@ -5,5 +5,6 @@ enum class SCENE_ID
 {
 	DUMMY,		//ダミー
 	TITLE,		//タイトル
-	GAMEMAIN	//ゲームメイン
+	GAMEMAIN,	//ゲームメイン
+	RESULT		//リザルトシーン
 };

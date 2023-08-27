@@ -19,7 +19,9 @@ CEnemyNormal::CEnemyNormal(aqua::IGameObject* parent)
 //‰Šú‰»
 void CEnemyNormal::Initialize(const aqua::CVector3& position)
 {
-	IEnemy::Initialize("data/model/boxt.mv1", position, m_graund_ray_langth,m_life);
+	IEnemy::Initialize("data/model/enemy_tank/TankFree_Red.mv1", position, m_graund_ray_langth,m_life);
+
+	m_Model->scale = aqua::CVector3(0.3f, 0.3f, 0.3f);
 
 	//Œü‚«İ’è
 	m_Player = CUnitManager::GetInstance().GetPlayer();

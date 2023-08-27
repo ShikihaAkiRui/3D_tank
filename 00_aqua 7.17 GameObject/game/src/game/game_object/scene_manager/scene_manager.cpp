@@ -1,6 +1,7 @@
 #include "scene_manager.h"
 #include"scene/title_scene/title_scene.h"
 #include"scene/gamemain_scene/gamemain_scene.h"
+#include"scene/gamemain_scene/result_scene/result_scene.h"
 
 const float CSceneManager::m_fade_speed = 255.0f;
 
@@ -117,11 +118,11 @@ void CSceneManager::Create(SCENE_ID id)
 {
 	IScene* scene = nullptr;
 
-	//IDÇ≤Ç∆Ç…êVÇµÇ≠ÉVÅ[ÉìÇê∂ê¨
 	switch (id)
 	{
 	case SCENE_ID::TITLE:	scene = aqua::CreateGameObject<CTitleScene>(this);			break;
 	case SCENE_ID::GAMEMAIN:	scene = aqua::CreateGameObject<CGameMainScene>(this);	break;
+	case SCENE_ID::RESULT: scene = aqua::CreateGameObject<CResultScene>(this);	break;
 	default:	break;
 	}
 

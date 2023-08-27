@@ -18,7 +18,7 @@ CEnemyParabola::CEnemyParabola(aqua::IGameObject* parent)
 //‰Šú‰»
 void CEnemyParabola::Initialize(const aqua::CVector3& position)
 {
-	IEnemy::Initialize("data/model/boxt.mv1", position, m_graund_ray_langth, m_life);
+	IEnemy::Initialize("data/model/enemy_tank/TankFree_Red.mv1", position, m_graund_ray_langth, m_life);
 
 	//Œü‚«Ý’è
 	m_Player = CUnitManager::GetInstance().GetPlayer();
@@ -30,6 +30,7 @@ void CEnemyParabola::Initialize(const aqua::CVector3& position)
 	m_Rotation.y = aqua::RadToDeg(atan2(distance.x, distance.z));
 
 	m_Model->rotation = m_Rotation;
+	m_Model->scale = aqua::CVector3(0.3f, 0.3f, 0.3f);
 
 	m_ShotTimer.Setup(m_shot_time);
 

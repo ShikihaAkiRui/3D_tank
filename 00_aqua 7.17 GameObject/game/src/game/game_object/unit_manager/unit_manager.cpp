@@ -3,7 +3,6 @@
 #include"character/character.h"
 #include"enemy/enemy_normal/enemy_normal.h"
 #include"enemy/enemy_parabola/enemy_parabola.h"
-#include"enemy/enemy_flight/enemy_flight.h"
 
 const std::string CUnitManager::m_enemy_name = "Enemy";
 const std::string CUnitManager::m_player_name = "Player";
@@ -68,7 +67,6 @@ void CUnitManager::CreateEnemy(UNIT_ID id, const aqua::CVector3& position)
 	{
 	case UNIT_ID::ENEMY_NORMAL:	enemy = aqua::CreateGameObject<CEnemyNormal>(&m_GameObject);	break;
 	case UNIT_ID::ENEMY_PARABOLA:	enemy = aqua::CreateGameObject<CEnemyParabola>(&m_GameObject);	break;
-	case UNIT_ID::ENEMY_FLIGHT:	enemy = aqua::CreateGameObject<CEnemyFlight>(&m_GameObject);	break;
 	default:	break;
 	}
 

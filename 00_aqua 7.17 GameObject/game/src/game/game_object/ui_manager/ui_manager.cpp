@@ -1,10 +1,13 @@
 #include "ui_manager.h"
 #include"ui_component/radar/radar.h"
 #include"ui_component/show_score/show_score.h"
+#include"ui_component/click_message/click_message.h"
 
 const std::string CUIManager::m_aim_name = "Aim";
 const std::string CUIManager::m_life_name = "Life";
 const std::string CUIManager::m_score_name = "Score";
+const std::string CUIManager::m_start_message_name = "StartMessage";
+const std::string CUIManager::m_end_message_name = "EndMessage";
 
 //インスタンスを取得
 CUIManager& CUIManager::GetInstance(void)
@@ -45,6 +48,8 @@ void CUIManager::Create(UI_ID id)
 	switch (id)
 	{
 	case UI_ID::AIM:	ui = aqua::CreateGameObject<CAim>(&m_GameObject);	break;
+	case UI_ID::START_MESSAGE:	ui = aqua::CreateGameObject<CStartMessage>(&m_GameObject);	break;
+	case UI_ID::END_MESSAGE:	ui = aqua::CreateGameObject<CEndMessage>(&m_GameObject);	break;
 	default:break;
 	}
 
@@ -70,8 +75,19 @@ void CUIManager::Create(UI_ID id, const aqua::CVector2& position)
 		ui->Initialize(position);
 }
 
+void CUIManager::Create(UI_ID id, const aqua::CVector2& position,const std::string& word)
+{
+	CClickMessage* click_message = nullptr;
+
+	if (UI_ID::CLICK_MESSAGE == id)
+		click_message = aqua::CreateGameObject<CClickMessage>(&m_GameObject);
+
+	if (click_message)
+		click_message->Initialize(position, word);
+}
+
 //生成
-void CUIManager::Create(UI_ID id, const aqua::CVector2& position, int score, float scale, aqua::CColor color)
+void CUIManager::Create(UI_ID id, const aqua::CVector2& position, int score, float scale, unsigned char color)
 {
 	CShowScore* show_score = nullptr;
 
@@ -155,6 +171,54 @@ CScore* CUIManager::GetScore(void)
 
 	return nullptr;
 
+}
+
+CStartMessage* CUIManager::GetStartMessage(void)
+{
+	if (m_GameObject.GetChildList()->empty())
+		return nullptr;
+
+	auto it = m_GameObject.GetChildList()->begin();
+
+	while (it != m_GameObject.GetChildList()->end())
+	{
+
+		if ((*it)->GetGameObjectName() == m_start_message_name)
+		{
+			CStartMessage* start_message = (CStartMessage*)(*it);
+
+			return start_message;
+		}
+
+		++it;
+	}
+
+	return nullptr;
+
+}
+
+//終了メッセージ取得
+CEndMessage* CUIManager::GetEndMessage(void)
+{
+	if (m_GameObject.GetChildList()->empty())
+		return nullptr;
+
+	auto it = m_GameObject.GetChildList()->begin();
+
+	while (it != m_GameObject.GetChildList()->end())
+	{
+
+		if ((*it)->GetGameObjectName() == m_end_message_name)
+		{
+			CEndMessage* end_message = (CEndMessage*)(*it);
+
+			return end_message;
+		}
+
+		++it;
+	}
+
+	return nullptr;
 }
 
 //コピーコンストラクタ

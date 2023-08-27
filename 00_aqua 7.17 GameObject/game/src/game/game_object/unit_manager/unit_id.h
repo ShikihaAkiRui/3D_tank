@@ -5,8 +5,7 @@ enum class UNIT_ID
 {
 	PLAYER,
 	ENEMY_NORMAL,
-	ENEMY_PARABOLA,
-	ENEMY_FLIGHT
+	ENEMY_PARABOLA
 };
 
 //ユニットのカテゴリー

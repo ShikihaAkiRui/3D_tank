@@ -15,6 +15,8 @@ public:
 	void Finalize(void)override;
 
 private:
-	static const std::string m_object_name;	//オブジェクトの名前
+	static const aqua::CVector2 m_message_position;	//メッセージ位置
+	static const std::string m_message;				//メッセージ文字
+	static const std::string m_object_name;			//オブジェクトの名前
 	aqua::CLabel m_Label;	//デバック用
 };

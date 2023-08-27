@@ -39,6 +39,11 @@ void CEffectManager::Draw(void)
 void CEffectManager::Finalize(void)
 {
 	m_GameObject.Finalize();
+
+	for (int i = 0; i < (int)EFFECT_ID::MAX; ++i)
+		m_LoadEffect[i].Delete();
+
+	AQUA_SAFE_DELETE_ARRAY(m_LoadEffect);
 }
 
 //¶¬

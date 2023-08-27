@@ -31,14 +31,14 @@ CPlayer::CPlayer(aqua::IGameObject* parent)
 //‰Šú‰»
 void CPlayer::Initialize(void)
 {
-	ICharacter::Initialize("data/model/cube.mv1");
+	ICharacter::Initialize("data/model/tank/TankFree_Green.mv1");
 
 	m_UnitCategory = UNIT_CATEGORY::PLAYER;
 	m_Life = m_life;
 
 	m_Position = aqua::CVector3(-1250.0f, 50.0f,-600.0f);
 	m_Model->position = m_Position;
-	m_Model->scale = aqua::CVector3(0.5f, 0.5f, 0.5f);
+	m_Model->scale = aqua::CVector3(-0.3f, 0.3f, -0.3f);
 
 	m_GraundRayLength = m_graund_ray_langth;
 

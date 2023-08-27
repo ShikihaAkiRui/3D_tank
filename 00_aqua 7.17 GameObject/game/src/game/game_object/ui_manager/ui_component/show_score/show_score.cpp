@@ -15,23 +15,29 @@ CShowScore::CShowScore(aqua::IGameObject* parent)
 }
 
 //‰Šú‰»
-void CShowScore::Initialize(const aqua::CVector2 position, int score, float scale, aqua::CColor color)
+void CShowScore::Initialize(const aqua::CVector2 position, int score, float scale, unsigned char color)
 {
 	IUIComponent::Initialize(position);
 	m_Score = score;
 	m_Scale = aqua::CVector2(scale, scale);
 	m_Color = color;
 
-	//Œ…‚ğ”‚¦‚é
-	while (score != 0)
-	{
-		score /= 10;
-		++m_MaxDigit;
-	}
 
 	//0‚¾‚Á‚½‚Æ‚«1Œ…‚É‚·‚é
 	if (score == 0)
+	{
 		m_MaxDigit = 1;
+	}
+	else
+	{
+		//Œ…‚ğ”‚¦‚é
+		while (score > 0)
+		{
+			score /= 10;
+			++m_MaxDigit;
+		}
+	}
+
 
 	m_Sprites = AQUA_NEW aqua::CSprite[m_MaxDigit];
 
@@ -42,7 +48,7 @@ void CShowScore::Initialize(const aqua::CVector2 position, int score, float scal
 		m_Sprites[i].scale = m_Scale;
 		m_Sprites[i].color = m_Color;
 	}
-
+	
 	int digit_count = 0;
 	int count_score = m_Score;
 
@@ -66,13 +72,12 @@ void CShowScore::Initialize(const aqua::CVector2 position, int score, float scal
 		//Œ…‚ğ‘‚â‚·
 		digit_count++;
 	} while (count_score > 0 && digit_count < m_MaxDigit);
-
+	
 }
 
 //•`‰æ
 void CShowScore::Draw(void)
 {
-
 	for (int i = 0; i < m_MaxDigit; ++i)
 	{
 		m_Sprites[i].Draw();
