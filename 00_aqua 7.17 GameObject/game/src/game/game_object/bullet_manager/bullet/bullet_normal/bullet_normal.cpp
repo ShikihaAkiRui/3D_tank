@@ -16,7 +16,7 @@ void CBulletNormal::Initialize(UNIT_CATEGORY unit_category, const aqua::CVector3
 	m_UnitCategory = unit_category;
 	m_Radius = m_radius;
 
-	IBullet::Initialize("data/model/ball.mv1");
+	IBullet::Initialize("data/model/Sphere.mv1");
 
 	//îÚÇŒÇ∑äpìxÇãÅÇﬂÇÈ
 	aqua::CMatrix matrix = aqua::CMatrix::Ident();

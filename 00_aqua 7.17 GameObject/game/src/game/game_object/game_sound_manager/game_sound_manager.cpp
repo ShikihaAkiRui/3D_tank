@@ -2,7 +2,7 @@
 
 const std::string CGameSoundManager::m_sound_file_names[] =
 {
-    "data/sound/title_bgm.mp3",
+    "data/sound/put.mp3",
     "data/sound/put.mp3",
 };
 

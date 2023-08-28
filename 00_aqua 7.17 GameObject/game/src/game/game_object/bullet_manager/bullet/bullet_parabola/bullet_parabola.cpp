@@ -21,7 +21,7 @@ void CBulletParabola::Initialize(UNIT_CATEGORY unit_category, const aqua::CVecto
 	m_ImpactPosition = impact_position;
 	m_Radius = m_radius;
 
-	IBullet::Initialize("data/model/ball.mv1");
+	IBullet::Initialize("data/model/Sphere.mv1");
 
 	m_Model.position = m_Position;
 	aqua::CVector3 vector = m_Position - m_ImpactPosition;
