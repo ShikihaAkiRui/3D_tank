@@ -36,9 +36,10 @@ void CEndMessage::Update(void)
 	{
 	case CEndMessage::STATE::START_IN:
 
-		m_Sprite.scale.x = aqua::easing::OutBack(m_DisplayTimer.GetTime(), m_DisplayTimer.GetLimit(), 0, m_max_scale);
-		m_Sprite.scale.y = aqua::easing::OutBack(m_DisplayTimer.GetTime(), m_DisplayTimer.GetLimit(), 0, m_max_scale);
+		m_Sprite.scale.x = aqua::easing::OutBack(m_DisplayTimer.GetTime(), m_DisplayTimer.GetLimit(), 0.0f, m_max_scale);
+		m_Sprite.scale.y = aqua::easing::OutBack(m_DisplayTimer.GetTime(), m_DisplayTimer.GetLimit(), 0.0f, m_max_scale);
 
+		//出し終えたら切り替え
 		if (m_DisplayTimer.Finished())
 		{
 			m_DisplayTimer.Reset();
@@ -48,6 +49,7 @@ void CEndMessage::Update(void)
 		break;
 	case CEndMessage::STATE::WAIT:
 
+		//出している状態かのフラグfalse
 			m_AppearFlag = false;
 
 		break;

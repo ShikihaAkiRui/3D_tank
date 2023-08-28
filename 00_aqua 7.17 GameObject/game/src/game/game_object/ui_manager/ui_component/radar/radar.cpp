@@ -70,6 +70,7 @@ void CRadar::Draw(void)
 	m_AreaSprite.Draw();
 	m_PlayerSprite.Draw();
 
+	//oŒ»”•ª•`‰æ
 	for (int i = 0; i < m_AppearEnemyCount; ++i)
 		m_EnemySprites[i].Draw();
 

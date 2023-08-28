@@ -46,8 +46,6 @@ private:
 	static const float m_rotation_speed;		//‰ñ“]‘¬‚³
 	static const float m_shot_rotation_speed;	//’e‚ğŒ‚‚Á‚½‚Ì‰ñ“]‘¬‚³
 	static const aqua::CVector3 m_graund_ray_langth;	//°—p‚ÌƒŒƒC‚Ì’·‚³
-	static const float m_jump_power;			//”ò‚Ô‚Æ‚«‚Ì—Í
-	static const float m_deceleration;			//Œ¸‘¬—¦
 	static const float m_damage_interval_time;	//–³“GŠÔ
 	static const float m_shot_bullet_time;		//ËŒ‚ŠÔŠu
 };

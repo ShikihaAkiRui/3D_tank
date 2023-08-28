@@ -11,6 +11,7 @@ public:
 
 	void Initialize(void)override {};
 	virtual void Initialize(const aqua::CVector3& position) {};
+	//モデルのパス,	位置,	床までの高さ,	体力
 	virtual void Initialize(const std::string& file_name,const aqua::CVector3& position ,float graund_ray_langeth,int life);
 
 protected:

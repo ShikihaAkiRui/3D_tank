@@ -9,6 +9,8 @@ public:
 	IEffect(aqua::IGameObject* parent, const std::string& object_name);
 	~IEffect() = default;
 
+	//‰Šú‰»
+	//ˆÊ’u
 	virtual void Initialize(const aqua::CVector3& position);
 
 protected:

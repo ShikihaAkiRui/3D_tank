@@ -9,6 +9,8 @@ public:
 	CLife(aqua::IGameObject* parent);
 	~CLife() = default;
 
+	//‰Šú‰»
+	//ˆÊ’u
 	void Initialize(const aqua::CVector2& position);
 	void Update(void)override;
 	void Draw(void)override;

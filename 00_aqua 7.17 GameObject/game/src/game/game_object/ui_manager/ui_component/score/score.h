@@ -9,8 +9,9 @@ public:
 	CScore(aqua::IGameObject* parent);
 	~CScore() = default;
 
+	//‰Šú‰»
+	//ˆÊ’u
 	void Initialize(const aqua::CVector2& position)override;
-
 	void Draw(void)override;
 	void Finalize(void)override;
 

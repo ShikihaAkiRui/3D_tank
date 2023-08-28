@@ -16,6 +16,7 @@ public:
 	void Finalize(void);
 
 	//生成
+	//エフェクトID,	位置
 	void Create(EFFECT_ID id, const aqua::CVector3 position);
 
 private:

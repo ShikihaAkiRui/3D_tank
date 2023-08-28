@@ -22,7 +22,7 @@ bool CStage::GetHitBulletGroundFlag(const aqua::CVector3& center_position, float
 	bool hit_flag = false;
 
 	hit_flag = CollCheckSphere(center_position, radius);
-
+	
 	return hit_flag;
 }
 

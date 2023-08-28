@@ -68,7 +68,7 @@ void CItem::Gravity(void)
 
 	m_Position.y += stage->GetGravity() * aqua::GetDeltaTime();
 
-	//°‚Æ“–‚½‚Á‚Ä‚½‚ç
+	//°‚Æ“–‚½‚Á‚Ä‚½‚ç—Ž‰º‚ðŽ~‚ß‚é
 	if (stage->CollCheckLine(m_Position, m_Position + m_graund_ray))
 	{
 		aqua::CVector3 hit_position;

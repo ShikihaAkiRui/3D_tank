@@ -25,6 +25,7 @@ void CGraundHitBulletEffect::Update(void)
 {
 	m_Effect.Update();
 
+	//エフェクトが終わったら消す
 	if (m_Effect.Finished())
 		DeleteObject();
 }

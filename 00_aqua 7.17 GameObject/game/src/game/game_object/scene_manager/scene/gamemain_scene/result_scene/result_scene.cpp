@@ -3,12 +3,13 @@
 #include "../gamemain_scene.h"
 #include"../../../../ui_manager/ui_manager.h"
 
-const unsigned char CResultScene::m_max_fade_color = 0x90;
+const float CResultScene::m_fade_time = 1.0f;
+const unsigned char CResultScene::m_max_fade_color = 0x80;
 const aqua::CVector2 CResultScene::m_label_position = aqua::CVector2(200.0f, 330.0f);
 const int CResultScene::m_label_size = 60.0f;
-const aqua::CVector2 CResultScene::m_score_position = aqua::CVector2(400.0f, 400.0f);
+const aqua::CVector2 CResultScene::m_score_position = aqua::CVector2(700.0f, 400.0f);
 const float CResultScene::m_score_scale = 5.0f;
-const unsigned char CResultScene::m_score_color = 0xffffffff;
+const aqua::CColor CResultScene::m_score_color = 0xffffff00;
 const aqua::CVector2 CResultScene::m_message_position  =aqua::CVector2(455.5f,600.0f);
 const std::string CResultScene::m_message = "クリックでタイトルへ";
 
@@ -16,6 +17,7 @@ const std::string CResultScene::m_message = "クリックでタイトルへ";
 CResultScene::CResultScene(aqua::IGameObject* parent)
     : IScene(parent, "ResultScene")
     , m_State(STATE::FADE)
+    ,m_ResultScore(0)
 {
 }
 
@@ -29,15 +31,17 @@ void CResultScene::Initialize(void)
     m_ScoreLabel.text = "スコア";
     m_ScoreLabel.position = m_label_position;
 
-    CUIManager::GetInstance().Finalize();
-    CUIManager::GetInstance().Initialize();
     CUIManager& ui_manager = CUIManager::GetInstance();
 
-    //ui_manager.Create(UI_ID::SHOW_SCORE, m_score_position, 0, m_score_scale, m_score_color);
+    //スコアを保存
+    m_ResultScore = ui_manager.GetScore()->GetScore();
+
+    ui_manager.Finalize();
+    ui_manager.Initialize();
 
     IGameObject::Initialize();
 
-    m_FadeTimer.Setup(1.0f);
+    m_FadeTimer.Setup(m_fade_time);
 
     m_State = STATE::FADE;
 
@@ -68,11 +72,10 @@ void CResultScene::Update(void)
     break;
     case STATE::MESSAGE_IN:
     {
-
         //演出終わった
         if (!ui_manager.GetEndMessage()->GetAppearFlag())
         {
-            //ui_manager.Create(UI_ID::SHOW_SCORE, m_score_position, 10, m_score_scale, m_score_color);
+            ui_manager.Create(UI_ID::SHOW_SCORE, m_score_position, m_ResultScore, m_score_scale, m_score_color);
             ui_manager.Create(UI_ID::CLICK_MESSAGE, m_message_position, m_message);
             m_State = STATE::WAIT;
         }
@@ -80,7 +83,6 @@ void CResultScene::Update(void)
     break;
     case STATE::WAIT:
     {
-
         if (aqua::mouse::Trigger(aqua::mouse::BUTTON_ID::LEFT))
             ChangeScene(SCENE_ID::TITLE);
     }

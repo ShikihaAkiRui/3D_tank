@@ -9,6 +9,8 @@ public:
 	CRadar(aqua::IGameObject* parent);
 	~CRadar() = default;
 
+	//‰Šú‰»
+	//ˆÊ’u
 	void Initialize(const aqua::CVector2& position)override;
 	void Update(void)override;
 	void Draw(void)override;

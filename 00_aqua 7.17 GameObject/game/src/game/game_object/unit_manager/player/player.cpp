@@ -12,8 +12,6 @@ const float CPlayer::m_ray_langth = 15.0f;
 const float CPlayer::m_rotation_speed = 10.0f;
 const float CPlayer::m_shot_rotation_speed = 40.0f;
 const aqua::CVector3 CPlayer::m_graund_ray_langth = aqua::CVector3(0.0f,-15.0f,0.0f);
-const float CPlayer::m_jump_power = 5.0f;
-const float CPlayer::m_deceleration = 0.9f;
 const float CPlayer::m_damage_interval_time = 3.0f;
 const float CPlayer::m_shot_bullet_time = 1.0f;
 
@@ -124,8 +122,6 @@ void CPlayer::Move(void)
 	direction_vector.Transform(camera_matrix);
 	direction_vector.y = 0.0f;
 
-#define TEST
-#ifdef TEST
 	//現在向いている方向のベクトル
 	aqua::CVector3 current_dir;
 	current_dir.x = sin(aqua::DegToRad(m_Rotation.y));
@@ -138,25 +134,16 @@ void CPlayer::Move(void)
 	//どちら側に回るかを計算
 	aqua::CVector3 cross = aqua::CVector3::Cross(current_dir.Normalize(), direction_vector.Normalize());
 	if (cross.x != 0.0f)cross = aqua::CVector3(0.0f, 1.0f, 0.0f);
-#else
-	direction_angle = aqua::RadToDeg(atan2(direction_vector.x, direction_vector.z));
-	
-#endif
 
 	//動いていたら方向を変える
 	if (direction_vector.Length() > 0)
 	{
-#ifdef TEST
-
 		//撃った時は回転を変える
 		if (m_ShotRotationFlag)
 			m_Angle = m_Angle + ((m_shot_rotation_speed * direction_angle) * aqua::GetDeltaTime() * cross.y);
 		else
 			m_Angle = m_Angle + ((m_rotation_speed * direction_angle) * aqua::GetDeltaTime() * cross.y);
 
-#else
-		m_Angle = m_Angle + (m_rotation_speed * (direction_angle - m_Angle)) * aqua::GetDeltaTime();
-#endif
 	}
 
 	//行列で方向変更
@@ -166,17 +153,7 @@ void CPlayer::Move(void)
 	
 	ICharacter::Move();
 
-	//地面についているとき飛ぶ
-	if (aqua::keyboard::Trigger(aqua::keyboard::KEY_ID::SPACE) && m_GraundFlag)
-	{
-		m_Velocity.y += m_jump_power;
-		m_GraundFlag = false;
-	}
-
 	m_Position += m_Velocity * m_move_speed * aqua::GetDeltaTime();
-
-	//ジャンプ力を減らす
-	m_Velocity *= m_deceleration;
 
 	m_Model->rotation = m_Rotation;
 	m_Model->position = m_Position;

@@ -10,6 +10,8 @@ public:
 	ICharacter(aqua::IGameObject* parent,const std::string& object_name);
 	virtual ~ICharacter() = default;
 
+	//‰Šú‰»
+	//ƒ‚ƒfƒ‹‚ÌƒpƒX
 	virtual void Initialize(const std::string& file_name)override;
 
 	virtual void Update(void)override;

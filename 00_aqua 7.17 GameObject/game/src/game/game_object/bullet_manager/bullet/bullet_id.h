@@ -3,6 +3,6 @@
 //’eID
 enum class BULLET_ID
 {
-	NORMAL,
-	PARABOLA
+	NORMAL,		//•’Ê‚Ì’e
+	PARABOLA	//•ú•¨ü‚Ì’e
 };

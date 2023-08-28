@@ -2,6 +2,7 @@
 #include"ui_component/radar/radar.h"
 #include"ui_component/show_score/show_score.h"
 #include"ui_component/click_message/click_message.h"
+#include"ui_component/title_name/title_name.h"
 
 const std::string CUIManager::m_aim_name = "Aim";
 const std::string CUIManager::m_life_name = "Life";
@@ -64,10 +65,10 @@ void CUIManager::Create(UI_ID id, const aqua::CVector2& position)
 
 	switch (id)
 	{
-	case UI_ID::AIM:	ui = aqua::CreateGameObject<CAim>(&m_GameObject);	break;
 	case UI_ID::LIFE:	ui = aqua::CreateGameObject<CLife>(&m_GameObject);	break;
 	case UI_ID::RADAR:	ui = aqua::CreateGameObject<CRadar>(&m_GameObject);	break;
 	case UI_ID::SCORE:	ui = aqua::CreateGameObject<CScore>(&m_GameObject);	break;
+	case UI_ID::TITLE_NAME:	ui = aqua::CreateGameObject<CTitleName>(&m_GameObject);	break;
 	default:break;
 	}
 
@@ -75,6 +76,7 @@ void CUIManager::Create(UI_ID id, const aqua::CVector2& position)
 		ui->Initialize(position);
 }
 
+//生成
 void CUIManager::Create(UI_ID id, const aqua::CVector2& position,const std::string& word)
 {
 	CClickMessage* click_message = nullptr;
@@ -87,7 +89,7 @@ void CUIManager::Create(UI_ID id, const aqua::CVector2& position,const std::stri
 }
 
 //生成
-void CUIManager::Create(UI_ID id, const aqua::CVector2& position, int score, float scale, unsigned char color)
+void CUIManager::Create(UI_ID id, const aqua::CVector2& position, int score, float scale, aqua::CColor color)
 {
 	CShowScore* show_score = nullptr;
 
@@ -97,6 +99,7 @@ void CUIManager::Create(UI_ID id, const aqua::CVector2& position, int score, flo
 	if (show_score)
 		show_score->Initialize(position, score, scale, color);
 }
+
 
 //照準UI取得
 CAim* CUIManager::GetAim(void)
@@ -173,6 +176,7 @@ CScore* CUIManager::GetScore(void)
 
 }
 
+//開始メッセージを取得
 CStartMessage* CUIManager::GetStartMessage(void)
 {
 	if (m_GameObject.GetChildList()->empty())

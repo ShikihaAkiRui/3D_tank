@@ -11,6 +11,7 @@ public:
 
 	//初期化
 	virtual void Initialize(void) = 0;
+	//モデルのパス
 	virtual void Initialize(const std::string& file_name);
 
 	//更新

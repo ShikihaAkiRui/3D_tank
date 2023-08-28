@@ -10,6 +10,8 @@ public:
 	CControlCamera(aqua::IGameObject* parent);
 	~CControlCamera() = default;
 	
+	//初期化
+	//カメラ,	カメラが追うユニット
 	void Initialize(aqua::CCamera* camera,IUnit* unit);
 
 	void Update(void)override;

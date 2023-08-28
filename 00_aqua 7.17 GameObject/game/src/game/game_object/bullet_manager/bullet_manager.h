@@ -17,6 +17,7 @@ public:
 	void Finalize(void);
 
 	//生成
+	//弾のID,	ユニットのカテゴリー,	出す位置,	角度
 	void Create(BULLET_ID id,UNIT_CATEGORY unit_category, const aqua::CVector3& position, const aqua::CVector3& rotation);
 
 	//弾とキャラクターの当たり判定

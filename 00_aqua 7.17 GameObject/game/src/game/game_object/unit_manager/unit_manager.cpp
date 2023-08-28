@@ -212,12 +212,12 @@ void CUnitManager::SetGameState(aqua::GAME_OBJECT_STATE state)
 
 	auto it = m_GameObject.GetChildList()->begin();
 
-	bool hit_flag = false;
 
 	while (it != m_GameObject.GetChildList()->end())
 	{
 		ICharacter* character = (ICharacter*)(*it);
 		
+		//ó‘Ô•ÏX
 		character->SetGameObjectState(state);
 
 		it++;

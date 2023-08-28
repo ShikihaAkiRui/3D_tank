@@ -10,6 +10,7 @@ public:
 	~IUIComponent() = default;
 
 	virtual void Initialize(void) {};
+	//ˆÊ’u
 	virtual void Initialize(const aqua::CVector2& position);
 
 protected:

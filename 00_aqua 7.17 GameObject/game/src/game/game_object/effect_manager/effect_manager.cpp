@@ -18,6 +18,7 @@ void CEffectManager::Initialize(void)
 
 	m_LoadEffect = AQUA_NEW aqua::CEffect3D[(int)EFFECT_ID::MAX];
 
+	//使うエフェクトを読み込む
 	m_LoadEffect[0].Create("data/effect/explosion/explosion.efkefc");
 	m_LoadEffect[1].Create("data/effect/fire/fire.efkefc");
 	m_LoadEffect[2].Create("data/effect/hit_player/hit_player.efkefc");

@@ -16,9 +16,11 @@ public:
 	void Finalize(void);
 
 	//生成
+	//位置
 	void Create(aqua::CVector3& position);
 
 	//アイテムとキャラクターの当たり判定
+	//コリジョン,	ユニットのカテゴリー
 	bool CheckHitCharacter(ICollision* collision, UNIT_CATEGORY unit_category);
 
 private:

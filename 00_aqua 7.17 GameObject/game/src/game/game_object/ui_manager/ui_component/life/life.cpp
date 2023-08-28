@@ -19,7 +19,7 @@ CLife::CLife(aqua::IGameObject* parent)
 void CLife::Initialize(const aqua::CVector2& position)
 {
 	IUIComponent::Initialize(position);
-
+	
 	m_Life = m_ShowLife = m_default_life;
 
 	m_Sprites = AQUA_NEW aqua::CSprite[m_Life];
@@ -46,7 +46,8 @@ void CLife::Update(void)
 	{
 		m_DisappearTimer.Update();
 
-		m_Sprites[m_ShowLife - 1].color.alpha = m_max_alpha - aqua::easing::OutQuart(m_DisappearTimer.GetTime(), m_DisappearTimer.GetLimit(), 0, m_max_alpha);
+		//èôÅXÇ…è¡Ç∑
+		m_Sprites[m_ShowLife - 1].color.alpha = (unsigned char)(m_max_alpha - aqua::easing::OutQuart(m_DisappearTimer.GetTime(), m_DisappearTimer.GetLimit(), 0, m_max_alpha));
 
 		if (m_DisappearTimer.Finished())
 		{

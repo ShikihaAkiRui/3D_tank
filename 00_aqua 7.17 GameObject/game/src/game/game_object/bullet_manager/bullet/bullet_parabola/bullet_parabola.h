@@ -9,6 +9,8 @@ public:
 	CBulletParabola(aqua::IGameObject* parent);
 	~CBulletParabola() = default;
 
+	//初期化
+	//ユニットのカテゴリー,	出す位置,　着弾位置
 	void Initialize(UNIT_CATEGORY unit_category, const aqua::CVector3& position, const aqua::CVector3& impact_position);
 	void Update(void)override;
 

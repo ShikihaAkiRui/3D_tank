@@ -90,7 +90,6 @@ void CGameMainScene::Update(void)
 
 		break;
 	case CGameMainScene::GAME_STATE::MAIN:
-		//PushScene(SCENE_ID::RESULT);
 
 		//‘Ì—Í‚ª‚È‚­‚È‚Á‚½‚ç
 		if (life->GetLife() <= 0)

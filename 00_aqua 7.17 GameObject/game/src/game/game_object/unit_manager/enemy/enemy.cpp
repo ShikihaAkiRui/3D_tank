@@ -14,14 +14,15 @@ void IEnemy::Initialize(const std::string& file_name,const aqua::CVector3& posit
 {
 	ICharacter::Initialize(file_name);
 
-	CheckGround();
-
 	m_Position = position;
 	m_GraundRayLength.y = graund_ray_langeth;
 	m_Life = life;
 	m_UnitCategory = UNIT_CATEGORY::ENMEY;
 
 	m_Model->position = m_Position;
+
+	//床の判定
+	CheckGround();
 }
 
 //倒された
@@ -36,6 +37,7 @@ void IEnemy::Dead(void)
 		//出ているエネミーの数を減らす
 		appear->SetCountEnemy(-1);
 
+	//爆発エフェクト表示
 	CEffectManager& effect_manager = CEffectManager::GetInstance();
 	effect_manager.Create(EFFECT_ID::EXPLOSION, m_Position);
 

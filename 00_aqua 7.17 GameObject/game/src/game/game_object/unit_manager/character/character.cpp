@@ -68,6 +68,7 @@ void ICharacter::CheckGround(void)
 
 		hit_position = stage->GetCollCheckLineHitPosition();
 
+		//è∞ÇÃçÇÇ≥Ç…çáÇÌÇπÇÈ
 		m_Position.y = hit_position.y - m_GraundRayLength.y;
 
 		m_GraundFlag = true;

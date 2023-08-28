@@ -32,9 +32,10 @@ void CStartMessage::Update(void)
 	{
 	case CStartMessage::STATE::START_IN:
 
-		m_StartSprite.scale.x = aqua::easing::OutBack(m_StartDisplayTimer.GetTime(), m_StartDisplayTimer.GetLimit(), 0, m_max_scale);
-		m_StartSprite.scale.y = aqua::easing::OutBack(m_StartDisplayTimer.GetTime(), m_StartDisplayTimer.GetLimit(), 0, m_max_scale);
+		m_StartSprite.scale.x = aqua::easing::OutBack(m_StartDisplayTimer.GetTime(), m_StartDisplayTimer.GetLimit(), 0.0f, m_max_scale);
+		m_StartSprite.scale.y = aqua::easing::OutBack(m_StartDisplayTimer.GetTime(), m_StartDisplayTimer.GetLimit(), 0.0f, m_max_scale);
 
+		//èoåªÇµèIÇ¶ÇΩÇÁêÿÇËë÷Ç¶
 		if (m_StartDisplayTimer.Finished())
 		{
 			m_StartDisplayTimer.Reset();
@@ -44,8 +45,9 @@ void CStartMessage::Update(void)
 		break;
 	case CStartMessage::STATE::WAIT:
 
-		m_StartSprite.color.alpha = 255 - aqua::easing::InExp(m_StartDisplayTimer.GetTime(), m_StartDisplayTimer.GetLimit(), 0, 255);
+		m_StartSprite.color.alpha = (unsigned char)(255.0f - aqua::easing::InExp(m_StartDisplayTimer.GetTime(), m_StartDisplayTimer.GetLimit(), 0.0f, 255.0f));
 
+		//è¡Ç¶ÇΩÇÁè¡Ç∑
 		if (m_StartDisplayTimer.Finished())
 		{
 			DeleteObject();

@@ -18,21 +18,27 @@ public:
 	void Finalize(void);
 
 	//生成
+	//ユニットID
 	IUnit* Create(UNIT_ID id);
 
 	//敵生成
+	//ユニット,	位置
 	void CreateEnemy(UNIT_ID id, const aqua::CVector3& position);
 
 	//ユニットの当たり判定
+	//オブジェクトの名前,	線の初めの位置,	線の終わりの位置
 	bool CheckHitUnit(const std::string& object_name, const aqua::CVector3& start_position, const aqua::CVector3& end_position);
 
 	//照準と敵の判定
+	//線の初めの位置,	線の終わりの位置
 	aqua::CVector3 CheckHitAim(const aqua::CVector3& start_position, const aqua::CVector3& end_position);
 
 	//プレイヤーと敵の距離取得
+	//情報を取得する配列,	敵の最大出現数
 	int GetEnemyData(aqua::CVector2* vectors, int max_enemy);
 
 	//全ユニットの状態変更
+	//変更する状態
 	void SetGameState(aqua::GAME_OBJECT_STATE state);
 
 	//プレイヤーを取得

@@ -55,6 +55,7 @@ void CBulletParabola::Initialize(UNIT_CATEGORY unit_category, const aqua::CVecto
 //更新
 void CBulletParabola::Update(void)
 {
+	//重力の値を加える
 	m_Velocity.y -= m_fall_speed;
 
 	IBullet::Update();

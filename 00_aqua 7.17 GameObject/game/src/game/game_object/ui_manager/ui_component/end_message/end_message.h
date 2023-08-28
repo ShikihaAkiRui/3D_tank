@@ -21,8 +21,8 @@ private:
 	//スタートメッセージの状態
 	enum class STATE
 	{
-		START_IN,
-		WAIT,
+		START_IN,	//動かす
+		WAIT,		//出し終わる
 	};
 
 	aqua::CSprite m_Sprite;			//スプライト

@@ -9,6 +9,8 @@ public:
 	CItem(aqua::IGameObject* parent);
 	~CItem() = default;
 
+	//‰Šú‰»
+	//ˆÊ’u
 	void Initialize(const aqua::CVector3& position);
 	void Update(void)override;
 	void Draw(void)override;

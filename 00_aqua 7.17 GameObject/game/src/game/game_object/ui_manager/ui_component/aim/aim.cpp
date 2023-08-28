@@ -36,6 +36,7 @@ void CAim::Update(void)
 	//ƒJƒƒ‰‚©‚ç‚ÌƒŒƒC‚ÌˆÊ’u‚ğİ’è
 	SetAimRay();
 
+	//“–‚½‚Á‚½êŠ‚ğó‚¯æ‚é
 	aqua::CVector3 hit_position = CheckHitRay();
 
 	//’e‚ğŒ‚‚Â•ûŒü‚ğİ’è

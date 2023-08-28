@@ -21,10 +21,14 @@ public:
 	void Finalize(void);
 
 	//生成
+	//UIのID
 	void Create(UI_ID id);
+	//UIのID,	位置
 	void Create(UI_ID id, const aqua::CVector2& position);
+	//UIのID,	位置,	文字
 	void Create(UI_ID id, const aqua::CVector2& position,const std::string& word);
-	void Create(UI_ID id, const aqua::CVector2& position, int score, float scale, unsigned char color);
+	//UIのID,	位置,	スコア,	拡大率,	色
+	void Create(UI_ID id, const aqua::CVector2& position, int score, float scale, aqua::CColor color);
 
 	//照準UI取得
 	CAim* GetAim(void);

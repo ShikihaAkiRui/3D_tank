@@ -123,6 +123,7 @@
     <ClCompile Include="src\game\game_object\ui_manager\ui_component\score\score.cpp" />
     <ClCompile Include="src\game\game_object\ui_manager\ui_component\show_score\show_score.cpp" />
     <ClCompile Include="src\game\game_object\ui_manager\ui_component\start_message\start_message.cpp" />
+    <ClCompile Include="src\game\game_object\ui_manager\ui_component\title_name\title_name.cpp" />
     <ClCompile Include="src\game\game_object\ui_manager\ui_component\ui_component.cpp" />
     <ClCompile Include="src\game\game_object\ui_manager\ui_manager.cpp" />
     <ClCompile Include="src\game\game_object\unit_manager\character\character.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="src\game\game_object\ui_manager\ui_component\score\score.h" />
     <ClInclude Include="src\game\game_object\ui_manager\ui_component\show_score\show_score.h" />
     <ClInclude Include="src\game\game_object\ui_manager\ui_component\start_message\start_message.h" />
+    <ClInclude Include="src\game\game_object\ui_manager\ui_component\title_name\title_name.h" />
     <ClInclude Include="src\game\game_object\ui_manager\ui_component\ui_component.h" />
     <ClInclude Include="src\game\game_object\ui_manager\ui_component\ui_id.h" />
     <ClInclude Include="src\game\game_object\ui_manager\ui_manager.h" />

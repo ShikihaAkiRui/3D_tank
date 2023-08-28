@@ -44,7 +44,7 @@ void CItemManager::Create(aqua::CVector3& position)
 	item->Initialize(position);
 }
 
-//
+//アイテムとキャラクターの当たり判定
 bool CItemManager::CheckHitCharacter(ICollision* collision, UNIT_CATEGORY unit_category)
 {
 	bool hit_flag = false;

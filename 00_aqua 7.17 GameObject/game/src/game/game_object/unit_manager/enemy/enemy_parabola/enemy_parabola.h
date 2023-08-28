@@ -10,8 +10,9 @@ public:
 	CEnemyParabola(aqua::IGameObject* parent);
 	~CEnemyParabola() = default;
 
+	//‰Šú‰»
+	//ˆÊ’u
 	void Initialize(const aqua::CVector3& position)override;
-
 	void Update(void)override;
 
 private:

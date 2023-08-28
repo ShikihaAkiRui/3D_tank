@@ -22,6 +22,7 @@ void CControlCamera::Initialize(aqua::CCamera* camera,IUnit* unit)
 	m_Camera = camera;
 	m_Unit = unit;
 
+	//ƒJƒƒ‰‰ŠúˆÊ’uÝ’è
 	m_Camera->m_Position = m_Unit->GetModel()->position + m_camera_length;
 	m_Camera->m_TargetPosition = m_Unit->GetModel()->position + m_target_position;
 
