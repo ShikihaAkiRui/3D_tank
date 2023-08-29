@@ -1,6 +1,6 @@
 #include "bullet_normal.h"
 
-const float CBulletNormal::m_move_speed = 100.0f;
+const float CBulletNormal::m_move_speed = 120.0f;
 const float CBulletNormal::m_radius = 4.0f;
 
 //コンストラクタ

@@ -15,6 +15,9 @@ public:
 	void Finalize(void)override;
 
 private:
+	aqua::CSprite m_BackSprite;	//背景スプライト
+
+	static const aqua::CVector2 m_back_scale;		//背景拡大率
 	static const aqua::CVector2 m_title_name_position;	//タイトルの位置
 	static const aqua::CVector2 m_message_position;	//メッセージ位置
 	static const std::string m_message;				//メッセージ文字

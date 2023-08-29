@@ -2,8 +2,14 @@
 #include"../../stage/stage.h"
 #include"../../unit_manager/unit_manager.h"
 
+const std::string CItem::m_item_file_names[] = {
+	"data/model/Diamondo.mv1",
+	"data/model/Diamondo_red.mv1",
+	"data/model/Hexgon.mv1"
+};
+const int CItem::m_max_file = 3;
 const aqua::CVector3 CItem::m_graund_ray = aqua::CVector3(0.0f, -4.0f, 0.0f);
-const float CItem::m_radius = 4.0f;
+const float CItem::m_radius = 10.0f;
 
 //コンストラクタ
 CItem::CItem(aqua::IGameObject* parent)
@@ -16,7 +22,9 @@ CItem::CItem(aqua::IGameObject* parent)
 //初期化
 void CItem::Initialize(const aqua::CVector3& position)
 {
-	m_Model.Load("data/model/ball.mv1");
+	int rand = aqua::Rand(m_max_file - 1, 0);
+
+	m_Model.Load(m_item_file_names[rand]);
 
 	m_Position = position;
 

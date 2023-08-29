@@ -90,7 +90,6 @@ void CShowScore::Draw(void)
 //‰ð•ú
 void CShowScore::Finalize(void)
 {
-
 	for (int i = 0; i < m_ShowDigit; ++i)
 		m_Sprites[i].Delete();
 

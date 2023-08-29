@@ -3,8 +3,8 @@
 #include"../../effect_manager/effect_manager.h"
 
 const aqua::CVector3 IBullet::m_default_direction = aqua::CVector3(0.0f,0.0f,1.0f);
-const aqua::CVector3 IBullet::m_min_range = aqua::CVector3(-2000.0f,-1000.0f,-2000.0f);
-const aqua::CVector3 IBullet::m_max_range = aqua::CVector3(2000.0f,1000.0f,2000.0f);
+const aqua::CVector3 IBullet::m_min_range = aqua::CVector3(-2000.0f,-500.0f,-2000.0f);
+const aqua::CVector3 IBullet::m_max_range = aqua::CVector3(2000.0f,500.0f,2000.0f);
 
 
 //コンストラクタ
@@ -92,14 +92,25 @@ void IBullet::CheckGraund(void)
 //表示範囲の判定
 void IBullet::CheckRange(void)
 {
+	CEffectManager& effect = CEffectManager::GetInstance();
+
 	//範囲から出たら消す
 	if (m_min_range.x > m_Position.x || m_max_range.x < m_Position.x)
+	{
+		effect.Create(EFFECT_ID::NOT_HIT, m_Position);
 		DeleteObject();
+	}
 
 	if (m_min_range.y > m_Position.y || m_max_range.y < m_Position.y)
+	{
+		effect.Create(EFFECT_ID::NOT_HIT, m_Position);
 		DeleteObject();
+	}
 
 	if (m_min_range.z > m_Position.z || m_max_range.z < m_Position.z)
+	{
+		effect.Create(EFFECT_ID::NOT_HIT, m_Position);
 		DeleteObject();
+	}
 
 }

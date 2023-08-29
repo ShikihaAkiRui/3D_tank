@@ -78,6 +78,18 @@ void ICharacter::CheckGround(void)
 
 }
 
+//•Ç‚Ì”»’è
+void ICharacter::CheckWall(void)
+{
+	CStage* stage = (CStage*)aqua::FindGameObject("Stage");
+	if (!stage)return;
+
+	aqua::CVector3 moved_position = m_Position + m_Velocity;
+
+	if (stage->GetHitWall(moved_position))
+		m_Velocity = aqua::CVector3::ZERO;
+}
+
 //’e‚Ì”»’è
 bool ICharacter::CheckHitBullet(void)
 {

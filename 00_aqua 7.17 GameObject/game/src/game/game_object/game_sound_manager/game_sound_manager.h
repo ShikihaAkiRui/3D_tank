@@ -5,11 +5,16 @@
 //サウンドID
 enum class SOUND_ID
 {
-	TITLEBGM,
+	TITLE_BGM,		//タイトルBGM
+	GAMEMAIN_BGM,	//ゲームメイン
 
-	DECISION,
+	DECISION,		//決定
+	EXPLOSION,		//爆発
+	DAMAGE,			//ダメージを受ける
+	SHOT,			//発射
+	GET_ITEM,		//アイテム取得
 
-	MAX
+	MAX				//サウンド数
 };
 
 //サウンドマネージャー

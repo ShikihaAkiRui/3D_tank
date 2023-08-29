@@ -44,6 +44,9 @@ protected:
 	//床の判定
 	void CheckGround(void);
 
+	//壁の判定
+	void CheckWall(void);
+
 	static const int m_default_damage;	//デフォルトのダメージ量
 
 private:

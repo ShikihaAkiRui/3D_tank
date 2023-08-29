@@ -40,6 +40,8 @@ private:
 	aqua::CTimer m_ShotBulletTimer;	   //射撃間隔
 	bool m_FirstShotFlag;		//最初の攻撃をしたかのフラグ
 
+	static const aqua::CVector3 m_default_position;	//初期位置
+	static const aqua::CVector3 m_scale;		//拡大率
 	static const int m_life;					//体力
 	static const float m_move_speed;			//速度
 	static const float m_ray_langth;			//レイ長さ

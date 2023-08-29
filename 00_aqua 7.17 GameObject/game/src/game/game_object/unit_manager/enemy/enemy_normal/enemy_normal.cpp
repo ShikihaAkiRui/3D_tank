@@ -2,12 +2,13 @@
 #include"../../../bullet_manager/bullet_manager.h"
 #include"../../unit_manager.h"
 
+const aqua::CVector3 CEnemyNormal::m_scale = aqua::CVector3(0.3f, 0.3f, 0.3f);
 const float CEnemyNormal::m_graund_ray_langth = -15.0f;
 const int CEnemyNormal::m_life = 1;
 const float CEnemyNormal::m_move_speed = 30.0f;
 const float CEnemyNormal::m_stop_distance = 250.0f;
 const float CEnemyNormal::m_back_distance = 230.0f;
-const float CEnemyNormal::m_shot_length = 400.0f;
+const float CEnemyNormal::m_shot_length = 500.0f;
 const float CEnemyNormal::m_shot_time = 3.0f;
 
 //コンストラクタ
@@ -22,7 +23,7 @@ void CEnemyNormal::Initialize(const aqua::CVector3& position)
 {
 	IEnemy::Initialize("data/model/enemy_tank/TankFree_Red.mv1", position, m_graund_ray_langth,m_life);
 
-	m_Model->scale = aqua::CVector3(0.3f, 0.3f, 0.3f);
+	m_Model->scale = m_scale;
 
 	//向き設定
 	m_Player = CUnitManager::GetInstance().GetPlayer();
@@ -78,6 +79,8 @@ void CEnemyNormal::Move(void)
 	m_Velocity.Transform(matrix);
 
 	IEnemy::Move();
+
+	CheckWall();
 
 	//止まる距離より遠いとき
 	if (m_PlayerDistance.Length() > m_stop_distance)

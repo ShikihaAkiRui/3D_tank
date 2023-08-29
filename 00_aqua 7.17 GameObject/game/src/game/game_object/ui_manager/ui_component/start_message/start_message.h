@@ -27,5 +27,8 @@ private:
 	STATE m_State;						//開始メッセージの状態
 
 	static const float m_start_display_time;	//状態の変更時間
-	static const float m_max_scale;				//最大拡大率
+	static const aqua::CVector2 m_default_scale;//初期の拡大率
+	static const aqua::CVector2 m_max_scale;	//最大拡大率
+	static const float m_max_alpha;				//アルファ値最大
+	static const float m_min_alpha;				//アルファ値最小
 };

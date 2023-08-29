@@ -6,7 +6,7 @@
 const float CResultScene::m_fade_time = 1.0f;
 const unsigned char CResultScene::m_max_fade_color = 0x80;
 const aqua::CVector2 CResultScene::m_label_position = aqua::CVector2(200.0f, 330.0f);
-const int CResultScene::m_label_size = 60.0f;
+const int CResultScene::m_label_size = 60;
 const aqua::CVector2 CResultScene::m_score_position = aqua::CVector2(700.0f, 400.0f);
 const float CResultScene::m_score_scale = 5.0f;
 const aqua::CColor CResultScene::m_score_color = 0xffffff00;
@@ -59,7 +59,7 @@ void CResultScene::Update(void)
     {
         m_FadeTimer.Update();
 
-        m_BackgroundPanel.color.alpha = aqua::easing::InOutQuad(
+        m_BackgroundPanel.color.alpha = (unsigned char)aqua::easing::InOutQuad(
             m_FadeTimer.GetTime(), m_FadeTimer.GetLimit(), 0, m_max_fade_color);
 
         //フェード終わった

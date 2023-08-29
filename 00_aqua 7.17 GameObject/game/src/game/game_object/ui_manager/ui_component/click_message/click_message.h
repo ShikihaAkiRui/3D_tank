@@ -23,5 +23,6 @@ private:
 	static const float m_label_angle_speed;	//アルファ値の速度
 	static const float m_max_alpha;			//アルファ値最大
 	static const int m_size;				//大きさ
+	static const int m_edge_size;			//端大きさ
 
 };

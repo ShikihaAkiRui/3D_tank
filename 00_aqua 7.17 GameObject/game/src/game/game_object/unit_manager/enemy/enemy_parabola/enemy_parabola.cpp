@@ -2,9 +2,10 @@
 #include"../../../bullet_manager/bullet_manager.h"
 #include"../../unit_manager.h"
 
+const aqua::CVector3 CEnemyParabola::m_scale = aqua::CVector3(0.3f, 0.3f, 0.3f);
 const float CEnemyParabola::m_graund_ray_langth = -15.0f;
 const int CEnemyParabola::m_life = 1;
-const float CEnemyParabola::m_move_speed = 10.0f;
+const float CEnemyParabola::m_move_speed = 25.0f;
 const float CEnemyParabola::m_stop_distance = 300.0f;
 const float CEnemyParabola::m_shot_time = 3.0f;
 
@@ -30,7 +31,7 @@ void CEnemyParabola::Initialize(const aqua::CVector3& position)
 	m_Rotation.y = aqua::RadToDeg(atan2(distance.x, distance.z));
 
 	m_Model->rotation = m_Rotation;
-	m_Model->scale = aqua::CVector3(0.3f, 0.3f, 0.3f);
+	m_Model->scale = m_scale;
 
 	m_ShotTimer.Setup(m_shot_time);
 
@@ -74,6 +75,8 @@ void CEnemyParabola::Move(void)
 	m_Velocity.Transform(matrix);
 
 	IEnemy::Move();
+
+	CheckWall();
 
 	//Ž~‚Ü‚é‹——£‚æ‚è‰“‚¢‚Æ‚«
 	if (m_Distance.Length() > m_stop_distance)

@@ -3,6 +3,8 @@
 
 const aqua::CVector3 CControlCamera::m_camera_length = aqua::CVector3(0.0f, 40.0f, -100.0f);
 const aqua::CVector2 CControlCamera::m_angle_variation = aqua::CVector2(0.1f, 0.1f);
+const float CControlCamera::m_max_y_angle = 360.0f;
+const float CControlCamera::m_min_y_angle = 0.0f;
 const float CControlCamera::m_max_x_angle = 60.0f;
 const float CControlCamera::m_min_x_angle = -90.0f;
 const aqua::CVector3 CControlCamera::m_target_position = aqua::CVector3(0.0f, 30.0f, 0.0f);
@@ -40,10 +42,10 @@ void CControlCamera::Update(void)
 	m_Angle.x += mouse.y * m_angle_variation.x;
 	m_Angle.y += mouse.x * m_angle_variation.y;
 
-	if (m_Angle.y >= 360.0f)
-		m_Angle.y -= 360.0f;
-	if (m_Angle.y <= 0.0f)
-		m_Angle.y += 360.0f;
+	if (m_Angle.y >= m_max_y_angle)
+		m_Angle.y -= m_max_y_angle;
+	if (m_Angle.y <= m_min_y_angle)
+		m_Angle.y += m_max_y_angle;
 
 	//ã‰º‚Ì•ûŒüãŒÀ
 	if (m_Angle.x >= m_max_x_angle)

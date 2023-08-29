@@ -14,8 +14,10 @@ CTitleName::CTitleName(aqua::IGameObject* parent)
 void CTitleName::Initialize(const aqua::CVector2& position)
 {
 	m_Label.Create(m_label_size,m_edge_bold);
-	m_Label.text = "タイトル";
+	m_Label.text = "タンクバスター";
 	m_Label.color = m_label_color;
+	m_Label.position = position;
+
 }
 
 //描画

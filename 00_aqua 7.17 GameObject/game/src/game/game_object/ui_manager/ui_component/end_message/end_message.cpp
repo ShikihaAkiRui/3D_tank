@@ -2,7 +2,8 @@
 
 const float CEndMessage::m_display_time = 1.5f;
 const float CEndMessage::m_position_height = 0.0f;
-const float CEndMessage::m_max_scale = 1.5f;
+const aqua::CVector2 CEndMessage::m_default_scale = aqua::CVector2(0.0f,0.0f);
+const aqua::CVector2 CEndMessage::m_max_scale = aqua::CVector2(1.5f, 1.5f);
 
 //コンストラクタ
 CEndMessage::CEndMessage(aqua::IGameObject* parent)
@@ -20,7 +21,7 @@ void CEndMessage::Initialize(void)
 	m_Sprite.position.y = m_position_height;
 	m_Sprite.anchor.x = m_Sprite.GetTextureWidth() / 2.0f;
 	m_Sprite.anchor.y = m_Sprite.GetTextureHeight() / 2.0f;
-	m_Sprite.scale = aqua::CVector2(0.0f, 0.0f);
+	m_Sprite.scale = m_default_scale;
 
 	m_DisplayTimer.Setup(m_display_time);
 
@@ -36,8 +37,8 @@ void CEndMessage::Update(void)
 	{
 	case CEndMessage::STATE::START_IN:
 
-		m_Sprite.scale.x = aqua::easing::OutBack(m_DisplayTimer.GetTime(), m_DisplayTimer.GetLimit(), 0.0f, m_max_scale);
-		m_Sprite.scale.y = aqua::easing::OutBack(m_DisplayTimer.GetTime(), m_DisplayTimer.GetLimit(), 0.0f, m_max_scale);
+		m_Sprite.scale.x = aqua::easing::OutBack(m_DisplayTimer.GetTime(), m_DisplayTimer.GetLimit(), m_default_scale.x, m_max_scale.x);
+		m_Sprite.scale.y = aqua::easing::OutBack(m_DisplayTimer.GetTime(), m_DisplayTimer.GetLimit(), m_default_scale.y, m_max_scale.y);
 
 		//出し終えたら切り替え
 		if (m_DisplayTimer.Finished())

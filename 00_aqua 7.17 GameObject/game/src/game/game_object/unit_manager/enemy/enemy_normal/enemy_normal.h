@@ -26,6 +26,7 @@ private:
 	aqua::CTimer m_ShotTimer;				//撃つ間隔の時間
 	aqua::CVector3 m_PlayerDistance;		//プレイヤーとの距離
 
+	static const aqua::CVector3 m_scale;			//拡大率
 	static const float  m_graund_ray_langth;		//床用のレイの長さ
 	static const int m_life;						//体力
 	static const float m_move_speed;				//移動速度

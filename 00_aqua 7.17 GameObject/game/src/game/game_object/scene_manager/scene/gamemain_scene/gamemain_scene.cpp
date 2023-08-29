@@ -82,6 +82,7 @@ void CGameMainScene::Update(void)
 	{
 	case CGameMainScene::GAME_STATE::START:
 
+		//演出が終わったら行動開始
 		if (ui_manager.GetStartMessage() == nullptr)
 		{
 			unit_manager.SetGameState(aqua::GAME_OBJECT_STATE::ACTIVE);
@@ -100,6 +101,7 @@ void CGameMainScene::Update(void)
 		
 		break;
 	case CGameMainScene::GAME_STATE::END:
+		//リザルトをプッシュ
 		PushScene(SCENE_ID::RESULT);
 
 		break;

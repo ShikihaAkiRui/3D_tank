@@ -3,6 +3,7 @@
 const float CClickMessage::m_label_angle_speed = 1.0f;
 const float CClickMessage::m_max_alpha = 255.0f;
 const int CClickMessage::m_size = 40;
+const int CClickMessage::m_edge_size = 1;
 
 //コンストラクタ
 CClickMessage::CClickMessage(aqua::IGameObject* parent)
@@ -14,7 +15,7 @@ CClickMessage::CClickMessage(aqua::IGameObject* parent)
 //初期化
 void CClickMessage::Initialize(const aqua::CVector2& position, const std::string word)
 {
-	m_Label.Create(m_size);
+	m_Label.Create(m_size,m_edge_size);
 	m_Label.text = word;
 	m_Label.position = position;
 }

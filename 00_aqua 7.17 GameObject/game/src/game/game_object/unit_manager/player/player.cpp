@@ -5,7 +5,10 @@
 #include"../../control_camera/control_camera.h"
 #include"../../ui_manager/ui_manager.h"
 #include"../../effect_manager/effect_manager.h"
+#include"../../game_sound_manager/game_sound_manager.h"
 
+const aqua::CVector3 CPlayer::m_default_position = aqua::CVector3(-1250.0f, 50.0f, -600.0f);
+const aqua::CVector3 CPlayer::m_scale = aqua::CVector3(-0.3f, 0.3f, -0.3f);
 const int CPlayer::m_life = 3;
 const float CPlayer::m_move_speed = 100.0f;
 const float CPlayer::m_ray_langth = 15.0f;
@@ -19,7 +22,7 @@ const float CPlayer::m_shot_bullet_time = 1.0f;
 CPlayer::CPlayer(aqua::IGameObject* parent)
 	:ICharacter(parent,"Player")
 	,m_Angle(0.0f)
-	, m_Matrix(aqua::CMatrix::Ident())
+	,m_Matrix(aqua::CMatrix::Ident())
 	,m_ShotRotationFlag(false)
 	,m_DamageFlag(false)
 	,m_FirstShotFlag(true)
@@ -34,9 +37,9 @@ void CPlayer::Initialize(void)
 	m_UnitCategory = UNIT_CATEGORY::PLAYER;
 	m_Life = m_life;
 
-	m_Position = aqua::CVector3(-1250.0f, 50.0f,-600.0f);
+	m_Position = m_default_position;
 	m_Model->position = m_Position;
-	m_Model->scale = aqua::CVector3(-0.3f, 0.3f, -0.3f);
+	m_Model->scale = m_scale;
 
 	m_GraundRayLength = m_graund_ray_langth;
 
@@ -153,6 +156,8 @@ void CPlayer::Move(void)
 	
 	ICharacter::Move();
 
+	CheckWall();
+
 	m_Position += m_Velocity * m_move_speed * aqua::GetDeltaTime();
 
 	m_Model->rotation = m_Rotation;
@@ -264,4 +269,7 @@ void CPlayer::HitItem(void)
 	if (!score)return;
 
 	score->Add(1);
+
+	CGameSoundManager& sound = CGameSoundManager::GetInstance();
+	sound.Play(SOUND_ID::GET_ITEM);
 }

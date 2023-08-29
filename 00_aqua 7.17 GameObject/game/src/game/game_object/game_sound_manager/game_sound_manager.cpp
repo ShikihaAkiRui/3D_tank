@@ -4,6 +4,13 @@ const std::string CGameSoundManager::m_sound_file_names[] =
 {
     "data/sound/put.mp3",
     "data/sound/put.mp3",
+
+    "data/sound/put.mp3",
+    "data/sound/explosion.mp3",
+    "data/sound/explosion.mp3",
+    "data/sound/gun-fire02.mp3",
+    "data/sound/coin03.mp3"
+
 };
 
 //インスタンスを取得
@@ -19,7 +26,7 @@ void CGameSoundManager::Initialize(void)
     if (!m_SoundPlayer) m_SoundPlayer = AQUA_NEW aqua::CSoundPlayer[(int)SOUND_ID::MAX];
 
     //ループ再生設定
-    for (int i = (int)SOUND_ID::TITLEBGM; i < (int)SOUND_ID::DECISION; ++i)
+    for (int i = (int)SOUND_ID::TITLE_BGM; i < (int)SOUND_ID::DECISION; ++i)
         m_SoundPlayer[i].Create(m_sound_file_names[i], true);
 
     // SEは単発
