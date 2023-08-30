@@ -5,13 +5,13 @@
 const float CEnemyAppear::m_max_ray_height = 500.0f;
 const float CEnemyAppear::m_min_ray_height = -500.0f;
 const float CEnemyAppear::m_appear_height = 10.0f;
-const int CEnemyAppear::m_max_enemy = 10;
-const aqua::CVector2 CEnemyAppear::m_max_appear_area = aqua::CVector2(-2000.0f,-2000.0f);
-const aqua::CVector2 CEnemyAppear::m_min_appear_area = aqua::CVector2(0.0f, 0.0f);
+const int CEnemyAppear::m_max_enemy = 20;
+const aqua::CVector2 CEnemyAppear::m_max_appear_area = aqua::CVector2(800.0f,800.0f);
+const aqua::CVector2 CEnemyAppear::m_min_appear_area = aqua::CVector2(-800.0f, -800.0f);
 const float CEnemyAppear::m_first_appear_time = 2.0f;
 const float CEnemyAppear::m_default_appear_time = 10.0f;
 const float CEnemyAppear::m_max_appear_time = 2.0f;
-const float CEnemyAppear::m_acceleration = 0.98f;
+const float CEnemyAppear::m_acceleration = 0.8f;
 const int CEnemyAppear::m_second_change_count = 5;
 
 //コンストラクタ
@@ -63,8 +63,8 @@ void CEnemyAppear::Update(void)
 		aqua::CVector3 appear_position = aqua::CVector3::ZERO;
 		
 		//平面上の座標を決める
-		appear_position.x = (float)aqua::Rand((int)m_min_appear_area.x,(int)m_max_appear_area.x);
-		appear_position.z = (float)aqua::Rand((int)m_min_appear_area.y,(int)m_max_appear_area.y);
+		appear_position.x = (float)aqua::Rand((int)m_max_appear_area.x,(int)m_min_appear_area.x);
+		appear_position.z = (float)aqua::Rand((int)m_max_appear_area.y,(int)m_min_appear_area.y);
 		
 		CStage* stage = (CStage*)aqua::FindGameObject("Stage");
 		if (!stage)return;

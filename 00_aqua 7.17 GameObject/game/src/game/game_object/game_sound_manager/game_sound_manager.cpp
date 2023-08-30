@@ -2,15 +2,20 @@
 
 const std::string CGameSoundManager::m_sound_file_names[] =
 {
-    "data/sound/put.mp3",
-    "data/sound/put.mp3",
+    "data/sound/chiisanaannaisya.mp3",
+    "data/sound/goshin.mp3",
 
     "data/sound/put.mp3",
     "data/sound/explosion.mp3",
-    "data/sound/explosion.mp3",
+    "data/sound/bomb.mp3",
+    "data/sound/small_explosion3.mp3",
     "data/sound/gun-fire02.mp3",
-    "data/sound/coin03.mp3"
-
+    "data/sound/coin03.mp3",
+    "data/sound/trampet.mp3"
+};
+const int CGameSoundManager::m_sound_volume[] =
+{
+    100,100,130,100,80,110,100,100,150
 };
 
 //インスタンスを取得
@@ -32,6 +37,10 @@ void CGameSoundManager::Initialize(void)
     // SEは単発
     for (int i = (int)SOUND_ID::DECISION; i < (int)SOUND_ID::MAX; ++i)
         m_SoundPlayer[i].Create(m_sound_file_names[i], false, 100);
+    
+    //ボリューム調整
+    for (int bo = 0; bo < (int)SOUND_ID::MAX; ++bo)
+        m_SoundPlayer[bo].SetVolume(m_sound_volume[bo]);
 }
 
 //解放

@@ -1,4 +1,5 @@
 #include "end_message.h"
+#include"../../../game_sound_manager/game_sound_manager.h"
 
 const float CEndMessage::m_display_time = 1.5f;
 const float CEndMessage::m_position_height = 0.0f;
@@ -26,6 +27,9 @@ void CEndMessage::Initialize(void)
 	m_DisplayTimer.Setup(m_display_time);
 
 	m_State = STATE::START_IN;
+
+	CGameSoundManager::GetInstance().Play(SOUND_ID::HORN);
+
 }
 
 //çXêV

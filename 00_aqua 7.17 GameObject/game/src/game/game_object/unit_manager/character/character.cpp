@@ -4,6 +4,7 @@
 #include"../../bullet_manager/bullet/bullet.h"
 #include"../../item_manager/item_manager.h"
 #include"../../item_manager/item/item.h"
+#include"../../game_sound_manager/game_sound_manager.h"
 
 const aqua::CVector3 ICharacter::m_default_position = aqua::CVector3::ZERO;
 const aqua::CVector3 ICharacter::m_default_graund_ray_length = aqua::CVector3(0.0f,-10.0f,0.0f);
@@ -138,6 +139,8 @@ void ICharacter::HitAttack(void)
 //“|‚³‚ê‚½
 void ICharacter::Dead(void)
 {
+	CGameSoundManager::GetInstance().Play(SOUND_ID::EXPLOSION);
+
 	DeleteObject();
 }
 

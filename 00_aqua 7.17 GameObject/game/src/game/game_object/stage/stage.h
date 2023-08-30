@@ -29,6 +29,7 @@ public:
 
 private:
 	static const aqua::CVector3 m_position;	//位置
+	static const aqua::CVector3 m_scale;	//拡大率
 	static const float m_gravity;			//重力
 	static const float m_not_hit_height;	//当たらなかったときに返す値
 	static const aqua::CVector3 m_min_wall_position;	//最小の壁の位置

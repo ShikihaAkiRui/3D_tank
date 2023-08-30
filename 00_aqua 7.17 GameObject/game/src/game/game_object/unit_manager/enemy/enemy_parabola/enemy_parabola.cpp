@@ -1,11 +1,12 @@
 #include "enemy_parabola.h"
 #include"../../../bullet_manager/bullet_manager.h"
 #include"../../unit_manager.h"
+#include"../../../game_sound_manager/game_sound_manager.h"
 
 const aqua::CVector3 CEnemyParabola::m_scale = aqua::CVector3(0.3f, 0.3f, 0.3f);
 const float CEnemyParabola::m_graund_ray_langth = -15.0f;
 const int CEnemyParabola::m_life = 1;
-const float CEnemyParabola::m_move_speed = 25.0f;
+const float CEnemyParabola::m_move_speed = 40.0f;
 const float CEnemyParabola::m_stop_distance = 300.0f;
 const float CEnemyParabola::m_shot_time = 3.0f;
 
@@ -106,6 +107,8 @@ void CEnemyParabola::Shot(void)
 
 		CBulletManager& bullet_manager = CBulletManager::GetInstance();
 		bullet_manager.Create(BULLET_ID::PARABOLA,m_UnitCategory, m_Position,m_Player->GetModel()->position );
+
+		CGameSoundManager::GetInstance().Play(SOUND_ID::SHOT);
 
 	}
 }

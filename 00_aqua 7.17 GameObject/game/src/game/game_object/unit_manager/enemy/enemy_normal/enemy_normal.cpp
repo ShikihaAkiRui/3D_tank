@@ -1,14 +1,15 @@
 #include "enemy_normal.h"
 #include"../../../bullet_manager/bullet_manager.h"
 #include"../../unit_manager.h"
+#include"../../../game_sound_manager/game_sound_manager.h"
 
 const aqua::CVector3 CEnemyNormal::m_scale = aqua::CVector3(0.3f, 0.3f, 0.3f);
 const float CEnemyNormal::m_graund_ray_langth = -15.0f;
 const int CEnemyNormal::m_life = 1;
-const float CEnemyNormal::m_move_speed = 30.0f;
+const float CEnemyNormal::m_move_speed = 50.0f;
 const float CEnemyNormal::m_stop_distance = 250.0f;
 const float CEnemyNormal::m_back_distance = 230.0f;
-const float CEnemyNormal::m_shot_length = 500.0f;
+const float CEnemyNormal::m_shot_length = 700.0f;
 const float CEnemyNormal::m_shot_time = 3.0f;
 
 //コンストラクタ
@@ -111,6 +112,8 @@ void CEnemyNormal::Shot(void)
 		CBulletManager& bullet_manager = CBulletManager::GetInstance();
 
 		bullet_manager.Create(BULLET_ID::NORMAL,m_UnitCategory, m_Position, m_Rotation);
+
+		CGameSoundManager::GetInstance().Play(SOUND_ID::SHOT);
 	}
 
 }

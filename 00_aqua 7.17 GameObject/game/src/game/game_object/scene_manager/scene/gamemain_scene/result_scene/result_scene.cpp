@@ -2,6 +2,7 @@
 #include "..\..\..\scene_manager.h"
 #include "../gamemain_scene.h"
 #include"../../../../ui_manager/ui_manager.h"
+#include"../../../../game_sound_manager/game_sound_manager.h"
 
 const float CResultScene::m_fade_time = 1.0f;
 const unsigned char CResultScene::m_max_fade_color = 0x80;
@@ -51,6 +52,7 @@ void CResultScene::Initialize(void)
 void CResultScene::Update(void)
 {
     CUIManager& ui_manager = CUIManager::GetInstance();
+    CGameSoundManager& sound = CGameSoundManager::GetInstance();
     ui_manager.Update();
 
     switch (m_State)
@@ -84,7 +86,11 @@ void CResultScene::Update(void)
     case STATE::WAIT:
     {
         if (aqua::mouse::Trigger(aqua::mouse::BUTTON_ID::LEFT))
+        {
+            sound.Play(SOUND_ID::DECISION);
+            sound.Stop(SOUND_ID::GAMEMAIN_BGM);
             ChangeScene(SCENE_ID::TITLE);
+        }
     }
     break;
     }

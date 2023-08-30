@@ -1,10 +1,11 @@
 #include "stage.h"
 
 const aqua::CVector3 CStage::m_position = aqua::CVector3(0.0f, -13.0f, 0.0f);
+const aqua::CVector3 CStage::m_scale = aqua::CVector3(0.5f, 0.75f, 0.5f);
 const float CStage::m_gravity = -50.0f;
 const float CStage::m_not_hit_height = -100.0f;
-const aqua::CVector3 CStage::m_min_wall_position = aqua::CVector3(-2000.0f,0.0f, -2000.0f);
-const aqua::CVector3 CStage::m_max_wall_position = aqua::CVector3(2000.0f,0.0f, 2000.0f);
+const aqua::CVector3 CStage::m_min_wall_position = aqua::CVector3(-1000.0f,0.0f, -1000.0f);
+const aqua::CVector3 CStage::m_max_wall_position = aqua::CVector3(1000.0f,0.0f, 1000.0f);
 
 //コンストラクタ
 CStage::CStage(aqua::IGameObject* parent)
@@ -15,8 +16,9 @@ CStage::CStage(aqua::IGameObject* parent)
 //初期化
 void CStage::Initialize(void)
 {
-	IUnit::Initialize("data/model/Terrain1.mv1");
+	IUnit::Initialize("data/model/Terrainte.mv1");
 	m_Model->position = m_position;
+	m_Model->scale = m_scale;
 }
 
 //弾と床の当たり判定
@@ -55,7 +57,7 @@ bool CStage::GetHitWall(const aqua::CVector3& position)
 
 	if (position.x >= m_max_wall_position.x || position.x <= m_min_wall_position.x)
 		hit_flag = true;
-	if (position.y >= m_max_wall_position.z || position.y <= m_min_wall_position.z)
+	if (position.z >= m_max_wall_position.z || position.z <= m_min_wall_position.z)
 		hit_flag = true;
 
 	return hit_flag;

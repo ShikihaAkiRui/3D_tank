@@ -1,4 +1,5 @@
 #include "start_message.h"
+#include"../../../game_sound_manager/game_sound_manager.h"
 
 const float CStartMessage::m_start_display_time = 1.0f;
 const aqua::CVector2 CStartMessage::m_default_scale = aqua::CVector2(0.0f, 0.0f);
@@ -26,6 +27,8 @@ void CStartMessage::Initialize(void)
 	m_StartDisplayTimer.Setup(m_start_display_time);
 
 	m_State = STATE::START_IN;
+
+	CGameSoundManager::GetInstance().Play(SOUND_ID::HORN);
 }
 
 //çXêV

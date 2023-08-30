@@ -25,6 +25,8 @@ void CTitleScene::Initialize(void)
 
 	IGameObject::Initialize();
 
+	CGameSoundManager::GetInstance().Play(SOUND_ID::TITLE_BGM);
+
 #ifdef _DEBUG
 	m_Label.Create(30);
 	m_Label.text = "title";
@@ -37,14 +39,17 @@ void CTitleScene::Initialize(void)
 void CTitleScene::Update(void)
 {
 	CUIManager::GetInstance().Update();
+	CGameSoundManager& sound = CGameSoundManager::GetInstance();
 
 	if (aqua::mouse::Trigger(aqua::mouse::BUTTON_ID::LEFT))
 	{
-		CGameSoundManager::GetInstance().Play(SOUND_ID::DECISION);
+		sound.Play(SOUND_ID::DECISION);
+		sound.Stop(SOUND_ID::TITLE_BGM);
 		ChangeScene(SCENE_ID::GAMEMAIN);
 	}
 
 	IGameObject::Update();
+
 }
 
 //•`‰æ

@@ -7,7 +7,7 @@
 #include"../../effect_manager/effect_manager.h"
 #include"../../game_sound_manager/game_sound_manager.h"
 
-const aqua::CVector3 CPlayer::m_default_position = aqua::CVector3(-1250.0f, 50.0f, -600.0f);
+const aqua::CVector3 CPlayer::m_default_position = aqua::CVector3(0.0f, 20.0f, 0.0f);
 const aqua::CVector3 CPlayer::m_scale = aqua::CVector3(-0.3f, 0.3f, -0.3f);
 const int CPlayer::m_life = 3;
 const float CPlayer::m_move_speed = 100.0f;
@@ -194,6 +194,8 @@ void CPlayer::Shot(void)
 			//弾生成
 			bullet_manager.Create(BULLET_ID::NORMAL, m_UnitCategory, m_Position, aim->GetAimAngle());
 
+			CGameSoundManager::GetInstance().Play(SOUND_ID::SHOT);
+
 			m_ShotRotationFlag = true;
 		}
 	}
@@ -222,6 +224,7 @@ void CPlayer::HitEnemyBody(void)
 		if (m_Life > 0)
 		{
 			CEffectManager::GetInstance().Create(EFFECT_ID::HITPLAYER, m_Position);
+			CGameSoundManager::GetInstance().Play(SOUND_ID::DAMAGE);
 		}
 
 		//体力の表示を減らす
@@ -246,6 +249,7 @@ void CPlayer::HitAttack(void)
 		if (m_Life > 0)
 		{
 			CEffectManager::GetInstance().Create(EFFECT_ID::HITPLAYER, m_Position);
+			CGameSoundManager::GetInstance().Play(SOUND_ID::DAMAGE);
 		}
 	
 		//体力の表示を減らす
@@ -260,6 +264,8 @@ void CPlayer::HitAttack(void)
 void CPlayer::Dead(void)
 {
 	CEffectManager::GetInstance().Create(EFFECT_ID::EXPLOSION, m_Position);
+	CGameSoundManager::GetInstance().Play(SOUND_ID::EXPLOSION);
+
 }
 
 //アイテムに当たった
@@ -270,6 +276,5 @@ void CPlayer::HitItem(void)
 
 	score->Add(1);
 
-	CGameSoundManager& sound = CGameSoundManager::GetInstance();
-	sound.Play(SOUND_ID::GET_ITEM);
+	CGameSoundManager::GetInstance().Play(SOUND_ID::GET_ITEM);
 }

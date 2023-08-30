@@ -7,6 +7,7 @@
 #include"../../../enemy_appear/enemy_appear.h"
 #include"../../../ui_manager/ui_manager.h"
 #include"../../../effect_manager/effect_manager.h"
+#include"../../../game_sound_manager/game_sound_manager.h"
 
 const std::string CGameMainScene::m_object_name = "GameMainScene";
 const aqua::CVector2 CGameMainScene::m_radar_position = aqua::CVector2(1000.0f, 10.0f);
@@ -53,6 +54,8 @@ void CGameMainScene::Initialize(void)
 	ui_manager.Create(UI_ID::START_MESSAGE);
 
 	m_GameState = GAME_STATE::START;
+
+	CGameSoundManager::GetInstance().Play(SOUND_ID::GAMEMAIN_BGM);
 
 #ifdef _DEBUG
 	m_Label.Create(30);

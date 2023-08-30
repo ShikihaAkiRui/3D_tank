@@ -11,8 +11,10 @@ enum class SOUND_ID
 	DECISION,		//決定
 	EXPLOSION,		//爆発
 	DAMAGE,			//ダメージを受ける
+	IMPACT,			//着弾
 	SHOT,			//発射
 	GET_ITEM,		//アイテム取得
+	HORN,			//角笛
 
 	MAX				//サウンド数
 };
@@ -40,6 +42,7 @@ private:
 
 
 	static const std::string	m_sound_file_names[];	//サウンドファイルパス
-	aqua::CSoundPlayer* m_SoundPlayer;				//サウンドプレイヤー
+	static const int m_sound_volume[];					//サウンドの大きさ
+	aqua::CSoundPlayer* m_SoundPlayer;					//サウンドプレイヤー
 
 };
