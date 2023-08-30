@@ -7,7 +7,7 @@
 #include"../../effect_manager/effect_manager.h"
 #include"../../game_sound_manager/game_sound_manager.h"
 
-const aqua::CVector3 CPlayer::m_default_position = aqua::CVector3(0.0f, 20.0f, 0.0f);
+const aqua::CVector3 CPlayer::m_default_position = aqua::CVector3(0.0f, 0.0f, 0.0f);
 const aqua::CVector3 CPlayer::m_scale = aqua::CVector3(-0.3f, 0.3f, -0.3f);
 const int CPlayer::m_life = 3;
 const float CPlayer::m_move_speed = 100.0f;
