@@ -7,7 +7,7 @@
 #include"../../effect_manager/effect_manager.h"
 #include"../../game_sound_manager/game_sound_manager.h"
 
-const aqua::CVector3 CPlayer::m_default_position = aqua::CVector3(0.0f, 0.0f, 0.0f);
+const aqua::CVector3 CPlayer::m_default_position = aqua::CVector3(0.0f, 2.0f, 0.0f);
 const aqua::CVector3 CPlayer::m_scale = aqua::CVector3(-0.3f, 0.3f, -0.3f);
 const int CPlayer::m_life = 3;
 const float CPlayer::m_move_speed = 100.0f;
@@ -15,7 +15,7 @@ const float CPlayer::m_ray_langth = 15.0f;
 const float CPlayer::m_rotation_speed = 10.0f;
 const float CPlayer::m_shot_rotation_speed = 40.0f;
 const aqua::CVector3 CPlayer::m_graund_ray_langth = aqua::CVector3(0.0f,-15.0f,0.0f);
-const float CPlayer::m_damage_interval_time = 3.0f;
+const float CPlayer::m_damage_interval_time = 2.0f;
 const float CPlayer::m_shot_bullet_time = 1.0f;
 
 //コンストラクタ
@@ -154,7 +154,8 @@ void CPlayer::Move(void)
 	m_Matrix.RotY(aqua::DegToRad(m_Rotation.y));
 	m_Velocity.Transform(m_Matrix);
 	
-	ICharacter::Move();
+	if(m_Velocity.Length() > 0)
+		ICharacter::Move();
 
 	CheckWall();
 
@@ -265,6 +266,8 @@ void CPlayer::Dead(void)
 {
 	CEffectManager::GetInstance().Create(EFFECT_ID::EXPLOSION, m_Position);
 	CGameSoundManager::GetInstance().Play(SOUND_ID::EXPLOSION);
+
+	SetGameObjectState(aqua::GAME_OBJECT_STATE::WAIT);
 
 }
 

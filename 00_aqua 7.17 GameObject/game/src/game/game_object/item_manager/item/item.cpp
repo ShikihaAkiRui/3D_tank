@@ -8,7 +8,7 @@ const std::string CItem::m_item_file_names[] = {
 	"data/model/Hexgon.mv1"
 };
 const int CItem::m_max_file = 3;
-const aqua::CVector3 CItem::m_graund_ray = aqua::CVector3(0.0f, -4.0f, 0.0f);
+const aqua::CVector3 CItem::m_graund_ray = aqua::CVector3(0.0f, -10.0f, 0.0f);
 const float CItem::m_radius = 10.0f;
 
 //コンストラクタ

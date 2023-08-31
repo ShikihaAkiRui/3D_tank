@@ -235,7 +235,6 @@ CPlayer* CUnitManager::GetPlayer(void)
 
 	while (it != m_GameObject.GetChildList()->end())
 	{
-
 		if ((*it)->GetGameObjectName() == m_player_name)
 		{
 			CPlayer* player = (CPlayer*)(*it);

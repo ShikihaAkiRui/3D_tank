@@ -20,9 +20,13 @@ public:
 	void Create(EFFECT_ID id, const aqua::CVector3 position);
 
 private:
+	//コンストラクタ
 	CEffectManager() = default;
+	//コピーコンストラクタ
 	CEffectManager(const CEffectManager& rhs);
+	//デストラクタ
 	~CEffectManager() = default;
+	//代入演算子
 	CEffectManager& operator=(const CEffectManager& rhs);
 
 	aqua::IGameObject m_GameObject;	//リスト

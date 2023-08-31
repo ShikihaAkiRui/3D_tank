@@ -5,7 +5,7 @@
 
 const aqua::CVector3 IBullet::m_default_direction = aqua::CVector3(0.0f,0.0f,1.0f);
 const aqua::CVector3 IBullet::m_min_range = aqua::CVector3(-1600.0f,-300.0f,-1600.0f);
-const aqua::CVector3 IBullet::m_max_range = aqua::CVector3(1000.0f,200.0f,1000.0f);
+const aqua::CVector3 IBullet::m_max_range = aqua::CVector3(1000.0f,500.0f,1000.0f);
 
 
 //コンストラクタ

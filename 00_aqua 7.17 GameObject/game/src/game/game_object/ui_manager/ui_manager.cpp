@@ -48,7 +48,7 @@ void CUIManager::Create(UI_ID id)
 
 	switch (id)
 	{
-	case UI_ID::AIM:	ui = aqua::CreateGameObject<CAim>(&m_GameObject);	break;
+	case UI_ID::AIM:			ui = aqua::CreateGameObject<CAim>(&m_GameObject);	break;
 	case UI_ID::START_MESSAGE:	ui = aqua::CreateGameObject<CStartMessage>(&m_GameObject);	break;
 	case UI_ID::END_MESSAGE:	ui = aqua::CreateGameObject<CEndMessage>(&m_GameObject);	break;
 	default:break;

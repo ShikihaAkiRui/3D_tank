@@ -3,15 +3,15 @@
 //ユニットID
 enum class UNIT_ID
 {
-	PLAYER,
-	ENEMY_NORMAL,
-	ENEMY_PARABOLA
+	PLAYER,			//プレイヤー
+	ENEMY_NORMAL,	//敵（普通の弾）
+	ENEMY_PARABOLA	//敵（放物線の弾）
 };
 
 //ユニットのカテゴリー
 enum class UNIT_CATEGORY
 {
-	DUMMY,
-	PLAYER,
-	ENMEY
+	DUMMY,	//ダミー
+	PLAYER,	//プレイヤー
+	ENMEY	//敵
 };

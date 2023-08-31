@@ -5,7 +5,7 @@
 #include"../../../control_camera/control_camera.h"
 
 const std::string CRadar::m_find_name = "Enemy";
-const float CRadar::m_scale_vector = 0.1f;
+const float CRadar::m_scale_vector = 0.2f;
 const aqua::CVector2 CRadar::m_character_scale = aqua::CVector2(2.0f, 2.0f);
 
 //コンストラクタ
@@ -95,7 +95,6 @@ void CRadar::GetEnemyData(void)
 	CUnitManager& unit_manager = CUnitManager::GetInstance();
 
 	m_AppearEnemyCount = unit_manager.GetEnemyData(m_EnemyVectors, m_MaxEnemyCount);
-
 }
 
 //表示位置設定

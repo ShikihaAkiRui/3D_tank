@@ -50,6 +50,7 @@ void CEnemyAppear::Update(void)
 		}
 		else
 		{
+			//徐々に出現時間を減らす
 			m_AppearTime *= m_acceleration;
 
 			if (m_AppearTime < m_max_appear_time)
@@ -58,7 +59,6 @@ void CEnemyAppear::Update(void)
 
 		m_AppearTimer.Reset();
 		m_AppearTimer.Setup(m_AppearTime);
-
 
 		aqua::CVector3 appear_position = aqua::CVector3::ZERO;
 		
@@ -69,7 +69,7 @@ void CEnemyAppear::Update(void)
 		CStage* stage = (CStage*)aqua::FindGameObject("Stage");
 		if (!stage)return;
 		
-		//床を探す
+		//出現予定地に床があるか探す
 		appear_position.y = stage->GetGraundHeight(aqua::CVector3(appear_position.x, m_min_ray_height, appear_position.z),
 													aqua::CVector3(appear_position.x, m_max_ray_height, appear_position.z));
 		appear_position.y += m_appear_height;
@@ -81,6 +81,7 @@ void CEnemyAppear::Update(void)
 			if (m_TotalCountEnemy > m_second_change_count)
 				m_AppearState = APPEAR_STATE::SECOND;
 
+			//出す敵の選択方法
 			switch (m_AppearState)
 			{
 			case APPEAR_STATE::FIRST:	FirstAppear();	break;
@@ -95,9 +96,7 @@ void CEnemyAppear::Update(void)
 
 			unit_manager.CreateEnemy(m_UnitID, appear_position);
 		}
-
 	}
-	
 }
 
 //エネミーの数を設定
