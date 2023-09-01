@@ -2,11 +2,12 @@
 #include"../../../control_camera/control_camera.h"
 #include"../../../unit_manager/unit_manager.h"
 #include"../../../unit_manager/player/player.h"
+#include"../../../stage/stage.h"
 
 const aqua::CVector2 CAim::m_aim_position = aqua::CVector2(aqua::GetWindowWidth() / 2.0f, aqua::GetWindowHeight() / 2.0f);
 const aqua::CColor CAim::m_aim_default_color = 0xff000000;
 const aqua::CColor CAim::m_aim_target_color = 0xffff0000;
-const float CAim::m_ray_length = 800.0f;
+const float CAim::m_ray_length = 750.0f;
 const std::string CAim::m_hit_object_name = "Enemy";
 const int CAim::m_frame_index = -1;
 
@@ -17,6 +18,7 @@ CAim::CAim(aqua::IGameObject* parent)
 	,m_DirectionAngle(aqua::CVector3::ZERO)
 	,m_StartRayPosition(aqua::CVector3::ZERO)
 	,m_EndRayPosition(aqua::CVector3::ZERO)
+	,m_HitEnemyFlag(false)
 {
 }
 
@@ -70,7 +72,7 @@ void CAim::SetAimRay(void)
 	CControlCamera* camera = (CControlCamera*)aqua::FindGameObject("ControlCamera");
 	if (!camera)return;
 
-	m_StartRayPosition = camera->GetPosition();
+	m_StartRayPosition = camera->GetTargetPosition();
 
 	//向いている方向のベクトル取得
 	aqua::CVector3 vector = aqua::CVector3(0.0f, 0.0f, 1.0f);
@@ -80,7 +82,7 @@ void CAim::SetAimRay(void)
 	matrix.RotY(aqua::DegToRad(camera->GetAngle().y));
 	vector.Transform(matrix);
 
-	m_EndRayPosition = camera->GetPosition() + (vector * m_ray_length);
+	m_EndRayPosition = camera->GetTargetPosition() + (vector * m_ray_length);
 
 }
 
@@ -88,8 +90,23 @@ void CAim::SetAimRay(void)
 aqua::CVector3 CAim::CheckHitRay(void)
 {
 	CUnitManager& unit_manager = CUnitManager::GetInstance();
+	CStage* stage = (CStage*)aqua::FindGameObject("Stage");
+	aqua::CVector3 hit_position;
 
-	return unit_manager.CheckHitAim(m_StartRayPosition, m_EndRayPosition);
+	m_HitEnemyFlag = true;
+
+	//敵と当たった位置を取得
+	hit_position = unit_manager.CheckHitAim(m_StartRayPosition, m_EndRayPosition);
+
+	//敵と当たっていなければステージと判定する
+	if (hit_position == m_EndRayPosition)
+	{
+		hit_position = stage->CheckHitAim(m_StartRayPosition, m_EndRayPosition);
+		m_HitEnemyFlag = false;
+
+	}
+
+	return hit_position;
 }
 
 //弾を撃つ角度
@@ -115,7 +132,7 @@ void CAim::GetBulletAngle(const aqua::CVector3& position)
 void CAim::ChangeColor(const aqua::CVector3& position)
 {
 	//当たっていたら色を変える
-	if (m_EndRayPosition != position)
+	if (m_HitEnemyFlag)
 		m_Sprite.color = m_aim_target_color;
 	else
 		m_Sprite.color = m_aim_default_color;

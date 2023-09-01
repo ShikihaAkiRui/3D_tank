@@ -4,6 +4,7 @@
 #include"../../../../ui_manager/ui_manager.h"
 #include"../../../../game_sound_manager/game_sound_manager.h"
 
+const aqua::CColor CResultScene::m_default_panel_color = 0x0000ff;
 const float CResultScene::m_fade_time = 1.0f;
 const unsigned char CResultScene::m_max_fade_color = 0x80;
 const aqua::CVector2 CResultScene::m_label_position = aqua::CVector2(200.0f, 330.0f);
@@ -25,8 +26,7 @@ CResultScene::CResultScene(aqua::IGameObject* parent)
 //èâä˙âª
 void CResultScene::Initialize(void)
 {
-    m_BackgroundPanel.Setup(aqua::CVector2::ZERO, (float)aqua::GetWindowWidth(), (float)aqua::GetWindowHeight(), aqua::CColor::BLUE);
-    m_BackgroundPanel.color.alpha = 0;
+    m_BackgroundPanel.Setup(aqua::CVector2::ZERO, (float)aqua::GetWindowWidth(), (float)aqua::GetWindowHeight(), m_default_panel_color);
 
     m_ScoreLabel.Create(m_label_size);
     m_ScoreLabel.text = "ÉXÉRÉA";

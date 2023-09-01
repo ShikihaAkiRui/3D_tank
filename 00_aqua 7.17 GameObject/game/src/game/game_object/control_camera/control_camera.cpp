@@ -64,10 +64,10 @@ void CControlCamera::Update(void)
 
 }
 
-//カメラの位置を取得
-aqua::CVector3 CControlCamera::GetPosition(void)
+//カメラの注視点位置を取得
+aqua::CVector3 CControlCamera::GetTargetPosition(void)
 {
-	return m_Camera->m_Position;
+	return m_Camera->m_TargetPosition;
 }
 
 //向いている角度を取得

@@ -9,6 +9,7 @@ public:
 	IUIComponent(aqua::IGameObject* parent,const std::string& object_name);
 	~IUIComponent() = default;
 
+	//‰Šú‰»
 	virtual void Initialize(void) {};
 	//ˆÊ’u
 	virtual void Initialize(const aqua::CVector2& position);

@@ -16,8 +16,8 @@ public:
 
 	void Update(void)override;
 
-	//カメラの位置取得
-	aqua::CVector3 GetPosition(void);
+	//カメラの注視点位置取得
+	aqua::CVector3 GetTargetPosition(void);
 	//向いている角度を取得
 	aqua::CVector3 GetAngle(void);
 

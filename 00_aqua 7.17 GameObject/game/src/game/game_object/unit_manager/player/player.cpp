@@ -7,7 +7,7 @@
 #include"../../effect_manager/effect_manager.h"
 #include"../../game_sound_manager/game_sound_manager.h"
 
-const aqua::CVector3 CPlayer::m_default_position = aqua::CVector3(0.0f, 2.0f, 0.0f);
+const aqua::CVector3 CPlayer::m_default_position = aqua::CVector3(20.0f, 2.0f, 20.0f);
 const aqua::CVector3 CPlayer::m_scale = aqua::CVector3(-0.3f, 0.3f, -0.3f);
 const int CPlayer::m_life = 3;
 const float CPlayer::m_move_speed = 100.0f;
@@ -154,6 +154,7 @@ void CPlayer::Move(void)
 	m_Matrix.RotY(aqua::DegToRad(m_Rotation.y));
 	m_Velocity.Transform(m_Matrix);
 	
+	//“®‚¢‚Ä‚¢‚È‚¯‚ê‚ÎŒÄ‚Î‚È‚¢
 	if(m_Velocity.Length() > 0)
 		ICharacter::Move();
 

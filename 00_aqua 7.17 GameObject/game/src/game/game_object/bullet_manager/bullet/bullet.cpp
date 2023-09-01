@@ -80,6 +80,7 @@ void IBullet::CheckGraund(void)
 {
 	CStage* stage = (CStage*)aqua::FindGameObject("Stage");
 
+	//°‚É“–‚½‚Á‚½‚çÁ‚·
 	if (stage->GetHitBulletGroundFlag(m_Position, m_Radius))
 	{
 		CEffectManager& effect = CEffectManager::GetInstance();

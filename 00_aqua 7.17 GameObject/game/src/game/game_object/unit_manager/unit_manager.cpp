@@ -19,6 +19,9 @@ CUnitManager& CUnitManager::GetInstance(void)
 void CUnitManager::Initialzie(void)
 {
 	m_GameObject.Initialize();
+
+	//‚ ‚ç‚©‚¶‚ß“Ç‚Ýž‚ñ‚Å‚¨‚­
+	m_LoadModel.Load("data/model/enemy_tank/TankFree_Red.mv1");
 }
 
 //XV
@@ -36,6 +39,8 @@ void CUnitManager::Draw(void)
 //‰ð•ú
 void CUnitManager::Finalize(void)
 {
+	m_LoadModel.Unload();
+
 	m_GameObject.Finalize();
 }
 
@@ -137,6 +142,7 @@ aqua::CVector3 CUnitManager::CheckHitAim(const aqua::CVector3& start_position, c
 					hit_position = unit->GetCollCheckLineHitPosition();
 
 					aqua::CVector3 vector = unit->GetCollCheckLineHitPosition() - player->GetModel()->position;
+					//‹——£‚ðŽæ“¾
 					more_near = vector.Length();
 
 				}

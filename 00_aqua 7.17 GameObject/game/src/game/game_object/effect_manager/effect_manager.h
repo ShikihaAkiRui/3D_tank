@@ -29,6 +29,8 @@ private:
 	//代入演算子
 	CEffectManager& operator=(const CEffectManager& rhs);
 
-	aqua::IGameObject m_GameObject;	//リスト
 	aqua::CEffect3D* m_LoadEffect;	//読み込むエフェクト
+	aqua::IGameObject m_GameObject;	//リスト
+
+	static const std::string m_load_file_name[];	//読み込むファイル名
 };

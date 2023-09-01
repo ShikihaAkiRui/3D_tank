@@ -56,6 +56,7 @@ void CStartMessage::Update(void)
 		//è¡Ç¶ÇΩÇÁè¡Ç∑
 		if (m_StartDisplayTimer.Finished())
 		{
+			m_StartSprite.color.alpha = m_min_alpha;
 			DeleteObject();
 		}
 

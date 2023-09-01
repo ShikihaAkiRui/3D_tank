@@ -5,13 +5,13 @@
 const float CEnemyAppear::m_max_ray_height = 500.0f;
 const float CEnemyAppear::m_min_ray_height = -500.0f;
 const float CEnemyAppear::m_appear_height = 10.0f;
-const int CEnemyAppear::m_max_enemy = 20;
+const int CEnemyAppear::m_max_enemy = 10;
 const aqua::CVector2 CEnemyAppear::m_max_appear_area = aqua::CVector2(800.0f,800.0f);
 const aqua::CVector2 CEnemyAppear::m_min_appear_area = aqua::CVector2(-800.0f, -800.0f);
-const float CEnemyAppear::m_first_appear_time = 2.0f;
+const float CEnemyAppear::m_first_appear_time = 2.5f;
 const float CEnemyAppear::m_default_appear_time = 10.0f;
 const float CEnemyAppear::m_max_appear_time = 2.0f;
-const float CEnemyAppear::m_acceleration = 0.8f;
+const float CEnemyAppear::m_acceleration = 0.9f;
 const int CEnemyAppear::m_second_change_count = 5;
 
 //コンストラクタ

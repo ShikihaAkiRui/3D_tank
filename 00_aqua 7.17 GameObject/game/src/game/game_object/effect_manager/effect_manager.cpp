@@ -5,6 +5,14 @@
 #include"effect/hit_player_effect/hit_player_effect.h"
 #include"effect/not_hit_effect/not_hit_effect.h"
 
+const std::string CEffectManager::m_load_file_name[] =
+{
+	"data/effect/explosion/explosion.efkefc",
+	"data/effect/fire/fire.efkefc",
+	"data/effect/hit_player/hit_player.efkefc",
+	"data/effect/not_hit/not_hit.efkefc"
+};
+
 //インスタンスを取得
 CEffectManager& CEffectManager::GetInstance(void)
 {
@@ -20,10 +28,9 @@ void CEffectManager::Initialize(void)
 	m_LoadEffect = AQUA_NEW aqua::CEffect3D[(int)EFFECT_ID::MAX];
 
 	//使うエフェクトを読み込む
-	m_LoadEffect[0].Create("data/effect/explosion/explosion.efkefc");
-	m_LoadEffect[1].Create("data/effect/fire/fire.efkefc");
-	m_LoadEffect[2].Create("data/effect/hit_player/hit_player.efkefc");
-	m_LoadEffect[3].Create("data/effect/not_hit/not_hit.efkefc");
+	for (int i = 0; i < (int)EFFECT_ID::MAX; ++i)
+		m_LoadEffect[i].Create(m_load_file_name[i]);
+	
 }
 
 //更新

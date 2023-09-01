@@ -30,6 +30,7 @@ private:
     aqua::CLabel    m_ScoreLabel;   //スコアのラベル
     int m_ResultScore;                //結果スコア
 
+    static const aqua::CColor m_default_panel_color;//初期の背景色
     static const float m_fade_time;                 //フェード時間
     static const unsigned char m_max_fade_color;    //フェード色
     static const aqua::CVector2 m_label_position;   //ラベル位置

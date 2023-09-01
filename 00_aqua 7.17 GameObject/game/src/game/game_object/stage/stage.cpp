@@ -6,6 +6,7 @@ const float CStage::m_gravity = -50.0f;
 const float CStage::m_not_hit_height = -100.0f;
 const aqua::CVector3 CStage::m_min_wall_position = aqua::CVector3(-1000.0f,0.0f, -1000.0f);
 const aqua::CVector3 CStage::m_max_wall_position = aqua::CVector3(1000.0f,0.0f, 1000.0f);
+const aqua::CColor CStage::m_background_color = 0xff87cefa;
 
 //コンストラクタ
 CStage::CStage(aqua::IGameObject* parent)
@@ -16,9 +17,20 @@ CStage::CStage(aqua::IGameObject* parent)
 //初期化
 void CStage::Initialize(void)
 {
+	m_BackgroundPanel.Setup(aqua::CVector2::ZERO, (float)aqua::GetWindowWidth(), (float)aqua::GetWindowHeight(), m_background_color);
+
+
 	IUnit::Initialize("data/model/Terrainte.mv1");
 	m_Model->position = m_position;
 	m_Model->scale = m_scale;
+}
+
+//描画
+void CStage::Draw(void)
+{
+	m_BackgroundPanel.Draw();
+
+	IUnit::Draw();
 }
 
 //弾と床の当たり判定
@@ -48,6 +60,19 @@ float CStage::GetGraundHeight(const aqua::CVector3& min_height_position, const a
 	aqua::CVector3 hit_position = GetCollCheckLineHitPosition();
 
 	return hit_position.y;
+}
+
+//照準と床の判定
+aqua::CVector3 CStage::CheckHitAim(const aqua::CVector3& start_position, const aqua::CVector3& end_position)
+{
+	//当たっていなかったら線の最後の位置を返す
+	if (!CollCheckLine(start_position, end_position))
+		return end_position;
+
+	//当たっていたら座標を取得
+	aqua::CVector3 hit_position = GetCollCheckLineHitPosition();
+
+	return hit_position;
 }
 
 //壁の判定
