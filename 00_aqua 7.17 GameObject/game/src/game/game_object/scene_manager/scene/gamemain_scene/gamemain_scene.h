@@ -15,7 +15,9 @@ public:
 	void Finalize(void)override;
 
 private:
-
+	//ƒQ[ƒ€I—¹”»’è
+	bool CheckGameFinish(void);
+	
 	//ƒQ[ƒ€‚Ìó‘Ô
 	enum class GAME_STATE
 	{

@@ -85,6 +85,7 @@ void CResultScene::Update(void)
     break;
     case STATE::WAIT:
     {
+        //ƒ^ƒCƒgƒ‹‚Ö
         if (aqua::mouse::Trigger(aqua::mouse::BUTTON_ID::LEFT))
         {
             sound.Play(SOUND_ID::DECISION);

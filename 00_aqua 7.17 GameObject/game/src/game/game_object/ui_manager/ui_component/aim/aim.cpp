@@ -103,7 +103,6 @@ aqua::CVector3 CAim::CheckHitRay(void)
 	{
 		hit_position = stage->CheckHitAim(m_StartRayPosition, m_EndRayPosition);
 		m_HitEnemyFlag = false;
-
 	}
 
 	return hit_position;

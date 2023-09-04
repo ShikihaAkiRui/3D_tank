@@ -13,7 +13,6 @@ public:
 	//初期化
 	//カメラ,	カメラが追うユニット
 	void Initialize(aqua::CCamera* camera,IUnit* unit);
-
 	void Update(void)override;
 
 	//カメラの注視点位置取得

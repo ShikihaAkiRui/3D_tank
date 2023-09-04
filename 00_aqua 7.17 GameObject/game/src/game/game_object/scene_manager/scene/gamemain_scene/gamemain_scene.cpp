@@ -67,18 +67,15 @@ void CGameMainScene::Initialize(void)
 //更新
 void CGameMainScene::Update(void)
 {
-	IGameObject::Update();
-
 	CUnitManager& unit_manager = CUnitManager::GetInstance();
 	unit_manager.Update();
+	CUIManager& ui_manager = CUIManager::GetInstance();
+	ui_manager.Update();
+	IGameObject::Update();
 	CItemManager::GetInstance().Update();
 	CBulletManager::GetInstance().Update();
 	CEffectManager::GetInstance().Update();
-	CUIManager& ui_manager = CUIManager::GetInstance();
-	ui_manager.Update();
-	CLife* life = CUIManager::GetInstance().GetLife();
 	CScore* score = CUIManager::GetInstance().GetScore();
-
 
 	//ゲームの状態
 	switch (m_GameState)
@@ -95,11 +92,12 @@ void CGameMainScene::Update(void)
 		break;
 	case CGameMainScene::GAME_STATE::MAIN:
 
-		//体力がなくなったら
-		if (life->GetLife() <= 0)
+		//終了条件を満たしたら
+		if (CheckGameFinish())
 		{
-			m_GameState = GAME_STATE::END;
+			//スコアの加算を終了
 			score->SetCountFlag(false);
+			m_GameState = GAME_STATE::END;
 		}
 		
 		break;
@@ -119,7 +117,6 @@ void CGameMainScene::Draw(void)
 	CUnitManager::GetInstance().Draw();
 	CItemManager::GetInstance().Draw();
 	CBulletManager::GetInstance().Draw();
-
 	CEffectManager::GetInstance().Draw();
 	CUIManager::GetInstance().Draw();
 
@@ -132,11 +129,10 @@ void CGameMainScene::Draw(void)
 //解放
 void CGameMainScene::Finalize(void)
 {
+	IGameObject::Finalize();
 	CUnitManager::GetInstance().Finalize();
 	CItemManager::GetInstance().Finalize();
 	CBulletManager::GetInstance().Finalize();
-
-	IGameObject::Finalize();
 	CEffectManager::GetInstance().Finalize();
 	CUIManager::GetInstance().Finalize();
 
@@ -144,4 +140,17 @@ void CGameMainScene::Finalize(void)
 	m_Label.Delete();
 #endif
 
+}
+
+//ゲーム終了判定
+bool CGameMainScene::CheckGameFinish(void)
+{
+	CLife* life = CUIManager::GetInstance().GetLife();
+	bool finish_flag = false;
+
+	//体力が0以下になったら終了
+	if (life->GetLife() <= 0)
+		finish_flag = true;
+
+	return finish_flag;
 }

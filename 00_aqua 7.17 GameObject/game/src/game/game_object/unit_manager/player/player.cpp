@@ -7,7 +7,7 @@
 #include"../../effect_manager/effect_manager.h"
 #include"../../game_sound_manager/game_sound_manager.h"
 
-const aqua::CVector3 CPlayer::m_default_position = aqua::CVector3(20.0f, 2.0f, 20.0f);
+const aqua::CVector3 CPlayer::m_default_position = aqua::CVector3(0.0f, 2.0f, 0.0f);
 const aqua::CVector3 CPlayer::m_scale = aqua::CVector3(-0.3f, 0.3f, -0.3f);
 const int CPlayer::m_life = 3;
 const float CPlayer::m_move_speed = 100.0f;
@@ -139,7 +139,7 @@ void CPlayer::Move(void)
 	if (cross.x != 0.0f)cross = aqua::CVector3(0.0f, 1.0f, 0.0f);
 
 	//“®‚¢‚Ä‚¢‚½‚ç•ûŒü‚ğ•Ï‚¦‚é
-	if (direction_vector.Length() > 0)
+	if (direction_vector.Length() > 0.0f)
 	{
 		//Œ‚‚Á‚½‚Í‰ñ“]‚ğ•Ï‚¦‚é
 		if (m_ShotRotationFlag)
@@ -155,9 +155,10 @@ void CPlayer::Move(void)
 	m_Velocity.Transform(m_Matrix);
 	
 	//“®‚¢‚Ä‚¢‚È‚¯‚ê‚ÎŒÄ‚Î‚È‚¢
-	if(m_Velocity.Length() > 0)
+	if(m_Velocity.Length() > 0.0f)
 		ICharacter::Move();
 
+	//•Ç‚Ì”»’è
 	CheckWall();
 
 	m_Position += m_Velocity * m_move_speed * aqua::GetDeltaTime();
@@ -201,7 +202,6 @@ void CPlayer::Shot(void)
 			m_ShotRotationFlag = true;
 		}
 	}
-
 
 	//•ú‚µ‚½‚ç•ûŒüˆ—‚ğ‚È‚­‚·
 	if (aqua::mouse::Released(aqua::mouse::BUTTON_ID::LEFT))

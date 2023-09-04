@@ -74,20 +74,11 @@ void CEnemyAppear::Update(void)
 													aqua::CVector3(appear_position.x, m_max_ray_height, appear_position.z));
 		appear_position.y += m_appear_height;
 
-		//出現範囲ないかつ最大数に達していない
+		//出現範囲ないかつ最大数に達していないとき出す
 		if (appear_position.y >= m_min_ray_height && m_CountEnemy < m_max_enemy)
 		{
-			//出す方法切り替え
-			if (m_TotalCountEnemy > m_second_change_count)
-				m_AppearState = APPEAR_STATE::SECOND;
-
-			//出す敵の選択方法
-			switch (m_AppearState)
-			{
-			case APPEAR_STATE::FIRST:	FirstAppear();	break;
-			case APPEAR_STATE::SECOND:	SecondAppear();	break;
-			default:	break;
-			}
+			//出す敵を変える
+			ChangeAppear();
 
 			SetCountEnemy(1);
 			m_TotalCountEnemy++;
@@ -114,6 +105,23 @@ void CEnemyAppear::SetCountEnemy(int count)
 int CEnemyAppear::GetMaxCountEnemy(void)
 {
 	return m_max_enemy;
+}
+
+//出す方法を変える
+void CEnemyAppear::ChangeAppear(void)
+{
+	//出す方法切り替え
+	if (m_TotalCountEnemy > m_second_change_count)
+		m_AppearState = APPEAR_STATE::SECOND;
+
+	//出す敵の選択方法
+	switch (m_AppearState)
+	{
+	case APPEAR_STATE::FIRST:	FirstAppear();	break;
+	case APPEAR_STATE::SECOND:	SecondAppear();	break;
+	default:	break;
+	}
+
 }
 
 //出す方法1

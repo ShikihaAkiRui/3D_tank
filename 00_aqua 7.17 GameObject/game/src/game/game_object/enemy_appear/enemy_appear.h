@@ -20,6 +20,8 @@ public:
 	int GetMaxCountEnemy(void);
 
 private:
+	//出す方法を変える
+	void ChangeAppear(void);
 	//出す方法１
 	void FirstAppear(void);
 	//出す方法２
