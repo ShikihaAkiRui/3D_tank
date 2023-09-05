@@ -24,8 +24,9 @@ CPlayer::CPlayer(aqua::IGameObject* parent)
 	,m_Angle(0.0f)
 	,m_Matrix(aqua::CMatrix::Ident())
 	,m_ShotRotationFlag(false)
-	,m_DamageFlag(false)
+	,m_DamageFlag(true)
 	,m_FirstShotFlag(true)
+	,m_BodyLine(aqua::CVector3::ZERO)
 {
 }
 
@@ -55,16 +56,13 @@ void CPlayer::Update(void)
 	//弾で攻撃
 	Shot();
 
-	//無敵時間
-	if(m_DamageFlag)
-	{
-		m_DamageIntervalTimer.Update();
-		if(m_DamageIntervalTimer.Finished())
-			m_DamageFlag = false;
-	}
-
 	ICharacter::Update();
 
+	//敵と衝突した
+	HitEnemyBody();
+
+	//無敵時間をカウント
+	CountDamageInterval();
 }
 
 //移動
@@ -155,8 +153,11 @@ void CPlayer::Move(void)
 	m_Velocity.Transform(m_Matrix);
 	
 	//動いていなければ呼ばない
-	if(m_Velocity.Length() > 0.0f)
+	if (m_Velocity.Length() > 0.0f)
+	{
 		ICharacter::Move();
+		m_BodyLine = m_Velocity;
+	}
 
 	//壁の判定
 	CheckWall();
@@ -215,7 +216,10 @@ void CPlayer::HitEnemyBody(void)
 {
 	CUnitManager& unit_manager = CUnitManager::GetInstance();
 
-	if (unit_manager.CheckHitUnit("Enemy", m_Position, m_Position + m_Velocity * m_ray_langth) && !m_DamageFlag)
+	//中心からの長さ
+	aqua::CVector3 body_line = m_BodyLine * m_ray_langth;
+
+	if (unit_manager.CheckHitUnit("Enemy", m_Position - body_line , m_Position + body_line) && !m_DamageFlag)
 	{
 		m_DamageFlag = true;
 		m_DamageIntervalTimer.Reset();
@@ -281,4 +285,19 @@ void CPlayer::HitItem(void)
 	score->Add(1);
 
 	CGameSoundManager::GetInstance().Play(SOUND_ID::GET_ITEM);
+}
+
+//無敵時間のカウント
+void CPlayer::CountDamageInterval(void)
+{
+	//trueの間数える
+	if (m_DamageFlag)
+	{
+		m_DamageIntervalTimer.Update();
+
+		//数え終わったらfalseにする
+		if (m_DamageIntervalTimer.Finished())
+			m_DamageFlag = false;
+	}
+
 }

@@ -32,6 +32,9 @@ private:
 	//アイテムに当たった
 	void HitItem(void)override;
 
+	//無敵時間のカウント
+	void CountDamageInterval(void);
+
 	float m_Angle;				//角度
 	aqua::CMatrix m_Matrix;		//行列
 	bool m_ShotRotationFlag;	//弾を撃つ方向への方向転換フラグ
@@ -39,6 +42,7 @@ private:
 	aqua::CTimer m_DamageIntervalTimer;//無敵時間のタイマー
 	aqua::CTimer m_ShotBulletTimer;	   //射撃間隔
 	bool m_FirstShotFlag;		//最初の攻撃をしたかのフラグ
+	aqua::CVector3 m_BodyLine;	//衝突の判定
 
 	static const aqua::CVector3 m_default_position;	//初期位置
 	static const aqua::CVector3 m_scale;		//拡大率

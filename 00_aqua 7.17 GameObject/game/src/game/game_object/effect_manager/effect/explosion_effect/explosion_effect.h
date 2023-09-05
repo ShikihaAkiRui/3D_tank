@@ -10,9 +10,6 @@ public:
 	~CExplosionEffect() = default;
 
 	void Initialize(const aqua::CVector3& position)override;
-	void Update(void)override;
-	void Draw(void)override;
-	void Finalize(void)override;
 
 private:
 
