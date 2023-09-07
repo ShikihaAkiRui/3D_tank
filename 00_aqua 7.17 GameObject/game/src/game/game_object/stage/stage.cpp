@@ -2,7 +2,7 @@
 
 const aqua::CVector3 CStage::m_position = aqua::CVector3(0.0f, -13.0f, 0.0f);
 const aqua::CVector3 CStage::m_scale = aqua::CVector3(0.5f, 0.75f, 0.5f);
-const float CStage::m_gravity = -50.0f;
+const float CStage::m_gravity = -80.0f;
 const float CStage::m_not_hit_height = -100.0f;
 const aqua::CVector3 CStage::m_min_wall_position = aqua::CVector3(-1000.0f,0.0f, -1000.0f);
 const aqua::CVector3 CStage::m_max_wall_position = aqua::CVector3(1000.0f,0.0f, 1000.0f);

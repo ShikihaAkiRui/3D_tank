@@ -25,3 +25,4 @@
 #include "primitive\primitive.h"
 #include "model\model.h"
 #include"collision\collision.h"
+#include"animation_model/animation_model.h"

@@ -17,6 +17,9 @@ private:
 	//移動
 	void Move(void)override;
 
+	//主砲回転
+	void GunRotation(void);
+
 	//弾で攻撃
 	void Shot(void);
 
@@ -37,7 +40,6 @@ private:
 
 	float m_Angle;				//角度
 	aqua::CMatrix m_Matrix;		//行列
-	bool m_ShotRotationFlag;	//弾を撃つ方向への方向転換フラグ
 	bool m_DamageFlag;			//ダメージのフラグ
 	aqua::CTimer m_DamageIntervalTimer;//無敵時間のタイマー
 	aqua::CTimer m_ShotBulletTimer;	   //射撃間隔
@@ -54,4 +56,6 @@ private:
 	static const aqua::CVector3 m_graund_ray_langth;	//床用のレイの長さ
 	static const float m_damage_interval_time;	//無敵時間
 	static const float m_shot_bullet_time;		//射撃間隔
+	static const int m_tank_tower_frame;		//戦車の主砲のフレーム番号
+	static const aqua::CVector3 m_tank_tower_height;	//戦車の主砲の位置
 };

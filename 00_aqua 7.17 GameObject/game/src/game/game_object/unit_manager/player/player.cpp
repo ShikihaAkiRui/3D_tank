@@ -12,18 +12,19 @@ const aqua::CVector3 CPlayer::m_scale = aqua::CVector3(-0.3f, 0.3f, -0.3f);
 const int CPlayer::m_life = 3;
 const float CPlayer::m_move_speed = 100.0f;
 const float CPlayer::m_ray_langth = 15.0f;
-const float CPlayer::m_rotation_speed = 10.0f;
+const float CPlayer::m_rotation_speed = 5.0f;
 const float CPlayer::m_shot_rotation_speed = 40.0f;
 const aqua::CVector3 CPlayer::m_graund_ray_langth = aqua::CVector3(0.0f,-15.0f,0.0f);
 const float CPlayer::m_damage_interval_time = 2.0f;
 const float CPlayer::m_shot_bullet_time = 1.0f;
+const int CPlayer::m_tank_tower_frame = 1;
+const aqua::CVector3 CPlayer::m_tank_tower_height = aqua::CVector3(0.0f, 50.0f, 8.9f);
 
 //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 CPlayer::CPlayer(aqua::IGameObject* parent)
 	:ICharacter(parent,"Player")
 	,m_Angle(0.0f)
 	,m_Matrix(aqua::CMatrix::Ident())
-	,m_ShotRotationFlag(false)
 	,m_DamageFlag(true)
 	,m_FirstShotFlag(true)
 	,m_BodyLine(aqua::CVector3::ZERO)
@@ -53,6 +54,9 @@ void CPlayer::Update(void)
 	//ˆÚ“®
 	Move();
 
+	//å–C‰ñ“]
+	GunRotation();
+
 	//’e‚ÅUŒ‚
 	Shot();
 
@@ -68,8 +72,7 @@ void CPlayer::Update(void)
 //ˆÚ“®
 void CPlayer::Move(void)
 {	
-	m_Velocity.x = 0.0f;
-	m_Velocity.z = 0.0f;
+	m_Velocity = aqua::CVector3::ZERO;
 
 	m_Matrix = aqua::CMatrix::Ident();
 	float direction_angle = 0.0f;
@@ -106,15 +109,6 @@ void CPlayer::Move(void)
 
 	}
 
-	//’e‚ğŒ‚‚Á‚½ ƒJƒƒ‰‚Ì•ûŒü‚É‚·‚é
-	if (m_ShotRotationFlag)
-	{
-		direction_vector.z = 1.0f;
-		direction_vector.x = 0.0f;
-
-		m_Velocity.z = 0.0f;
-	}
-
 	//ƒJƒƒ‰‚ÌŒü‚«‚É‡‚í‚¹‚é
 	CControlCamera* camera = (CControlCamera*)aqua::FindGameObject("ControlCamera");
 	if (!camera)return;
@@ -138,14 +132,8 @@ void CPlayer::Move(void)
 
 	//“®‚¢‚Ä‚¢‚½‚ç•ûŒü‚ğ•Ï‚¦‚é
 	if (direction_vector.Length() > 0.0f)
-	{
-		//Œ‚‚Á‚½‚Í‰ñ“]‚ğ•Ï‚¦‚é
-		if (m_ShotRotationFlag)
-			m_Angle = m_Angle + ((m_shot_rotation_speed * direction_angle) * aqua::GetDeltaTime() * cross.y);
-		else
-			m_Angle = m_Angle + ((m_rotation_speed * direction_angle) * aqua::GetDeltaTime() * cross.y);
+		m_Angle = m_Angle + ((m_rotation_speed * direction_angle) * aqua::GetDeltaTime() * cross.y);
 
-	}
 
 	//s—ñ‚Å•ûŒü•ÏX
 	m_Rotation.y = m_Angle;
@@ -166,6 +154,32 @@ void CPlayer::Move(void)
 
 	m_Model->rotation = m_Rotation;
 	m_Model->position = m_Position;
+}
+
+//å–C‰ñ“]
+void CPlayer::GunRotation(void)
+{
+	//ƒJƒƒ‰‚ÌŒü‚«æ“¾
+	CControlCamera* camera = (CControlCamera*)aqua::FindGameObject("ControlCamera");
+	if (!camera)return;
+
+	//“·‘Ì
+	aqua::CMatrix tower_matrix = aqua::CMatrix::Ident();
+	float tower_angle = camera->GetAngle().y - m_Rotation.y;
+
+	tower_matrix.Translate(m_tank_tower_height);
+	tower_matrix.RotY(aqua::DegToRad(tower_angle));
+
+	aqua::CAnimationModel::SetFrameUserLocalMatrix(m_Model, m_tank_tower_frame, tower_matrix);
+
+	/*
+	//“›
+	aqua::CMatrix canon_matrix = aqua::CMatrix::Ident();
+	canon_matrix.RotX(aqua::DegToRad(-camera->GetAngle().x));
+	canon_matrix.Translate(aqua::CVector3(0.0f, 28.3f, -73.7f));
+
+	aqua::CAnimationModel::SetFrameUserLocalMatrix(m_Model, 2, canon_matrix);
+	*/
 }
 
 //’e‚ÅUŒ‚
@@ -200,15 +214,9 @@ void CPlayer::Shot(void)
 
 			CGameSoundManager::GetInstance().Play(SOUND_ID::SHOT);
 
-			m_ShotRotationFlag = true;
 		}
 	}
 
-	//•ú‚µ‚½‚ç•ûŒüˆ—‚ğ‚È‚­‚·
-	if (aqua::mouse::Released(aqua::mouse::BUTTON_ID::LEFT))
-	{
-		m_ShotRotationFlag = false;
-	}
 }
 
 //“G‚ÆÕ“Ë‚µ‚½
