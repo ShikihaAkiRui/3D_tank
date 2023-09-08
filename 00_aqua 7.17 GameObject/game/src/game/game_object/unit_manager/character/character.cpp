@@ -10,6 +10,16 @@ const aqua::CVector3 ICharacter::m_default_position = aqua::CVector3::ZERO;
 const aqua::CVector3 ICharacter::m_default_graund_ray_length = aqua::CVector3(0.0f,-10.0f,0.0f);
 const aqua::CVector3 ICharacter::m_model_right_vector = aqua::CVector3(1.0f,0.0f,0.0f);
 const int ICharacter::m_default_damage = 1;
+const aqua::CVector3 ICharacter::m_tank_wheel_position[] = 
+{
+	aqua::CVector3(78.1f,-33.7f,57.2f),
+	aqua::CVector3(-78.1f,-33.7f,57.2f),
+	aqua::CVector3(78.1f,-33.7f,-55.1f),
+	aqua::CVector3(-78.1f,-33.7f,-55.1f)
+};
+const int ICharacter::m_wheel_first_frame = 3;
+const int ICharacter::m_max_wheel = 4;
+
 
 //コンストラクタ
 ICharacter::ICharacter(aqua::IGameObject* parent, const std::string& object_name)
@@ -21,6 +31,7 @@ ICharacter::ICharacter(aqua::IGameObject* parent, const std::string& object_name
 	,m_UnitCategory(UNIT_CATEGORY::DUMMY)
 	,m_Life(0)
 	,m_GraundFlag(false)
+	,m_WheelAngle(0.0f)
 {
 }
 
@@ -147,4 +158,27 @@ void ICharacter::Dead(void)
 //アイテムが当たった
 void ICharacter::HitItem(void)
 {
+}
+
+//タイヤの回転
+void ICharacter::WheelRotation(float rotation_speed)
+{
+	aqua::CMatrix wheel_matrix = aqua::CMatrix::Ident();
+
+	//回転させる
+	m_WheelAngle -= rotation_speed;
+
+	int end_loop = m_wheel_first_frame + m_max_wheel;
+
+	//タイヤを設定
+	for (int i = m_wheel_first_frame; i < end_loop; ++i)
+	{
+		wheel_matrix.RotX(aqua::DegToRad(m_WheelAngle));
+		wheel_matrix.Translate(m_tank_wheel_position[i - m_wheel_first_frame]);
+
+		aqua::CAnimationModel::SetFrameUserLocalMatrix(m_Model, i, wheel_matrix);
+
+		wheel_matrix = aqua::CMatrix::Ident();
+	}
+
 }

@@ -9,11 +9,13 @@ const int CEnemyParabola::m_life = 1;
 const float CEnemyParabola::m_move_speed = 40.0f;
 const float CEnemyParabola::m_stop_distance = 300.0f;
 const float CEnemyParabola::m_shot_time = 3.0f;
+const float CEnemyParabola::m_wheel_rotation_speed = 1.3f;
 
 //コンストラクタ
 CEnemyParabola::CEnemyParabola(aqua::IGameObject* parent)
 	:IEnemy(parent, "EnemyNormal")
 	,m_Distance(aqua::CVector3::ZERO)
+	,m_WheelRotationSpeed(0.0f)
 {
 }
 
@@ -35,20 +37,21 @@ void CEnemyParabola::Initialize(const aqua::CVector3& position)
 	m_Model->scale = m_scale;
 
 	m_ShotTimer.Setup(m_shot_time);
-
 }
 
 //更新
 void CEnemyParabola::Update(void)
 {
-	IEnemy::Update();
-
 	//移動
 	Move();
+
+	//タイヤの回転
+	WheelRotation(m_WheelRotationSpeed);
 
 	//弾を撃つ
 	Shot();
 
+	IEnemy::Update();
 }
 
 //移動
@@ -77,18 +80,24 @@ void CEnemyParabola::Move(void)
 
 	IEnemy::Move();
 
+	//壁の判定
 	CheckWall();
+
+	m_WheelRotationSpeed = 0.0f;
 
 	//止まる距離より遠いとき
 	if (m_Distance.Length() > m_stop_distance)
 	{
 		m_Position += m_Velocity * m_move_speed * aqua::GetDeltaTime();
 
+		m_WheelRotationSpeed += m_wheel_rotation_speed;
 	}
 	//下がる位置内のとき
-	else
+	if(m_Distance.Length() < m_stop_distance)
 	{
 		m_Position -= m_Velocity * m_move_speed * aqua::GetDeltaTime();
+
+		m_WheelRotationSpeed -= m_wheel_rotation_speed;
 	}
 
 	m_Model->rotation = m_Rotation;

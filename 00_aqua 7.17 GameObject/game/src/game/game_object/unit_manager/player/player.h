@@ -17,6 +17,9 @@ private:
 	//移動
 	void Move(void)override;
 
+	//タイヤ回転
+	void WheelRotation(float rotation_speed)override;
+
 	//主砲回転
 	void GunRotation(void);
 
@@ -45,6 +48,7 @@ private:
 	aqua::CTimer m_ShotBulletTimer;	   //射撃間隔
 	bool m_FirstShotFlag;		//最初の攻撃をしたかのフラグ
 	aqua::CVector3 m_BodyLine;	//衝突の判定
+	bool m_MoveFlag;			//移動のフラグ
 
 	static const aqua::CVector3 m_default_position;	//初期位置
 	static const aqua::CVector3 m_scale;		//拡大率
@@ -57,5 +61,6 @@ private:
 	static const float m_damage_interval_time;	//無敵時間
 	static const float m_shot_bullet_time;		//射撃間隔
 	static const int m_tank_tower_frame;		//戦車の主砲のフレーム番号
-	static const aqua::CVector3 m_tank_tower_height;	//戦車の主砲の位置
+	static const aqua::CVector3 m_tank_tower_height;	//戦車の主砲のローカル座標
+	static const float m_wheel_angle_speed;		//タイヤの回転速度
 };

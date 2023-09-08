@@ -19,6 +19,7 @@ const float CPlayer::m_damage_interval_time = 2.0f;
 const float CPlayer::m_shot_bullet_time = 1.0f;
 const int CPlayer::m_tank_tower_frame = 1;
 const aqua::CVector3 CPlayer::m_tank_tower_height = aqua::CVector3(0.0f, 50.0f, 8.9f);
+const float CPlayer::m_wheel_angle_speed = 3.0f;
 
 //コンストラクタ
 CPlayer::CPlayer(aqua::IGameObject* parent)
@@ -28,6 +29,7 @@ CPlayer::CPlayer(aqua::IGameObject* parent)
 	,m_DamageFlag(true)
 	,m_FirstShotFlag(true)
 	,m_BodyLine(aqua::CVector3::ZERO)
+	,m_MoveFlag(false)
 {
 }
 
@@ -54,6 +56,9 @@ void CPlayer::Update(void)
 	//移動
 	Move();
 
+	//タイヤの回転
+	WheelRotation(m_wheel_angle_speed);
+
 	//主砲回転
 	GunRotation();
 
@@ -72,6 +77,7 @@ void CPlayer::Update(void)
 //移動
 void CPlayer::Move(void)
 {	
+	m_MoveFlag = false;
 	m_Velocity = aqua::CVector3::ZERO;
 
 	m_Matrix = aqua::CMatrix::Ident();
@@ -85,6 +91,7 @@ void CPlayer::Move(void)
 
 		m_Velocity.z = 1.0f;
 
+		m_MoveFlag = true;
 	}
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::D))
 	{
@@ -92,6 +99,7 @@ void CPlayer::Move(void)
 
 		m_Velocity.z = 1.0f;
 
+		m_MoveFlag = true;
 	}
 	//前後移動
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::W))
@@ -100,6 +108,7 @@ void CPlayer::Move(void)
 	
 		m_Velocity.z = 1.0f;
 
+		m_MoveFlag = true;
 	}
 	if (aqua::keyboard::Button(aqua::keyboard::KEY_ID::S))
 	{
@@ -107,6 +116,7 @@ void CPlayer::Move(void)
 	
 		m_Velocity.z = 1.0f;
 
+		m_MoveFlag = true;
 	}
 
 	//カメラの向きに合わせる
@@ -141,7 +151,7 @@ void CPlayer::Move(void)
 	m_Velocity.Transform(m_Matrix);
 	
 	//動いていなければ呼ばない
-	if (m_Velocity.Length() > 0.0f)
+	if (m_MoveFlag)
 	{
 		ICharacter::Move();
 		m_BodyLine = m_Velocity;
@@ -156,6 +166,16 @@ void CPlayer::Move(void)
 	m_Model->position = m_Position;
 }
 
+//タイヤ回転
+void CPlayer::WheelRotation(float rotation_speed)
+{
+	//動いていたら回転
+	if (m_MoveFlag)
+	{
+		ICharacter::WheelRotation(rotation_speed);
+	}
+}
+
 //主砲回転
 void CPlayer::GunRotation(void)
 {
@@ -163,23 +183,15 @@ void CPlayer::GunRotation(void)
 	CControlCamera* camera = (CControlCamera*)aqua::FindGameObject("ControlCamera");
 	if (!camera)return;
 
-	//胴体
 	aqua::CMatrix tower_matrix = aqua::CMatrix::Ident();
+	//ワールド座標の角度に直す
 	float tower_angle = camera->GetAngle().y - m_Rotation.y;
 
 	tower_matrix.Translate(m_tank_tower_height);
 	tower_matrix.RotY(aqua::DegToRad(tower_angle));
 
+	//主砲を設定
 	aqua::CAnimationModel::SetFrameUserLocalMatrix(m_Model, m_tank_tower_frame, tower_matrix);
-
-	/*
-	//筒
-	aqua::CMatrix canon_matrix = aqua::CMatrix::Ident();
-	canon_matrix.RotX(aqua::DegToRad(-camera->GetAngle().x));
-	canon_matrix.Translate(aqua::CVector3(0.0f, 28.3f, -73.7f));
-
-	aqua::CAnimationModel::SetFrameUserLocalMatrix(m_Model, 2, canon_matrix);
-	*/
 }
 
 //弾で攻撃

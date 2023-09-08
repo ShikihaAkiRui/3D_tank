@@ -41,13 +41,16 @@ protected:
 	//アイテムが当たった
 	virtual void HitItem(void);
 
+	//タイヤの回転
+	virtual void WheelRotation(float rotation_speed);
+
 	//床の判定
 	void CheckGround(void);
 
 	//壁の判定
 	void CheckWall(void);
 
-	static const int m_default_damage;	//デフォルトのダメージ量
+	static const int m_default_damage;							//デフォルトのダメージ量
 
 private:
 	//弾の判定
@@ -56,8 +59,12 @@ private:
 	//アイテムの判定
 	bool CheckHitItem(void);
 
+	float m_WheelAngle;			//タイヤの角度
+
 	static const aqua::CVector3 m_default_position;				//デフォルトの位置
 	static const aqua::CVector3 m_default_graund_ray_length;	//デフォルトの床へのレイの長さ
 	static const aqua::CVector3 m_model_right_vector;			//右向きのベクトル
-
+	static const aqua::CVector3 m_tank_wheel_position[];		//タイヤのローカル座標配列
+	static const int m_wheel_first_frame;						//一つ目のタイヤのフレーム番号
+	static const int m_max_wheel;								//タイヤの数
 };

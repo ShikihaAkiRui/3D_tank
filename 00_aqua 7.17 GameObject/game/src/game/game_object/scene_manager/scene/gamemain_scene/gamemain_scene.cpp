@@ -46,6 +46,7 @@ void CGameMainScene::Initialize(void)
 
 	m_Camera.Initialize();
 	cam_con->Initialize(&m_Camera, player);
+	cam_con->SetGameObjectState(aqua::GAME_OBJECT_STATE::WAIT);
 
 	ui_manager.Create(UI_ID::AIM);
 	ui_manager.Create(UI_ID::LIFE,m_life_position);
@@ -76,6 +77,7 @@ void CGameMainScene::Update(void)
 	CBulletManager::GetInstance().Update();
 	CEffectManager::GetInstance().Update();
 	CScore* score = CUIManager::GetInstance().GetScore();
+	CControlCamera* cam_con = (CControlCamera*)aqua::FindGameObject("ControlCamera");
 
 	//ゲームの状態
 	switch (m_GameState)
@@ -85,6 +87,7 @@ void CGameMainScene::Update(void)
 		//演出が終わったら行動開始
 		if (ui_manager.GetStartMessage() == nullptr)
 		{
+			cam_con->SetGameObjectState(aqua::GAME_OBJECT_STATE::ACTIVE);
 			unit_manager.SetGameState(aqua::GAME_OBJECT_STATE::ACTIVE);
 			m_GameState = GAME_STATE::MAIN;
 		}

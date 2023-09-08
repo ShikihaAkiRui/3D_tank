@@ -19,7 +19,6 @@ public:
 	aqua::CVector3 GetTargetPosition(void);
 	//向いている角度を取得
 	aqua::CVector3 GetAngle(void);
-
 private:
 
 	aqua::CCamera* m_Camera;	//カメラのポインタ

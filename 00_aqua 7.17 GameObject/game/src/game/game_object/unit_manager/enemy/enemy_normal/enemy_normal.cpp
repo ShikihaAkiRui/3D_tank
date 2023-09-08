@@ -11,11 +11,13 @@ const float CEnemyNormal::m_stop_distance = 250.0f;
 const float CEnemyNormal::m_back_distance = 230.0f;
 const float CEnemyNormal::m_shot_length = 700.0f;
 const float CEnemyNormal::m_shot_time = 3.0f;
+const float CEnemyNormal::m_wheel_rotation_speed = 1.5f;
 
 //コンストラクタ
 CEnemyNormal::CEnemyNormal(aqua::IGameObject* parent)
 	:IEnemy(parent,"EnemyNormal")
 	,m_PlayerDistance(aqua::CVector3::ZERO)
+	,m_WheelRotationSpeed(0.0f)
 {
 }
 
@@ -44,15 +46,17 @@ void CEnemyNormal::Initialize(const aqua::CVector3& position)
 //更新
 void CEnemyNormal::Update(void)
 {
-	IEnemy::Update();
-
 	//移動
 	Move();
+
+	//タイヤを回転
+	IEnemy::WheelRotation(m_WheelRotationSpeed);
 
 	//プレイヤーが撃ち始める距離より近いとき撃つ
 	if (m_PlayerDistance.Length() < m_shot_length)
 		Shot();
 
+	IEnemy::Update();
 }
 
 //移動
@@ -83,16 +87,22 @@ void CEnemyNormal::Move(void)
 
 	CheckWall();
 
+	m_WheelRotationSpeed = 0.0f;
+
 	//止まる距離より遠いとき
 	if (m_PlayerDistance.Length() > m_stop_distance)
 	{
 		m_Position += m_Velocity * m_move_speed * aqua::GetDeltaTime();
 
+		m_WheelRotationSpeed += m_wheel_rotation_speed;
+
 	}
 	//下がる位置内のとき
-	else if (m_PlayerDistance.Length() < m_back_distance)
+	if (m_PlayerDistance.Length() < m_back_distance)
 	{
 		m_Position -= m_Velocity * m_move_speed * aqua::GetDeltaTime();
+
+		m_WheelRotationSpeed -= m_wheel_rotation_speed;
 	}
 
 	m_Model->rotation = m_Rotation;

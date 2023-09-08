@@ -78,7 +78,6 @@ void CUnitManager::CreateEnemy(UNIT_ID id, const aqua::CVector3& position)
 	if (!enemy)return;
 
 	enemy->Initialize(position);
-
 }
 
 //ƒ†ƒjƒbƒg‚Ì“–‚½‚è”»’è

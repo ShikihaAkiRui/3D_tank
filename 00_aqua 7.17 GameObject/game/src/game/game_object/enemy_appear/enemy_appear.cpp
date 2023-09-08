@@ -3,7 +3,7 @@
 #include"../unit_manager/unit_manager.h"
 
 const float CEnemyAppear::m_max_ray_height = 500.0f;
-const float CEnemyAppear::m_min_ray_height = -500.0f;
+const float CEnemyAppear::m_min_ray_height = -200.0f;
 const float CEnemyAppear::m_appear_height = 10.0f;
 const int CEnemyAppear::m_max_enemy = 10;
 const aqua::CVector2 CEnemyAppear::m_max_appear_area = aqua::CVector2(800.0f,800.0f);
