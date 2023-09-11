@@ -10,11 +10,16 @@
 class CUnitManager
 {
 public:
+	//インスタンスを取得
 	static CUnitManager& GetInstance(void);
 
+	//初期化
 	void Initialzie(void);
+	//更新
 	void Update(void);
+	//描画
 	void Draw(void);
+	//解放
 	void Finalize(void);
 
 	//生成

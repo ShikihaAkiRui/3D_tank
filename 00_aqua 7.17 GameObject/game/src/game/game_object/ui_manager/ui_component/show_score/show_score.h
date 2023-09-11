@@ -6,13 +6,17 @@
 class CShowScore : public IUIComponent
 {
 public:
+	//コンストラクタ
 	CShowScore(aqua::IGameObject* parent);
+	//デストラクタ
 	~CShowScore() = default;
 
 	//初期化
 	//位置,	スコア,	拡大率,	色
 	void Initialize(const aqua::CVector2& position, int score, float scale, aqua::CColor color);
+	//描画
 	void Draw(void)override;
+	//解放
 	void Finalize(void)override;
 
 private:

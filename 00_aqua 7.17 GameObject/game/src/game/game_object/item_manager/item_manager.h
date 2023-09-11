@@ -10,9 +10,13 @@ public:
 	//インスタンスを取得
 	static CItemManager& GetInstance(void);
 
+	//初期化
 	void Initialize(void);
+	//更新
 	void Update(void);
+	//描画
 	void Draw(void);
+	//解放
 	void Finalize(void);
 
 	//生成

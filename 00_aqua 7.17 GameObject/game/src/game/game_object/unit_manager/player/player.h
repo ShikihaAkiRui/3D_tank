@@ -6,11 +6,14 @@
 class CPlayer : public ICharacter
 {
 public:
+	//コンストラクタ
 	CPlayer(aqua::IGameObject* parent);
+	//デストラクタ
 	CPlayer() = default;
 
+	//初期化
 	void Initialize(void);
-
+	//更新
 	void Update(void);
 
 private:
@@ -18,6 +21,7 @@ private:
 	void Move(void)override;
 
 	//タイヤ回転
+	//回転速度
 	void WheelRotation(float rotation_speed)override;
 
 	//主砲回転

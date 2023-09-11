@@ -129,6 +129,7 @@
     <ClCompile Include="src\game\game_object\ui_manager\ui_manager.cpp" />
     <ClCompile Include="src\game\game_object\unit_manager\character\character.cpp" />
     <ClCompile Include="src\game\game_object\unit_manager\enemy\enemy.cpp" />
+    <ClCompile Include="src\game\game_object\unit_manager\enemy\enemy_fly\enemy_fly.cpp" />
     <ClCompile Include="src\game\game_object\unit_manager\enemy\enemy_normal\enemy_normal.cpp" />
     <ClCompile Include="src\game\game_object\unit_manager\enemy\enemy_parabola\enemy_parabola.cpp" />
     <ClCompile Include="src\game\game_object\unit_manager\player\player.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="src\game\game_object\ui_manager\ui_manager.h" />
     <ClInclude Include="src\game\game_object\unit_manager\character\character.h" />
     <ClInclude Include="src\game\game_object\unit_manager\enemy\enemy.h" />
+    <ClInclude Include="src\game\game_object\unit_manager\enemy\enemy_fly\enemy_fly.h" />
     <ClInclude Include="src\game\game_object\unit_manager\enemy\enemy_normal\enemy_normal.h" />
     <ClInclude Include="src\game\game_object\unit_manager\enemy\enemy_parabola\enemy_parabola.h" />
     <ClInclude Include="src\game\game_object\unit_manager\player\player.h" />

@@ -6,12 +6,18 @@
 class CAim : public IUIComponent
 {
 public:
+	//コンストラクタ
 	CAim(aqua::IGameObject* parent);
+	//デストラクタ
 	~CAim() = default;
 
+	//初期化
 	void Initialize(void)override;
+	//更新
 	void Update(void)override;
+	//描画
 	void Draw(void)override;
+	//解放
 	void Finalize(void)override;
 
 	//狙っている方向を取得
@@ -25,10 +31,11 @@ private:
 	aqua::CVector3 CheckHitRay(void);
 
 	//弾を飛ばす角度
+	//飛ばす位置
 	void GetBulletAngle(const aqua::CVector3& position);
 
 	//射線上のとき色を変える
-	void ChangeColor(const aqua::CVector3& position);
+	void ChangeColor(void);
 
 
 	aqua::CSprite m_Sprite;		//照準

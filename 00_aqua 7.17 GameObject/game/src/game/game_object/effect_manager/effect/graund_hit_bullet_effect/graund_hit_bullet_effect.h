@@ -6,9 +6,13 @@
 class CGraundHitBulletEffect : public IEffect
 {
 public:
+	//コンストラクタ
 	CGraundHitBulletEffect(aqua::IGameObject* parent);
+	//デストラクタ
 	~CGraundHitBulletEffect() = default;
 
+	//初期化
+	//位置
 	void Initialize(const aqua::CVector3& position)override;
 
 private:

@@ -7,7 +7,9 @@
 class IScene : public aqua::IGameObject
 {
 public:
+	//コンストラクタ
 	IScene(aqua::IGameObject* parent,const std::string& object_name);
+	//デストラクタ
 	~IScene() = default;
 
 	//シーンを変更

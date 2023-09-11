@@ -13,5 +13,5 @@ enum class UNIT_CATEGORY
 {
 	DUMMY,	//ダミー
 	PLAYER,	//プレイヤー
-	ENMEY	//敵
+	ENEMY	//敵
 };

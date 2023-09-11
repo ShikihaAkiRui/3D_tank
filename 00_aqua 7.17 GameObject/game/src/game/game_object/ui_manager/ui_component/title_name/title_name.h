@@ -6,13 +6,17 @@
 class CTitleName : public IUIComponent
 {
 public:
+	//コンストラクタ
 	CTitleName(aqua::IGameObject* parent);
+	//デストラクタ
 	~CTitleName() = default;
 
 	//初期化
 	//位置
 	void Initialize(const aqua::CVector2& position);
+	//描画
 	void Draw(void)override;
+	//解放
 	void Finalize(void)override;
 
 private:

@@ -6,7 +6,9 @@
 class IEffect : public aqua::IGameObject
 {
 public:
+	//コンストラクタ
 	IEffect(aqua::IGameObject* parent, const std::string& object_name);
+	//デストラクタ
 	~IEffect() = default;
 
 	//初期化
@@ -14,8 +16,11 @@ public:
 	virtual void Initialize(const aqua::CVector3& position) {};
 	//エフェクトファイル名,	位置,	拡大率
 	void Initialize(const std::string& effect_file, const aqua::CVector3& position, const aqua::CVector3& scale);
+	//更新
 	void Update(void)override;
+	//描画
 	void Draw(void)override;
+	//解放
 	void Finalize(void)override;
 
 protected:

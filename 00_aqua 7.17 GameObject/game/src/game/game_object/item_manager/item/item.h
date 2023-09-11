@@ -6,14 +6,19 @@
 class CItem : public aqua::IGameObject
 {
 public:
+	//コンストラクタ
 	CItem(aqua::IGameObject* parent);
+	//デストラクタ
 	~CItem() = default;
 
 	//初期化
 	//位置
 	void Initialize(const aqua::CVector3& position);
+	//更新
 	void Update(void)override;
+	//描画
 	void Draw(void)override;
+	//解放
 	void Finalize(void)override;
 
 	//キャラクターに当たった

@@ -6,11 +6,14 @@
 class CStage : public IUnit
 {
 public:
+	//コンストラクタ
 	CStage(aqua::IGameObject* parent);
+	//デストラクタ
 	~CStage() = default;
 
 	//初期化
 	void Initialize(void)override;
+	//描画
 	void Draw(void)override;
 
 	//弾と床の判定

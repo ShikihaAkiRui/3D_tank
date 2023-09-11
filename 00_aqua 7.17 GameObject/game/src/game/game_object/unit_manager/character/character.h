@@ -7,13 +7,15 @@
 class ICharacter : public IUnit
 {
 public:
+	//コンストラクタ
 	ICharacter(aqua::IGameObject* parent,const std::string& object_name);
+	//デストラクタ
 	virtual ~ICharacter() = default;
 
 	//初期化
 	//モデルのパス
 	virtual void Initialize(const std::string& file_name)override;
-
+	//更新
 	virtual void Update(void)override;
 
 	//ユニットのカテゴリーを取得
@@ -42,6 +44,7 @@ protected:
 	virtual void HitItem(void);
 
 	//タイヤの回転
+	//回転速度
 	virtual void WheelRotation(float rotation_speed);
 
 	//床の判定
@@ -50,14 +53,15 @@ protected:
 	//壁の判定
 	void CheckWall(void);
 
-	static const int m_default_damage;							//デフォルトのダメージ量
-
-private:
 	//弾の判定
 	bool CheckHitBullet(void);
 
 	//アイテムの判定
 	bool CheckHitItem(void);
+
+	static const int m_default_damage;							//デフォルトのダメージ量
+
+private:
 
 	float m_WheelAngle;			//タイヤの角度
 

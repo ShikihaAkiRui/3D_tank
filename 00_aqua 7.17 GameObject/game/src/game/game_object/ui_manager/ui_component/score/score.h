@@ -6,16 +6,21 @@
 class CScore : public IUIComponent
 {
 public:
+	//コンストラクタ
 	CScore(aqua::IGameObject* parent);
+	//デストラクタ
 	~CScore() = default;
 
 	//初期化
 	//位置
 	void Initialize(const aqua::CVector2& position)override;
+	//描画
 	void Draw(void)override;
+	//解放
 	void Finalize(void)override;
 
 	//スコアを加算
+	//加算する数
 	void Add(int score);
 
 	//スコア取得

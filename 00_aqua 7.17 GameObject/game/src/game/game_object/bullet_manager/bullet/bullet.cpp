@@ -29,6 +29,7 @@ void IBullet::Initialize(const std::string& file_name)
 //XV
 void IBullet::Update(void)
 {
+	//ˆÊ’u‚ğˆÚ“®
 	m_Position += m_Velocity;
 	m_Model.position = m_Position;
 

@@ -11,9 +11,13 @@ public:
 	//インスタンスの取得
 	static CBulletManager& GetInstance(void);
 
+	//初期化
 	void Initialize(void);
+	//更新
 	void Update(void);
+	//描画
 	void Draw(void);
+	//解放
 	void Finalize(void);
 
 	//生成
@@ -21,6 +25,7 @@ public:
 	void Create(BULLET_ID id,UNIT_CATEGORY unit_category, const aqua::CVector3& position, const aqua::CVector3& rotation);
 
 	//弾とキャラクターの当たり判定
+	//コリジョン,	ユニットのカテゴリー
 	bool CheckHitCharacter(ICollision* collision, UNIT_CATEGORY unit_category);
 
 private:

@@ -7,12 +7,15 @@
 class CControlCamera : public aqua::IGameObject
 {
 public:
+	//コンストラクタ
 	CControlCamera(aqua::IGameObject* parent);
+	//デストラクタ
 	~CControlCamera() = default;
 	
 	//初期化
 	//カメラ,	カメラが追うユニット
 	void Initialize(aqua::CCamera* camera,IUnit* unit);
+	//更新
 	void Update(void)override;
 
 	//カメラの注視点位置取得

@@ -6,18 +6,22 @@
 class CRadar : public IUIComponent
 {
 public:
+	//コンストラクタ
 	CRadar(aqua::IGameObject* parent);
+	//デストラクタ
 	~CRadar() = default;
 
 	//初期化
 	//位置
 	void Initialize(const aqua::CVector2& position)override;
+	//更新
 	void Update(void)override;
+	//描画
 	void Draw(void)override;
+	//解放
 	void Finalize(void)override;
 
 private:
-
 	//エネミーのデータを得る
 	void GetEnemyData(void);
 

@@ -6,14 +6,19 @@
 class IBullet : public aqua::IGameObject
 {
 public:
+	//コンストラクタ
 	IBullet(aqua::IGameObject* parent,const std::string& object_name);
+	//デストラクタ
 	~IBullet() = default;
 
 	//初期化
 	//ファイル名
 	virtual void Initialize(const std::string& file_name);
+	//更新
 	virtual void Update(void)override;
+	//描画
 	virtual void Draw(void)override;
+	//解放
 	virtual void Finalize(void)override;
 
 	//キャラクターに当たった

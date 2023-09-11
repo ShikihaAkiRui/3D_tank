@@ -6,9 +6,13 @@
 class CExplosionEffect : public IEffect
 {
 public:
+	//コンストラクタ
 	CExplosionEffect(aqua::IGameObject* parent);
+	//デストラクタ
 	~CExplosionEffect() = default;
 
+	//初期化
+	//位置
 	void Initialize(const aqua::CVector3& position)override;
 
 private:

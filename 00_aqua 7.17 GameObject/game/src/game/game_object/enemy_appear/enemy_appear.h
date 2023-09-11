@@ -4,14 +4,16 @@
 #include"../unit_manager/unit_id.h"
 
 //エネミーの出現管理クラス
-class CEnemyAppear : public aqua::IGameObject
+class CEnemyAppear
 {
 public:
-	CEnemyAppear(aqua::IGameObject* parent);
-	~CEnemyAppear() = default;
+	//インスタンスを取得
+	static CEnemyAppear& GetInstance(void);
 
-	void Initialize(void)override;
-	void Update(void)override;
+	//初期化
+	void Initialize(void);
+	//更新
+	void Update(void);
 
 	//エネミーの数を設定
 	void SetCountEnemy(int count);
@@ -20,6 +22,15 @@ public:
 	int GetMaxCountEnemy(void);
 
 private:
+	//コンストラクタ
+	CEnemyAppear(void);
+	//コピーコンストラクタ
+	CEnemyAppear(const CEnemyAppear& rhs);
+	//デストラクタ
+	~CEnemyAppear() = default;
+	//代入演算子
+	CEnemyAppear& operator=(const CEnemyAppear& rhs);
+
 	//出す方法を変える
 	void ChangeAppear(void);
 	//出す方法１

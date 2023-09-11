@@ -7,11 +7,16 @@
 class CSceneManager : public aqua::IGameObject
 {
 public:
+	//コンストラクタ
 	CSceneManager(aqua::IGameObject* parent);
+	//デストラクタ
 	~CSceneManager() = default;
 
+	//初期化
 	void Initialize(void)override;
+	//更新
 	void Update(void)override;
+	//描画
 	void Draw(void)override;
 
 	//シーンを変更

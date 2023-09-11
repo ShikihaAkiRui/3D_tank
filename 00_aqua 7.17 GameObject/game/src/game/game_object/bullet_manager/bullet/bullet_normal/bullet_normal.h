@@ -5,7 +5,9 @@
 class CBulletNormal : public IBullet
 {
 public:
+	//コンストラクタ
 	CBulletNormal(aqua::IGameObject* parent);
+	//デストラクタ
 	~CBulletNormal() = default;
 
 	//初期化

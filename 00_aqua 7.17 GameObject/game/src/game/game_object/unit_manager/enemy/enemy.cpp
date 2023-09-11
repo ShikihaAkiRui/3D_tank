@@ -17,7 +17,7 @@ void IEnemy::Initialize(const std::string& file_name,const aqua::CVector3& posit
 	m_Position = position;
 	m_GraundRayLength.y = graund_ray_langeth;
 	m_Life = life;
-	m_UnitCategory = UNIT_CATEGORY::ENMEY;
+	m_UnitCategory = UNIT_CATEGORY::ENEMY;
 
 	m_Model->position = m_Position;
 
@@ -32,10 +32,9 @@ void IEnemy::Dead(void)
 	//アイテムをドロップする
 	item_manager.Create(m_Position);
 
-	CEnemyAppear* appear = (CEnemyAppear*)aqua::FindGameObject("EnemyAppear");
-	if (appear)
-		//出ているエネミーの数を減らす
-		appear->SetCountEnemy(-1);
+	//出ているエネミーの数を減らす
+	CEnemyAppear& enemy_appear = CEnemyAppear::GetInstance();
+	enemy_appear.SetCountEnemy(-1);
 
 	//爆発エフェクト表示
 	CEffectManager& effect_manager = CEffectManager::GetInstance();

@@ -7,12 +7,15 @@
 class CEnemyNormal : public IEnemy
 {
 public:
+	//コンストラクタ
 	CEnemyNormal(aqua::IGameObject* parent);
+	//デストラクタ
 	~CEnemyNormal() = default;
 
 	//初期化
 	//位置
 	void Initialize(const aqua::CVector3& position)override;
+	//更新
 	void Update(void)override;
 
 private:

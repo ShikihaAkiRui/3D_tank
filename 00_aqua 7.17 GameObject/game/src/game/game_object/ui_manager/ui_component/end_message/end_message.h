@@ -6,12 +6,18 @@
 class CEndMessage : public IUIComponent
 {
 public:
+	//コンストラクタ
 	CEndMessage(aqua::IGameObject* parent);
+	//デストラクタ
 	~CEndMessage() = default;
 
+	//初期化
 	void Initialize(void)override;
+	//更新
 	void Update(void)override;
+	//描画
 	void Draw(void)override;
+	//解放
 	void Finalize(void)override;
 
 	//出しているかを取得

@@ -31,7 +31,7 @@ void CGameMainScene::Initialize(void)
 	CUnitManager& unit_manager = CUnitManager::GetInstance();
 	unit_manager.GetInstance().Initialzie();
 	CControlCamera* cam_con = aqua::CreateGameObject<CControlCamera>(this);
-	aqua::CreateGameObject<CEnemyAppear>(this);
+	CEnemyAppear::GetInstance().Initialize();
 	CItemManager::GetInstance().Initialize();
 	CBulletManager::GetInstance().Initialize();
 	CUIManager& ui_manager = CUIManager::GetInstance();
@@ -72,6 +72,7 @@ void CGameMainScene::Update(void)
 	unit_manager.Update();
 	CUIManager& ui_manager = CUIManager::GetInstance();
 	ui_manager.Update();
+	CEnemyAppear::GetInstance().Update();
 	IGameObject::Update();
 	CItemManager::GetInstance().Update();
 	CBulletManager::GetInstance().Update();

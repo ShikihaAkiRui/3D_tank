@@ -6,7 +6,9 @@
 class IUIComponent : public aqua::IGameObject
 {
 public:
+	//コンストラクタ
 	IUIComponent(aqua::IGameObject* parent,const std::string& object_name);
+	//デストラクタ
 	~IUIComponent() = default;
 
 	//初期化

@@ -6,7 +6,9 @@
 class CNotHitEffect : public IEffect
 {
 public:
+	//コンストラクタ
 	CNotHitEffect(aqua::IGameObject* parent);
+	//デストラクタ
 	~CNotHitEffect() = default;
 
 	//初期化

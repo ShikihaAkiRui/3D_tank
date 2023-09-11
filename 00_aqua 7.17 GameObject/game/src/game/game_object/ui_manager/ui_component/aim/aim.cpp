@@ -45,7 +45,7 @@ void CAim::Update(void)
 	GetBulletAngle(hit_position);
 
 	//Ëüã‚Ì‚Æ‚«F‚ğ•Ï‚¦‚é
-	ChangeColor(hit_position);
+	ChangeColor();
 }
 
 //•`‰æ
@@ -128,7 +128,7 @@ void CAim::GetBulletAngle(const aqua::CVector3& position)
 }
 
 //Ëüã‚Ì‚Æ‚«F‚ğ•Ï‚¦‚é
-void CAim::ChangeColor(const aqua::CVector3& position)
+void CAim::ChangeColor(void)
 {
 	//“–‚½‚Á‚Ä‚¢‚½‚çF‚ğ•Ï‚¦‚é
 	if (m_HitEnemyFlag)

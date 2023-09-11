@@ -26,20 +26,27 @@ public:
 	//インスタンスを取得
 	static CGameSoundManager& GetInstance(void);
 
+	//初期化
 	void Initialize(void);
+	//更新
 	void Finalize(void);
 
 	//サウンド再生
+	//サウンドID
 	void Play(SOUND_ID id);
 	//サウンド停止
+	//サウンドID
 	void Stop(SOUND_ID id);
 
 private:
+	//コンストラクタ
 	CGameSoundManager(void);
+	//コピーコンストラクタ
 	CGameSoundManager(const CGameSoundManager& rhs);
+	//デストラクタ
 	~CGameSoundManager(void) = default;
+	//代入演算子
 	CGameSoundManager& operator=(const CGameSoundManager& rhs);
-
 
 	static const std::string	m_sound_file_names[];	//サウンドファイルパス
 	static const int m_sound_volume[];					//サウンドの大きさ

@@ -6,14 +6,19 @@
 class CClickMessage : public IUIComponent
 {
 public:
+	//コンストラクタ
 	CClickMessage(aqua::IGameObject* parent);
+	//デストラクタ
 	~CClickMessage() = default;
 
 	//初期化
 	//位置,	文字
 	void Initialize(const aqua::CVector2& position, const std::string word);
+	//更新
 	void Update(void)override;
+	//描画
 	void Draw(void)override;
+	//解放
 	void Finalize(void)override;
 
 private:

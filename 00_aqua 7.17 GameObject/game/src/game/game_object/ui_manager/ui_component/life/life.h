@@ -6,17 +6,23 @@
 class CLife : public IUIComponent
 {
 public:
+	//コンストラクタ
 	CLife(aqua::IGameObject* parent);
+	//デストラクタ
 	~CLife() = default;
 
 	//初期化
 	//位置
 	void Initialize(const aqua::CVector2& position);
+	//更新
 	void Update(void)override;
+	//描画
 	void Draw(void)override;
+	//解放
 	void Finalize(void)override;
 
 	//体力を減らす
+	//減らす数
 	void Reduce(int life);
 
 	//現在の体力を取得

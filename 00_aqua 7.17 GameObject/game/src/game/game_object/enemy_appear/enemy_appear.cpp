@@ -14,16 +14,12 @@ const float CEnemyAppear::m_max_appear_time = 2.0f;
 const float CEnemyAppear::m_acceleration = 0.9f;
 const int CEnemyAppear::m_second_change_count = 5;
 
-//コンストラクタ
-CEnemyAppear::CEnemyAppear(aqua::IGameObject* parent)
-	:aqua::IGameObject(parent,"EnemyAppear")
-	,m_FirstAppearFlag(true)
-	,m_CountEnemy(0)
-	,m_TotalCountEnemy(0)
-	,m_AppearTime(m_default_appear_time)
-	,m_AppearState(APPEAR_STATE::FIRST)
-	,m_UnitID(UNIT_ID::ENEMY_NORMAL)
+
+//インスタンスを取得
+CEnemyAppear& CEnemyAppear::GetInstance(void)
 {
+	static CEnemyAppear instance;
+	return instance;
 }
 
 //初期化
@@ -34,9 +30,7 @@ void CEnemyAppear::Initialize(void)
 
 //更新
 void CEnemyAppear::Update(void)
-{
-	aqua::IGameObject::Update();
-	
+{	
 	m_AppearTimer.Update();
 
 	//出す時間になったら出す
@@ -105,6 +99,30 @@ void CEnemyAppear::SetCountEnemy(int count)
 int CEnemyAppear::GetMaxCountEnemy(void)
 {
 	return m_max_enemy;
+}
+
+//コンストラクタ
+CEnemyAppear::CEnemyAppear(void)
+	: m_FirstAppearFlag(true)
+	, m_CountEnemy(0)
+	, m_TotalCountEnemy(0)
+	, m_AppearTime(m_default_appear_time)
+	, m_AppearState(APPEAR_STATE::FIRST)
+	, m_UnitID(UNIT_ID::ENEMY_NORMAL)
+{
+}
+
+//コピーコンストラクタ
+CEnemyAppear::CEnemyAppear(const CEnemyAppear& rhs)
+{
+	(void)rhs;
+}
+
+//代入演算子
+CEnemyAppear& CEnemyAppear::operator=(const CEnemyAppear& rhs)
+{
+	(void)rhs;
+	return *this;
 }
 
 //出す方法を変える

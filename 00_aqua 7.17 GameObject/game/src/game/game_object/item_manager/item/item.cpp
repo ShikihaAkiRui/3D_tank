@@ -22,6 +22,7 @@ CItem::CItem(aqua::IGameObject* parent)
 //‰Šú‰»
 void CItem::Initialize(const aqua::CVector3& position)
 {
+	//•\¦‚·‚éƒ‚ƒfƒ‹‚ğŒˆ‚ß‚é
 	int rand = aqua::Rand(m_max_file - 1, 0);
 
 	m_Model.Load(m_item_file_names[rand]);

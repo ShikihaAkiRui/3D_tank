@@ -6,16 +6,18 @@
 class CBulletParabola : public IBullet
 {
 public:
+	//コンストラクタ
 	CBulletParabola(aqua::IGameObject* parent);
+	//デストラクタ
 	~CBulletParabola() = default;
 
 	//初期化
 	//ユニットのカテゴリー,	出す位置,　着弾位置
 	void Initialize(UNIT_CATEGORY unit_category, const aqua::CVector3& position, const aqua::CVector3& impact_position);
+	//更新
 	void Update(void)override;
 
 private:
-
 	aqua::CVector3 m_ImpactPosition;	//着弾位置
 
 	static const float m_move_speed;	//初速
