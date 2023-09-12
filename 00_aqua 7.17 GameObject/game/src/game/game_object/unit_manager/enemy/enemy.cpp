@@ -23,6 +23,9 @@ void IEnemy::Initialize(const std::string& file_name,const aqua::CVector3& posit
 
 	//床の判定
 	CheckGround();
+
+	//コリジョンの位置修正
+	RefreshCollInfo();
 }
 
 //倒された
@@ -33,8 +36,8 @@ void IEnemy::Dead(void)
 	item_manager.Create(m_Position);
 
 	//出ているエネミーの数を減らす
-	CEnemyAppear& enemy_appear = CEnemyAppear::GetInstance();
-	enemy_appear.SetCountEnemy(-1);
+	CEnemyAppear* enemy_appear = (CEnemyAppear*)aqua::FindGameObject("EnemyAppear");
+	enemy_appear->SetCountEnemy(-1);
 
 	//爆発エフェクト表示
 	CEffectManager& effect_manager = CEffectManager::GetInstance();

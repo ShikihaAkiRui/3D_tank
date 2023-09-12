@@ -22,6 +22,12 @@ private:
 	//移動
 	void Move(void)override;
 
+	//弾を撃つ角度を決める
+	void ShotAngle(void);
+
+	//機体の傾き
+	void MoveRotation(void);
+
 	//弾を撃つ
 	void Shot(void);
 
@@ -29,6 +35,10 @@ private:
 	aqua::CTimer m_ShotTimer;				//撃つ間隔の時間
 	aqua::CVector3 m_BulletAngle;			//弾を撃つ角度
 	aqua::CVector3 m_PlayerDistance;		//プレイヤーとの距離
+	aqua::CTimer m_FlyTimer;				//飛び上がる時間
+	float m_DefaultPositionY;				//高さ初期値
+	float m_MoveAngle;						//移動時の回転
+	bool m_HoveringFlag;					//ホバリングフラグ
 
 	static const aqua::CVector3 m_scale;			//拡大率
 	static const float m_graund_ray_langth;			//床用のレイの長さ
@@ -38,7 +48,9 @@ private:
 	static const float m_back_distance;				//下がる距離
 	static const float m_shot_length;				//撃つ距離
 	static const float m_shot_time;					//撃つ感覚の時間
-
 	static const float m_max_fly_height;			//最高高度
-
+	static const float m_fly_speed;					//最高高度までの時間
+	static const float m_max_front_angle;			//前方向の最大角度
+	static const float m_max_back_angle;			//後ろ方向の最大角度
+	static const float m_angle_speed;				//回転速度
 };

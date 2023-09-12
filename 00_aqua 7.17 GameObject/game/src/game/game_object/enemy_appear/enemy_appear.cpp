@@ -11,16 +11,22 @@ const aqua::CVector2 CEnemyAppear::m_min_appear_area = aqua::CVector2(-800.0f, -
 const float CEnemyAppear::m_first_appear_time = 2.5f;
 const float CEnemyAppear::m_default_appear_time = 10.0f;
 const float CEnemyAppear::m_max_appear_time = 2.0f;
-const float CEnemyAppear::m_acceleration = 0.9f;
+const float CEnemyAppear::m_acceleration = 0.92f;
 const int CEnemyAppear::m_second_change_count = 5;
+const int CEnemyAppear::m_third_change_count = 10;
 
-
-//インスタンスを取得
-CEnemyAppear& CEnemyAppear::GetInstance(void)
+//コンストラクタ
+CEnemyAppear::CEnemyAppear(aqua::IGameObject* parent)
+	:aqua::IGameObject(parent,"EnemyAppear")
+	, m_FirstAppearFlag(true)
+	, m_CountEnemy(0)
+	, m_TotalCountEnemy(0)
+	, m_AppearTime(m_default_appear_time)
+	, m_AppearState(APPEAR_STATE::FIRST)
+	, m_UnitID(UNIT_ID::ENEMY_NORMAL)
 {
-	static CEnemyAppear instance;
-	return instance;
 }
+
 
 //初期化
 void CEnemyAppear::Initialize(void)
@@ -31,6 +37,8 @@ void CEnemyAppear::Initialize(void)
 //更新
 void CEnemyAppear::Update(void)
 {	
+	IGameObject::Update();
+
 	m_AppearTimer.Update();
 
 	//出す時間になったら出す
@@ -101,35 +109,13 @@ int CEnemyAppear::GetMaxCountEnemy(void)
 	return m_max_enemy;
 }
 
-//コンストラクタ
-CEnemyAppear::CEnemyAppear(void)
-	: m_FirstAppearFlag(true)
-	, m_CountEnemy(0)
-	, m_TotalCountEnemy(0)
-	, m_AppearTime(m_default_appear_time)
-	, m_AppearState(APPEAR_STATE::FIRST)
-	, m_UnitID(UNIT_ID::ENEMY_NORMAL)
-{
-}
-
-//コピーコンストラクタ
-CEnemyAppear::CEnemyAppear(const CEnemyAppear& rhs)
-{
-	(void)rhs;
-}
-
-//代入演算子
-CEnemyAppear& CEnemyAppear::operator=(const CEnemyAppear& rhs)
-{
-	(void)rhs;
-	return *this;
-}
-
 //出す方法を変える
 void CEnemyAppear::ChangeAppear(void)
 {
 	//出す方法切り替え
-	if (m_TotalCountEnemy > m_second_change_count)
+	if (m_TotalCountEnemy > m_third_change_count)
+		m_AppearState = APPEAR_STATE::THIRD;
+	else if (m_TotalCountEnemy > m_second_change_count)
 		m_AppearState = APPEAR_STATE::SECOND;
 
 	//出す敵の選択方法
@@ -137,6 +123,7 @@ void CEnemyAppear::ChangeAppear(void)
 	{
 	case APPEAR_STATE::FIRST:	FirstAppear();	break;
 	case APPEAR_STATE::SECOND:	SecondAppear();	break;
+	case APPEAR_STATE::THIRD:	ThirdAppear();	break;
 	default:	break;
 	}
 
@@ -154,11 +141,22 @@ void CEnemyAppear::SecondAppear(void)
 	int select = aqua::Rand(1, 0);
 
 	if (select < 1)
-	{
 		m_UnitID = UNIT_ID::ENEMY_NORMAL;
-	}
 	else
-	{
 		m_UnitID = UNIT_ID::ENEMY_PARABOLA;
+}
+
+//出す方法3
+void CEnemyAppear::ThirdAppear(void)
+{
+	int select = aqua::Rand(2, 0);
+
+	switch (select)
+	{
+	case 0:	m_UnitID = UNIT_ID::ENEMY_NORMAL;	break;
+	case 1:	m_UnitID = UNIT_ID::ENEMY_PARABOLA;	break;
+	case 2:	m_UnitID = UNIT_ID::ENEMY_FLY;		break;
+	default: break;
 	}
+
 }
