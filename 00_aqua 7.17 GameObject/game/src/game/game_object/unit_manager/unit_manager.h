@@ -61,8 +61,9 @@ private:
 
 	aqua::IGameObject m_GameObject;	//ゲームオブジェクト
 
-	aqua::CModel m_LoadModel;		//あらかじめ読み込むモデル
+	aqua::CModel* m_LoadModel;		//あらかじめ読み込むモデル
 
 	static const std::string m_enemy_name;	//当たる対象の名前
 	static const std::string m_player_name;	//プレイヤーの名前
+	static const int m_load_model_count;	//読み込むモデルの数
 };

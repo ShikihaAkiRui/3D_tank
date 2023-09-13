@@ -7,6 +7,7 @@
 
 const std::string CUnitManager::m_enemy_name = "Enemy";
 const std::string CUnitManager::m_player_name = "Player";
+const int CUnitManager::m_load_model_count = 2;
 
 //インスタンスの取得
 CUnitManager& CUnitManager::GetInstance(void)
@@ -22,7 +23,9 @@ void CUnitManager::Initialzie(void)
 	m_GameObject.Initialize();
 
 	//あらかじめ読み込んでおく
-	m_LoadModel.Load("data/model/enemy_tank/TankFree_Red.mv1");
+	m_LoadModel = AQUA_NEW aqua::CModel[m_load_model_count];
+	m_LoadModel[0].Load("data/model/enemy_tank/TankFree_Red.mv1");
+	m_LoadModel[1].Load("data/model/helicopter/PoliceHelicopter-fbx.mv1");
 }
 
 //更新
@@ -40,7 +43,10 @@ void CUnitManager::Draw(void)
 //解放
 void CUnitManager::Finalize(void)
 {
-	m_LoadModel.Unload();
+	for (int i = 0; i < m_load_model_count; ++i)
+	{
+		m_LoadModel[i].Unload();
+	}
 
 	m_GameObject.Finalize();
 }

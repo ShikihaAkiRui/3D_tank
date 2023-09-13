@@ -3,35 +3,42 @@
 #include"../../../bullet_manager/bullet_manager.h"
 #include"../../../game_sound_manager/game_sound_manager.h"
 
-const aqua::CVector3 CEnemyFly::m_scale = aqua::CVector3(0.3f, 0.3f, 0.3f);
+const aqua::CVector3 CEnemyFly::m_scale = aqua::CVector3(-0.8f, 0.8f, -0.8f);
 const float CEnemyFly::m_graund_ray_langth = -15.0f;
 const int CEnemyFly::m_life = 1;
 const float CEnemyFly::m_move_speed = 40.0f;
-const float CEnemyFly::m_stop_distance = 300.0f;
-const float CEnemyFly::m_back_distance = 250.0f;
+const float CEnemyFly::m_stop_distance = 350.0f;
+const float CEnemyFly::m_back_distance = 300.0f;
 const float CEnemyFly::m_shot_length = 700.0f;
 const float CEnemyFly::m_shot_time = 6.0f;
 const float CEnemyFly::m_max_fly_height = 100.0f;
 const float CEnemyFly::m_fly_speed = 10.0f;
 const float CEnemyFly::m_max_front_angle = 15.0f;
 const float CEnemyFly::m_max_back_angle = -10.0f;
-const float CEnemyFly::m_angle_speed = 30.0f;
+const float CEnemyFly::m_move_angle_speed = 30.0f;
+const float CEnemyFly::m_propeller_angle_speed = 10.0f;
+const float CEnemyFly::m_main_propeller_angle = 90.0f;
+const aqua::CVector3 CEnemyFly::m_main_propeller_position = aqua::CVector3(0.0f, 35.4f, 0.0f);
+const int CEnemyFly::m_main_propeller_frame = 6;
+const aqua::CVector3 CEnemyFly::m_back_propeller_position = aqua::CVector3(-4.8f, 13.7f, 73.5f);
+const int CEnemyFly::m_back_propeller_frame = 1;
 
 //コンストラクタ
 CEnemyFly::CEnemyFly(aqua::IGameObject* parent)
-	:IEnemy(parent,"EnemyFly")
+	:IEnemy(parent, "EnemyFly")
 	, m_PlayerDistance(aqua::CVector3::ZERO)
-	,m_BulletAngle(aqua::CVector3::ZERO)
-	,m_DefaultPositionY(0.0f)
-	,m_MoveAngle(0.0f)
-	,m_HoveringFlag(false)
+	, m_BulletAngle(aqua::CVector3::ZERO)
+	, m_DefaultPositionY(0.0f)
+	, m_MoveAngle(0.0f)
+	, m_HoveringFlag(false)
+	, m_PropellerAngle(0.0f)
 {
 }
 
 //初期化
 void CEnemyFly::Initialize(const aqua::CVector3& position)
 {
-	IEnemy::Initialize("data/model/enemy_tank/TankFree_Red.mv1", position, m_graund_ray_langth, m_life);
+	IEnemy::Initialize("data/model/helicopter/PoliceHelicopter-fbx.mv1", position, m_graund_ray_langth, m_life);
 
 	m_Model->scale = m_scale;
 
@@ -47,6 +54,9 @@ void CEnemyFly::Initialize(const aqua::CVector3& position)
 	m_Model->rotation = m_Rotation;
 	m_BulletAngle = m_Rotation;
 
+	//コリジョンの位置修正
+	RefreshCollInfo();
+
 	m_ShotTimer.Setup(m_shot_time);
 	m_FlyTimer.Setup(m_fly_speed);
 }
@@ -59,6 +69,9 @@ void CEnemyFly::Update(void)
 
 	//機体の傾き
 	MoveRotation();
+
+	//プロペラを回転
+	PropellerRotation();
 
 	//弾を撃つ
 	Shot();
@@ -113,14 +126,14 @@ void CEnemyFly::Move(void)
 	if (m_PlayerDistance.Length() > m_stop_distance)
 	{
 		m_Position += m_Velocity * m_move_speed * aqua::GetDeltaTime();
-		m_MoveAngle = m_angle_speed;
+		m_MoveAngle = m_move_angle_speed;
 		m_HoveringFlag = false;
 	}
 	//下がる位置内のとき
 	else if (m_PlayerDistance.Length() < m_back_distance)
 	{
 		m_Position -= m_Velocity * m_move_speed * aqua::GetDeltaTime();
-		m_MoveAngle = -m_angle_speed;
+		m_MoveAngle = -m_move_angle_speed;
 		m_HoveringFlag = false;
 	}
 	else
@@ -155,6 +168,29 @@ void CEnemyFly::ShotAngle(void)
 	m_BulletAngle.x = aqua::RadToDeg(x_angle);
 }
 
+//プロペラを回転
+void CEnemyFly::PropellerRotation(void)
+{
+	//メインのプロペラ
+	aqua::CMatrix main_matrix = aqua::CMatrix::Ident();
+
+	m_PropellerAngle += m_propeller_angle_speed;
+
+	main_matrix.RotX(aqua::DegToRad(m_main_propeller_angle));
+	main_matrix.RotY(aqua::DegToRad(m_PropellerAngle));
+	main_matrix.Translate(m_main_propeller_position);
+
+	aqua::CAnimationModel::SetFrameUserLocalMatrix(m_Model, m_main_propeller_frame, main_matrix);
+
+	//後ろのプロペラ
+	aqua::CMatrix back_matrix = aqua::CMatrix::Ident();
+	
+	back_matrix.RotX(aqua::DegToRad(-m_PropellerAngle));
+	back_matrix.Translate(m_back_propeller_position);
+
+	aqua::CAnimationModel::SetFrameUserLocalMatrix(m_Model, m_back_propeller_frame, back_matrix);
+}
+
 //機体の傾き
 void CEnemyFly::MoveRotation(void)
 {
@@ -164,7 +200,7 @@ void CEnemyFly::MoveRotation(void)
 		//角度が0以上
 		if (m_Rotation.x > 0)
 		{
-			m_MoveAngle = -m_angle_speed;
+			m_MoveAngle = -m_move_angle_speed;
 			m_Rotation.x += m_MoveAngle * aqua::GetDeltaTime();
 
 			//0未満になったら0
@@ -173,7 +209,7 @@ void CEnemyFly::MoveRotation(void)
 		}
 		else
 		{
-			m_MoveAngle = m_angle_speed;
+			m_MoveAngle = m_move_angle_speed;
 			m_Rotation.x += m_MoveAngle * aqua::GetDeltaTime();
 
 			//0超えたらになったら0

@@ -2,6 +2,7 @@
 #include"../../../unit_manager/unit_manager.h"
 #include"../../../bullet_manager/bullet_manager.h"
 #include"../../../control_camera/control_camera.h"
+#include"../../../control_light/control_light.h"
 #include"../../../stage/stage.h"
 #include"../../../item_manager/item_manager.h"
 #include"../../../enemy_appear/enemy_appear.h"
@@ -31,6 +32,7 @@ void CGameMainScene::Initialize(void)
 	CUnitManager& unit_manager = CUnitManager::GetInstance();
 	unit_manager.GetInstance().Initialzie();
 	CControlCamera* cam_con = aqua::CreateGameObject<CControlCamera>(this);
+	CControlLight* lig_con = aqua::CreateGameObject<CControlLight>(this);
 	aqua::CreateGameObject<CEnemyAppear>(this);
 	CItemManager::GetInstance().Initialize();
 	CBulletManager::GetInstance().Initialize();
@@ -48,6 +50,9 @@ void CGameMainScene::Initialize(void)
 	cam_con->Initialize(&m_Camera, player);
 	cam_con->SetGameObjectState(aqua::GAME_OBJECT_STATE::WAIT);
 
+	m_Light.Initialize();
+	lig_con->Initialize(&m_Light);
+	
 	ui_manager.Create(UI_ID::AIM);
 	ui_manager.Create(UI_ID::LIFE,m_life_position);
 	ui_manager.Create(UI_ID::SCORE,m_score_position);

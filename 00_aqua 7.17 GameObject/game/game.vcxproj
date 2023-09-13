@@ -104,6 +104,7 @@
     <ClCompile Include="src\game\game_object\bullet_manager\bullet\bullet_parabola\bullet_parabola.cpp" />
     <ClCompile Include="src\game\game_object\bullet_manager\bullet_manager.cpp" />
     <ClCompile Include="src\game\game_object\control_camera\control_camera.cpp" />
+    <ClCompile Include="src\game\game_object\control_light\control_light.cpp" />
     <ClCompile Include="src\game\game_object\effect_manager\effect\effect.cpp" />
     <ClCompile Include="src\game\game_object\effect_manager\effect\explosion_effect\explosion_effect.cpp" />
     <ClCompile Include="src\game\game_object\effect_manager\effect\graund_hit_bullet_effect\graund_hit_bullet_effect.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="src\game\game_object\bullet_manager\bullet\bullet_parabola\bullet_parabola.h" />
     <ClInclude Include="src\game\game_object\bullet_manager\bullet_manager.h" />
     <ClInclude Include="src\game\game_object\control_camera\control_camera.h" />
+    <ClInclude Include="src\game\game_object\control_light\control_light.h" />
     <ClInclude Include="src\game\game_object\effect_manager\effect\effect.h" />
     <ClInclude Include="src\game\game_object\effect_manager\effect\effect_id.h" />
     <ClInclude Include="src\game\game_object\effect_manager\effect\explosion_effect\explosion_effect.h" />

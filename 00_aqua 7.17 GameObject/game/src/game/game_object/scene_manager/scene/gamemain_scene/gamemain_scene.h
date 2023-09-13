@@ -33,6 +33,7 @@ private:
 	};
 
 	aqua::CCamera m_Camera;					//カメラ
+	aqua::CLight m_Light;					//ライト
 	GAME_STATE m_GameState;					//ゲームの状態
 
 	static const std::string m_object_name;	//オブジェクトの名前

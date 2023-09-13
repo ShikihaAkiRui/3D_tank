@@ -59,6 +59,7 @@
     <ClCompile Include="src\utility\csv_loader\csv_loader.cpp" />
     <ClCompile Include="src\utility\easing\easing.cpp" />
     <ClCompile Include="src\utility\fmf_loader\fmf_loader.cpp" />
+    <ClCompile Include="src\utility\light\light.cpp" />
     <ClCompile Include="src\utility\point\point.cpp" />
     <ClCompile Include="src\utility\rect\rect.cpp" />
     <ClCompile Include="src\utility\thread\thread.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="src\utility\json_loader\rapidjson\stream.h" />
     <ClInclude Include="src\utility\json_loader\rapidjson\stringbuffer.h" />
     <ClInclude Include="src\utility\json_loader\rapidjson\writer.h" />
+    <ClInclude Include="src\utility\light\light.h" />
     <ClInclude Include="src\utility\memory\memory.h" />
     <ClInclude Include="src\utility\point\point.h" />
     <ClInclude Include="src\utility\rect\rect.h" />

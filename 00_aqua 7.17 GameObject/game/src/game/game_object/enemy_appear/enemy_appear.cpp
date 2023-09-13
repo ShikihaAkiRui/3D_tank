@@ -13,7 +13,7 @@ const float CEnemyAppear::m_default_appear_time = 10.0f;
 const float CEnemyAppear::m_max_appear_time = 2.0f;
 const float CEnemyAppear::m_acceleration = 0.92f;
 const int CEnemyAppear::m_second_change_count = 5;
-const int CEnemyAppear::m_third_change_count = 10;
+const int CEnemyAppear::m_third_change_count = 15;
 
 //コンストラクタ
 CEnemyAppear::CEnemyAppear(aqua::IGameObject* parent)
@@ -113,9 +113,9 @@ int CEnemyAppear::GetMaxCountEnemy(void)
 void CEnemyAppear::ChangeAppear(void)
 {
 	//出す方法切り替え
-	if (m_TotalCountEnemy > m_third_change_count)
+	if (m_TotalCountEnemy >= m_third_change_count)
 		m_AppearState = APPEAR_STATE::THIRD;
-	else if (m_TotalCountEnemy > m_second_change_count)
+	else if (m_TotalCountEnemy >= m_second_change_count)
 		m_AppearState = APPEAR_STATE::SECOND;
 
 	//出す敵の選択方法
@@ -133,6 +133,7 @@ void CEnemyAppear::ChangeAppear(void)
 void CEnemyAppear::FirstAppear(void)
 {
 	m_UnitID = UNIT_ID::ENEMY_NORMAL;
+
 }
 
 //出す方法2
