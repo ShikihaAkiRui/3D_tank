@@ -37,11 +37,11 @@ void CGameMainScene::Initialize(void)
 	CItemManager::GetInstance().Initialize();
 	CBulletManager::GetInstance().Initialize();
 	CUIManager& ui_manager = CUIManager::GetInstance();
+	ui_manager.Initialize();
 
 	IGameObject::Initialize();
 
 	CEffectManager::GetInstance().Initialize();
-	ui_manager.Initialize();
 
 	IUnit* player = unit_manager.Create(UNIT_ID::PLAYER);
 	unit_manager.SetGameState(aqua::GAME_OBJECT_STATE::WAIT);
@@ -121,16 +121,16 @@ void CGameMainScene::Update(void)
 //•`‰æ
 void CGameMainScene::Draw(void)
 {
+#ifdef _DEBUG
+	m_Label.Draw();
+#endif 
+
 	IGameObject::Draw();
 	CUnitManager::GetInstance().Draw();
 	CItemManager::GetInstance().Draw();
 	CBulletManager::GetInstance().Draw();
 	CEffectManager::GetInstance().Draw();
 	CUIManager::GetInstance().Draw();
-
-#ifdef _DEBUG
-	//m_Label.Draw();
-#endif 
 
 }
 

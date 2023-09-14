@@ -19,11 +19,9 @@ void CStage::Initialize(void)
 {
 	m_BackgroundPanel.Setup(aqua::CVector2::ZERO, (float)aqua::GetWindowWidth(), (float)aqua::GetWindowHeight(), m_background_color);
 
-
 	IUnit::Initialize("data/model/Terrainte.mv1");
 	m_Model->position = m_position;
 	m_Model->scale = m_scale;
-
 }
 
 //•`‰æ

@@ -48,6 +48,8 @@ void CUnitManager::Finalize(void)
 		m_LoadModel[i].Unload();
 	}
 
+	AQUA_SAFE_DELETE_ARRAY(m_LoadModel);
+
 	m_GameObject.Finalize();
 }
 
