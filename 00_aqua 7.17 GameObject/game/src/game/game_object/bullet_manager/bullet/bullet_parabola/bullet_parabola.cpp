@@ -29,14 +29,14 @@ void CBulletParabola::Initialize(UNIT_CATEGORY unit_category, const aqua::CVecto
 	float target_length = vector.Length();
 
 	//位置が射程内か確認
-	float bullet_length = (m_move_speed * m_move_speed * sin(2 * aqua::DegToRad(m_max_lenght_angle))) / m_fall_speed;
+	float bullet_length = (m_move_speed * m_move_speed * sin(2.0f * aqua::DegToRad(m_max_lenght_angle))) / m_fall_speed;
 
 	//ターゲットが範囲外なら消す
 	if (target_length > bullet_length)
 		DeleteObject();
 
 	//角度を求める
-	float angle = asinf((target_length * m_fall_speed) / (m_move_speed * m_move_speed)) / 2;
+	float angle = asinf((target_length * m_fall_speed) / (m_move_speed * m_move_speed)) / 2.0f;
 
 	m_Velocity.y = cos(angle) * m_move_speed;
 	m_Velocity.z = sin(angle) * m_move_speed;
