@@ -57,7 +57,7 @@
          - light.h
          - light.cpp
 
-#### ゲームプログラム作成部分
+#### ゲームプログラム作成箇所
 - game
   - src
     - game
